@@ -49,7 +49,21 @@ Check in this order, signal density descends.
    publishes a license, so **ideas only, never phrasing**. Both contributed conceptually
    to the craft layer and neither has ever contributed expression — a 2026-08-17 scan
    confirmed zero overlap. Keep it that way.
-8. **WCAG 2.2, Apple HIG, Material** — the numbers in `thresholds.md`. These move on a
+8. **AccessLint/skills**, https://github.com/AccessLint/skills (MIT). Five accessibility
+   skills tiered by what is actually automatable: scan (rule engine), inspect (manual
+   keyboard/AT), audit (full WCAG-EM), diff (regression), fix. Small repo, best-engineered
+   on this list. Its evidence-basis tagging is what our Accessibility score is missing.
+9. **vercel-labs/web-interface-guidelines**, https://github.com/vercel-labs/web-interface-guidelines
+   (MIT). Note the Vercel *skill* in `agent-skills` is only a wrapper that fetches this file
+   at runtime — read this repo, not the skill. Implementation-level where we are
+   design-level, so most of it is out of scope; the typographic micro-details are not.
+10. **bencium/bencium-marketplace**, https://github.com/bencium/bencium-marketplace (MIT).
+   Its `design-audit` and `typography` skills. Same domain, dimension-table shaped, so it
+   diffs cleanly against our Group A–E. Skip its heavyweight document pre-read protocol.
+11. **nolanperk/rad-spacing**, https://github.com/nolanperk/rad-spacing. **No licence —
+   ideas only, never phrasing.** Small and single-purpose: hierarchical spacing by Gestalt
+   proximity.
+12. **WCAG 2.2, Apple HIG, Material** — the numbers in `thresholds.md`. These move on a
    release cadence rather than continuously; check when a spec version ships, not every
    sweep. A changed threshold is a correctness bug here, not an enhancement.
 
@@ -161,6 +175,12 @@ Current version: 1.1.1.
 | wonjyou/design-audit | 2026-08-17 | **No license published.** Contributed conceptually to the craft layer. Scan confirms zero expression copied. Ideas only, permanently. |
 | Ashutos1997/claude-design-auditor-skill | 2026-08-17 | **No license published.** Same status as above; zero overlap confirmed. |
 | Mobbin | never | Connector available, never used as a harvest source. This is the visual channel and the only way to run a credible retirement pass. |
+| AccessLint/skills | 2026-08-17 | MIT, ~84 stars. **Never harvested.** WCAG-EM methodology; five skills tiered by automatability. **Take:** evidence-basis tagging on findings, and an explicit human-required marker for criteria a screenshot review cannot verify (keyboard operability, focus order, SR output). Our Accessibility /100 currently overclaims without it. Highest-integrity find of the sweep. |
+| vercel-labs/web-interface-guidelines | 2026-08-17 | MIT, ~777 stars. **Never harvested.** The real source behind the Vercel skill, which is a 176-word wrapper. **Take:** typographic micro-detail — `…` not `...`, curly quotes, non-breaking spaces, widow prevention on headings — plus "interactive states increase contrast" and long/empty content handling. **Reject:** hydration, virtualization, `min-w-0` and framework specifics. Wrong layer; we review screens, not React. |
+| bencium/bencium-marketplace | 2026-08-17 | MIT, ~392 stars, 16 skills. **Never harvested.** `design-audit` is the domain match. **Take:** iconography as a dimension (consistent style/weight/size, one set vs mixed libraries — we have none), empty states, and dark mode as a dimension rather than only a trope. **Reject:** its pre-read protocol (DESIGN_SYSTEM, PRD, APP_FLOW, TECH_STACK, LESSONS) as bureaucracy; our §3 is leaner. `typography` skill unread. |
+| nolanperk/rad-spacing | 2026-08-17 | **No licence, ideas only.** ~13 stars, one file. One strong idea: spacing should encode nesting depth, each level roughly 1.4x its child, snapped to the 8px scale, grounded in Gestalt proximity. We check on-grid and consistent stepping but never that spacing *encodes hierarchy* — a screen can be perfectly on-scale with card padding equal to page padding. Computable, so it belongs in `symmetry.py`. Highest single-idea value of the sweep. |
+| anthropics/claude-code frontend-design | 2026-08-17 | **(c) Anthropic PBC, all rights reserved, Commercial ToS. Not open source.** Most restrictive source examined. Assessed 2026-07-14 as strong on visual identity, thin on motion. Low marginal value against our current coverage, highest legal risk. **Do not harvest.** Listed here so future sweeps do not re-evaluate it. |
+| nextlevelbuilder/ui-ux-pro-max-skill | 2026-08-17 | MIT, ~117k stars. A design *generator* driven by a search/RAG query contract, not a reviewer. Different job, little to harvest for a review skill. Its master-plus-overrides design-system persistence pattern is the only part worth revisiting, and only if `design-system.md` grows. |
 | WCAG / Apple HIG / Material | 2026-08-17 | `thresholds.md` reflects WCAG 2.2 AA, Apple 44pt, Material 48dp. Re-check when a spec version ships. |
 
 ## Self-application
