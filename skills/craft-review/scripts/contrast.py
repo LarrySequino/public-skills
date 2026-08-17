@@ -5,9 +5,9 @@ contrast.py — WCAG 2.x contrast ratio for two colors.
 Deterministic math so the review never guesses a ratio. Pure stdlib.
 
 Usage:
-    python3 contrast.py "#F4EEFB" "#161020"
-    python3 contrast.py "255,93,143" "#0E0A14"        # rgb or hex, either order
-    python3 contrast.py --json "#B3A6C9" "#0E0A14"    # machine-readable output
+    python3 contrast.py "#F2F3F5" "#191B1F"
+    python3 contrast.py "76,141,255" "#101114"        # rgb or hex, either order
+    python3 contrast.py --json "#A8ADB7" "#101114"    # machine-readable output
 
 Exit code is 0 always; read the PASS/FAIL fields. Import get_ratio()/verdicts() to use in code.
 """

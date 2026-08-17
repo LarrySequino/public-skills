@@ -1,13 +1,14 @@
-# LoveBlind — Design System (review source of truth)
+# Design System (review source of truth)
 
 > **How this is used:** the skill FIRST tries to read live tokens from the Figma file via
 > `get_variable_defs`. This file is the **fallback** used when the file has no variables yet
 > (currently the case). When you build a real product design file with Figma variables, this
 > file becomes a secondary reference — keep it in sync, or delete it and rely on live tokens.
 >
-> **Status:** PLACEHOLDER starter values derived from the LoveBlind toolkit palette. Replace
-> with the real system as it firms up. Anything a screen uses that is NOT listed here is a
-> consistency finding by definition.
+> **Status:** PLACEHOLDER. These are neutral starter values, not anyone's brand — replace them
+> with the real system before relying on the consistency pass, or the review will measure the
+> screen against the wrong scale. Once replaced, anything a screen uses that is NOT listed here
+> is a consistency finding by definition.
 
 ## Spacing scale (8-point grid; 4 for fine tuning)
 
@@ -42,29 +43,33 @@ Weight carries hierarchy, not decoration. Tighten tracking on display type.
 
 ## Color palette (exact hex)
 
+Neutral placeholders. Swap wholesale for the product's real tokens.
+
 **Surfaces / ink**
 | Token | Hex | Role |
 |---|---|---|
-| `color/bg` | #0E0A14 | App background |
-| `color/surface` | #161020 | Card / sheet |
-| `color/surface-raised` | #1C1526 | Elevated card |
-| `color/ink` | #F4EEFB | Primary text |
-| `color/muted` | #B3A6C9 | Secondary text |
-| `color/faint` | #7E7295 | Tertiary text / hints |
+| `color/bg` | #101114 | App background |
+| `color/surface` | #191B1F | Card / sheet |
+| `color/surface-raised` | #212429 | Elevated card |
+| `color/ink` | #F2F3F5 | Primary text |
+| `color/muted` | #A8ADB7 | Secondary text |
+| `color/faint` | #71767F | Tertiary text / hints |
 
-**Brand / semantic**
+**Accent / semantic**
 | Token | Hex | Role |
 |---|---|---|
-| `color/brand/rose` | #FF5D8F | Primary accent / danger |
-| `color/brand/rose-soft` | #FF86AC | Accent hover / light |
-| `color/brand/plum` | #A06BFF | Secondary accent (gradient partner) |
-| `color/brand/gold` | #FFCF6B | Highlight / warning |
-| `color/success/mint` | #5FE3C0 | Success / positive |
-| `color/primary-gradient` | #FF5D8F → #A06BFF | Primary CTAs, signature moments |
+| `color/accent` | #4C8DFF | Primary accent |
+| `color/accent-soft` | #7DAEFF | Accent hover / light |
+| `color/success` | #3DBF87 | Success / positive |
+| `color/warning` | #E0A33A | Highlight / warning |
+| `color/danger` | #E5544B | Destructive |
 
-**Known-good text/background contrast** (verify with `scripts/contrast.py`):
-- `ink` on `bg` ≈ 15:1 ✅  · `muted` on `bg` ≈ 7:1 ✅  · `faint` on `bg` ≈ 3.6:1 (large text only)
-- `rose` on `bg` ≈ 4.9:1 ✅ (body ok) · white on `rose` ≈ 2.5:1 ❌ (fails — don't put white text on rose fills at body size; use `ink` on darker or enlarge)
+**Worked contrast check** (computed with `scripts/contrast.py`; recompute after swapping tokens):
+- `ink` on `bg` = 17.0 OK  ·  `muted` on `bg` = 8.4 OK  ·  `faint` on `bg` = 4.1 (large text only)
+- `accent` on `bg` = 5.9 OK for body
+- white on `accent` = 3.2 FAILS body text. This is the common one: a mid-tone accent that reads
+  fine against a dark background still fails as a fill behind white label text. Darken the fill or
+  put `ink` on it instead. Check the fill, not just the text.
 
 ## Radius scale
 
@@ -83,6 +88,14 @@ longer and be choreographed. Always honor `prefers-reduced-motion`.
 
 ## Brand feeling (for the Group D pass)
 
-Intimate, warm, a little magical. Atmospheric over utilitarian. Faces hidden until connection — no
-avatars in the blind phase. Pods and the reveal should feel high-stakes and tender, never like a
-settings screen.
+Group D measures the screen against the product's intended feeling, so that intent has to be
+written down. Left blank, Group D cannot run and should be reported as skipped rather than passed.
+
+Fill in three or four lines covering:
+
+- **The adjectives**, and their opposites. "Warm, atmospheric, unhurried — not utilitarian" gives
+  the review something to fail against. "Clean and modern" does not; every product claims it.
+- **The signature moments** and how they should feel, since those carry the brand more than any
+  component does.
+- **The deliberate constraints** — what this product does not do, even where convention would.
+  A rule the interface breaks on purpose is not a finding, and Group D needs to know which is which.

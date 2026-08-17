@@ -44,7 +44,7 @@ name gap is 6px; your scale is 4/8/12/16 and the nearest value is 8; it's hardco
 ## 2. Workflow
 
 1. **Classify context.** mobile-app / web-app / marketing-site (+ domain). Load the matching profile
-   from `references/context-profiles.md`. Default: mobile-app, dating-domain modifier on.
+   from `references/context-profiles.md`. Default: mobile-app, no domain modifier.
 2. **Load the design system.** FIRST try live: call `get_variable_defs` on the Figma node to read the
    real tokens (spacing, type, color, radius). If it returns tokens, measure against those. If it
    returns `{}` (none defined yet), fall back to `references/design-system.md`. State which you used.

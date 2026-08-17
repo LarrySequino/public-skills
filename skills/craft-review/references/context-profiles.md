@@ -3,7 +3,7 @@
 Classify the screen, then apply that profile's emphasis on top of the base dimensions. A finding's
 severity can shift by profile (e.g., tap-target size is Critical on mobile, N/A on a marketing hero).
 
-## mobile-app (DEFAULT for LoveBlind)
+## mobile-app (default)
 
 Native iOS/Android app screens.
 
@@ -37,13 +37,20 @@ Landing pages, homepages, conversion surfaces.
 - **Less chrome:** editorial hierarchy and rhythm matter more than app-pattern consistency.
 - Weight heavily: hierarchy, type, color composition, brand feeling; relax app-pattern/state checks.
 
-## Domain modifier: dating
+## Domain modifiers
 
-Applies on top of any profile for LoveBlind.
+A domain modifier layers product-specific criteria on top of a profile. None is active by default —
+write one for the product under review and name it when invoking.
 
-- **Emotional tone is a criterion**, not a nicety — see Group D. Cold-but-correct is a finding.
-- **Trust & safety cues:** reporting, blocking, consent, and safety affordances should be present and
-  findable where relevant; their absence in the wrong place is a finding.
-- **Photo/identity handling:** in the blind phase, no faces/avatars — flag any identity leak.
-- **High-stakes moments** (pods, the reveal, first message) deserve extra scrutiny on motion,
-  hierarchy, and copy tone; they are the product's signature and can't feel generic.
+A modifier should say three things:
+
+- **Which qualities become criteria rather than niceties.** If a product lives or dies on emotional
+  tone, "cold but correct" is a finding — see Group D. If it lives on precision, warmth is noise.
+- **Which affordances must be present and findable**, so their absence is a finding rather than an
+  omission. Consent, reporting, undo, audit trails, disclosure — whichever the domain demands.
+- **Which moments carry disproportionate weight.** Every product has a handful of screens that are
+  its signature. Those earn extra scrutiny on motion, hierarchy and copy tone; they cannot feel
+  generic, and a merely-adequate result on one is a finding.
+
+Keep a modifier to a handful of lines. If it grows into a second rubric, it is a profile, not a
+modifier.
