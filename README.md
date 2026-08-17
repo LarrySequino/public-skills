@@ -1,4 +1,4 @@
-# public-skills
+# skills
 
 Skills I wrote for Claude, published for anyone to use.
 
