@@ -2,7 +2,7 @@
 """
 slop-scan.py — deterministic detector for the mechanically-checkable AI design tells.
 
-Companion to the `design-review` skill's Group E (distinctiveness / anti-slop). It does NOT judge
+Companion to this skill's Group E (distinctiveness / anti-slop). It does NOT judge
 taste — it flags the reflex patterns from `design-tropes.md` that can be found statically in
 HTML/CSS source, so a human (or the review pass) can decide whether each is earned or slop.
 
