@@ -202,6 +202,8 @@ important finding — fix the disagreement, not the symptom.
 - `references/design-tropes.md` — the catalog of AI design tells for the Group E distinctiveness pass.
 - `references/example-review.md` — a full worked review (the few-shot gold standard).
 - `scripts/contrast.py`, `scripts/symmetry.py`, `scripts/slop-scan.py` — deterministic checks.
+- `references/maintenance.md` — watchlist, harvest criteria and update procedure. Read only
+  when refreshing this skill, never during a review.
 
 ## Standards referenced
 
