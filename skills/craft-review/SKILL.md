@@ -43,8 +43,11 @@ name gap is 6px; your scale is 4/8/12/16 and the nearest value is 8; it's hardco
 
 ## 2. Workflow
 
-1. **Classify context.** mobile-app / web-app / marketing-site (+ domain). Load the matching profile
-   from `references/context-profiles.md`. Default: mobile-app, no domain modifier.
+1. **Classify context** on three independent axes — **modality** (touch / pointer / hybrid),
+   **platform** (iOS / Android / web / cross-platform), **surface** (product / dense / marketing),
+   plus any domain modifier. See `references/context-profiles.md`. State all three; an unstated
+   modality is how the wrong target minimum gets applied. Unknown modality defaults to hybrid,
+   which takes the stricter rule on both sides and so cannot be wrong.
 2. **Load the design system.** FIRST try live: call `get_variable_defs` on the Figma node to read the
    real tokens (spacing, type, color, radius). If it returns tokens, measure against those. If it
    returns `{}` (none defined yet), fall back to `references/design-system.md`. State which you used.
@@ -78,7 +81,9 @@ each lens is sharper alone. Optionally add a skeptic pass that tries to refute f
 Full thresholds (exact numbers) live in `references/thresholds.md`. Run Group A first.
 
 ### Group A — Measurable rigor (compute, don't eyeball)
-1. **Spacing, grid & rhythm** — every gap/pad on the scale (8pt grid, 4pt fine); consistent vertical
+1. **Spacing, grid & rhythm** — on-scale is necessary, not sufficient: spacing must also *encode
+   nesting depth*, each level out roughly 1.4x its child, or grouping collapses even with every
+   value on-grid. Compute the ratio between adjacent depths. Every gap/pad on the scale (8pt grid, 4pt fine); consistent vertical
    rhythm; proximity groups related content. Run `scripts/symmetry.py`.
 2. **Symmetry, balance & alignment — WEIGHTED (highest signal).** Internal padding symmetry (L=R,
    T=B); paired/repeated components share identical padding; axial balance; edge & baseline alignment;
@@ -88,13 +93,16 @@ Full thresholds (exact numbers) live in `references/thresholds.md`. Run Group A 
    Color-system rigor: work in OKLCH; never pure `#000`/`#fff` (reduce chroma near the extremes); pick
    a color *strategy* first — Restrained / Committed / Full-palette / Drenched — and check the design
    executes one, not a random mix.
-4. **Consistency & tokens** — one radius scale, one shadow/elevation scale, one icon family/size;
+4. **Consistency & tokens** — one radius scale, one shadow/elevation scale; icons from one family at
+   consistent style, weight and size (mixed libraries read as assembled, not designed);
    components reused not re-drawn; flag hardcoded values that should be tokens.
 
 ### Group B — Craft & composition (judgment; second opinion)
 5. **Visual hierarchy** — size/weight/color used deliberately; squint test; exactly one primary action;
    Gestalt grouping.
 6. **Typography** — modular scale; body line-height 1.4–1.6; line length 45–75ch; weight for hierarchy;
+   micro-detail per `thresholds.md` (true ellipsis, curly quotes, non-breaking spaces in value-unit
+   pairs, tabular figures in number columns, balanced heading wraps) — the fastest tell nobody swept;
    ≤2 families; tracking tuned by size; watch truncation & locale expansion.
 7. **Color as composition** — ~60/30/10; intentional warm/cool grays; consistent semantic roles; dark
    mode is a systematic re-map, never a straight invert.
@@ -105,8 +113,11 @@ Full thresholds (exact numbers) live in `references/thresholds.md`. Run Group A 
 
 ### Group C — Usability & inclusion
 9. **Heuristics & cognitive load** — Nielsen's 10; Fitts / Hick / Miller; Gestalt.
-10. **Accessibility** — targets ≥44×44pt (mobile); visible focus; logical reading order; never color-
-    only meaning; labels on controls; reduced motion & dynamic type.
+10. **Accessibility** — targets per modality (touch 48dp / pointer 44px / 24px floor), never per
+    platform; visible focus; logical reading order; never color-only meaning; labels on controls;
+    reduced motion & dynamic type. **Mark what you could not test.** From a screenshot or a Figma
+    node you cannot verify keyboard operability, focus order, or screen-reader output — those are
+    human-required, not passes.
 11. **States & feedback** — empty, loading (skeletons > spinners), error, success, disabled; every async
     action shows status; destructive actions confirm/undo.
 12. **Content & microcopy** — specific verb labels ("Start a pod" not "Submit"); errors say what & how
@@ -127,11 +138,9 @@ The lens craft rigor misses. The prose anti-slop doctrine applied to pixels; ful
     product's category alone ("fintech → navy + gold", "AI → dark + purple")? If yes, it's reflex, not
     a decision — rework. *Second-order:* could they guess the aesthetic *family* from category + the
     obvious anti-reference? If yes, dig deeper.
-15. **Template-reuse gates.** Flag the reflex defaults: the hero-metric strip, identical tiled card
-    grids (and nested cards), centered-hero + two equal buttons, pure `#000`/`#fff`, the purple→blue
-    SaaS gradient, gradient text as decoration, glassmorphism-by-default, the uniform soft drop-shadow
-    on everything, decorative side-stripe borders, fade-up-on-scroll on everything, one-duration motion.
-    One instance is fine; the *reflex* — applied everywhere without a reason — is the finding.
+15. **Template-reuse gates.** Run the catalog in `references/design-tropes.md` and
+    `scripts/slop-scan.py`. One instance is fine; the *reflex* — applied everywhere without a
+    reason — is the finding.
 16. **The two-briefs test.** Would this design system, run on a *different* brief, produce a visibly
     different result — or just a color-swap of the same template? If the latter, it isn't distinctive.
 
@@ -167,11 +176,19 @@ Report three scores so no single number hides a weakness:
 
 **Every finding:**
 ```
-[severity] [category] — <one-line problem>
+[severity] [category] [evidence] — <one-line problem>
   What:  the specific element and exact issue (with numbers).
   Why:   the principle/standard violated + user impact.
   Fix:   the concrete change (value, token, action). Numeric where possible.
 ```
+
+`[evidence]` is **computed** (a script produced the number), **observed** (read from Figma or
+source), or **judged** (visual assessment). Never present judged as computed — "most taste
+critique is arithmetic" only holds when the arithmetic ran.
+
+**Accessibility must state coverage:** `NN/100 (N computed, N judged, N human-required)`, listing
+the human-required ones. A screenshot cannot test keyboard operability, focus order, or
+assistive-tech output; scoring those silently turns an untested criterion into a pass.
 
 **Report structure:** Summary (screen, job, user, input used) · Scores (Overall · Accessibility ·
 Distinctiveness) · Overall impression (2–3 sentences) · Findings by category (severity-ranked) ·

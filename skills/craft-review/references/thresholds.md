@@ -2,6 +2,24 @@
 
 The precise numbers so the review never drifts. When a value is available, compute — don't estimate.
 
+## How to read these
+
+Every number carries a tier. The tier decides whether a miss is a defect or a
+dialect.
+
+- **[U] Universal.** Derived from bodies and perception, not from a vendor —
+  contrast, reach, cognitive load. Applies to every surface. A miss is Critical.
+- **[M] Modality.** Set by the *input device*, not the platform. A touch laptop
+  running a web app takes touch numbers; a native iPad app driven by a trackpad
+  takes pointer numbers. A miss is Critical.
+- **[P] Platform.** Convention: iOS, Android, or web idiom. Applies only to the
+  platform the review declared. A miss costs familiarity, not usability, so it
+  is Major at most — unless it also breaks [U] or [M], which it often does.
+
+**Cross-platform rule.** When one artifact ships to more than one platform, take
+the **stricter** number, never the current platform's. 48dp satisfies both 48
+and 44; 44 satisfies only one. A single artifact binds to the union of maxima.
+
 ## Color contrast (WCAG 2.2)
 
 | Content | AA | AAA |
@@ -14,25 +32,57 @@ The precise numbers so the review never drifts. When a value is available, compu
 Compute with `scripts/contrast.py`. Also sanity-check color-blind safety: never rely on hue alone to
 distinguish states (add icon/shape/text).
 
-## Target size (WCAG 2.5.5 / 2.5.8 + platform)
+## Target size
 
-| Standard | Minimum |
-|---|---|
-| Apple HIG (iOS) | 44 × 44 pt |
-| Material (Android) | 48 × 48 dp |
-| WCAG 2.5.5 (AAA) | 44 × 44 px |
-| WCAG 2.5.8 (AA) | 24 × 24 px |
+Keyed on input modality, not on platform. This is the distinction Material draws
+and most reviews miss.
 
-Mobile default: **44×44pt**. Adjacent targets need spacing so they're not mis-tapped.
+| Tier | Rule | Minimum |
+|---|---|---|
+| **[M]** | Touch input | **48 × 48 dp** |
+| **[M]** | Pointer input | **44 × 44 px** |
+| **[U]** | Absolute floor, any input (WCAG 2.5.8 AA) | **24 × 24 px** |
+| **[U]** | WCAG 2.5.5 (AAA) | 44 × 44 px |
+| **[P]** | iOS convention | 44 × 44 pt |
+| **[P]** | Android / Material convention | 48 × 48 dp |
+
+Material states 48dp for touch and 44dp for pointer, and notes iOS recommends
+44. Apple's current guidance gives no single figure — it defers to a per-platform
+minimum across iOS, iPadOS, macOS, watchOS, tvOS and visionOS.
+
+So **do not resolve "mobile" to 44**. Resolve the modality first: a touch surface
+takes 48 whatever platform it runs on, and a cross-platform artifact takes 48
+because that satisfies both.
+
+Adjacent targets need spacing so they are not mis-tapped, regardless of size.
 
 ## Spacing & grid
 
 - Base grid **8pt**; **4pt** for fine adjustments only.
 - Every gap/margin/padding should resolve to a scale token (see `design-system.md`).
 - Vertical rhythm: consistent step between stacked bands. Inconsistent steps (48/56/72/84) are a finding.
+- **[U] Spacing must encode nesting depth, not merely land on the scale.** Each level
+  outward takes roughly **1.4x** its child, snapped to the scale (8pt, or 4pt when that
+  lands closer). Grounded in Gestalt proximity: grouping is communicated by relative
+  distance, so a card whose inner padding equals the page padding has no grouping at all,
+  even with every value on-grid. Compute the ratio between adjacent depths — approaching
+  1.0 means the levels are indistinguishable, and inverted means the hierarchy reads
+  backwards. Cap the outermost value (48-64pt) on structures deeper than four levels and
+  compress inward, keeping the progression monotonic.
 - Paired/repeated components: identical internal padding — no exceptions.
 
 ## Typography
+
+**[U] Micro-detail.** Invisible when right, cheap to get wrong, and the fastest tell
+that nobody swept the type:
+
+- `…` (single glyph), never three periods. Loading and truncation copy ends in it.
+- Curly quotes and apostrophes, never straight. Primes (`′`/`″`) only for measures.
+- Non-breaking space inside value-unit and shortcut pairs (`10 MB`, `⌘ K`) and inside
+  brand names, so they never break across lines.
+- Tabular figures for any column or comparison of numbers; proportional figures make
+  aligned digits jitter.
+- Headings get balanced wrapping so a single word never strands on the last line.
 
 - Body line-height **1.4–1.6** (1.5 default); headings tighter (~1.1–1.25).
 - Reading line length **45–75 characters** (66 ideal).

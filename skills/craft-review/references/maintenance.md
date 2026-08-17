@@ -60,7 +60,7 @@ Check in this order, signal density descends.
 10. **bencium/bencium-marketplace**, https://github.com/bencium/bencium-marketplace (MIT).
    Its `design-audit` and `typography` skills. Same domain, dimension-table shaped, so it
    diffs cleanly against our Group A–E. Skip its heavyweight document pre-read protocol.
-11. **nolanperk/rad-spacing**, https://github.com/nolanperk/rad-spacing. **No licence —
+11. **nolanperk/rad-spacing**, https://github.com/nolanperk/rad-spacing. **No license —
    ideas only, never phrasing.** Small and single-purpose: hierarchical spacing by Gestalt
    proximity.
 12. **WCAG 2.2, Apple HIG, Material** — the numbers in `thresholds.md`. These move on a
@@ -157,13 +157,25 @@ what its detector actually checks; the rules live in the code.
 
 `design-tropes.md` has a UI-copy section that overlaps the prose anti-slop skill. The
 split: if the fix is to change *words*, it belongs to `deslop`. If the fix is to change
-*layout, type, colour or motion*, it belongs here. Microcopy that is only wrong because
+*layout, type, color or motion*, it belongs here. Microcopy that is only wrong because
 of where it sits — a button label that has to be long because the layout gives it no room
 — is ours. Keep both catalogs pointing at each other rather than duplicating entries.
 
 ## Harvest log
 
-Current version: 1.1.1.
+Current version: 1.2.0.
+
+**2026-08-17 sweep.** Taken: evidence-basis tagging and the human-required marker
+(AccessLint); typographic micro-detail (Vercel WIG); sharper icon consistency (bencium);
+spacing-encodes-depth (rad-spacing, idea only). Restructured `context-profiles.md` from
+three conflated profiles into three independent axes — modality, platform, surface — after
+Material confirmed the binding variable is input modality (touch 48dp, pointer 44dp), not
+platform. That fixed a real defect: "mobile" resolved to Apple's 44 and under-enforced
+Material's 48 on Android. Rejected: bencium's document pre-read protocol as bureaucracy;
+Vercel's hydration/virtualization/framework rules as the wrong layer; ui-ux-pro-max as a
+generator rather than a reviewer; Anthropic's frontend-design on license grounds. Two
+suspected gaps proved false — dark mode and empty states were already covered. Provenance
+scan clean against all sources.
 
 | Source | Last checked | State at check |
 |---|---|---|
@@ -175,10 +187,10 @@ Current version: 1.1.1.
 | wonjyou/design-audit | 2026-08-17 | **No license published.** Contributed conceptually to the craft layer. Scan confirms zero expression copied. Ideas only, permanently. |
 | Ashutos1997/claude-design-auditor-skill | 2026-08-17 | **No license published.** Same status as above; zero overlap confirmed. |
 | Mobbin | never | Connector available, never used as a harvest source. This is the visual channel and the only way to run a credible retirement pass. |
-| AccessLint/skills | 2026-08-17 | MIT, ~84 stars. **Never harvested.** WCAG-EM methodology; five skills tiered by automatability. **Take:** evidence-basis tagging on findings, and an explicit human-required marker for criteria a screenshot review cannot verify (keyboard operability, focus order, SR output). Our Accessibility /100 currently overclaims without it. Highest-integrity find of the sweep. |
-| vercel-labs/web-interface-guidelines | 2026-08-17 | MIT, ~777 stars. **Never harvested.** The real source behind the Vercel skill, which is a 176-word wrapper. **Take:** typographic micro-detail — `…` not `...`, curly quotes, non-breaking spaces, widow prevention on headings — plus "interactive states increase contrast" and long/empty content handling. **Reject:** hydration, virtualization, `min-w-0` and framework specifics. Wrong layer; we review screens, not React. |
-| bencium/bencium-marketplace | 2026-08-17 | MIT, ~392 stars, 16 skills. **Never harvested.** `design-audit` is the domain match. **Take:** iconography as a dimension (consistent style/weight/size, one set vs mixed libraries — we have none), empty states, and dark mode as a dimension rather than only a trope. **Reject:** its pre-read protocol (DESIGN_SYSTEM, PRD, APP_FLOW, TECH_STACK, LESSONS) as bureaucracy; our §3 is leaner. `typography` skill unread. |
-| nolanperk/rad-spacing | 2026-08-17 | **No licence, ideas only.** ~13 stars, one file. One strong idea: spacing should encode nesting depth, each level roughly 1.4x its child, snapped to the 8px scale, grounded in Gestalt proximity. We check on-grid and consistent stepping but never that spacing *encodes hierarchy* — a screen can be perfectly on-scale with card padding equal to page padding. Computable, so it belongs in `symmetry.py`. Highest single-idea value of the sweep. |
+| AccessLint/skills | 2026-08-17 | MIT, ~84 stars. **HARVESTED 2026-08-17.** WCAG-EM methodology; five skills tiered by automatability. **Take:** evidence-basis tagging on findings, and an explicit human-required marker for criteria a screenshot review cannot verify (keyboard operability, focus order, SR output). Our Accessibility /100 currently overclaims without it. Highest-integrity find of the sweep. |
+| vercel-labs/web-interface-guidelines | 2026-08-17 | MIT, ~777 stars. **HARVESTED 2026-08-17.** The real source behind the Vercel skill, which is a 176-word wrapper. **Take:** typographic micro-detail — `…` not `...`, curly quotes, non-breaking spaces, widow prevention on headings — plus "interactive states increase contrast" and long/empty content handling. **Reject:** hydration, virtualization, `min-w-0` and framework specifics. Wrong layer; we review screens, not React. |
+| bencium/bencium-marketplace | 2026-08-17 | MIT, ~392 stars, 16 skills. **HARVESTED 2026-08-17 (partial).** `design-audit` is the domain match. **Take:** iconography as a dimension (consistent style/weight/size, one set vs mixed libraries — we have none), empty states, and dark mode as a dimension rather than only a trope. **Reject:** its pre-read protocol (DESIGN_SYSTEM, PRD, APP_FLOW, TECH_STACK, LESSONS) as bureaucracy; our §3 is leaner. `typography` skill unread. |
+| nolanperk/rad-spacing | 2026-08-17 | **HARVESTED 2026-08-17, idea only.** No license. ~13 stars, one file. One strong idea: spacing should encode nesting depth, each level roughly 1.4x its child, snapped to the 8px scale, grounded in Gestalt proximity. We check on-grid and consistent stepping but never that spacing *encodes hierarchy* — a screen can be perfectly on-scale with card padding equal to page padding. Computable, so it belongs in `symmetry.py`. Highest single-idea value of the sweep. |
 | anthropics/claude-code frontend-design | 2026-08-17 | **(c) Anthropic PBC, all rights reserved, Commercial ToS. Not open source.** Most restrictive source examined. Assessed 2026-07-14 as strong on visual identity, thin on motion. Low marginal value against our current coverage, highest legal risk. **Do not harvest.** Listed here so future sweeps do not re-evaluate it. |
 | nextlevelbuilder/ui-ux-pro-max-skill | 2026-08-17 | MIT, ~117k stars. A design *generator* driven by a search/RAG query contract, not a reviewer. Different job, little to harvest for a review skill. Its master-plus-overrides design-system persistence pattern is the only part worth revisiting, and only if `design-system.md` grows. |
 | WCAG / Apple HIG / Material | 2026-08-17 | `thresholds.md` reflects WCAG 2.2 AA, Apple 44pt, Material 48dp. Re-check when a spec version ships. |

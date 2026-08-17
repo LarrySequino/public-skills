@@ -21,7 +21,7 @@ detectors, which informed `references/design-tropes.md` and
 *Statement of changes (required by Apache-2.0 §4b):* no file from impeccable is
 reproduced here. Its detection concepts were reimplemented from scratch against
 this skill's own three-score model and trope catalog. The overlap scan found a
-single 8-word fragment spanning a sentence boundary, consisting of colour
+single 8-word fragment spanning a sentence boundary, consisting of color
 terminology.
 
 ## MIT
@@ -29,6 +29,9 @@ terminology.
 **nutlope/hallmark** — https://github.com/nutlope/hallmark
 **jaywilburn/refactoring-ui-skill** — https://github.com/jaywilburn/refactoring-ui-skill
 **jezweb/claude-skills** — https://github.com/jezweb/claude-skills
+**AccessLint/skills** — https://github.com/AccessLint/skills
+**vercel-labs/web-interface-guidelines** — https://github.com/vercel-labs/web-interface-guidelines
+**bencium/bencium-marketplace** — https://github.com/bencium/bencium-marketplace
 
     MIT License
 
@@ -50,6 +53,13 @@ terminology.
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 
+`AccessLint/skills` contributed the idea of tagging findings by evidence basis and marking
+criteria a tool cannot test as human-required rather than passed — which is why the
+accessibility score now reports its coverage. `vercel-labs/web-interface-guidelines`
+contributed the typographic micro-detail checks. `bencium/bencium-marketplace` contributed
+the sharper reading of icon consistency (style and weight, not only family and size).
+No text was taken from any of them; a 2026-08-17 scan found no shared phrasing.
+
 `hallmark` contributed the slop-test gates and the two-briefs framing.
 `refactoring-ui-skill` and `jezweb/claude-skills` informed the craft layer.
 The overlap scan found no shared phrasing with `hallmark` or
@@ -67,6 +77,26 @@ Neither repository publishes a license, so neither grants redistribution
 rights. Nothing from either is redistributed here: the overlap scan found
 **zero** shared 8-word runs with either, against every file in this skill.
 Their contribution was conceptual only.
+
+## Ideas only — no license published
+
+**nolanperk/rad-spacing** — https://github.com/nolanperk/rad-spacing
+
+No license, so no redistribution rights. Nothing is redistributed here. It contributed one
+idea: spacing should encode nesting depth, each level roughly 1.4x its child, grounded in
+Gestalt proximity. That idea is expressed here in original words and the scan confirms zero
+shared phrasing.
+
+## Standards cited, not reproduced
+
+Target-size and contrast figures come from **WCAG 2.2** (W3C), Apple's **Human Interface
+Guidelines**, and **Material Design 3**. Measurements are facts and carry no copyright; the
+guidelines' prose does, and none is reproduced. Apple's HIG is copyright Apple Inc. and
+Material's documentation is Google's.
+
+**Not used:** Anthropic's `frontend-design` skill was examined and deliberately not
+harvested. It is copyright Anthropic PBC, all rights reserved, under Commercial Terms of
+Service — not open source.
 
 ## Predecessor
 
