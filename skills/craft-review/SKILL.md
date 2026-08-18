@@ -220,6 +220,9 @@ important finding — fix the disagreement, not the symptom.
 - `references/example-review.md` — a full worked review (the few-shot gold standard).
 - `scripts/preflight.py` — showstopper gate for HTML artifacts. Deterministic only; run it
   before anything ships, and pass `--baseline` when rewriting an existing page.
+- `scripts/collect-boxes.js` — emits `symmetry.py`'s JSON from a live HTML page, so the same
+  analyzer covers HTML mocks and Figma. Run it in a browser; CSS has no geometry until a
+  layout engine produces it.
 - `scripts/contrast.py`, `scripts/symmetry.py`, `scripts/slop-scan.py` — deterministic checks.
 - `references/maintenance.md` — watchlist, harvest criteria and update procedure. Read only
   when refreshing this skill, never during a review.

@@ -84,9 +84,14 @@ def analyze(data):
         if not p:
             continue
 
-        # (2) grid adherence — only meaningful values: left/top insets, width, height
+        # (2) grid adherence — only meaningful values: left/top insets, width, height.
+        # A source with derived_sizes (HTML, where the engine computes width and height
+        # from the container and the content) gets insets only: a derived size reports
+        # the viewport, not a decision, and grid-checking it is pure noise.
         _, _, fw, fh = _b(f)
-        checks = {"left inset": p["left"], "top inset": p["top"], "width": fw, "height": fh}
+        checks = {"left inset": p["left"], "top inset": p["top"]}
+        if not data.get("derived_sizes"):
+            checks.update({"width": fw, "height": fh})
         for label, val in checks.items():
             og = off_grid(val, base)
             if og is True:
