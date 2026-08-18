@@ -19,8 +19,15 @@ Right/bottom "leftover" space is measured and shown but NOT auto-flagged (it's u
 whitespace for top-left-anchored content), except under an explicit "expect".
 
 Usage:
-    python3 symmetry.py geometry.json
+    python3 symmetry.py page.html                  # HTML mock, real layout via headless Chromium
+    python3 symmetry.py page.html --viewport 390,844   # same mock at a phone width
+    python3 symmetry.py geometry.json              # Figma geometry (get_metadata output)
     python3 symmetry.py --demo
+
+Both sources land in the same schema, so the analysis is identical. HTML mocks
+declare derived_sizes, so they are checked on insets only: the engine computes
+width and height from the container, and grid-checking those reports the
+viewport rather than a decision.
 
 JSON schema:
 {
@@ -37,6 +44,73 @@ JSON schema:
 """
 import sys
 import json
+import re
+from pathlib import Path
+
+
+
+def _chromium():
+    """Any cached headless Chromium. Nothing is installed for this; it reuses what
+    playwright or a Chrome install already put on disk."""
+    import glob
+    pats = [
+        str(Path.home()) + "/Library/Caches/ms-playwright/chromium_headless_shell-*/*/chrome-headless-shell",
+        str(Path.home()) + "/Library/Caches/ms-playwright/chromium-*/*/Chromium.app/Contents/MacOS/Chromium",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "/Applications/Chromium.app/Contents/MacOS/Chromium",
+        "/usr/bin/chromium", "/usr/bin/chromium-browser", "/usr/bin/google-chrome",
+    ]
+    for pat in pats:
+        hits = sorted(glob.glob(pat))
+        if hits:
+            return hits[-1]
+    return None
+
+
+def geometry_from_html(src, viewport="1440,900"):
+    """Render the page and collect boxes. CSS has no geometry until a layout engine
+    runs, so this is the only honest way to measure an HTML mock."""
+    import subprocess
+    import tempfile
+    import html as _html
+
+    chrome = _chromium()
+    if not chrome:
+        sys.exit("no headless Chromium found. Install one, e.g. `npx playwright install chromium`.")
+    collector = Path(__file__).resolve().parent / "collect-boxes.js"
+    if not collector.exists():
+        sys.exit(f"missing {collector}")
+
+    is_url = src.startswith(("http://", "https://"))
+    page = Path(src).resolve() if not is_url else None
+    if not is_url and not page.exists():
+        sys.exit(f"no such file: {src}")
+    doc = "" if is_url else page.read_text(errors="ignore")
+
+    inject = ("<pre id=\"__boxes\"></pre><script>" + collector.read_text() +
+              "\nwindow.addEventListener('load',function(){"
+              "document.getElementById('__boxes').textContent=JSON.stringify(collectBoxes());});</script>")
+
+    # write the instrumented copy beside the original so relative assets still resolve
+    tmpdir = None
+    if is_url:
+        sys.exit("URL input needs the page saved locally first; pass the .html file.")
+    target = page.with_name("._symmetry_" + page.name)
+    target.write_text(doc.replace("</body>", inject + "</body>") if "</body>" in doc else doc + inject)
+    try:
+        out = subprocess.run(
+            [chrome, "--headless", "--disable-gpu", f"--window-size={viewport}",
+             "--virtual-time-budget=5000", "--dump-dom", target.as_uri()],
+            capture_output=True, text=True, timeout=90).stdout
+    finally:
+        target.unlink(missing_ok=True)
+        if tmpdir:
+            tmpdir.cleanup()
+
+    m = re.search(r'<pre id="__boxes">(.*?)</pre>', out, re.S)
+    if not m or not m.group(1).strip():
+        sys.exit("collector produced nothing. Is the page valid HTML with a <body>?")
+    return json.loads(_html.unescape(m.group(1)))
 
 
 def _b(o):
@@ -161,11 +235,25 @@ DEMO = {
 
 
 def main(argv):
+    viewport = "1440,900"
+    if "--viewport" in argv:
+        viewport = argv[argv.index("--viewport") + 1]
+    args = [a for a in argv if not a.startswith("--")]
+    # skip a value that belongs to a flag
+    if "--viewport" in argv and viewport in args:
+        args.remove(viewport)
+
     if "--demo" in argv:
         data = DEMO
-    elif argv:
-        with open(argv[0]) as fh:
-            data = json.load(fh)
+    elif args:
+        src = args[0]
+        if src.lower().endswith((".html", ".htm")):
+            data = geometry_from_html(src, viewport)
+            print(f"# {src} rendered at {viewport}; {len(data['frames'])} frames, "
+                  f"{len(data['pairs'])} auto-detected pairs\n")
+        else:
+            with open(src) as fh:
+                data = json.load(fh)
     else:
         print(__doc__)
         return

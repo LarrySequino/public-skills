@@ -27,7 +27,11 @@ function collectBoxes(opts) {
   // Type is not a container. A <span> inside an <h2> is not a content inset, and
   // treating it as one reports the position of a word. Headings and paragraphs are
   // excluded as frames; they are still measured as children of whatever holds them.
-  var NOT_A_FRAME = { H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1, P: 1, FIGCAPTION: 1 };
+  // Page-level elements are excluded for the same reason: a centered max-width
+  // child makes body's inset (viewport - width) / 2, which is arithmetic, not a
+  // decision, and it changes on every resize.
+  var NOT_A_FRAME = { H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1, P: 1, FIGCAPTION: 1,
+                      BODY: 1, HTML: 1 };
 
   var names = Object.create(null);
   function nameFor(el) {
