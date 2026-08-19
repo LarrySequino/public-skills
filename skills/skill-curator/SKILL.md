@@ -1,6 +1,11 @@
 ---
 name: skill-curator
-description: Audit, evaluate, merge, and refresh a library of agent skills. Use when the user asks to review or clean up installed skills, check whether two skills overlap or compete for the same trigger, vet a third-party skill before installing it, compare competing skills that do the same job, merge duplicates into one, harvest the best parts of a provided list of skill repos or files into an existing skill, or check a skill's upstream sources for updates. Covers inventory and collision detection, harvest criteria, security screening of third-party skills, the merge procedure, provenance logging, and packaging. NOT for authoring a brand-new skill from scratch (use skill-creator) and NOT for writing the subject-matter content inside a skill.
+description: >
+  Audit, evaluate, merge, and refresh a library of agent skills. Use when asked to review or clean up
+  installed skills, check whether two skills collide on the same trigger, vet or compare third-party
+  skills before installing, merge duplicates, harvest material from skill repos into an existing skill,
+  or check a skill's upstream sources for updates. NOT for authoring a new skill from scratch (use
+  skill-creator) and NOT for writing the subject-matter content inside one.
 ---
 
 # Skill Curator

@@ -1,14 +1,12 @@
 ---
 name: craft-review
 description: >
-  Rigorous visual + UX design review for UI screens and flows. Use whenever the user asks to
-  "review this design", "critique this screen", "does this look polished / off", "design review",
-  "audit this UI", "check spacing / alignment / hierarchy / contrast", or shares a screenshot or
-  Figma URL asking for feedback. Evaluates spacing & grid, symmetry / balance / alignment,
-  typography, color & contrast, visual hierarchy, consistency & tokens, distinctiveness / anti-slop,
-  states, motion, content, accessibility, and brand fit — and whether they work in unison. Reads
-  exact values from Figma (via the Figma MCP) or code and computes checks with bundled scripts
-  BEFORE making visual judgments, then reports severity-ranked findings with specific, numeric fixes.
+  Rigorous visual and UX design review for UI screens and flows. Use when the user asks to review a
+  design, critique a screen, audit a UI, check spacing, alignment, hierarchy, typography, color,
+  contrast or accessibility, asks whether something looks polished, off, or generically AI-generated,
+  or shares a screenshot or Figma URL for feedback. Measures before it
+  judges, and reports severity-ranked findings with numeric fixes. NOT for turning mocks into a decision
+  page (use decision-artifact) and NOT for prose (use natural-writing).
 ---
 
 # Craft Review
