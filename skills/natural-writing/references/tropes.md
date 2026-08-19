@@ -72,6 +72,8 @@ The dramatic countdown pattern. AI builds tension by negating two or more things
 
 ### "The X? A Y."
 
+*Same pattern as `structures.md` § Self-Posed Rhetorical Questions.*
+
 Self-posed rhetorical questions answered immediately in the next sentence or clause. The model asks a question nobody was asking, then answers it for dramatic effect. Thinks this is the epitome of great writing.
 
 **Avoid patterns like:**
@@ -129,6 +131,8 @@ Using "from X to Y" constructions where X and Y aren't on any real scale. In leg
 ## Paragraph Structure
 
 ### Short Punchy Fragments
+
+*Same pattern as `structures.md` § Dramatic Fragmentation.*
 
 Excessive use of very short sentences or sentence fragments as standalone paragraphs for manufactured emphasis. RLHF training has pushed models toward "writing for readability" aimed at the lowest common denominator: one thought per sentence, no mental state-keeping required. It's an inhuman style. No real person writes first drafts this way because it doesn't match how humans think or speak.
 

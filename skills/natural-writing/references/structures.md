@@ -51,6 +51,8 @@ Listing what something is *not* before revealing what it *is*. A dramatic countd
 
 ## Dramatic Fragmentation
 
+*Same pattern as `tropes.md` § Short Punchy Fragments. Two names, one tell; grep both before adding a third.*
+
 Sentence fragments for emphasis read as manufactured profundity. RLHF training has pushed models toward "writing for readability" aimed at the lowest common denominator: one thought per sentence, no mental state-keeping required. No human writes first drafts this way.
 
 | Pattern | Problem |
@@ -64,6 +66,8 @@ Sentence fragments for emphasis read as manufactured profundity. RLHF training h
 **Fix:** Complete sentences. Trust content over presentation.
 
 ## Self-Posed Rhetorical Questions
+
+*Same pattern as `tropes.md` § "The X? A Y." Two names, one tell.*
 
 The model asks a question nobody was asking, then answers it for dramatic effect.
 

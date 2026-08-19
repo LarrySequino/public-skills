@@ -47,6 +47,15 @@ A candidate pattern earns inclusion only if it: (a) is specific and named, with 
 6. Report the harvest: per source, what was new, what was taken, what was rejected and why.
 7. Recommend a security scan of the packaged result before install. Harvesting text from third-party repos can carry an injection payload into the output even when each source read clean. See the skill-curator skill for how to run one safely.
 
+**tropes.md duplicates structures.md on purpose.** Its header tells the user to paste it
+into a system prompt on its own, so it has to be complete without the rest of the skill.
+Six patterns are defined in both files and should stay that way; the shared text is the
+definition sentence, while each file keeps its own format (tables of Pattern/Problem in
+structures.md, example lists in tropes.md). An internal-repetition scan will keep reporting
+this. Exclude tropes.md from that measurement rather than cutting it, and check instead that
+no pattern exists under two different NAMES, which is the failure that actually matters
+because it defeats criterion (d).
+
 **Read the whole file, not the summary.** The 2026-07-28 pass took one reference file from no-ai-slop and assumed its SKILL.md was already covered; a re-read two days later found eight harvestable items including an architectural improvement. Skimming a source is how good material gets missed twice.
 
 ## Retirement pass
