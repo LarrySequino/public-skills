@@ -78,6 +78,10 @@ that nobody swept the type:
 
 - `…` (single glyph), never three periods. Loading and truncation copy ends in it.
 - Curly quotes and apostrophes, never straight. Primes (`′`/`″`) only for measures.
+  Scope: rendered interface copy. In authored prose the opposite holds, because a curly
+  quote is evidence of who typed the sentence rather than a typesetting choice. See
+  `natural-writing`. A page that contains both, such as an artifact whose body copy is
+  authored and whose mockups show product UI, follows each rule in its own half.
 - Non-breaking space inside value-unit and shortcut pairs (`10 MB`, `⌘ K`) and inside
   brand names, so they never break across lines.
 - Tabular figures for any column or comparison of numbers; proportional figures make

@@ -253,7 +253,16 @@ Every bullet point or list item starts with a bolded phrase or sentence. Extreme
 
 ### Unicode Decoration
 
-Use of unicode arrows (->), smart/curly quotes, and other special characters that can't be easily typed on a standard keyboard. Real writers typing in a text editor produce straight quotes and -> or =>. Claude in particular loves the -> arrow.
+Use of unicode arrows (->), smart/curly quotes, and other special characters that can't be easily typed on a standard keyboard.
+
+**Scope: authored prose only.** This rule is a provenance heuristic, not a typography
+standard. A curly quote is a tell because a person at a keyboard does not produce one, so
+it says something about who wrote the sentence. That logic applies to text a reader
+attributes to a person: articles, docs, commit messages, issue bodies, chat, and the body
+copy of a page. It does NOT apply to text rendered inside a designed interface, where
+curly quotes, a true ellipsis and real arrows are correct typesetting and nobody infers
+authorship from a button label. For interface copy, `craft-review`'s typography rules
+govern and they say the opposite on purpose. Real writers typing in a text editor produce straight quotes and -> or =>. Claude in particular loves the -> arrow.
 
 **Avoid patterns like:**
 - "Input → Processing → Output"
