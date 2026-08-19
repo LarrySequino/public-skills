@@ -105,7 +105,7 @@ Put the conclusion first at every level: the draft, the section, the paragraph, 
 
 ### 14. Open it up, don't dumb it down
 
-Strip what makes writing hard to read: tangled clauses, abstract nouns, jargon that isn't load-bearing, sentences carrying three ideas. Keep what makes it worth reading: substance, nuance, precision, technical vocabulary the audience shares, and the author's actual position. Simplification that removes content isn't editing, it's deletion. If a cut would lose information, restructure instead.
+Strip what makes writing hard to read: tangled clauses, abstract nouns, jargon that isn't load-bearing, sentences carrying three ideas. Keep what makes it worth reading: substance, nuance, precision, technical vocabulary the audience shares, and the author's actual position. Simplification that removes content is deletion. If a cut would lose information, restructure instead.
 
 ### 15. Know whether you're writing an answer or a deliverable
 

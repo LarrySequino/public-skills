@@ -84,7 +84,17 @@ Prose or docs that narrate the change that produced the thing instead of describ
 Substituting fancier verbs for "is" and "has": "serves as," "features," "boasts," "represents." Press-release sound. Default to "is"/"has" unless a specific verb adds meaning.
 
 ### Periphrastic connection
-Roundabout relationship phrasing where a specific relationship should be named: "is associated with," "has ties to," "is linked to," "plays a role in," "is connected to," "in the context of." A sibling of copula avoidance, but the failure is worse than style: the vagueness usually hides a connection the writer can't actually specify, the same way "experts argue" hides a missing source. Fix: name the relationship, meaning who did what to whom or what causes what, or else cut the claim. Never invent the specifics to fill it in; if the relationship isn't known, that's a flag for the author, not a gap to paper over. Carve-out: uncertainty stated as uncertainty ("the mechanism linking the two isn't established") is honest writing, not periphrasis.
+Roundabout relationship phrasing where a specific relationship should be named: "is associated with," "in connection with," "in association with," "connected with," "has ties to," "is linked to," "plays a role in," "in the context of." A sibling of copula avoidance, but the failure is worse than style: the vagueness usually hides a connection the writer can't actually specify, the same way "experts argue" hides a missing source.
+
+Two fixes, cheapest first. Often the phrase stands in for a plain preposition and the swap costs one word: "uses associated with the patented method" becomes "uses of the patented method"; "referenced the inventor in connection with the award" becomes "referenced the inventor for the award." When a preposition won't carry it, name the relationship, meaning who did what to whom or what causes what.
+
+The preposition swap is always safe, since "of" and "for" claim no more than the original. Naming the relationship with a verb ("caused by," "used in," "working with") is only safe when the writer knows it holds; picking "caused by" for an association the source never established is fabrication in compact form. If the relationship isn't known, that's a flag for the author, not a gap to paper over. Carve-out: uncertainty stated as uncertainty ("the mechanism linking the two isn't established") is honest writing, not periphrasis. Watch for the pairing with generic intensifiers ("widely associated," "particularly associated"), which is the same evasion twice in one phrase.
+
+### Interchangeable sentence
+A sentence that could sit unchanged in a competitor's documentation carries no information about this one. Test it by swapping in a rival's name: if it still reads true, it was never about your subject. Replace it with the fact, number or behavior that only this thing has, or cut it.
+
+### Dense sentence
+Distinct from uniformity, which is about rhythm. This is parse cost. If the reader has to return to the start of a sentence to work out what attaches to what, split it. One idea per sentence, and let the next sentence take the next one. Long is fine; tangled is not.
 
 ### Synonym cycling
 "Developers… engineers… practitioners… builders" in one paragraph. Human writers repeat the clearest word. If the same noun appears three times and it's the right word, keep all three.

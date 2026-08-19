@@ -34,7 +34,7 @@ Run after every rewrite or edit, before returning the draft. Answer each check p
 13. Are Tier 1 vocabulary, filler phrases, hollow intensifiers, and inflated claims gone (unless quoted as examples)?
 14. Are binary contrasts, affirmative reversals (setup-then-deflation with no negation), negative listings, colon reveals, throat-clearing, faux-insight setups, and dramatic fragments removed?
 15. Are importance puffery and weasel attribution replaced with plain facts and named sources, or flagged to the author when no source exists?
-15a. Is every relationship named rather than gestured at ("is associated with," "has ties to"), or flagged where the specifics aren't known?
+15a. Is every relationship named rather than gestured at ("is associated with," "in connection with," "has ties to"), or flagged where the specifics aren't known?
 15b. Any assertion of realness doing emphasis work ("the gap is real," "genuine utility") without a named contrast?
 16. Is formatting slop gone: emoji headings, decorative bold, bullets that should be prose, headers over tiny sections, Title Case subheadings?
 

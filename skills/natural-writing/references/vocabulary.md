@@ -148,6 +148,30 @@ Multi-word boilerplate that's individually unobjectionable but stacks heavily in
 | user engagement | Name the action (clicks, comments, retention) |
 | designed for long-term [X] | Cut "designed for"; either it is or it isn't |
 
+## Abstract metaphor nouns (technical register)
+
+Words that sound technical and carry less than the plain one. Common in engineering prose, where the fancier noun reads as precision. The tell is that the concrete word is shorter and truer.
+
+| Reach for | Usually means |
+|---|---|
+| substrate | base |
+| wedge (as verb) | add, insert |
+| vector | way, route, method |
+| nexus, locus | the point where it happens |
+| primitive (as noun) | building block |
+| harness (as metaphor) | use |
+| surface (as in API surface) | what a caller can reach |
+| bedrock | the part that does not change |
+| scaffolding (as metaphor) | temporary support |
+| modality | mode, kind |
+| paradigm | approach |
+| gold-plating | more than the job needs |
+| ratchet (as metaphor) | name the mechanism, or "a limit that only tightens" |
+| evacuate (of code) | move out |
+| endgame | the last phase |
+| north star | the goal |
+| flywheel | the loop that compounds |
+
 ## Template phrases (avoid)
 
 Slot-fill constructions. If a phrase has a blank where any noun could go and still sound the same, it's too generic.

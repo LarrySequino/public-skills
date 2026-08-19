@@ -12,6 +12,9 @@ against every source.
 
 **blader/humanizer** — https://github.com/blader/humanizer
 **petergyang/no-ai-slop** — https://github.com/petergyang/no-ai-slop
+**cursor/plugins** — https://github.com/cursor/plugins, its `pstack/skills/unslop` skill.
+Copyright (c) 2026 Lauren Tan. Full text at `pstack/LICENSE`; the repository root has none,
+so automated license detection reports it unlicensed.
 
     MIT License
 
@@ -35,6 +38,12 @@ against every source.
 
 Material from `no-ai-slop` shaped `SKILL.md`'s intake questions and
 `references/preflight.md`'s check ordering, with some phrasing carried over.
+
+From `unslop`, three ideas entered 2.9 written in original words: the abstract
+metaphor-noun table in `references/vocabulary.md`, and the interchangeable-sentence and
+dense-sentence entries in `references/patterns.md`. A scan on 2026-08-19 found no shared
+phrasing. Its own pattern list independently reaches the same conclusion as ours on
+straight quotes and takes a stricter line on em dashes.
 
 ## CC BY-SA 4.0
 
