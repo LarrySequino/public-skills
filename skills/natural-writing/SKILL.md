@@ -173,20 +173,6 @@ If the original is already strong, say so and cut only what's needed. Don't manu
 
 ## Examples
 
-**Scientific writing:**
-
-Before:
-> "It's worth noting that these findings have important implications for how we navigate the challenges of forecast ensembling moving forward. Despite these challenges, this work contributes meaningfully to the growing body of literature, highlighting the need for continued evaluation."
-
-After:
-> "If individual model rankings are unstable across geography and time, ensemble methods that weight models by past performance may not improve on equal-weight approaches."
-
-**Blog post:**
-
-Before:
-> "Here's the thing: most bioinformatics pipelines break in production. Not because the code is bad. Because the data is bad. Let that sink in."
-
-After:
-> "Most bioinformatics pipelines break in production. The code runs fine. The data doesn't match the assumptions baked into it."
-
-See [references/examples.md](references/examples.md) for more.
+Worked before/after pairs live in [references/examples.md](references/examples.md), covering
+scientific writing, blog prose, technical docs and marketing copy. Read one before a first pass
+to calibrate how far to edit.
