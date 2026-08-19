@@ -100,7 +100,9 @@ A sentence that could move unchanged to another person, company, country or prod
 Distinct from uniformity, which is about rhythm. This is parse cost. If the reader has to return to the start of a sentence to work out what attaches to what, split it. One idea per sentence, and let the next sentence take the next one. Long is fine; tangled is not.
 
 ### Synonym cycling
-"Developers… engineers… practitioners… builders" in one paragraph. Human writers repeat the clearest word. If the same noun appears three times and it's the right word, keep all three.
+*Style fault, not an authorship tell.*
+
+"Developers… engineers… practitioners… builders" in one paragraph. Human writers repeat the clearest word. If the same noun appears three times and it's the right word, keep all three. Fowler named elegant variation a fault in 1926 and it reads badly whoever produced it. Do not cite it as evidence that a model wrote the text; that claim was withdrawn in 2.11, see the harvest log.
 
 ### Hedge-stacked predictions
 "Could potentially create," "may eventually unlock," "might ultimately transform." Either word alone is fine; the stack asserts nothing while sounding thoughtful. Pick one.
