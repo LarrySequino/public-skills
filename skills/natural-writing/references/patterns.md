@@ -90,8 +90,11 @@ Two fixes, cheapest first. Often the phrase stands in for a plain preposition an
 
 The preposition swap is always safe, since "of" and "for" claim no more than the original. Naming the relationship with a verb ("caused by," "used in," "working with") is only safe when the writer knows it holds; picking "caused by" for an association the source never established is fabrication in compact form. If the relationship isn't known, that's a flag for the author, not a gap to paper over. Carve-out: uncertainty stated as uncertainty ("the mechanism linking the two isn't established") is honest writing, not periphrasis. Watch for the pairing with generic intensifiers ("widely associated," "particularly associated"), which is the same evasion twice in one phrase.
 
+### Interpretive metadiscourse
+Lines that step outside the subject to tell the reader what to notice or how much weight to give it: "the key point is," "as you can see," "this distinction matters," "that last part matters more than it sounds," and glossing "in other words" when the first phrasing was already clear. The prose either demonstrates the point or it does not; an instruction to find it important is not a substitute. Delete the aside, or replace it with the fact that would have made the point land on its own.
+
 ### Interchangeable sentence
-A sentence that could sit unchanged in a competitor's documentation carries no information about this one. Test it by swapping in a rival's name: if it still reads true, it was never about your subject. Replace it with the fact, number or behavior that only this thing has, or cut it.
+A sentence that could move unchanged to another person, company, country or product carries no information about this one. Swap in a rival's name: if it still reads true, it was never about your subject. Two independent sources reached this test separately, which is some evidence it catches something real. Replace it with the fact, number or behavior that only this thing has, or cut it.
 
 ### Dense sentence
 Distinct from uniformity, which is about rhythm. This is parse cost. If the reader has to return to the start of a sentence to work out what attaches to what, split it. One idea per sentence, and let the next sentence take the next one. Long is fine; tangled is not.

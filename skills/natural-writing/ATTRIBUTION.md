@@ -37,7 +37,14 @@ so automated license detection reports it unlicensed.
     SOFTWARE.
 
 Material from `no-ai-slop` shaped `SKILL.md`'s intake questions and
-`references/preflight.md`'s check ordering, with some phrasing carried over.
+`references/preflight.md`'s check ordering, with some phrasing carried over. 2.10 took two more
+ideas from it, written in original words: interpretive metadiscourse, and the portability
+framing that widened the interchangeable-sentence entry.
+
+A note for future audits: the measured overlap with `no-ai-slop` rose from 85 to 99 shared
+runs on 2026-08-19 without anything being copied. Their own checklist grew in a direction
+that matched text we had already harvested in July, so the increase came from the source
+moving toward us. The files edited in 2.10 show zero overlap.
 
 From `unslop`, three ideas entered 2.9 written in original words: the abstract
 metaphor-noun table in `references/vocabulary.md`, and the interchangeable-sentence and
