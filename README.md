@@ -36,23 +36,9 @@ npx skills remove natural-writing                 # take one back out
 
 ### Output styles
 
-`output-styles/` holds Claude Code output styles. They are plain files with no CLI, so
-installing one is a copy:
-
-```bash
-git clone https://github.com/LarrySequino/skills
-mkdir -p ~/.claude/output-styles
-cp skills/output-styles/*.md ~/.claude/output-styles/
-```
-
-Then pick it in `/config`, or set it directly in `~/.claude/settings.json`:
-
-```json
-{ "outputStyle": "Shipmate" }
-```
-
-**Shipmate** is the one here. Outcome first, bullets over prose, explicit recommendations,
-no filler, and it keeps Claude Code's coding behavior rather than replacing it.
+Output styles live in [LarrySequino/output-styles](https://github.com/LarrySequino/output-styles).
+They install differently (a file copy, no CLI) and only Claude Code reads them, where these
+skills work across about 70 agents.
 
 ### claude.ai and Cowork
 
