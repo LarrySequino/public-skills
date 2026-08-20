@@ -2,14 +2,50 @@
 
 Skills I wrote for Claude, published for anyone to use.
 
-## Using one
+## Install
 
-Each directory under `skills/` is a complete skill. Zip it and upload the
-result at **Settings → Capabilities → Skills** in claude.ai:
+One command, for Claude Code, Codex, Cursor and Grok at once:
 
-    cd skills && zip -rD ../natural-writing.skill natural-writing
+```bash
+npx skills add LarrySequino/skills -g -s '*' -y \
+  -a claude-code -a codex -a cursor -a grok
+```
 
-Or drop the directory into `~/.claude/skills/` for Claude Code.
+Leave off `-a` entirely to be asked which agents you have. The CLI supports about
+70, so `--agent '*'` is a trap: it writes a directory into your home folder for
+every agent it knows about, installed or not.
+
+Three details worth knowing, because each one is easy to get wrong:
+
+- **`-a` takes one agent.** Repeat the flag. Comma-separated and space-separated
+  both fail with `Invalid agents`.
+- **`-g` installs user-level.** Without it you get a project-local install inside
+  whatever directory you happen to be in.
+- **Codex and Cursor get no directory of their own.** They read the shared store at
+  `~/.agents/skills`. Claude Code and Grok get symlinks at `~/.claude/skills` and
+  `~/.grok/skills`. All four are working even though only two have folders.
+
+Then:
+
+```bash
+npx skills list                                   # what you have
+npx skills update                                 # pull newer versions
+npx skills add LarrySequino/skills --list         # preview without installing
+npx skills remove natural-writing                 # take one back out
+```
+
+### claude.ai and Cowork
+
+Neither has a CLI and neither can pull, so this is manual and stays manual. A
+`.skill` file is a zip:
+
+```bash
+git clone https://github.com/LarrySequino/skills && cd skills/skills
+zip -rD ../../natural-writing.skill natural-writing
+```
+
+Upload the result at **Settings → Capabilities → Skills**. Uploading the same name
+overwrites, so there is nothing to delete first.
 
 ## This repo is generated
 
