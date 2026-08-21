@@ -134,7 +134,7 @@ disappearance, not on the finding being inconvenient.
    HTML/CSS → a new check in `scripts/slop-scan.py`, with a case in its `--demo`. New
    dimensions go in `SKILL.md` only if they change what every review does; keep it
    under ~200 lines.
-4. **Update the harvest log below**, in the same pass, never afterwards from memory.
+4. **Update the harvest log below**, in the same pass, never afterward from memory.
    Record rejections and their reasons — otherwise the next sweep re-evaluates the same
    material at full cost.
 5. **Update `ATTRIBUTION.md`** if a new source contributed. Apache-2.0 sources need a
@@ -201,3 +201,7 @@ This skill is subject to its own Group E. The catalog must not become a checklis
 flags every considered choice, and the three-score model must not grow a fourth score.
 If a sweep adds more than it retires two passes running, the catalog is drifting toward
 a rubric — cut before adding.
+
+## Locale
+
+Run `tools/us-english.py skills/craft-review` from the repo root; it must report clean. US English is the house rule and publish.sh enforces it.

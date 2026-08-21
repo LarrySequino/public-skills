@@ -67,7 +67,7 @@ Adjacent targets need spacing so they are not mis-tapped, regardless of size.
   distance, so a card whose inner padding equals the page padding has no grouping at all,
   even with every value on-grid. Compute the ratio between adjacent depths — approaching
   1.0 means the levels are indistinguishable, and inverted means the hierarchy reads
-  backwards. Cap the outermost value (48-64pt) on structures deeper than four levels and
+  backward. Cap the outermost value (48-64pt) on structures deeper than four levels and
   compress inward, keeping the progression monotonic.
 - Paired/repeated components: identical internal padding — no exceptions.
 

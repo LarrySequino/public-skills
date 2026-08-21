@@ -77,7 +77,7 @@ def audit(root):
     for ks in kw.values():
         for w in ks: freq[w] = freq.get(w, 0) + 1
     # Rank pairs by how much territory they share, and report rather than assert.
-    # Which overlaps actually compete is a judgement; the arithmetic just says where
+    # Which overlaps actually compete is a judgment; the arithmetic just says where
     # to look. A pair whose descriptions name each other is already disambiguated.
     pairs = []
     for a, b in itertools.combinations(skills, 2):
@@ -104,7 +104,7 @@ def audit(root):
         boundary = re.search(r"\bNOT for\b|\bnot for\b|\binstead\b|\brather than\b|"
                              r"\buse [\w-]+ (?:for|instead|when)\b", s["desc"], re.I)
         if not boundary and len(skills) > 1:
-            findings.append(("NO-BOUNDARY", f"{s['name']}: description names no neighbouring "
+            findings.append(("NO-BOUNDARY", f"{s['name']}: description names no neighboring "
                                             "territory, which is the clause that fixes collisions"))
         if s["lines"] > 400:
             findings.append(("BLOAT", f"{s['name']}: SKILL.md is {s['lines']} lines and loads "

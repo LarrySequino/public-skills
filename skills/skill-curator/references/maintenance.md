@@ -14,7 +14,7 @@ Each claim below names the thing it depends on and the check that catches the dr
 | `disable-model-invocation: true` marks a skill explicit-only | Claude Code frontmatter | Confirm the key still exists in current Claude Code docs; rename in `SKILL.md` if it moved |
 | The eval format in `harvest-log.md` | Anthropic `skill-creator`, `references/schemas.md` | Diff `evals.json` shape against the installed plugin; update the pointer and the field names if they changed |
 | "roughly ten skills in a scope" as the count trigger | Skill discovery budget | Re-read whatever the current harness documents about skill listing limits; adjust the number in `SKILL.md` and in `scripts/audit.py` together |
-| The 400-line bloat threshold | Nothing external; a judgement | Leave alone unless evidence arrives |
+| The 400-line bloat threshold | Nothing external; a judgment | Leave alone unless evidence arrives |
 | `scripts/overlap.py` matches `tools/overlap.py` in the private repo | `publish.sh` copying the right file | `diff` the two; they must be byte-identical |
 
 ## Deterministic checks, run every time
@@ -44,6 +44,8 @@ table above.
    fit none of the five is a candidate for a sixth, or for a sharper description.
 
 ## Package
+Run `tools/us-english.py skills/skill-curator` from the repo root; it must report clean. US English is the house rule and publish.sh enforces it.
+
 
 7. Validate frontmatter, confirm `scripts/` ships both tools, and run `audit.py` one last time on a
    directory containing only this skill. Then publish per the private repo's `publish.sh`.

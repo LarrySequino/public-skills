@@ -77,7 +77,7 @@ each lens is sharper alone. Optionally add a skeptic pass that tries to refute f
    screenshot, there is nothing to measure and nothing to observe, and a review does not happen. Do not
    score. Do not issue findings, chipped or not. Say what a description cannot support, ask for one of
    the four above, and if anything is offered in the meantime it is general guidance about the
-   category, labelled as such, never a finding about this screen.
+   category, labeled as such, never a finding about this screen.
 
 ## 4. The dimensions
 

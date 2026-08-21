@@ -18,7 +18,7 @@ text came from as a measurement rather than a recollection.
 
 | Skill | What it does | Use when |
 |---|---|---|
-| [**natural-writing**](skills/natural-writing/SKILL.md) | Strips AI patterns from prose: write, rewrite, audit, or edit a file in place. Tiered vocabulary read live from the catalogue, false-positive gates, a hard no-fabrication rule with a `--compare` check that lists every specific a rewrite added. | You say "deslop", "humanize", "make it sound human", or ask what AI tells are in a text; or you're drafting prose for publication. Fires on its own for those. Not for code or commit messages. |
+| [**natural-writing**](skills/natural-writing/SKILL.md) | Strips AI patterns from prose: write, rewrite, audit, or edit a file in place. Tiered vocabulary read live from the catalog, false-positive gates, a hard no-fabrication rule with a `--compare` check that lists every specific a rewrite added. | You say "deslop", "humanize", "make it sound human", or ask what AI tells are in a text; or you're drafting prose for publication. Fires on its own for those. Not for code or commit messages. |
 | [**craft-review**](skills/craft-review/SKILL.md) | Reviews UI screens and flows. Reads exact values from source or Figma, computes contrast, spacing and symmetry with bundled scripts, then reports severity-ranked findings with numeric fixes. | You ask "does this look right", "review this screen", or share a screenshot or Figma link for feedback. Fires on its own. Not for turning mocks into a decision doc. |
 | [**skill-curator**](skills/skill-curator/SKILL.md) | Maintains a skill library: audits for description collisions and bloat, vets third-party skills before install, harvests ideas without carrying phrasing, and scans for verbatim overlap against every source. | You ask to clean up or audit your skills, vet a skill before installing it, merge two that overlap, or check a skill's sources for updates. Not for writing a new skill from scratch. |
 
@@ -51,7 +51,7 @@ $ python3 skills/craft-review/scripts/contrast.py --demo
        #767676 on #FFFFFF    4.54:1  want  4.54  ok
 ```
 
-`preflight.py` catches the artifact bugs a reader misses in one theme: a colour defined
+`preflight.py` catches the artifact bugs a reader misses in one theme: a color defined
 only inside a dark-mode block, a body with no background of its own, a contrast failure
 resolved per theme. `symmetry.py` turns "looks unbalanced" into an inset delta in pixels.
 
@@ -133,17 +133,17 @@ Scripts decide every expectation a script can decide; a reader decides the rest,
 quoted line of evidence per verdict. The full per-run record is in each skill's
 `evals/results/`. First run, 2026-08-21, Opus 5, 96 executor runs:
 
-| Skill | With | Without | Delta | Behaviour-only delta* |
+| Skill | With | Without | Delta | Behavior-only delta* |
 |---|---|---|---|---|
 | natural-writing | 0.905 | 0.790 | **+0.11** | +0.11 |
 | skill-curator | 0.979 | 0.804 | **+0.17** | +0.12 |
 | craft-review | 0.800 | 0.850 | **−0.05** | −0.09 |
 
 *Excluding expectations of the form "the transcript shows the skill's script was run,"
-which can only pass with the skill present and so measure availability, not behaviour.
+which can only pass with the skill present and so measure availability, not behavior.
 
 **craft-review lost to its own baseline**, and the per-eval record says why. It wins
-where its scripts catch what a reader misses (a colour defined only inside a dark-mode
+where its scripts catch what a reader misses (a color defined only inside a dark-mode
 block: +0.33), ties where the model already does the arithmetic unaided (contrast
 ratios, a 6px inset), and loses on the two evals that test restraint: handed a one-line
 verbal description with nothing to measure, all three with-skill runs scored the page

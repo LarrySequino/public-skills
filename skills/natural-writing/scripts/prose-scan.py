@@ -16,11 +16,11 @@ refuses to make; counting characters is not.
 import re, sys, unicodedata, statistics as st
 
 # --- Vocabulary tiers -----------------------------------------------------------
-# The catalogue lives in references/vocabulary.md. This script READS it rather
+# The catalog lives in references/vocabulary.md. This script READS it rather
 # than carrying a copy, because a copy drifted within a day of being written:
-# 'robust' was Tier 1 in the catalogue and Tier 2 here. The lists below are a
+# 'robust' was Tier 1 in the catalog and Tier 2 here. The lists below are a
 # fallback for running the script outside the skill, and the report says which
-# source was used so a drifted fallback cannot pass as the catalogue.
+# source was used so a drifted fallback cannot pass as the catalog.
 _FALLBACK_TIER1 = {
     "delve": None, "tapestry": "figurative", "testament to": None, "underscore": "verb",
     "leverage": "verb", "seamless": None, "multifaceted": None, "realm": None,
@@ -59,7 +59,7 @@ def load_vocabulary():
         elif tier == 3: t3.append(term)
     if not t1:
         return _FALLBACK_TIER1, _FALLBACK_TIER2, _FALLBACK_TIER3, "built-in fallback (vocabulary.md parsed empty)"
-    # A term the catalogue lists in more than one tier belongs to the strictest one.
+    # A term the catalog lists in more than one tier belongs to the strictest one.
     # Keeping it in both double-counts it everywhere downstream.
     t2 = [w for w in dict.fromkeys(t2) if w not in t1]
     t3 = [w for w in dict.fromkeys(t3) if w not in t1 and w not in t2]
@@ -146,7 +146,7 @@ def find(text):
                                "a table row, or a blockquote, which reads as an example"))
 
     low = prose.lower()
-    # A line listing four or more flagged words is a catalogue of them, not prose
+    # A line listing four or more flagged words is a catalog of them, not prose
     # written with them. Text about AI writing quotes its own examples constantly,
     # and the skill exempts quoted examples, so the scan must too.
     _ALL = list(dict.fromkeys(list(TIER1) + TIER2 + TIER3))
@@ -170,7 +170,7 @@ def find(text):
             out.append(("TIER1", f'"{prose[m.start():m.end()]}"{note}'))
     if skipped:
         out.append(("SKIPPED", f"{skipped} vocabulary hits ignored on lines that list four or "
-                               "more flagged words, which reads as a catalogue rather than prose"))
+                               "more flagged words, which reads as a catalog rather than prose"))
 
     for p in paras(prose):
         body = "\n".join(l for l in p.split("\n") if not is_catalogue(l))
@@ -232,7 +232,7 @@ _COMMON_CAPS = set("The A An In On At For To Of And But Or If When While Before 
 
 def facts(text):
     """Specifics a rewrite is not allowed to introduce: numbers, years, citations,
-    and capitalised names that are not sentence-initial function words."""
+    and capitalized names that are not sentence-initial function words."""
     t = strip_code(text)
     nums  = {n.strip().rstrip(".") for n in NUM.findall(t)}
     years = set(YEAR.findall(t))
@@ -281,7 +281,7 @@ def report(name, text):
     return out
 
 def _demo_text():
-    """Built from the LOADED tiers, so this self-check tracks the catalogue instead of
+    """Built from the LOADED tiers, so this self-check tracks the catalog instead of
     a copy of it. Two Tier 2 words in one paragraph; a Tier 3 word repeated past 3%."""
     t2 = [w for w in TIER2 if " " not in w][:2] or ["crucial", "foster"]
     t3 = next((w for w in TIER3 if " " not in w), "key")

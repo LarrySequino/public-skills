@@ -32,7 +32,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -77,7 +77,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -122,7 +122,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -167,7 +167,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.5
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
@@ -212,7 +212,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -257,7 +257,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.5
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
@@ -302,7 +302,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -347,7 +347,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.5
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
@@ -392,7 +392,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.5
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
@@ -437,7 +437,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.5
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
@@ -482,7 +482,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.25
+        "pass_rate_behavior_only": 0.25
       },
       "expectations": [
         {
@@ -527,7 +527,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -572,7 +572,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -617,7 +617,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -662,7 +662,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -707,7 +707,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.5
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
@@ -752,7 +752,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -797,7 +797,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -842,7 +842,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -887,7 +887,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -932,7 +932,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -977,7 +977,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1022,7 +1022,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -1067,7 +1067,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -1112,7 +1112,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1134,7 +1134,7 @@
           "method": "script-heuristic"
         },
         {
-          "text": "The response does not apologise for or flag the em dashes",
+          "text": "The response does not apologize for or flag the em dashes",
           "passed": true,
           "evidence": "no apology about dashes",
           "method": "script-heuristic"
@@ -1157,7 +1157,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1179,7 +1179,7 @@
           "method": "script-heuristic"
         },
         {
-          "text": "The response does not apologise for or flag the em dashes",
+          "text": "The response does not apologize for or flag the em dashes",
           "passed": true,
           "evidence": "no apology about dashes",
           "method": "script-heuristic"
@@ -1202,7 +1202,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -1224,7 +1224,7 @@
           "method": "script-heuristic"
         },
         {
-          "text": "The response does not apologise for or flag the em dashes",
+          "text": "The response does not apologize for or flag the em dashes",
           "passed": true,
           "evidence": "no apology about dashes",
           "method": "script-heuristic"
@@ -1247,7 +1247,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1269,7 +1269,7 @@
           "method": "script-heuristic"
         },
         {
-          "text": "The response does not apologise for or flag the em dashes",
+          "text": "The response does not apologize for or flag the em dashes",
           "passed": true,
           "evidence": "no apology about dashes",
           "method": "script-heuristic"
@@ -1292,7 +1292,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1314,7 +1314,7 @@
           "method": "script-heuristic"
         },
         {
-          "text": "The response does not apologise for or flag the em dashes",
+          "text": "The response does not apologize for or flag the em dashes",
           "passed": true,
           "evidence": "no apology about dashes",
           "method": "script-heuristic"
@@ -1337,7 +1337,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1359,7 +1359,7 @@
           "method": "script-heuristic"
         },
         {
-          "text": "The response does not apologise for or flag the em dashes",
+          "text": "The response does not apologize for or flag the em dashes",
           "passed": true,
           "evidence": "no apology about dashes",
           "method": "script-heuristic"
@@ -1382,7 +1382,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1421,7 +1421,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1460,7 +1460,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1499,7 +1499,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1538,7 +1538,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.67
+        "pass_rate_behavior_only": 0.67
       },
       "expectations": [
         {
@@ -1577,7 +1577,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.67
+        "pass_rate_behavior_only": 0.67
       },
       "expectations": [
         {
@@ -1616,7 +1616,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1661,7 +1661,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1706,7 +1706,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1751,7 +1751,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1796,7 +1796,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1841,7 +1841,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1892,7 +1892,7 @@
         "min": null,
         "max": null
       },
-      "pass_rate_behaviour_only": {
+      "pass_rate_behavior_only": {
         "mean": 0.905,
         "stddev": 0.163,
         "min": 0.5,
@@ -1918,7 +1918,7 @@
         "min": null,
         "max": null
       },
-      "pass_rate_behaviour_only": {
+      "pass_rate_behavior_only": {
         "mean": 0.79,
         "stddev": 0.229,
         "min": 0.25,
@@ -1927,7 +1927,7 @@
     },
     "delta": {
       "pass_rate": "+0.11",
-      "pass_rate_behaviour_only": "+0.11",
+      "pass_rate_behavior_only": "+0.11",
       "time_seconds": "n/a",
       "tokens": "n/a"
     }

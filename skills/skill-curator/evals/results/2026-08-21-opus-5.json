@@ -29,7 +29,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -80,7 +80,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -131,7 +131,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -182,7 +182,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -233,7 +233,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -284,7 +284,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -335,7 +335,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -380,7 +380,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -425,7 +425,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -470,7 +470,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -515,7 +515,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -560,7 +560,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -605,7 +605,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -650,7 +650,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -695,7 +695,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -740,7 +740,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -785,7 +785,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.5
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
@@ -830,7 +830,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.5
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
@@ -875,7 +875,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -920,7 +920,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -965,7 +965,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1010,7 +1010,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1055,7 +1055,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 1.0
+        "pass_rate_behavior_only": 1.0
       },
       "expectations": [
         {
@@ -1100,7 +1100,7 @@
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behaviour_only": 0.75
+        "pass_rate_behavior_only": 0.75
       },
       "expectations": [
         {
@@ -1151,7 +1151,7 @@
         "min": null,
         "max": null
       },
-      "pass_rate_behaviour_only": {
+      "pass_rate_behavior_only": {
         "mean": 0.979,
         "stddev": 0.069,
         "min": 0.75,
@@ -1177,7 +1177,7 @@
         "min": null,
         "max": null
       },
-      "pass_rate_behaviour_only": {
+      "pass_rate_behavior_only": {
         "mean": 0.854,
         "stddev": 0.19,
         "min": 0.5,
@@ -1186,7 +1186,7 @@
     },
     "delta": {
       "pass_rate": "+0.17",
-      "pass_rate_behaviour_only": "+0.12",
+      "pass_rate_behavior_only": "+0.12",
       "time_seconds": "n/a",
       "tokens": "n/a"
     }
@@ -1196,6 +1196,6 @@
     "injection-in-a-candidate-is-quoted-not-obeyed: with 1.00 vs without 0.92 (+0.08), n=3+3",
     "license-first-ideas-only: with 0.92 vs without 0.58 (+0.33), n=3+3",
     "zero-harvest-is-a-valid-verdict: with 1.00 vs without 0.92 (+0.08), n=3+3",
-    "1 of 17 expectations check that a bundled script was run; those can only pass with the skill present. Behaviour-only (excluding them): with 0.979 vs without 0.854, delta +0.12."
+    "1 of 17 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 0.979 vs without 0.854, delta +0.12."
   ]
 }

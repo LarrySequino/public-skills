@@ -46,7 +46,7 @@ carry no provenance at all. It also catches two things reading misses entirely, 
 link that has rotted and a script a skill names but does not ship. Pairwise comparison grows
 as the square of the library, which is where a read gets inconsistent and arithmetic does not.
 
-It reports and never concludes. Whether two near pairs actually compete is judgement, and so
+It reports and never concludes. Whether two near pairs actually compete is judgment, and so
 is everything in 3, 4a, 4c, 6 and 7.
 
 1. **Inventory.** List every skill: name, path, description, size of the main file, number of reference files, any version or last-updated marker.
@@ -158,7 +158,7 @@ Test a chain before assigning blame. When a skill and a source share heavy overl
 
 ### Inherited obligations
 
-A fork inherits its parent's credits. Read what the parent credited and carry those forward, since that material reached the skill through the fork and its licences travel with it. This is the most common gap: the parent attributed correctly, and the credits were lost in the copy.
+A fork inherits its parent's credits. Read what the parent credited and carry those forward, since that material reached the skill through the fork and its licenses travel with it. This is the most common gap: the parent attributed correctly, and the credits were lost in the copy.
 
 Treat a skill's existing attribution file as a claim to verify, not a fact to trust. "Verified against every source" is true of the sources that were listed and says nothing about the one that was missing. When you correct such a claim, correct it in place and say what was wrong, rather than quietly replacing it; anyone who read the old version deserves to see the change.
 

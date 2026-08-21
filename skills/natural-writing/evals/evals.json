@@ -5,7 +5,7 @@
     {
       "id": 1,
       "name": "already-good-prose-is-left-alone",
-      "prompt": "Deslop this.\n\nWe shipped the cutover at 02:10. Replica lag was 4s, well under the 30s we'd budgeted — and then the alarms went quiet for the first time in a week. Two things bit us: the connection pool on the old primary stayed warm for nine minutes after we'd drained it, and one batch job had a hardcoded host. Both are fixed. Both were our fault. The dashboard, the runbook, and the on-call notes are updated; if you're on rotation tonight you'll see the new topology in the first panel. I'm not going to pretend this was smooth — it wasn't — but it's done, and the data matches to the row.",
+      "prompt": "Deslop this.\n\nWe shipped the cutover at 02:10. Replica lag was 4s, well under the 30s we'd budgeted \u2014 and then the alarms went quiet for the first time in a week. Two things bit us: the connection pool on the old primary stayed warm for nine minutes after we'd drained it, and one batch job had a hardcoded host. Both are fixed. Both were our fault. The dashboard, the runbook, and the on-call notes are updated; if you're on rotation tonight you'll see the new topology in the first panel. I'm not going to pretend this was smooth \u2014 it wasn't \u2014 but it's done, and the data matches to the row.",
       "expected_output": "The text is already human and blunt. The skill should change very little: at most light edits, and it should say the piece is largely clean. The em dashes sit inside a strong voice and the three-item list is natural, not compulsive.",
       "expectations": [
         "Fewer than 10 percent of the words are changed",
@@ -41,7 +41,7 @@
     {
       "id": 4,
       "name": "false-positive-restraint",
-      "prompt": "Audit this for AI writing patterns. Flag only; don't rewrite.\n\nThe trail climbs through a landscape of granite and stunted pine for the first two miles, then levels out along the ridge. Water is the crucial thing to get right: there's none between the trailhead and the lake, and on a hot day you'll want three litres, not two. Bring a map, a headlamp, and more food than you think. The last mile down to the car is steeper than it looks on paper.",
+      "prompt": "Audit this for AI writing patterns. Flag only; don't rewrite.\n\nThe trail climbs through a landscape of granite and stunted pine for the first two miles, then levels out along the ridge. Water is the crucial thing to get right: there's none between the trailhead and the lake, and on a hot day you'll want three liters, not two. Bring a map, a headlamp, and more food than you think. The last mile down to the car is steeper than it looks on paper.",
       "expected_output": "This is clean human writing. 'Landscape' is literal and geographic, 'crucial' is a single Tier 2 word with no cluster, and the three-item list is natural. The audit should report no P0 or P1 findings and say the piece is clean.",
       "expectations": [
         "No P0 or P1 findings are reported",
@@ -53,13 +53,13 @@
     {
       "id": 5,
       "name": "voice-sample-precedence",
-      "prompt": "Here's how I write. Match it and draft me 250 words introducing our new on-call rotation to the team.\n\n---\nOkay so — quick one. The deploy thing from Tuesday? Fixed. Root cause was dumb (a stale env var — yes, again) but the fix is real this time, I promise. Couple of other bits: the dashboard stuff is live, the alerting stuff is half-live, and the docs stuff is... a work in progress, let's say. If any of it looks wrong, ping me — I'd rather hear about it now than at 3am.\n---",
+      "prompt": "Here's how I write. Match it and draft me 250 words introducing our new on-call rotation to the team.\n\n---\nOkay so \u2014 quick one. The deploy thing from Tuesday? Fixed. Root cause was dumb (a stale env var \u2014 yes, again) but the fix is real this time, I promise. Couple of other bits: the dashboard stuff is live, the alerting stuff is half-live, and the docs stuff is... a work in progress, let's say. If any of it looks wrong, ping me \u2014 I'd rather hear about it now than at 3am.\n---",
       "expected_output": "The writer's sample uses em dashes freely and says 'stuff' and 'thing'. The voice-sample rule outranks the em-dash cap and the vocabulary upgrades. The draft should carry dashes and the casual diction.",
       "expectations": [
         "The draft contains at least two em dashes",
         "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
         "The register matches the sample: contractions, asides, a 'ping me' style closer",
-        "The response does not apologise for or flag the em dashes"
+        "The response does not apologize for or flag the em dashes"
       ]
     },
     {
@@ -70,7 +70,7 @@
       "expectations": [
         "The response states the sample is too short to judge authorship",
         "No authorship verdict is given, in either direction",
-        "Running scripts/prose-scan.py on the text reports the FLOOR finding"
+        "The response is under 150 words; a verdict it cannot give does not need a long explanation"
       ]
     },
     {
@@ -85,5 +85,24 @@
         "The report lists only the spans it touched"
       ]
     }
-  ]
+  ],
+  "notes": {
+    "round-1 (2026-08-21, Opus 5)": {
+      "floors": [
+        "quoted-material-is-untouched: both arms 1.00. Kept as a regression guard; it does not separate the arms."
+      ],
+      "weak": [
+        "rhythm-without-staccato: +0.08. Both arms mostly clear it."
+      ],
+      "defect-found": [
+        "voice-sample-precedence: 1 run in 3 produced one em dash against a six-dash sample. Fixed in the skill; re-run as round 2."
+      ],
+      "grader-fixes": [
+        "false-positive checks moved to a reader after a regex failed three correct answers",
+        "numeric-sentence check ignores punctuation",
+        "rhythm step check matches by meaning",
+        "short-sample E3 was trivially true and is replaced"
+      ]
+    }
+  }
 }
