@@ -103,7 +103,7 @@ One point per section. Ask of every paragraph: what's actually new here? If you 
 
 ### 12. Watch formatting tells
 
-No bold-first bullets. No unicode arrows or emoji in headers. Sentence case for subheadings, not Title Case. No "In conclusion..." signposts. Bullets only for list-like content; a list of 5+ bare noun phrases with no verbs ("Reliable pool connectivity / Optimized performance") should become prose or full claims. Em dashes: target zero, hard max one per 1,000 words, including headings. The basis is reader perception, not detection science: it's the most widely circulated AI tell there is, so dash-dense text reads as machine-written whatever detectors weight. Keep the cap even where the tell is argued to be aging out. A voice sample still overrides it.
+No bold-first bullets. No unicode arrows or emoji in headers. Sentence case for subheadings, not Title Case. No "In conclusion..." signposts. Bullets only for list-like content; a list of 5+ bare noun phrases with no verbs ("Reliable pool connectivity / Optimized performance") should become prose or full claims. Em dashes: if the writer supplied a voice sample, its dash rate is the rule and nothing in this paragraph applies; match it. Absent a sample, target zero, hard max one per 1,000 words, including headings. The basis is reader perception, not detection science: it's the most widely circulated AI tell there is, so dash-dense text reads as machine-written whatever detectors weight. Keep the cap even where the tell is argued to be aging out. The sample wins because the cap is a proxy for "this reads as machine-written" and a writer who uses dashes is the counterexample in hand.
 
 ### 13. Front-load every unit
 

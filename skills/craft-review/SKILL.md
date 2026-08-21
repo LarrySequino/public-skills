@@ -73,6 +73,11 @@ each lens is sharper alone. Optionally add a skeptic pass that tries to refute f
 3. **Source code.** Read the component to flag off-scale values and hardcoded tokens directly.
 4. **A static screenshot (fallback).** Vision-only; assess hierarchy, balance, approximate contrast,
    composition. Say when a finding needs exact values to confirm.
+5. **A verbal description alone is not an input.** With no Figma node, no running app, no source and no
+   screenshot, there is nothing to measure and nothing to observe, and a review does not happen. Do not
+   score. Do not issue findings, chipped or not. Say what a description cannot support, ask for one of
+   the four above, and if anything is offered in the meantime it is general guidance about the
+   category, labelled as such, never a finding about this screen.
 
 ## 4. The dimensions
 
@@ -170,7 +175,9 @@ Report three scores so no single number hides a weakness:
 - **Accessibility /100** (WCAG pass rate) — so a pretty-but-inaccessible screen can't hide.
 - **Distinctiveness /100** — rate 1–10 on Intentionality, Distinctiveness, Hierarchy, Restraint,
   Coherence (×2 = /100); below **70/100 reads as generated — rework**. So a flawless-but-generic
-  screen can't hide behind a high craft number either.
+  screen can't hide behind a high craft number either. This score is judged by nature: report it
+  only when an artifact was actually seen, mark it `(judged)`, and never let it alone trip the
+  rework line.
 
 **Every finding:**
 ```
@@ -184,12 +191,19 @@ Report three scores so no single number hides a weakness:
 source), or **judged** (visual assessment). Never present judged as computed — "most taste
 critique is arithmetic" only holds when the arithmetic ran.
 
+**Severity chips and deductions attach to computed and observed findings only.** A judged item gets
+no chip and deducts nothing. It goes in its own section after the ranked findings, **Judgment
+calls**, phrased as what you would try and why, so the reader can take it or leave it. Tagging a
+taste remark `[judged]` and then giving it a Major chip is the thing this rule exists to stop: the
+tag names the evidence class, the chip makes it a defect, and a taste remark is not a defect.
+
 **Accessibility must state coverage:** `NN/100 (N computed, N judged, N human-required)`, listing
 the human-required ones. A screenshot cannot test keyboard operability, focus order, or
 assistive-tech output; scoring those silently turns an untested criterion into a pass.
 
 **Report structure:** Summary (screen, job, user, input used) · Scores (Overall · Accessibility ·
-Distinctiveness) · Overall impression (2–3 sentences) · Findings by category (severity-ranked) ·
+Distinctiveness) · Overall impression (2–3 sentences) · Findings by category (severity-ranked,
+computed and observed only) · Judgment calls (unranked, no chips) ·
 Priority table · Top 3 quick wins · Strengths to preserve · Annotated screenshot when possible
 (measurement pills + colored overlays, Morgan-Knutson style). See `references/example-review.md`.
 
@@ -204,7 +218,8 @@ important finding — fix the disagreement, not the symptom.
 
 - Vague feedback ("feels off") — always attach the measurement or principle.
 - Taste stated as fact — label judgment as judgment; reserve certainty for measured issues.
-- Nitpicking without severity — a 1px polish note and a WCAG failure are not equals; rank them.
+- Nitpicking without severity — a 1px polish note and a WCAG failure are not equals; rank them. Rank
+  only what was measured or observed; a judgment call is offered, not ranked.
 - All problems, no strengths — name what to preserve or fixes will break good work.
 - Reviewing pixels while ignoring the flow — a beautiful screen in a broken journey still fails.
 - Grading craft while ignoring slop — a perfectly-built generic screen is still a finding (Group E).
