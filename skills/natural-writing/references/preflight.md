@@ -41,7 +41,8 @@ Run after every rewrite or edit, before returning the draft. Answer each check p
 ## Mechanical scans
 
 17. Dash scan: does a search for `—`, `–`, and `--` come back clean (at most one per 1,000 words, with en dashes in numeric ranges exempt), unless the writer's own voice sample uses them?
-18. Artifact scan: no chatbot phrases, placeholders, leaked citation tokens, AI-tool URL parameters, or cutoff disclaimers anywhere?
+18. Artifact scan: no chatbot phrases, placeholders, leaked citation tokens, AI-tool URL parameters, cutoff disclaimers, or invisible characters anywhere?
+19. Enough text to judge? Under roughly forty words, report that the sample is too short instead of returning a verdict.
 
 ## Final read
 

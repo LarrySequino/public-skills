@@ -48,6 +48,12 @@ little room for two writers to differ, so the overlap is much weaker evidence of
 the same number would be in prose. Credited because a fork is recorded, not because the
 shingle count alone would prove it.
 
+**aboudjem/humanizer-skill** — https://github.com/aboudjem/humanizer-skill
+Copyright (c) 2026 Adam Boudjemaa. Four ideas taken in 2.12, written in original words and
+scanned clean: the short-sample floor, the register break, invisible characters as a P0
+artifact, and hedged-enumeration openers. Measured independent of this skill, sharing only
+the Wikipedia URL both cite.
+
 **ehmo/slopkit** — https://github.com/ehmo/slopkit
 Copyright (c) 2026 ehmo. Three ideas taken in 2.12, written in original words and scanned
 clean: the brief-versus-artifact distinction, the invented-obligation carve-outs for support

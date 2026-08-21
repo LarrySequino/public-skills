@@ -26,6 +26,12 @@ Remove these. State the content directly.
 
 Any "here's what/this/that" construction is throat-clearing before the point. Cut it and state the point.
 
+### Hedged enumeration
+
+Openers that announce a list before delivering one, or announce generality before saying anything: "There are several ways to", "There are a few things to consider", "In general,", "Broadly speaking,". Analysis of human-versus-model answer corpora finds these among the strongest single discriminators, which is unsurprising: they buy the writer a sentence of thinking time and cost the reader one.
+
+**Fix:** lead with the answer, then enumerate if enumeration still helps. "There are several ways to cache this" becomes "Cache it at the edge." Delete "in general" outright; a sentence that needs it is either a rule or an exception, and saying which is the useful version.
+
 ## Emphasis Crutches
 
 These add no meaning. Delete them.

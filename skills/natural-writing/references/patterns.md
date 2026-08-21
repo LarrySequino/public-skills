@@ -38,10 +38,24 @@ These are fingerprints, not stylistic signals. Their presence is near-proof of A
 ### Chatbot citation markup leaks
 `citeturn0search0`, `contentReference[oaicite:0]{index=0}`, `oai_citation`, `[attached_file:1]`. Internal tokens surviving copy-paste from chat UIs. Strip every token; replace meaningful citations with real references. Worth catching even when nothing else reads as AI.
 
+### Invisible characters
+
+Zero-width spaces and joiners (U+200B, U+200D), soft hyphens (U+00AD), and Cyrillic or Greek homoglyphs standing in for Latin letters. These reach text through watermarking, through a paste out of a rendered page, or through a deliberate attempt to defeat a matcher. They are invisible on screen and survive every edit made by eye.
+
+Mechanical to find and near-impossible to false-positive, so scan rather than read: `grep -P '[\x{200B}\x{200D}\x{00AD}]'` catches the first group.
+
+**Fix:** strip them. A homoglyph inside an otherwise Latin word is always an error; normalize it.
+
 ### AI-tool URL parameters
 `utm_source=chatgpt.com`, `utm_source=openai`, `utm_source=claude.ai`, `utm_source=perplexity.ai`, `referrer=grok.com` on links. Strip the parameter, keep the URL if the link is meaningful.
 
 ---
+
+### Register break
+
+A piece that changes voice partway through, with no reason in the content, was written in more than one pass or by more than one hand. Watch for the error profile changing too: typos and comma splices in the first half and none in the second is the same tell from the other direction, and it is the more reliable of the two because nobody edits their mistakes back in.
+
+**Fix:** pick the register the piece earns and hold it end to end. When the shift is deliberate, and sometimes it is, give it a reason the reader can see.
 
 ## Whole-text tests
 

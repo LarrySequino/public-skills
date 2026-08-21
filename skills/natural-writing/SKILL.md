@@ -11,6 +11,8 @@ Strip predictable AI patterns from writing. Make prose sound like a specific hum
 
 The patterns here are statistically more common in LLM output, but humans on autopilot produce the same shapes, whether under deadline, in an unfamiliar genre, or in a second language. Commercial AI detectors have shown false-positive rates above 60% on non-native English writers (Liang et al., Stanford, 2023). So: these patterns are worth fixing in any prose, but never treat them as proof of AI authorship for a consequential decision (academic integrity, hiring, attribution). When auditing someone else's text, report patterns, not verdicts.
 
+A short sample carries no signal. Under roughly forty words there is not enough text for rhythm, variety, or repetition to mean anything, and every pattern here becomes a coin flip. Say the sample is too short rather than returning a verdict on it. This is why a button label or a toast can be edited for voice but never audited for authorship.
+
 Corollary for rewriting: don't over-sand. Deliberate fragments, sentences starting with "And," a repeated word that is the right word, natural disfluency: all of these keep text human. Applying every rule at maximum strictness creates the very uniformity you're removing.
 
 ## Voice, not habit
@@ -128,7 +130,7 @@ Applying answer discipline to a deliverable produces a thin artifact. Applying d
 The in-flight scan, for write mode and short pieces. Full verification is [references/preflight.md](references/preflight.md), which is authoritative for every rewrite and edit; these are the mechanical passes worth running even when a full Evaluator pass is overkill.
 
 - **Dash scan (mandatory, all modes):** search for `—`, `–`, and `--`. Any hit over one per 1,000 words means the draft isn't done. En dashes inside numeric ranges (5–20x, 1990–2000) are exempt; the scan is for dashes doing parenthetical work.
-- **Artifacts:** chatbot phrases, placeholders, leaked citation tokens, AI-tool URL parameters, cutoff disclaimers. Always P0.
+- **Artifacts:** chatbot phrases, placeholders, leaked citation tokens, AI-tool URL parameters, cutoff disclaimers, invisible characters. Always P0.
 - **Fabrication:** any fact, number, name, or citation in the output that wasn't in the input or from the author. Remove or flag.
 - **Tier 1 vocabulary:** replace on sight.
 - **Filler:** meta-joiners, "it's worth noting," "let's dive in," heavy -ly adverbs, hollow intensifiers. Delete.
