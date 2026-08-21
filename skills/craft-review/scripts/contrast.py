@@ -98,5 +98,27 @@ def main(argv):
         print("  ! fails AA for body text — enlarge, embolden, or increase contrast.")
 
 
+def _demo():
+    """Self-check on values with known answers. Exits 1 on any miss."""
+    cases = [
+        ("#000000", "#FFFFFF", 21.0),       # the WCAG maximum, by definition
+        ("#FFFFFF", "#FFFFFF", 1.0),        # identical colours, the minimum
+        ("#767676", "#FFFFFF", 4.54),       # the canonical just-passes-AA grey
+        ("255,255,255", "#000", 21.0),      # rgb and short-hex parse to the same thing
+    ]
+    bad = []
+    for a, b, want in cases:
+        got = get_ratio(parse_color(a), parse_color(b))
+        ok = abs(got - want) < 0.01
+        print(f"  {a:>12} on {b:<8} {got:6.2f}:1  want {want:5.2f}  {'ok' if ok else 'MISS'}")
+        if not ok:
+            bad.append((a, b, got, want))
+        verdicts(got)                       # must not raise on any ratio
+    print(f"\n  self-check: {'PASS' if not bad else 'FAIL'}")
+    sys.exit(1 if bad else 0)
+
+
 if __name__ == "__main__":
+    if "--demo" in sys.argv:
+        _demo()
     main(sys.argv[1:])

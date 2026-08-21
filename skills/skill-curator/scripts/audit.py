@@ -118,11 +118,18 @@ def audit(root):
         for m in re.findall(r"`?(?:scripts/)([\w-]+\.(?:py|js|sh))`?", s["text"]):
             if not any(x.name == m for x in s["scripts"]):
                 findings.append(("MISSING-SCRIPT", f"{s['name']}: names scripts/{m} but does not ship it"))
-        has_prov = any(x.name in {"harvest-log.md", "maintenance.md"} for x in s["refs"]) \
-                   or (s["path"] / "ATTRIBUTION.md").exists()
-        if not has_prov:
-            findings.append(("NO-PROVENANCE", f"{s['name']}: no harvest log, maintenance file, or "
-                                              "ATTRIBUTION.md, so an update starts from zero"))
+        # Provenance means a RECORD, not a file with the right name. A harvest log is
+        # a table with sources and dates in it; a format reference that happens to be
+        # called harvest-log.md is documentation, and passing it here is how the skill
+        # that audits provenance ended up with none of its own.
+        def is_record(p):
+            t = p.read_text(errors="ignore")
+            return bool(re.search(r"\b20\d\d-\d\d-\d\d\b", t)) and bool(re.search(r"https?://", t))
+        prov_files = [x for x in s["refs"] if x.name in {"harvest-log.md", "maintenance.md"}]
+        prov_files += [p for p in [s["path"] / "ATTRIBUTION.md"] if p.exists()]
+        if not any(is_record(p) for p in prov_files):
+            findings.append(("NO-PROVENANCE", f"{s['name']}: no file records where it came from "
+                                              "(a source URL and a date), so an update starts from zero"))
     if len(skills) > 10:
         findings.append(("COUNT", f"{len(skills)} skills in one scope. Past roughly ten, the "
                                   "discovery budget means some stop being surfaced at all."))
