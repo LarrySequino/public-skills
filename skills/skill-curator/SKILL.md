@@ -39,6 +39,16 @@ Pick by what the user asked for. When unclear, ask which one.
 
 ### 1. Audit — "clean up my skills"
 
+**Run `scripts/audit.py <skills-dir>` first.** It does steps 1, 2, 4, 4b and 5 exactly: the
+inventory with line counts and description lengths, the pairwise description comparison ranked
+by how rare the shared terms are, the bloat threshold, the per-scope count, and which skills
+carry no provenance at all. It also catches two things reading misses entirely, a reference
+link that has rotted and a script a skill names but does not ship. Pairwise comparison grows
+as the square of the library, which is where a read gets inconsistent and arithmetic does not.
+
+It reports and never concludes. Whether two near pairs actually compete is judgement, and so
+is everything in 3, 4a, 4c, 6 and 7.
+
 1. **Inventory.** List every skill: name, path, description, size of the main file, number of reference files, any version or last-updated marker.
 2. **Collision check.** Compare descriptions pairwise, not bodies. At routing time the description is the only thing the model sees, so two skills whose descriptions could both match one prompt will fire unpredictably. Flag every pair that overlaps.
 3. **Duplication check.** Two skills covering the same job are a merge candidate (job 3). Two skills covering adjacent jobs need boundary language, not a merge.
@@ -130,7 +140,7 @@ Every maintained skill should carry a harvest log: ranked sources with URLs, wha
 
 ### Measure it, don't read for it
 
-Reading finds ideas. Only a scan finds copied expression, and the two questions have different answers. Compare the skill against every source mechanically, in runs of about eight words: short enough to catch a lifted sentence, long enough that a hit means copying rather than two people describing the same pattern. Do this before writing anything down about where the skill came from.
+Reading finds ideas. Only a scan finds copied expression, and the two questions have different answers. Run `scripts/overlap.py <skill-dir> <sources-dir>`, which compares the skill against every source in runs of about eight words: short enough to catch a lifted sentence, long enough that a hit means copying rather than two people describing the same pattern. Do this before writing anything down about where the skill came from.
 
 Four independent careful readings of one skill and one of its sources missed a 108-word identical block sitting in both. Nobody was careless; prose that says the same thing in the same domain reads as familiar rather than as identical, and a reader has no way to feel the difference between "I have seen this idea" and "I have seen these words in this order."
 
