@@ -1,6 +1,13 @@
 # skills
 
-Skills I wrote for Claude, published for anyone to use.
+Three skills for Claude and about seventy other agents, maintained against a
+measured provenance trail rather than a vibe.
+
+| Skill | What it does |
+|---|---|
+| **natural-writing** | Strips AI patterns from prose. Write, rewrite, audit, or edit files in place. Tiered vocabulary, false-positive gates, and a preflight checklist, so it doesn't flag ordinary human writing. |
+| **craft-review** | Visual and UX review for UI screens. Measures spacing, contrast, alignment and typography with bundled scripts *before* it judges, then reports severity-ranked findings with numeric fixes. |
+| **skill-curator** | Maintenance for a skill library: audit for trigger collisions, vet third-party skills before installing, merge duplicates, and check upstream sources for updates. |
 
 ## Install
 
@@ -60,9 +67,22 @@ overwritten wholesale on every publish, so **edits made directly to this repo
 will be lost.** Issues are welcome and read. Pull requests are welcome too,
 but they get applied upstream by hand rather than merged here.
 
-## Scope
+## Provenance
 
-Only skills that are wholly mine are published here. My working library also
-contains skills adapted from other people's work, which stay private until
-their licensing is properly sorted out — a prose credit inside a file doesn't
-satisfy a license.
+Every skill here carries an `ATTRIBUTION.md` naming what it descends from, what
+was harvested as ideas and written fresh, and what expression carried over. Those
+files record measurements, not impressions: each skill is scanned against every
+source in runs of eight words, which is short enough to catch a lifted sentence
+and long enough that a hit means copying rather than two people describing the
+same thing.
+
+That method found a gap in this repo's own work. **natural-writing began as a fork
+of [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop)**
+(MIT) and shares 6,169 eight-word runs with it, the longest unbroken stretch
+running 1,189 words. Its parent credited two sources of its own, and those credits
+were lost in the fork. All three are now in `ATTRIBUTION.md`. The scanner is in
+this repo as `tools/overlap.py` if you want to run it on your own.
+
+My working library also holds skills adapted from other people that stay private
+until their licensing is sorted. A prose credit inside a file does not satisfy a
+license.

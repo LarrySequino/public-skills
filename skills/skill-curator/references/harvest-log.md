@@ -37,3 +37,24 @@ The version column is what makes the next pass a diff instead of a re-read. Reco
 - If a source can't be verified, write "unverified" rather than a guess.
 - Keep dormant sources in the table with a note to skip; removing them means rediscovering them later.
 - When a skill is renamed, keep the former name in the log so older references resolve.
+
+## Overlap measurements
+
+A harvest log records ideas taken. It should also record expression measured, because
+the two go stale differently: a source can sit unchanged for a year while the skill
+drifts into its wording, and only a scan catches that.
+
+Add a row per source with the run count, the longest unbroken run, and where those runs
+landed. The location does the interpretive work: hundreds of runs inside a word-list
+table mean far less than one long run in a rationale paragraph.
+
+| Source | Scanned | Runs | Longest | Where they sit | Read as |
+|---|---|---|---|---|---|
+| parent-project | 2026-08-20 | 6,169 | 1,189w | SKILL.md, four references | Descent. This is a fork. |
+| word-source | 2026-08-20 | 964 | 197w | vocabulary tables only | Weak. Tables converge. |
+| idea-source | 2026-08-20 | 48 | 16w | a shared URL, one quoted example | Nothing. Expected. |
+| unrelated | 2026-08-20 | 0 | — | — | Clean. |
+
+Record zero results too. A source that shares no phrasing is a fact worth keeping, since
+it is the control that makes a high count elsewhere meaningful rather than an artifact of
+the method.

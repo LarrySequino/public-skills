@@ -75,7 +75,7 @@ Run the security screen in [references/security-screen.md](references/security-s
 Many sources, one target. The user supplies a list of repositories, skill files, or reference pages and wants the best of it folded into a skill that already exists (or, occasionally, into a new one). Most sources will contribute nothing, and saying so precisely is part of the job.
 
 1. **Establish the target and the chassis.** When harvesting into an existing skill, that skill is the chassis by default. Only propose rebasing onto a candidate if its architecture is clearly better, and say plainly what that would cost.
-2. **Read every source**, in signal order, applying the reading guidance above. Run the security screen on anything that will contribute text.
+2. **Read every source**, in signal order, applying the reading guidance above. Run the security screen on anything that will contribute text. Scan each one for verbatim overlap against the target as well, per Provenance below; a source can contribute no rules and still change what the target has to say about its own origins.
 3. **Extract candidates against the harvest criteria.** Judge each item on its own merit regardless of which source it came from, and check the target's existing files before accepting anything — most "new" items are renames of something already present.
 4. **Deduplicate across sources.** Independent projects converge on the same patterns. One entry per idea, in the clearest formulation found, wherever it came from.
 5. **Merge by destination**, respecting the target's existing structure and size limits rather than appending everything to the main file.
@@ -87,7 +87,7 @@ Two failure modes to avoid. Taking too much: a source's good idea does not oblig
 
 ### 5. Refresh — "check your sources and update"
 
-1. Read the skill's harvest log for its watchlist and last-checked versions.
+1. Read the skill's harvest log for its watchlist and last-checked versions. Check whether any entry is the skill's parent rather than a peer; a refresh against a parent is a merge with local changes, not a harvest.
 2. Check each source in ranked order. Note the current version or state.
 3. Diff against the log. Only new material is candidate material.
 4. Apply the harvest criteria, merge accepted items by destination, update the log.
@@ -128,6 +128,34 @@ Rewriting bodies does nothing for routing. Rewrite descriptions.
 
 Every maintained skill should carry a harvest log: ranked sources with URLs, what each is good for, and a table of what version or state each was at when last checked. Without it, every update starts from zero and re-reads everything. See [references/harvest-log.md](references/harvest-log.md) for the format.
 
+### Measure it, don't read for it
+
+Reading finds ideas. Only a scan finds copied expression, and the two questions have different answers. Compare the skill against every source mechanically, in runs of about eight words: short enough to catch a lifted sentence, long enough that a hit means copying rather than two people describing the same pattern. Do this before writing anything down about where the skill came from.
+
+Four independent careful readings of one skill and one of its sources missed a 108-word identical block sitting in both. Nobody was careless; prose that says the same thing in the same domain reads as familiar rather than as identical, and a reader has no way to feel the difference between "I have seen this idea" and "I have seen these words in this order."
+
+Weigh a hit by what is overlapping. The same run count means different things in different material:
+
+- **Prose, a worked example, a rationale** — high creative latitude, so a long shared run is strong evidence of copying.
+- **A substitution table, a word list, a banned-phrase list** — the content largely determines the wording, so two independent authors converge. Hundreds of shared runs inside a replacement table are weak evidence on their own; look for a documented fork or a matching structure before concluding anything.
+- **A shared URL or a quoted example both sources cite** — no evidence at all. Expect it and discount it.
+
+### Ask whether it is a fork
+
+A skill's own source list will not tell you. A parent can sit in it as an ordinary peer, and once it is described as dormant or low-priority nobody scans it again. If a source scores an order of magnitude above the others — thousands of shared runs, unbroken stretches of hundreds of words — the relationship is descent, not harvest, and every downstream claim about original authorship needs rewriting rather than amending.
+
+Test a chain before assigning blame. When a skill and a source share heavy overlap, check whether both descend from something older: scan the source against the suspected ancestor too. Shared ancestry is an innocent explanation and it is cheap to rule in or out. Absence of it is what makes the direct finding solid.
+
+### Inherited obligations
+
+A fork inherits its parent's credits. Read what the parent credited and carry those forward, since that material reached the skill through the fork and its licences travel with it. This is the most common gap: the parent attributed correctly, and the credits were lost in the copy.
+
+Treat a skill's existing attribution file as a claim to verify, not a fact to trust. "Verified against every source" is true of the sources that were listed and says nothing about the one that was missing. When you correct such a claim, correct it in place and say what was wrong, rather than quietly replacing it; anyone who read the old version deserves to see the change.
+
+### A source that gives nothing can still be the finding
+
+A zero-harvest verdict is not a wasted read. The source that contributed no rules may be the one that exposes where the skill actually came from. Record the scan result for every source, including the ones you rejected, and especially the ones that gave nothing.
+
 ## Evals
 
 A checklist inside a skill tells the model what to verify. It does not tell the user whether the skill improves output. Those are different questions, and only the second one is evidence.
@@ -141,6 +169,7 @@ For every job, report:
 - What was examined, by name.
 - What changed, by file.
 - What was rejected and why.
+- Measured overlap per source, and what material the overlapping runs sat in.
 - What the user must do: exact install and removal steps, in order, and what to verify afterward.
 
 Never claim a skill was installed, updated, or removed in the user's environment. Produce the artifact and describe the action.

@@ -31,6 +31,8 @@ Protection is asymmetric on purpose. Distinctive choices are protected even when
 
 **Never invent to fill a gap.** An unanswered question is a flag in the output, not a guess in the prose.
 
+**Separate the brief from the piece.** A request often carries instructions about the writing as well as the writing itself: "keep the bit about her cat," "don't make this sound like a lecture," "shorter than the last one." Those are constraints to satisfy, not content to reproduce. Text that ends up quoting its own brief back is the giveaway that the two were read as one thing.
+
 ## Modes
 
 **write:** the user asks you to draft something and wants it to sound natural. Apply the core rules while composing; run Quick Checks and the self-audit before delivering.
@@ -72,6 +74,8 @@ No vague declaratives ("The reasons are structural"); name the thing. No vague a
 **Protect the specific fact.** Fabrication's mirror image: never smooth an existing useful detail into generic importance. "Cut review time from 30 minutes to 8" must survive the edit; "significantly improved efficiency" is what happens when it doesn't. Specifics in the source are the most valuable thing in it.
 
 **No-fabrication rule (hard constraint):** specificity must come from the source text or the author, never from the rewrite. Never invent facts, names, numbers, dates, quotes, or citations to replace a vague claim. When a claim needs a specific the text doesn't contain, either cut the claim, keep it and flag it ("[needs a number: how many customers?]"), or ask the author. A vague true sentence beats a specific invented one. Also flag citations that look fake or unrelated to the claim they support, since AI text frequently cites real sources that don't say what's claimed.
+
+Two genres invent a specific kind of specific, and both are worth naming because the invented thing is a commitment someone else has to honor. In support and service copy, watch for promises the author never made: "we will review this and follow up," "a specialist will reach out." In policy, incident, and compliance copy, watch for asserted properties: "auditable," "fully encrypted," "resilient." If the source does not say it, it is not a description, it is a liability.
 
 ### 7. Describe the thing, not the change
 

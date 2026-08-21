@@ -77,6 +77,8 @@ Legitimate on their own. When two or more show up together, the paragraph likely
 | Replace | With |
 |---|---|
 | harness | use, take advantage of |
+| showcase | show, is, has |
+| supercharge | speed up, improve |
 | navigate / navigating | work through, handle, deal with |
 | foster | encourage, support, build |
 | elevate | improve, raise, strengthen |
