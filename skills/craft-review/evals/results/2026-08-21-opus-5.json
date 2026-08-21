@@ -1,0 +1,1401 @@
+{
+  "metadata": {
+    "skill_name": "craft-review",
+    "skill_path": "/Users/larry/projects/skills/skills/craft-review",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "contrast-failure-gets-a-ratio",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review states a contrast ratio for body text on background, and it is between 1.9:1 and 2.2:1",
+          "passed": true,
+          "evidence": "ratios found: ['1.96', '3.21', '1.96', '4.5', '1.96', '7.73']",
+          "method": "script"
+        },
+        {
+          "text": "The finding is ranked as the most severe on the page",
+          "passed": true,
+          "evidence": "Priority table row 1: Critical / Contrast / 'Body text unreadable / 1.96:1 (needs 4.5)'; overall impression: 'Nothing else matters until the palette is fixed.'",
+          "method": "agent"
+        },
+        {
+          "text": "The fix names a specific replacement color and the ratio it achieves, not 'increase contrast'",
+          "passed": true,
+          "evidence": "hex + ratio near each other",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/contrast.py or scripts/preflight.py was run before the judgment was written",
+          "passed": true,
+          "evidence": "script named in transcript: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "contrast-failure-gets-a-ratio",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review states a contrast ratio for body text on background, and it is between 1.9:1 and 2.2:1",
+          "passed": true,
+          "evidence": "ratios found: ['1.96', '4.5', '3.21', '1.96', '1.96', '4.5']",
+          "method": "script"
+        },
+        {
+          "text": "The finding is ranked as the most severe on the page",
+          "passed": true,
+          "evidence": "Priority table row 1: Critical / Contrast / 'All text 1.96:1 - fails AA body and large'; opens 'Nothing on this page is legible.'",
+          "method": "agent"
+        },
+        {
+          "text": "The fix names a specific replacement color and the ratio it achieves, not 'increase contrast'",
+          "passed": true,
+          "evidence": "hex + ratio near each other",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/contrast.py or scripts/preflight.py was run before the judgment was written",
+          "passed": true,
+          "evidence": "script named in transcript: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "contrast-failure-gets-a-ratio",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review states a contrast ratio for body text on background, and it is between 1.9:1 and 2.2:1",
+          "passed": true,
+          "evidence": "ratios found: ['1.96', '4.5', '1.96', '1.96', '4.5', '1.96']",
+          "method": "script"
+        },
+        {
+          "text": "The finding is ranked as the most severe on the page",
+          "passed": true,
+          "evidence": "Priority table row 1: Critical / Contrast / 'All text at 1.96:1 (needs 4.5:1)'; 'That is the whole review - nothing else matters until the text is legible'",
+          "method": "agent"
+        },
+        {
+          "text": "The fix names a specific replacement color and the ratio it achieves, not 'increase contrast'",
+          "passed": true,
+          "evidence": "hex + ratio near each other",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/contrast.py or scripts/preflight.py was run before the judgment was written",
+          "passed": true,
+          "evidence": "script named in transcript: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "contrast-failure-gets-a-ratio",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review states a contrast ratio for body text on background, and it is between 1.9:1 and 2.2:1",
+          "passed": true,
+          "evidence": "ratios found: ['1.96', '1.96', '4.5', '4.5', '4.53', '8.30']",
+          "method": "script"
+        },
+        {
+          "text": "The finding is ranked as the most severe on the page",
+          "passed": true,
+          "evidence": "'The color is the problem, and it's serious enough that it outweighs everything else on the page.' - first item under ## Critical: '1. Body text is unreadable - 1.96:1 contrast.'",
+          "method": "agent"
+        },
+        {
+          "text": "The fix names a specific replacement color and the ratio it achieves, not 'increase contrast'",
+          "passed": true,
+          "evidence": "hex + ratio near each other",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/contrast.py or scripts/preflight.py was run before the judgment was written",
+          "passed": true,
+          "evidence": "script named in transcript: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "contrast-failure-gets-a-ratio",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review states a contrast ratio for body text on background, and it is between 1.9:1 and 2.2:1",
+          "passed": true,
+          "evidence": "ratios found: ['1.96', '1.96', '4.5', '4.5', '0.5', '6.9']",
+          "method": "script"
+        },
+        {
+          "text": "The finding is ranked as the most severe on the page",
+          "passed": true,
+          "evidence": "'The problem is color. As written, this page is close to unreadable, and that outranks everything else.' - first item under ## Critical",
+          "method": "agent"
+        },
+        {
+          "text": "The fix names a specific replacement color and the ratio it achieves, not 'increase contrast'",
+          "passed": true,
+          "evidence": "hex + ratio near each other",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/contrast.py or scripts/preflight.py was run before the judgment was written",
+          "passed": true,
+          "evidence": "script named in transcript: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "contrast-failure-gets-a-ratio",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review states a contrast ratio for body text on background, and it is between 1.9:1 and 2.2:1",
+          "passed": true,
+          "evidence": "ratios found: ['1.96', '1.96', '4.5', '1.96', '6.98', '1.74']",
+          "method": "script"
+        },
+        {
+          "text": "The finding is ranked as the most severe on the page",
+          "passed": true,
+          "evidence": "First item under ## Blocking: '1. Body and heading text are effectively invisible - 1.96:1' ... 'Dark gray on near-black is the single thing wrong with this page.'",
+          "method": "agent"
+        },
+        {
+          "text": "The fix names a specific replacement color and the ratio it achieves, not 'increase contrast'",
+          "passed": true,
+          "evidence": "hex + ratio near each other",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/contrast.py or scripts/preflight.py was run before the judgment was written",
+          "passed": true,
+          "evidence": "script named in transcript: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "theme-only-color-is-caught",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --muted is defined only inside a theme block",
+          "passed": true,
+          "evidence": "theme-only-color named",
+          "method": "script"
+        },
+        {
+          "text": "The review reports that body has no background of its own",
+          "passed": true,
+          "evidence": "no-body-bg named",
+          "method": "script"
+        },
+        {
+          "text": "Both are framed as blocking, not as polish",
+          "passed": true,
+          "evidence": "framed as blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run",
+          "passed": true,
+          "evidence": "preflight in transcript",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "theme-only-color-is-caught",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --muted is defined only inside a theme block",
+          "passed": true,
+          "evidence": "theme-only-color named",
+          "method": "script"
+        },
+        {
+          "text": "The review reports that body has no background of its own",
+          "passed": true,
+          "evidence": "no-body-bg named",
+          "method": "script"
+        },
+        {
+          "text": "Both are framed as blocking, not as polish",
+          "passed": true,
+          "evidence": "framed as blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run",
+          "passed": true,
+          "evidence": "preflight in transcript",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "theme-only-color-is-caught",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --muted is defined only inside a theme block",
+          "passed": true,
+          "evidence": "theme-only-color named",
+          "method": "script"
+        },
+        {
+          "text": "The review reports that body has no background of its own",
+          "passed": true,
+          "evidence": "no-body-bg named",
+          "method": "script"
+        },
+        {
+          "text": "Both are framed as blocking, not as polish",
+          "passed": true,
+          "evidence": "framed as blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run",
+          "passed": true,
+          "evidence": "preflight in transcript",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "theme-only-color-is-caught",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --muted is defined only inside a theme block",
+          "passed": true,
+          "evidence": "theme-only-color named",
+          "method": "script"
+        },
+        {
+          "text": "The review reports that body has no background of its own",
+          "passed": false,
+          "evidence": "no-body-bg named",
+          "method": "script"
+        },
+        {
+          "text": "Both are framed as blocking, not as polish",
+          "passed": true,
+          "evidence": "framed as blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run",
+          "passed": false,
+          "evidence": "preflight in transcript",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "theme-only-color-is-caught",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --muted is defined only inside a theme block",
+          "passed": true,
+          "evidence": "theme-only-color named",
+          "method": "script"
+        },
+        {
+          "text": "The review reports that body has no background of its own",
+          "passed": true,
+          "evidence": "no-body-bg named",
+          "method": "script"
+        },
+        {
+          "text": "Both are framed as blocking, not as polish",
+          "passed": true,
+          "evidence": "framed as blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run",
+          "passed": false,
+          "evidence": "preflight in transcript",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "theme-only-color-is-caught",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --muted is defined only inside a theme block",
+          "passed": true,
+          "evidence": "theme-only-color named",
+          "method": "script"
+        },
+        {
+          "text": "The review reports that body has no background of its own",
+          "passed": true,
+          "evidence": "no-body-bg named",
+          "method": "script"
+        },
+        {
+          "text": "Both are framed as blocking, not as polish",
+          "passed": true,
+          "evidence": "framed as blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run",
+          "passed": false,
+          "evidence": "preflight in transcript",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "No finding is ranked as blocking or severe",
+          "passed": true,
+          "evidence": "no blocking language",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review states the page passes the mechanical checks",
+          "passed": true,
+          "evidence": "says passes/clean",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labelled as a judgment call rather than a defect",
+          "passed": false,
+          "evidence": "\ud83d\udfe0 Major  Hierarchy [judged] \u2014 the label wins the squint test; the answer doesn't",
+          "method": "agent"
+        },
+        {
+          "text": "No contrast number is reported as a failure",
+          "passed": true,
+          "evidence": "no failing ratio reported",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.25
+      },
+      "expectations": [
+        {
+          "text": "No finding is ranked as blocking or severe",
+          "passed": false,
+          "evidence": "no blocking language",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review states the page passes the mechanical checks",
+          "passed": true,
+          "evidence": "says passes/clean",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labelled as a judgment call rather than a defect",
+          "passed": false,
+          "evidence": "\ud83d\udfe1 Minor  Two-briefs test \u2014 the page has no visual vocabulary for bad news  [judged]",
+          "method": "agent"
+        },
+        {
+          "text": "No contrast number is reported as a failure",
+          "passed": false,
+          "evidence": "no failing ratio reported",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "No finding is ranked as blocking or severe",
+          "passed": true,
+          "evidence": "no blocking language",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review states the page passes the mechanical checks",
+          "passed": true,
+          "evidence": "says passes/clean",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labelled as a judgment call rather than a defect",
+          "passed": false,
+          "evidence": "\ud83d\udfe0 Major  Content [judged] \u2014 the handoff hands off a pointer, not a handoff",
+          "method": "agent"
+        },
+        {
+          "text": "No contrast number is reported as a failure",
+          "passed": false,
+          "evidence": "no failing ratio reported",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "No finding is ranked as blocking or severe",
+          "passed": false,
+          "evidence": "no blocking language",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review states the page passes the mechanical checks",
+          "passed": true,
+          "evidence": "says passes/clean",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labelled as a judgment call rather than a defect",
+          "passed": false,
+          "evidence": "## Content problems (the real ones) ... **No names.** Who handed off, who's receiving.",
+          "method": "agent"
+        },
+        {
+          "text": "No contrast number is reported as a failure",
+          "passed": true,
+          "evidence": "no failing ratio reported",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "No finding is ranked as blocking or severe",
+          "passed": true,
+          "evidence": "no blocking language",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review states the page passes the mechanical checks",
+          "passed": true,
+          "evidence": "says passes/clean",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labelled as a judgment call rather than a defect",
+          "passed": false,
+          "evidence": "### 4. The rule is nearly invisible ... Half a line is worse than either.",
+          "method": "agent"
+        },
+        {
+          "text": "No contrast number is reported as a failure",
+          "passed": true,
+          "evidence": "no failing ratio reported",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "No finding is ranked as blocking or severe",
+          "passed": true,
+          "evidence": "no blocking language",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review states the page passes the mechanical checks",
+          "passed": false,
+          "evidence": "says passes/clean",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labelled as a judgment call rather than a defect",
+          "passed": false,
+          "evidence": "**3. The h1 inherits body leading.** ... body rhythm applied to a heading, so it reads loose.",
+          "method": "agent"
+        },
+        {
+          "text": "No contrast number is reported as a failure",
+          "passed": true,
+          "evidence": "no failing ratio reported",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "asymmetry-gets-a-pixel-delta",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review names the left padding as 18px against 24px, or reports a 6px inset delta",
+          "passed": true,
+          "evidence": "18/24 or 6px present",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: set left padding to 24px, or equivalent",
+          "passed": true,
+          "evidence": "numeric fix with 24px",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review does not describe the problem only in sensory terms without the measurement",
+          "passed": true,
+          "evidence": "has at least one measurement",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "asymmetry-gets-a-pixel-delta",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review names the left padding as 18px against 24px, or reports a 6px inset delta",
+          "passed": true,
+          "evidence": "18/24 or 6px present",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: set left padding to 24px, or equivalent",
+          "passed": true,
+          "evidence": "numeric fix with 24px",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review does not describe the problem only in sensory terms without the measurement",
+          "passed": true,
+          "evidence": "has at least one measurement",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "asymmetry-gets-a-pixel-delta",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review names the left padding as 18px against 24px, or reports a 6px inset delta",
+          "passed": true,
+          "evidence": "18/24 or 6px present",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: set left padding to 24px, or equivalent",
+          "passed": true,
+          "evidence": "numeric fix with 24px",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review does not describe the problem only in sensory terms without the measurement",
+          "passed": true,
+          "evidence": "has at least one measurement",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "asymmetry-gets-a-pixel-delta",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review names the left padding as 18px against 24px, or reports a 6px inset delta",
+          "passed": true,
+          "evidence": "18/24 or 6px present",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: set left padding to 24px, or equivalent",
+          "passed": true,
+          "evidence": "numeric fix with 24px",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review does not describe the problem only in sensory terms without the measurement",
+          "passed": true,
+          "evidence": "has at least one measurement",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "asymmetry-gets-a-pixel-delta",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review names the left padding as 18px against 24px, or reports a 6px inset delta",
+          "passed": true,
+          "evidence": "18/24 or 6px present",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: set left padding to 24px, or equivalent",
+          "passed": true,
+          "evidence": "numeric fix with 24px",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review does not describe the problem only in sensory terms without the measurement",
+          "passed": true,
+          "evidence": "has at least one measurement",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "asymmetry-gets-a-pixel-delta",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review names the left padding as 18px against 24px, or reports a 6px inset delta",
+          "passed": true,
+          "evidence": "18/24 or 6px present",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: set left padding to 24px, or equivalent",
+          "passed": true,
+          "evidence": "numeric fix with 24px",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The review does not describe the problem only in sensory terms without the measurement",
+          "passed": true,
+          "evidence": "has at least one measurement",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": false,
+          "evidence": "Three of five rate at 3-4. On the full 50-point scale the threshold for \"reads as generated -- rework\" is 35, and the rated dimensions are tracking well under that pace.",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": false,
+          "evidence": "Major  Distinctiveness [judged] -- the palette is a category reflex, not a decision (severity-ranked finding issued about this page)",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": false,
+          "evidence": "**Distinctiveness: provisionally 40-60 / 100 [judged].** Below the 70 line that reads as generated rather than designed.",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": false,
+          "evidence": "Major  Hierarchy [judged] -- six equal tiles means nothing wins the squint test (severity-ranked finding issued about this page)",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": false,
+          "evidence": "**Distinctiveness** | **2 of 5 dimensions rateable; both fail** | Intentionality 3/10, Distinctiveness 3/10 (below).",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": false,
+          "evidence": "Major  Distinctiveness (Group E) [judged] -- the palette is a category reflex, not a decision; plus a Priority table ranking findings for this screen",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "Accent blue on white: same check, 4.5:1 for text, 3:1 for UI borders and chart strokes.",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": true,
+          "evidence": "treat what follows as two things: (1) the failure modes this exact layout and palette almost always has, and (2) the specific checks to run against your real screen.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "Check the active state and any secondary/muted nav label against the navy: 4.5:1 for text, 3:1 for the indicator bar or icon.",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": true,
+          "evidence": "Up front: I can't do a real craft review from this description. Craft lives in the values",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "A 4px or 8px base is standard: 4, 8, 12, 16, 24, 32, 48, 64.",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": true,
+          "evidence": "nothing below is a verdict on your specific screen. ... Where I say \"usually\" or \"check\", that's a hypothesis to test, not a finding.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.8,
+        "stddev": 0.261,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behaviour_only": {
+        "mean": 0.8,
+        "stddev": 0.261,
+        "min": 0.25,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.85,
+        "stddev": 0.2,
+        "min": 0.5,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behaviour_only": {
+        "mean": 0.894,
+        "stddev": 0.184,
+        "min": 0.5,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "-0.05",
+      "pass_rate_behaviour_only": "-0.09",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "contrast-failure-gets-a-ratio: with 1.00 vs without 1.00 (+0.00), n=3+3",
+    "theme-only-color-is-caught: with 1.00 vs without 0.67 (+0.33), n=3+3",
+    "clean-page-is-called-clean: with 0.50 vs without 0.58 (-0.08), n=3+3",
+    "asymmetry-gets-a-pixel-delta: with 1.00 vs without 1.00 (+0.00), n=3+3",
+    "unmeasurable-is-said-so: with 0.50 vs without 1.00 (-0.50), n=3+3",
+    "2 of 19 expectations check that a bundled script was run; those can only pass with the skill present. Behaviour-only (excluding them): with 0.8 vs without 0.894, delta -0.09."
+  ]
+}

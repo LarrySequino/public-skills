@@ -128,9 +128,41 @@ fork. All three are now in `ATTRIBUTION.md`, and the scanner is at
 ## Evals
 
 Each skill ships `evals/evals.json` in the format Anthropic's `skill-creator` uses:
-prompts with checkable expectations, run with the skill and without, three runs each,
-graded with evidence. The sets are written; the numbers are not yet published. When
-they are, they will be here, with the runs that produced them.
+prompts with checkable expectations, run with the skill and without, three runs each.
+Scripts decide every expectation a script can decide; a reader decides the rest, with a
+quoted line of evidence per verdict. The full per-run record is in each skill's
+`evals/results/`. First run, 2026-08-21, Opus 5, 96 executor runs:
+
+| Skill | With | Without | Delta | Behaviour-only delta* |
+|---|---|---|---|---|
+| natural-writing | 0.905 | 0.790 | **+0.11** | +0.11 |
+| skill-curator | 0.979 | 0.804 | **+0.17** | +0.12 |
+| craft-review | 0.800 | 0.850 | **−0.05** | −0.09 |
+
+*Excluding expectations of the form "the transcript shows the skill's script was run,"
+which can only pass with the skill present and so measure availability, not behaviour.
+
+**craft-review lost to its own baseline**, and the per-eval record says why. It wins
+where its scripts catch what a reader misses (a colour defined only inside a dark-mode
+block: +0.33), ties where the model already does the arithmetic unaided (contrast
+ratios, a 6px inset), and loses on the two evals that test restraint: handed a one-line
+verbal description with nothing to measure, all three with-skill runs scored the page
+anyway ("Distinctiveness 3/10, in the rework band") and issued severity-tagged findings
+about a screen they had never seen, while the baseline said it could not review from a
+description. The skill's severity and scoring machinery fires on things it has not
+measured. That is a defect, it is now known, and the fix and re-run are the next entry
+in this table.
+
+**natural-writing** is ahead on five of seven evals, even on one, and behind on one by a
+single check: one run in three produced one em dash against a six-dash voice sample,
+the predicted collision between the dash cap and the voice-sample override.
+
+The grader was wrong three times before any skill was, and each time against the
+skill: a regex that read "named `landscape` and cleared it" as flagging it, a synonym
+check that failed "watch the results" for not saying "monitor," and "AA needs 4.5:1"
+cited as a standard read as a reported finding. Each was caught by reading the answers
+and each would have published a wrong number. The method held up; the first draft of
+the grader did not, which is the argument for the method.
 
 ## This repo is generated
 

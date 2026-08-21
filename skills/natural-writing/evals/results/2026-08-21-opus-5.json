@@ -1,0 +1,1944 @@
+{
+  "metadata": {
+    "skill_name": "natural-writing",
+    "skill_path": "/Users/larry/projects/skills/skills/natural-writing",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "already-good-prose-is-left-alone",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "Fewer than 10 percent of the words are changed",
+          "passed": true,
+          "evidence": "0% of words changed (difflib ratio)",
+          "method": "script"
+        },
+        {
+          "text": "At least one em dash survives, or the response states explicitly why it removed them and names the voice it was protecting",
+          "passed": true,
+          "evidence": "em dash in rewrite: False; mentions dashes: True",
+          "method": "script"
+        },
+        {
+          "text": "No sentence containing a number or a time is rewritten",
+          "passed": true,
+          "evidence": "2/2 numeric sentences kept word-for-word (punctuation ignored)",
+          "method": "script"
+        },
+        {
+          "text": "The response says the text is already largely human rather than manufacturing findings",
+          "passed": false,
+          "evidence": "phrase search in answer",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "already-good-prose-is-left-alone",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Fewer than 10 percent of the words are changed",
+          "passed": true,
+          "evidence": "0% of words changed (difflib ratio)",
+          "method": "script"
+        },
+        {
+          "text": "At least one em dash survives, or the response states explicitly why it removed them and names the voice it was protecting",
+          "passed": true,
+          "evidence": "em dash in rewrite: False; mentions dashes: True",
+          "method": "script"
+        },
+        {
+          "text": "No sentence containing a number or a time is rewritten",
+          "passed": true,
+          "evidence": "2/2 numeric sentences kept word-for-word (punctuation ignored)",
+          "method": "script"
+        },
+        {
+          "text": "The response says the text is already largely human rather than manufacturing findings",
+          "passed": true,
+          "evidence": "phrase search in answer",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "already-good-prose-is-left-alone",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "Fewer than 10 percent of the words are changed",
+          "passed": true,
+          "evidence": "3% of words changed (difflib ratio)",
+          "method": "script"
+        },
+        {
+          "text": "At least one em dash survives, or the response states explicitly why it removed them and names the voice it was protecting",
+          "passed": true,
+          "evidence": "em dash in rewrite: False; mentions dashes: True",
+          "method": "script"
+        },
+        {
+          "text": "No sentence containing a number or a time is rewritten",
+          "passed": false,
+          "evidence": "1/2 numeric sentences kept word-for-word (punctuation ignored)",
+          "method": "script"
+        },
+        {
+          "text": "The response says the text is already largely human rather than manufacturing findings",
+          "passed": true,
+          "evidence": "phrase search in answer",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "already-good-prose-is-left-alone",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "Fewer than 10 percent of the words are changed",
+          "passed": true,
+          "evidence": "7% of words changed (difflib ratio)",
+          "method": "script"
+        },
+        {
+          "text": "At least one em dash survives, or the response states explicitly why it removed them and names the voice it was protecting",
+          "passed": true,
+          "evidence": "em dash in rewrite: False; mentions dashes: True",
+          "method": "script"
+        },
+        {
+          "text": "No sentence containing a number or a time is rewritten",
+          "passed": false,
+          "evidence": "1/2 numeric sentences kept word-for-word (punctuation ignored)",
+          "method": "script"
+        },
+        {
+          "text": "The response says the text is already largely human rather than manufacturing findings",
+          "passed": false,
+          "evidence": "phrase search in answer",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "already-good-prose-is-left-alone",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "Fewer than 10 percent of the words are changed",
+          "passed": true,
+          "evidence": "0% of words changed (difflib ratio)",
+          "method": "script"
+        },
+        {
+          "text": "At least one em dash survives, or the response states explicitly why it removed them and names the voice it was protecting",
+          "passed": true,
+          "evidence": "em dash in rewrite: True; mentions dashes: True",
+          "method": "script"
+        },
+        {
+          "text": "No sentence containing a number or a time is rewritten",
+          "passed": true,
+          "evidence": "2/2 numeric sentences kept word-for-word (punctuation ignored)",
+          "method": "script"
+        },
+        {
+          "text": "The response says the text is already largely human rather than manufacturing findings",
+          "passed": false,
+          "evidence": "phrase search in answer",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "already-good-prose-is-left-alone",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "Fewer than 10 percent of the words are changed",
+          "passed": true,
+          "evidence": "7% of words changed (difflib ratio)",
+          "method": "script"
+        },
+        {
+          "text": "At least one em dash survives, or the response states explicitly why it removed them and names the voice it was protecting",
+          "passed": true,
+          "evidence": "em dash in rewrite: False; mentions dashes: True",
+          "method": "script"
+        },
+        {
+          "text": "No sentence containing a number or a time is rewritten",
+          "passed": false,
+          "evidence": "1/2 numeric sentences kept word-for-word (punctuation ignored)",
+          "method": "script"
+        },
+        {
+          "text": "The response says the text is already largely human rather than manufacturing findings",
+          "passed": false,
+          "evidence": "phrase search in answer",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "fabrication-under-pressure",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The rewrite contains no number, percentage, date, or named metric that the source lacked",
+          "passed": true,
+          "evidence": "  no specifics in the rewrite that were absent from the source",
+          "method": "script"
+        },
+        {
+          "text": "The response flags at least one place where a specific is missing, in the skill's flag style, or asks the author for it",
+          "passed": true,
+          "evidence": "flag bracket or question present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Filler (significantly, overall, big win) is cut rather than replaced with invented specifics",
+          "passed": true,
+          "evidence": "filler words absent from rewrite",
+          "method": "script"
+        },
+        {
+          "text": "Running scripts/prose-scan.py --compare source rewrite reports zero new numbers and zero new citations",
+          "passed": true,
+          "evidence": "prose-scan --compare exit code 0",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "fabrication-under-pressure",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "The rewrite contains no number, percentage, date, or named metric that the source lacked",
+          "passed": false,
+          "evidence": "  [NEW-NAME] 1: Needs",
+          "method": "script"
+        },
+        {
+          "text": "The response flags at least one place where a specific is missing, in the skill's flag style, or asks the author for it",
+          "passed": true,
+          "evidence": "flag bracket or question present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Filler (significantly, overall, big win) is cut rather than replaced with invented specifics",
+          "passed": true,
+          "evidence": "filler words absent from rewrite",
+          "method": "script"
+        },
+        {
+          "text": "Running scripts/prose-scan.py --compare source rewrite reports zero new numbers and zero new citations",
+          "passed": false,
+          "evidence": "prose-scan --compare exit code 0",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "fabrication-under-pressure",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "The rewrite contains no number, percentage, date, or named metric that the source lacked",
+          "passed": false,
+          "evidence": "  [NEW-NAME] 1: Needs",
+          "method": "script"
+        },
+        {
+          "text": "The response flags at least one place where a specific is missing, in the skill's flag style, or asks the author for it",
+          "passed": true,
+          "evidence": "flag bracket or question present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Filler (significantly, overall, big win) is cut rather than replaced with invented specifics",
+          "passed": true,
+          "evidence": "filler words absent from rewrite",
+          "method": "script"
+        },
+        {
+          "text": "Running scripts/prose-scan.py --compare source rewrite reports zero new numbers and zero new citations",
+          "passed": false,
+          "evidence": "prose-scan --compare exit code 0",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "fabrication-under-pressure",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "The rewrite contains no number, percentage, date, or named metric that the source lacked",
+          "passed": false,
+          "evidence": "  [NEW-NAME] 1: Redis",
+          "method": "script"
+        },
+        {
+          "text": "The response flags at least one place where a specific is missing, in the skill's flag style, or asks the author for it",
+          "passed": true,
+          "evidence": "flag bracket or question present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Filler (significantly, overall, big win) is cut rather than replaced with invented specifics",
+          "passed": true,
+          "evidence": "filler words absent from rewrite",
+          "method": "script"
+        },
+        {
+          "text": "Running scripts/prose-scan.py --compare source rewrite reports zero new numbers and zero new citations",
+          "passed": false,
+          "evidence": "prose-scan --compare exit code 0",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "fabrication-under-pressure",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.25
+      },
+      "expectations": [
+        {
+          "text": "The rewrite contains no number, percentage, date, or named metric that the source lacked",
+          "passed": false,
+          "evidence": "  [NEW-NAME] 1: Redis",
+          "method": "script"
+        },
+        {
+          "text": "The response flags at least one place where a specific is missing, in the skill's flag style, or asks the author for it",
+          "passed": false,
+          "evidence": "flag bracket or question present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Filler (significantly, overall, big win) is cut rather than replaced with invented specifics",
+          "passed": true,
+          "evidence": "filler words absent from rewrite",
+          "method": "script"
+        },
+        {
+          "text": "Running scripts/prose-scan.py --compare source rewrite reports zero new numbers and zero new citations",
+          "passed": false,
+          "evidence": "prose-scan --compare exit code 0",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "fabrication-under-pressure",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "The rewrite contains no number, percentage, date, or named metric that the source lacked",
+          "passed": true,
+          "evidence": "  no specifics in the rewrite that were absent from the source",
+          "method": "script"
+        },
+        {
+          "text": "The response flags at least one place where a specific is missing, in the skill's flag style, or asks the author for it",
+          "passed": false,
+          "evidence": "flag bracket or question present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Filler (significantly, overall, big win) is cut rather than replaced with invented specifics",
+          "passed": true,
+          "evidence": "filler words absent from rewrite",
+          "method": "script"
+        },
+        {
+          "text": "Running scripts/prose-scan.py --compare source rewrite reports zero new numbers and zero new citations",
+          "passed": true,
+          "evidence": "prose-scan --compare exit code 0",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rhythm-without-staccato",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Sentence-length variation rises: the coefficient of variation reported by scripts/prose-scan.py is above 0.35 where the source was below 0.2",
+          "passed": true,
+          "evidence": "CV=0.44",
+          "method": "script"
+        },
+        {
+          "text": "There is no run of three consecutive sentences under eight words",
+          "passed": true,
+          "evidence": "sentence lengths [7, 25, 20, 9, 16]",
+          "method": "script"
+        },
+        {
+          "text": "The First/Second/Third scaffold is gone",
+          "passed": true,
+          "evidence": "ordinal scaffold search",
+          "method": "script"
+        },
+        {
+          "text": "No step from the source is dropped",
+          "passed": true,
+          "evidence": "steps present: ['schema', 'plan', 'staging', 'monitor', 'document']",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rhythm-without-staccato",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "Sentence-length variation rises: the coefficient of variation reported by scripts/prose-scan.py is above 0.35 where the source was below 0.2",
+          "passed": true,
+          "evidence": "CV=0.55",
+          "method": "script"
+        },
+        {
+          "text": "There is no run of three consecutive sentences under eight words",
+          "passed": true,
+          "evidence": "sentence lengths [3, 27, 18, 9, 17]",
+          "method": "script"
+        },
+        {
+          "text": "The First/Second/Third scaffold is gone",
+          "passed": false,
+          "evidence": "ordinal scaffold search",
+          "method": "script"
+        },
+        {
+          "text": "No step from the source is dropped",
+          "passed": true,
+          "evidence": "steps present: ['schema', 'plan', 'staging', 'monitor', 'document']",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rhythm-without-staccato",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Sentence-length variation rises: the coefficient of variation reported by scripts/prose-scan.py is above 0.35 where the source was below 0.2",
+          "passed": true,
+          "evidence": "CV=0.42",
+          "method": "script"
+        },
+        {
+          "text": "There is no run of three consecutive sentences under eight words",
+          "passed": true,
+          "evidence": "sentence lengths [4, 17, 20, 15, 8, 18]",
+          "method": "script"
+        },
+        {
+          "text": "The First/Second/Third scaffold is gone",
+          "passed": true,
+          "evidence": "ordinal scaffold search",
+          "method": "script"
+        },
+        {
+          "text": "No step from the source is dropped",
+          "passed": true,
+          "evidence": "steps present: ['schema', 'plan', 'staging', 'monitor', 'document']",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rhythm-without-staccato",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "Sentence-length variation rises: the coefficient of variation reported by scripts/prose-scan.py is above 0.35 where the source was below 0.2",
+          "passed": true,
+          "evidence": "CV=0.56",
+          "method": "script"
+        },
+        {
+          "text": "There is no run of three consecutive sentences under eight words",
+          "passed": false,
+          "evidence": "sentence lengths [10, 9, 27, 10, 17, 5, 22, 3, 7, 7, 15, 18]",
+          "method": "script"
+        },
+        {
+          "text": "The First/Second/Third scaffold is gone",
+          "passed": true,
+          "evidence": "ordinal scaffold search",
+          "method": "script"
+        },
+        {
+          "text": "No step from the source is dropped",
+          "passed": false,
+          "evidence": "steps present: ['schema', 'plan', 'staging', 'monitor']",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rhythm-without-staccato",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Sentence-length variation rises: the coefficient of variation reported by scripts/prose-scan.py is above 0.35 where the source was below 0.2",
+          "passed": true,
+          "evidence": "CV=0.52",
+          "method": "script"
+        },
+        {
+          "text": "There is no run of three consecutive sentences under eight words",
+          "passed": true,
+          "evidence": "sentence lengths [15, 7, 33, 12, 25, 7, 24, 6, 19, 14, 8, 20]",
+          "method": "script"
+        },
+        {
+          "text": "The First/Second/Third scaffold is gone",
+          "passed": true,
+          "evidence": "ordinal scaffold search",
+          "method": "script"
+        },
+        {
+          "text": "No step from the source is dropped",
+          "passed": true,
+          "evidence": "steps present: ['schema', 'plan', 'staging', 'monitor', 'document']",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "rhythm-without-staccato",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Sentence-length variation rises: the coefficient of variation reported by scripts/prose-scan.py is above 0.35 where the source was below 0.2",
+          "passed": true,
+          "evidence": "CV=0.47",
+          "method": "script"
+        },
+        {
+          "text": "There is no run of three consecutive sentences under eight words",
+          "passed": true,
+          "evidence": "sentence lengths [14, 7, 33, 20, 12, 8, 27, 15, 19]",
+          "method": "script"
+        },
+        {
+          "text": "The First/Second/Third scaffold is gone",
+          "passed": true,
+          "evidence": "ordinal scaffold search",
+          "method": "script"
+        },
+        {
+          "text": "No step from the source is dropped",
+          "passed": true,
+          "evidence": "steps present: ['schema', 'plan', 'staging', 'monitor', 'document']",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "false-positive-restraint",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "No P0 or P1 findings are reported",
+          "passed": true,
+          "evidence": "No AI patterns worth flagging. The passage reads as human.",
+          "method": "agent"
+        },
+        {
+          "text": "'landscape' is not flagged, or is explicitly noted as literal and exempt",
+          "passed": true,
+          "evidence": "Tier 1, but only in the metaphor sense (\"the funding landscape\"). This is literal terrain. Not a finding.",
+          "method": "agent"
+        },
+        {
+          "text": "'crucial' is not flagged as a lone Tier 2 word",
+          "passed": true,
+          "evidence": "Tier 2, and a lone Tier 2 word in an otherwise human paragraph carries no signal.",
+          "method": "agent"
+        },
+        {
+          "text": "The response states that the text is clean rather than producing findings to fill the report",
+          "passed": true,
+          "evidence": "says clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "false-positive-restraint",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "No P0 or P1 findings are reported",
+          "passed": true,
+          "evidence": "**P0 (credibility killers):** none. ... **P1 (obvious AI smell):** none.",
+          "method": "agent"
+        },
+        {
+          "text": "'landscape' is not flagged, or is explicitly noted as literal and exempt",
+          "passed": true,
+          "evidence": "but that entry is gated to the metaphor sense ... Here it's literal terrain. Keep it.",
+          "method": "agent"
+        },
+        {
+          "text": "'crucial' is not flagged as a lone Tier 2 word",
+          "passed": true,
+          "evidence": "`crucial` is Tier 2, which flags only when two or more cluster in a paragraph. It's alone, and the sentence earns it. Keep it.",
+          "method": "agent"
+        },
+        {
+          "text": "The response states that the text is clean rather than producing findings to fill the report",
+          "passed": true,
+          "evidence": "says clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "false-positive-restraint",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "No P0 or P1 findings are reported",
+          "passed": true,
+          "evidence": "**P0 / P1 / P2: nothing.**",
+          "method": "agent"
+        },
+        {
+          "text": "'landscape' is not flagged, or is explicitly noted as literal and exempt",
+          "passed": true,
+          "evidence": "`landscape` is a Tier 1 word, but only in its metaphor sense ... Here it is literal terrain. Keep it.",
+          "method": "agent"
+        },
+        {
+          "text": "'crucial' is not flagged as a lone Tier 2 word",
+          "passed": true,
+          "evidence": "Tier 2 vocabulary, which counts only when two or more cluster in the same paragraph. This one stands alone ... Keep it.",
+          "method": "agent"
+        },
+        {
+          "text": "The response states that the text is clean rather than producing findings to fill the report",
+          "passed": true,
+          "evidence": "says clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "false-positive-restraint",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "No P0 or P1 findings are reported",
+          "passed": true,
+          "evidence": "this reads as human-written. I found no strong AI tells, and nothing I'd call a must-fix.",
+          "method": "agent"
+        },
+        {
+          "text": "'landscape' is not flagged, or is explicitly noted as literal and exempt",
+          "passed": true,
+          "evidence": "\"landscape\" is a word AI overuses, but here it's literal terrain, not the metaphorical \"the landscape of modern X\". Fine.",
+          "method": "agent"
+        },
+        {
+          "text": "'crucial' is not flagged as a lone Tier 2 word",
+          "passed": true,
+          "evidence": "Three things I looked at and decided *not* to flag: ... **\"Water is the crucial thing to get right\"** ... Fine.",
+          "method": "agent"
+        },
+        {
+          "text": "The response states that the text is clean rather than producing findings to fill the report",
+          "passed": true,
+          "evidence": "says clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "false-positive-restraint",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "No P0 or P1 findings are reported",
+          "passed": true,
+          "evidence": "**Verdict: this reads as human-written. No strong AI tells.** ... Flagged items, all minor",
+          "method": "agent"
+        },
+        {
+          "text": "'landscape' is not flagged, or is explicitly noted as literal and exempt",
+          "passed": true,
+          "evidence": "[no mention of 'landscape' anywhere in the answer]",
+          "method": "agent"
+        },
+        {
+          "text": "'crucial' is not flagged as a lone Tier 2 word",
+          "passed": false,
+          "evidence": "Flagged items, all minor: 1. **\"Water is the crucial thing to get right\"** \u2014 the \"X is the crucial/key thing\" frame is a mild blog-and-LLM tic. Weak flag",
+          "method": "agent"
+        },
+        {
+          "text": "The response states that the text is clean rather than producing findings to fill the report",
+          "passed": true,
+          "evidence": "says clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "false-positive-restraint",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "No P0 or P1 findings are reported",
+          "passed": true,
+          "evidence": "**Verdict: essentially clean.** ... Nothing here needs changing to remove AI fingerprints.",
+          "method": "agent"
+        },
+        {
+          "text": "'landscape' is not flagged, or is explicitly noted as literal and exempt",
+          "passed": true,
+          "evidence": "[no mention of 'landscape' anywhere in the answer]",
+          "method": "agent"
+        },
+        {
+          "text": "'crucial' is not flagged as a lone Tier 2 word",
+          "passed": false,
+          "evidence": "**\"Water is the crucial thing to get right\"** \u2014 the single mildest flag. \"The crucial thing\" is a slightly ceremonial way to introduce a point",
+          "method": "agent"
+        },
+        {
+          "text": "The response states that the text is clean rather than producing findings to fill the report",
+          "passed": true,
+          "evidence": "says clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "7 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologise for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "5 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologise for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": false,
+          "evidence": "1 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologise for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "6 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologise for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "5 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologise for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "4 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologise for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "short-sample-floor",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states the sample is too short to judge authorship",
+          "passed": true,
+          "evidence": "floor language",
+          "method": "script"
+        },
+        {
+          "text": "No authorship verdict is given, in either direction",
+          "passed": true,
+          "evidence": "no verdict phrasing",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Running scripts/prose-scan.py on the text reports the FLOOR finding",
+          "passed": true,
+          "evidence": "trivially true for 8 words; see FLOOR in prose-scan",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "short-sample-floor",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states the sample is too short to judge authorship",
+          "passed": true,
+          "evidence": "floor language",
+          "method": "script"
+        },
+        {
+          "text": "No authorship verdict is given, in either direction",
+          "passed": true,
+          "evidence": "no verdict phrasing",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Running scripts/prose-scan.py on the text reports the FLOOR finding",
+          "passed": true,
+          "evidence": "trivially true for 8 words; see FLOOR in prose-scan",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "short-sample-floor",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states the sample is too short to judge authorship",
+          "passed": true,
+          "evidence": "floor language",
+          "method": "script"
+        },
+        {
+          "text": "No authorship verdict is given, in either direction",
+          "passed": true,
+          "evidence": "no verdict phrasing",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Running scripts/prose-scan.py on the text reports the FLOOR finding",
+          "passed": true,
+          "evidence": "trivially true for 8 words; see FLOOR in prose-scan",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "short-sample-floor",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states the sample is too short to judge authorship",
+          "passed": true,
+          "evidence": "floor language",
+          "method": "script"
+        },
+        {
+          "text": "No authorship verdict is given, in either direction",
+          "passed": true,
+          "evidence": "no verdict phrasing",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Running scripts/prose-scan.py on the text reports the FLOOR finding",
+          "passed": true,
+          "evidence": "trivially true for 8 words; see FLOOR in prose-scan",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "short-sample-floor",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 2,
+        "failed": 1,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "The response states the sample is too short to judge authorship",
+          "passed": false,
+          "evidence": "floor language",
+          "method": "script"
+        },
+        {
+          "text": "No authorship verdict is given, in either direction",
+          "passed": true,
+          "evidence": "no verdict phrasing",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Running scripts/prose-scan.py on the text reports the FLOOR finding",
+          "passed": true,
+          "evidence": "trivially true for 8 words; see FLOOR in prose-scan",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "short-sample-floor",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 2,
+        "failed": 1,
+        "total": 3,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "The response states the sample is too short to judge authorship",
+          "passed": false,
+          "evidence": "floor language",
+          "method": "script"
+        },
+        {
+          "text": "No authorship verdict is given, in either direction",
+          "passed": true,
+          "evidence": "no verdict phrasing",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Running scripts/prose-scan.py on the text reports the FLOOR finding",
+          "passed": true,
+          "evidence": "trivially true for 8 words; see FLOOR in prose-scan",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "quoted-material-is-untouched",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The blockquote text is unchanged",
+          "passed": true,
+          "evidence": "blockquote verbatim present",
+          "method": "script"
+        },
+        {
+          "text": "Tier 1 words in the surrounding prose (delves, it is worth noting, leverages, multifaceted) are removed or replaced",
+          "passed": true,
+          "evidence": "tier-1 words remaining outside quote: []",
+          "method": "script"
+        },
+        {
+          "text": "The final sentence is unchanged",
+          "passed": true,
+          "evidence": "final sentence verbatim",
+          "method": "script"
+        },
+        {
+          "text": "The report lists only the spans it touched",
+          "passed": true,
+          "evidence": "1. Sentence 1 \u2014 `Our vendor's documentation delves into the topic at length.` \u2192 `Our vendor's documentation covers this at length,`",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "quoted-material-is-untouched",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The blockquote text is unchanged",
+          "passed": true,
+          "evidence": "blockquote verbatim present",
+          "method": "script"
+        },
+        {
+          "text": "Tier 1 words in the surrounding prose (delves, it is worth noting, leverages, multifaceted) are removed or replaced",
+          "passed": true,
+          "evidence": "tier-1 words remaining outside quote: []",
+          "method": "script"
+        },
+        {
+          "text": "The final sentence is unchanged",
+          "passed": true,
+          "evidence": "final sentence verbatim",
+          "method": "script"
+        },
+        {
+          "text": "The report lists only the spans it touched",
+          "passed": true,
+          "evidence": "\"documentation delves into the topic at length\" \u2192 \"documentation covers the topic at length\"",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "quoted-material-is-untouched",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The blockquote text is unchanged",
+          "passed": true,
+          "evidence": "blockquote verbatim present",
+          "method": "script"
+        },
+        {
+          "text": "Tier 1 words in the surrounding prose (delves, it is worth noting, leverages, multifaceted) are removed or replaced",
+          "passed": true,
+          "evidence": "tier-1 words remaining outside quote: []",
+          "method": "script"
+        },
+        {
+          "text": "The final sentence is unchanged",
+          "passed": true,
+          "evidence": "final sentence verbatim",
+          "method": "script"
+        },
+        {
+          "text": "The report lists only the spans it touched",
+          "passed": true,
+          "evidence": "\"It is worth noting that their recommended approach leverages a multifaceted strategy.\" \u2192 \"Their recommended approach combines several strategies.\"",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "quoted-material-is-untouched",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The blockquote text is unchanged",
+          "passed": true,
+          "evidence": "blockquote verbatim present",
+          "method": "script"
+        },
+        {
+          "text": "Tier 1 words in the surrounding prose (delves, it is worth noting, leverages, multifaceted) are removed or replaced",
+          "passed": true,
+          "evidence": "tier-1 words remaining outside quote: []",
+          "method": "script"
+        },
+        {
+          "text": "The final sentence is unchanged",
+          "passed": true,
+          "evidence": "final sentence verbatim",
+          "method": "script"
+        },
+        {
+          "text": "The report lists only the spans it touched",
+          "passed": true,
+          "evidence": "\"delves into the topic\" -> \"covers this\" ... Dropped \"It is worth noting that\" ... \"required\" -> \"took\"",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "quoted-material-is-untouched",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The blockquote text is unchanged",
+          "passed": true,
+          "evidence": "blockquote verbatim present",
+          "method": "script"
+        },
+        {
+          "text": "Tier 1 words in the surrounding prose (delves, it is worth noting, leverages, multifaceted) are removed or replaced",
+          "passed": true,
+          "evidence": "tier-1 words remaining outside quote: []",
+          "method": "script"
+        },
+        {
+          "text": "The final sentence is unchanged",
+          "passed": true,
+          "evidence": "final sentence verbatim",
+          "method": "script"
+        },
+        {
+          "text": "The report lists only the spans it touched",
+          "passed": true,
+          "evidence": "\"leverages a multifaceted strategy\" -> \"combines several strategies at once\"",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "quoted-material-is-untouched",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behaviour_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The blockquote text is unchanged",
+          "passed": true,
+          "evidence": "blockquote verbatim present",
+          "method": "script"
+        },
+        {
+          "text": "Tier 1 words in the surrounding prose (delves, it is worth noting, leverages, multifaceted) are removed or replaced",
+          "passed": true,
+          "evidence": "tier-1 words remaining outside quote: []",
+          "method": "script"
+        },
+        {
+          "text": "The final sentence is unchanged",
+          "passed": true,
+          "evidence": "final sentence verbatim",
+          "method": "script"
+        },
+        {
+          "text": "The report lists only the spans it touched",
+          "passed": true,
+          "evidence": "\"delves into the topic at length\" -> \"covers this at length\" ... Dropped \"It is worth noting that\"",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.905,
+        "stddev": 0.163,
+        "min": 0.5,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behaviour_only": {
+        "mean": 0.905,
+        "stddev": 0.163,
+        "min": 0.5,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.79,
+        "stddev": 0.229,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behaviour_only": {
+        "mean": 0.79,
+        "stddev": 0.229,
+        "min": 0.25,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.11",
+      "pass_rate_behaviour_only": "+0.11",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "already-good-prose-is-left-alone: with 0.83 vs without 0.58 (+0.25), n=3+3",
+    "fabrication-under-pressure: with 0.67 vs without 0.50 (+0.17), n=3+3",
+    "rhythm-without-staccato: with 0.92 vs without 0.83 (+0.08), n=3+3",
+    "false-positive-restraint: with 1.00 vs without 0.83 (+0.17), n=3+3",
+    "voice-sample-precedence: with 0.92 vs without 1.00 (-0.08), n=3+3",
+    "short-sample-floor: with 1.00 vs without 0.78 (+0.22), n=3+3",
+    "quoted-material-is-untouched: with 1.00 vs without 1.00 (+0.00), n=3+3"
+  ]
+}
