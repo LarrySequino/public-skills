@@ -47,7 +47,7 @@ def load_vocabulary():
         m = re.match(r"^\|\s*([^|]+?)\s*\|", line)
         if not m or tier is None: continue
         term = m.group(1).strip().strip("`*")
-        if not term or term.lower() in {"word", "phrase", "term", "pattern"} or set(term) <= set("-: "):
+        if not term or term.lower() in {"word", "phrase", "term", "pattern", "replace", "with", "what to do", "avoid", "use instead"} or set(term) <= set("-: "):
             continue
         sense = None
         s = re.match(r"^(.*?)\s*\((?:as )?(\w[\w ]*)\)\s*$", term)
