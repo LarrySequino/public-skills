@@ -1,6 +1,6 @@
 ---
 name: natural-writing
-description: Remove AI writing patterns from prose. Write, rewrite, audit, or edit files in place. Use whenever drafting or revising text that should not read as AI-generated, and when the user says "deslop", "de-AI", "humanize", "make it sound human", or asks to find AI tells, slop, tropes, or formulaic patterns. Also fires on a request to refresh this skill's sources. Covers the words in any prose, including UI microcopy. NOT for code, comments, or commit messages, and NOT for interface typesetting such as quotes, dashes and ellipses as rendered, which is craft-review's.
+description: Remove AI writing patterns from prose. Write, rewrite, audit, or edit files in place. Use when the user says "deslop", "de-AI", "humanize", "make it sound human", or asks to find AI tells, slop, tropes, or formulaic patterns, and when drafting prose meant for publication. Covers the words in any prose, including UI microcopy. NOT for code, comments, or commit messages, and NOT for interface typesetting such as quotes, dashes and ellipses as rendered, which is craft-review's. Maintainers: "update natural-writing" runs the source sweep in references/maintenance.md.
 ---
 
 # Natural Writing: Prose Without AI Patterns
@@ -9,7 +9,7 @@ Strip predictable AI patterns from writing. Make prose sound like a specific hum
 
 ## Signals, not proof
 
-The patterns here are statistically more common in LLM output, but humans on autopilot produce the same shapes, whether under deadline, in an unfamiliar genre, or in a second language. Commercial AI detectors have shown false-positive rates above 60% on non-native English writers (Liang et al., Stanford, 2023). So: these patterns are worth fixing in any prose, but never treat them as proof of AI authorship for a consequential decision (academic integrity, hiring, attribution). When auditing someone else's text, report patterns, not verdicts.
+The patterns here are statistically more common in LLM output, but humans on autopilot produce the same shapes, whether under deadline, in an unfamiliar genre, or in a second language. Detectors built on these same signals misfire on non-native writers at rates that should end the argument (the figure and the citation are in `references/preflight.md`). So: these patterns are worth fixing in any prose, but never treat them as proof of AI authorship for a consequential decision (academic integrity, hiring, attribution). When auditing someone else's text, report patterns, not verdicts.
 
 A short sample carries no signal. Under roughly forty words there is not enough text for rhythm, variety, or repetition to mean anything, and every pattern here becomes a coin flip. Say the sample is too short rather than returning a verdict on it. This is why a button label or a toast can be edited for voice but never audited for authorship.
 
@@ -107,7 +107,7 @@ No bold-first bullets. No unicode arrows or emoji in headers. Sentence case for 
 
 ### 13. Front-load every unit
 
-Put the conclusion first at every level: the draft, the section, the paragraph, and the sentence. Point, then detail, then background. Most AI structure inverts this, building context toward a conclusion the reader needed up front. Exception: narrative and persuasive setups that earn their delay. Front-loading a joke ruins it.
+Put the conclusion first at the levels a reader navigates by: the draft, the section, the paragraph. Point, then detail, then background. Most AI structure inverts this, building context toward a conclusion the reader needed up front. It stops at the paragraph on purpose. Front-loading every *sentence* produces the one-thought-per-sentence profile that rule 9 and the dramatic-fragmentation entry are trying to undo; inside a paragraph, let sentences build. Exception: narrative and persuasive setups that earn their delay. Front-loading a joke ruins it.
 
 ### 14. Open it up, don't dumb it down
 
@@ -127,27 +127,15 @@ Applying answer discipline to a deliverable produces a thin artifact. Applying d
 
 ## Quick checks
 
-**Run `scripts/prose-scan.py <file>` first.** It does every pass on this list that is
-arithmetic rather than judgment: dash density against the per-1,000 cap with numeric ranges
-and markdown rules exempted, Tier 1 hits with their sense gates flagged, Tier 2 paragraph
-density, Tier 3 saturation and co-occurrence, chatbot artifacts and leaked tokens, invisible
-characters and homoglyphs, Title Case headings, curly quotes, and sentence and paragraph
-uniformity. It reports counts and never a score, and it skips lines that list four or more
-flagged words, since text about AI writing quotes its own examples. Seconds, exact, and it
-frees the read for the things below that actually need a reader.
+**Run `scripts/prose-scan.py <file>` first.** It does every mechanical pass exactly and in about a second: dash density against the per-1,000 cap with numeric ranges and markdown rules exempted, vocabulary hits read live from `references/vocabulary.md` with their sense gates flagged, paragraph density and co-occurrence, chatbot artifacts and leaked tokens, invisible characters and homoglyphs, Title Case headings, curly quotes, and sentence and paragraph uniformity. It reports counts and never a score, and it skips and counts anything that sits inside a quoted example. `--compare original rewrite` lists every number, year, citation and name the rewrite added that the source did not have; zero is the only acceptable result.
 
-The in-flight scan, for write mode and short pieces. Full verification is [references/preflight.md](references/preflight.md), which is authoritative for every rewrite and edit; these are the mechanical passes worth running even when a full Evaluator pass is overkill.
+Three passes stay manual because they need a reader, and they run in every mode:
 
-- **Dash scan (mandatory, all modes):** search for `—`, `–`, and `--`. Any hit over one per 1,000 words means the draft isn't done. En dashes inside numeric ranges (5–20x, 1990–2000) are exempt; the scan is for dashes doing parenthetical work.
-- **Artifacts:** chatbot phrases, placeholders, leaked citation tokens, AI-tool URL parameters, cutoff disclaimers, invisible characters. Always P0.
-- **Fabrication:** any fact, number, name, or citation in the output that wasn't in the input or from the author. Remove or flag.
-- **Tier 1 vocabulary:** replace on sight.
-- **Filler:** meta-joiners, "it's worth noting," "let's dive in," heavy -ly adverbs, hollow intensifiers. Delete.
-- **Vagueness:** vague declaratives and unnamed attributions. Name the thing or flag the gap.
-- **Signature test:** anything kept only because the author wrote it, rather than because it's theirs? Cut it.
-- **Answer or deliverable?** If it's an answer, cut to the point and stop. If it's a deliverable, don't trim the substance to look lean.
+- **Fabrication:** any fact, number, name, or citation in the output that was not in the input or from the author. Remove or flag. `--compare` catches most of it; this catches the rest.
+- **Signature test:** anything kept only because the author wrote it, rather than because it is theirs? Cut it.
 - **Silent omission:** would the reader act wrongly without something that was cut? Put it back.
-- **Self-audit question:** read the draft fresh and ask, "What makes this look obviously AI-generated?" Fix whatever you answer, then deliver.
+
+Then ask, reading the draft fresh: what makes this look obviously AI-generated? Fix whatever the answer is. The full checklist is [references/preflight.md](references/preflight.md), authoritative for every rewrite and edit.
 
 ## Severity
 
@@ -189,5 +177,7 @@ If the original is already strong, say so and cut only what's needed. Don't manu
 ## Examples
 
 Worked before/after pairs live in [references/examples.md](references/examples.md), covering
-scientific writing, blog prose, technical docs and marketing copy. Read one before a first pass
-to calibrate how far to edit.
+scientific and grant writing, blog prose, and general-purpose copy. Read one before a first pass
+to calibrate how far to edit. Every After adds no fact the Before did not contain; where the
+Before was vague and a specific was needed, the After flags it rather than inventing it, which is
+the rule demonstrated rather than stated.

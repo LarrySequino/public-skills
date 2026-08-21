@@ -104,7 +104,7 @@ Overuse of the rule-of-three pattern. A single tricolon is fine; multiple back-t
 | "identity, payments, compute, distribution" | Extended lists masquerading as analysis |
 | "workflows, decisions, and interactions" | Three-item groupings everywhere |
 
-**Fix:** Use two items or one. Break the three-item habit.
+**Fix:** Use the number the content has. Two things get two; three get three. The habit to break is reaching for three when the content does not supply it, and the tell is a document where every list is exactly three long.
 
 ## False Agency
 
@@ -211,7 +211,7 @@ AI acknowledges problems only to immediately dismiss them. Always follows the sa
 
 | Pattern | Fix |
 |---------|-----|
-| Sentences starting with What, When, Where, Which, Who, Why, How | Restructure. Lead with the subject or the verb. |
+| A run of sentences opening on What, When, Where, Which, Who, Why, How | The pattern is the repeat, not the word. "When the replica caught up, we cut over" is fine; five of them in a row is a tic. Vary the opener. |
 | Paragraphs starting with "So" | Start with content |
 | Sentences starting with "Look," | Remove |
 
@@ -228,10 +228,10 @@ Wh- openers become a crutch. "What makes this hard is..." becomes "The constrain
 
 | Pattern | Fix |
 |---------|-----|
-| Three-item lists | Use two items or one |
+| Three-item lists, compulsively | Use the natural number. A list that happens to have three things is fine; a writer who reaches for three every time is the tell. |
 | Questions answered immediately | Let questions breathe or cut them |
 | Every paragraph ends punchily | Vary endings |
-| Em dashes | Remove. Use commas or periods. |
+| Em dashes, dense | Target zero, hard max one per 1,000 words, numeric ranges exempt. A voice sample that uses them overrides this. |
 | Staccato fragmentation | Do not stack short punchy sentences |
 | "Not always. Not perfectly." | Hedging disguised as reassurance |
 
@@ -241,7 +241,7 @@ Wh- openers become a crutch. "What makes this hard is..." becomes "The constrain
 |---------|---------|
 | Bold-first bullets | Every list item starting with a bolded keyword is an AI signal |
 | Unicode arrows (→) | Use -> or => or plain text instead |
-| Smart/curly quotes | Use straight quotes |
+| Smart/curly quotes in a draft | Straight quotes read as typed. Leave them in finished publications and in interface copy, where typesetting is the point; that is craft-review's territory. |
 | Signposted conclusions ("In conclusion...") | Let the writing conclude naturally |
 | Fractal summaries | Do not summarize what you are about to say, say it, then summarize what you said |
 

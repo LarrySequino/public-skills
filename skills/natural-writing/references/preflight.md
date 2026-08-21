@@ -1,4 +1,6 @@
-# Preflight: Pass/Fail Checks Before Delivery
+# Preflight
+
+Why none of this is a verdict: commercial AI detectors, built on the same signals this checklist uses, have shown false-positive rates above 60% on non-native English writers (Liang et al., Stanford, 2023). Report patterns; never assert authorship.: Pass/Fail Checks Before Delivery
 
 Run after every rewrite or edit, before returning the draft. Answer each check pass or fail. Any fail means fix the draft first. For detect requests, verify the response names each pattern with a quoted line and a short fix, without rewriting, scoring, or claiming AI authorship.
 

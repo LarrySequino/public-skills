@@ -1,13 +1,72 @@
 # skills
 
-Three skills for Claude and about seventy other agents, maintained against a
-measured provenance trail rather than a vibe.
+Three skills for Claude Code, Codex, Cursor, Grok and the other agents the
+[`skills` CLI](https://github.com/vercel-labs/skills) installs into: one for prose,
+one for UI review, one for keeping a skill library honest.
+
+## Why these exist
+
+Most skills are a checklist the model reads and then grades itself against. These
+three put the arithmetic in scripts and leave the model only the judgment. A dash
+count, a contrast ratio, a pairwise description comparison across a library: a script
+does those exactly in a second, and a model does them approximately and differently
+each time. Each skill ships its scripts, a self-check for each script, an eval set in
+Anthropic's `skill-creator` format, and an `ATTRIBUTION.md` that records where the
+text came from as a measurement rather than a recollection.
+
+## The skills
 
 | Skill | What it does |
 |---|---|
-| **natural-writing** | Strips AI patterns from prose. Write, rewrite, audit, or edit files in place. Tiered vocabulary, false-positive gates, and a preflight checklist, so it doesn't flag ordinary human writing. |
-| **craft-review** | Visual and UX review for UI screens. Measures spacing, contrast, alignment and typography with bundled scripts *before* it judges, then reports severity-ranked findings with numeric fixes. |
-| **skill-curator** | Maintenance for a skill library: audit for trigger collisions, vet third-party skills before installing, merge duplicates, and check upstream sources for updates. |
+| [**natural-writing**](skills/natural-writing/SKILL.md) | Strips AI patterns from prose: write, rewrite, audit, or edit a file in place. Tiered vocabulary read live from the catalogue, false-positive gates, a hard no-fabrication rule with a `--compare` check that lists every specific a rewrite added. |
+| [**craft-review**](skills/craft-review/SKILL.md) | Reviews UI screens and flows. Reads exact values from source or Figma, computes contrast, spacing and symmetry with bundled scripts, then reports severity-ranked findings with numeric fixes. |
+| [**skill-curator**](skills/skill-curator/SKILL.md) | Maintains a skill library: audits for description collisions and bloat, vets third-party skills before install, harvests ideas without carrying phrasing, and scans for verbatim overlap against every source. |
+
+## What you get
+
+**natural-writing** runs its scanner before it reads. Counts, never a verdict:
+
+```
+$ python3 skills/natural-writing/scripts/prose-scan.py draft.md
+
+=== draft.md (80 words) ===
+  vocabulary: references/vocabulary.md (58/41/37 terms)
+  [DASH] 1 in 80 words = 12.5 per 1,000 (cap is 1). A voice sample overrides this.
+  [INVISIBLE] 1x zero-width space (U+200B)
+  [ARTIFACT] sycophantic opener: "Great question"
+  [TIER1] "tapestry" — gated to the figurative sense, check this one
+  [FORMAT] heading looks Title Case: "The Evolving Landscape Of Modern Systems"
+
+  These are counts, not a verdict. Judgment checks are in references/preflight.md.
+```
+
+and `--compare original.md rewrite.md` prints every number, year, citation and name the
+rewrite introduced that the source did not have. Zero is the only passing result.
+
+**craft-review** computes before it judges:
+
+```
+$ python3 skills/craft-review/scripts/contrast.py --demo
+       #000000 on #FFFFFF   21.00:1  want 21.00  ok
+       #767676 on #FFFFFF    4.54:1  want  4.54  ok
+```
+
+`preflight.py` catches the artifact bugs a reader misses in one theme: a colour defined
+only inside a dark-mode block, a body with no background of its own, a contrast failure
+resolved per theme. `symmetry.py` turns "looks unbalanced" into an inset delta in pixels.
+
+**skill-curator** does the part of an audit that grows as the square of the library:
+
+```
+$ python3 skills/skill-curator/scripts/audit.py ~/.claude/skills
+  [BLOAT] emil-design-eng: SKILL.md is 675 lines and loads whole on every trigger
+  [NEAR-PAIR] emil-design-eng vs review-animations: share philosophy, emil, kowalski,
+              animation, and neither names the other. Check whether one prompt could match both.
+  [NO-PROVENANCE] apple-design: no file records where it came from
+```
+
+and `overlap.py` compares a skill against its sources in runs of eight words, which is
+how this repo found its own attribution gap (below).
 
 ## Install
 
@@ -18,71 +77,60 @@ npx skills add LarrySequino/skills -g -s '*' -y \
   -a claude-code -a codex -a cursor -a grok
 ```
 
-Leave off `-a` entirely to be asked which agents you have. The CLI supports about
-70, so `--agent '*'` is a trap: it writes a directory into your home folder for
-every agent it knows about, installed or not.
+Three details, because each one is easy to get wrong:
 
-Three details worth knowing, because each one is easy to get wrong:
-
-- **`-a` takes one agent.** Repeat the flag. Comma-separated and space-separated
-  both fail with `Invalid agents`.
+- **`-a` takes one agent.** Repeat the flag. Comma-separated and space-separated both
+  fail with `Invalid agents`.
 - **`-g` installs user-level.** Without it you get a project-local install inside
   whatever directory you happen to be in.
 - **Codex and Cursor get no directory of their own.** They read the shared store at
-  `~/.agents/skills`. Claude Code and Grok get symlinks at `~/.claude/skills` and
-  `~/.grok/skills`. All four are working even though only two have folders.
+  `~/.agents/skills`. Claude Code and Grok get symlinks. All four work even though
+  only two have folders.
 
-Then:
-
-```bash
-npx skills list                                   # what you have
-npx skills update                                 # pull newer versions
-npx skills add LarrySequino/skills --list         # preview without installing
-npx skills remove natural-writing                 # take one back out
-```
-
-### Output styles
-
-Output styles live in [LarrySequino/output-styles](https://github.com/LarrySequino/output-styles).
-They install differently (a file copy, no CLI) and only Claude Code reads them, where these
-skills work across about 70 agents.
+Leave off `-a` entirely to be asked which agents you have; `--agent '*'` writes a
+directory into your home folder for every agent the CLI knows about, installed or not.
+Updating and removing are the CLI's own commands, documented
+[there](https://github.com/vercel-labs/skills).
 
 ### claude.ai and Cowork
 
-Neither has a CLI and neither can pull, so this is manual and stays manual. A
-`.skill` file is a zip:
+Neither has a CLI and neither can pull, so this is manual. A `.skill` file is a zip:
 
 ```bash
 git clone https://github.com/LarrySequino/skills && cd skills/skills
 zip -rD ../../natural-writing.skill natural-writing
 ```
 
-Upload the result at **Settings → Capabilities → Skills**. Uploading the same name
-overwrites, so there is nothing to delete first.
-
-## This repo is generated
-
-It's published from a private working repo, one-way. Files here are
-overwritten wholesale on every publish, so **edits made directly to this repo
-will be lost.** Issues are welcome and read. Pull requests are welcome too,
-but they get applied upstream by hand rather than merged here.
+Upload it at **Settings → Capabilities → Skills**. Uploading the same name overwrites.
 
 ## Provenance
 
-Every skill here carries an `ATTRIBUTION.md` naming what it descends from, what
-was harvested as ideas and written fresh, and what expression carried over. Those
-files record measurements, not impressions: each skill is scanned against every
-source in runs of eight words, which is short enough to catch a lifted sentence
-and long enough that a hit means copying rather than two people describing the
-same thing.
+Every skill carries an `ATTRIBUTION.md` naming what it descends from, what was
+harvested as ideas and written fresh, and what expression carried over. Those files
+record measurements: each skill is scanned against every source in runs of eight
+words, short enough to catch a lifted sentence and long enough that a hit means copying
+rather than two people describing the same thing.
 
-That method found a gap in this repo's own work. **natural-writing began as a fork
-of [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop)**
-(MIT) and shares 6,169 eight-word runs with it, the longest unbroken stretch
-running 1,189 words. Its parent credited two sources of its own, and those credits
-were lost in the fork. All three are now in `ATTRIBUTION.md`. The scanner is in
-this repo as `tools/overlap.py` if you want to run it on your own.
+That method found a gap in this repo's own work. **natural-writing began as a fork of
+[stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop)** (MIT)
+and shares 6,169 eight-word runs with it, the longest unbroken stretch running 1,189
+words. Its parent credited two sources of its own, and those credits were lost in the
+fork. All three are now in `ATTRIBUTION.md`, and the scanner is at
+[`tools/overlap.py`](tools/overlap.py) if you want to run it on yours.
 
-My working library also holds skills adapted from other people that stay private
-until their licensing is sorted. A prose credit inside a file does not satisfy a
-license.
+## Evals
+
+Each skill ships `evals/evals.json` in the format Anthropic's `skill-creator` uses:
+prompts with checkable expectations, run with the skill and without, three runs each,
+graded with evidence. The sets are written; the numbers are not yet published. When
+they are, they will be here, with the runs that produced them.
+
+## This repo is generated
+
+Published one-way from a private working repo; files here are overwritten on every
+publish, so edits made directly to this repo are lost. Issues and pull requests are
+read and applied upstream by hand.
+
+## License
+
+MIT. Each skill's `ATTRIBUTION.md` carries the notices for what it inherited.

@@ -10,21 +10,62 @@ It reports findings and never a score. Scoring authorship is a claim this skill
 refuses to make; counting characters is not.
 
     python3 prose-scan.py draft.md
+    python3 prose-scan.py --compare original.md rewrite.md   # specifics the rewrite added
     python3 prose-scan.py --demo        # self-check on known input
 """
 import re, sys, unicodedata, statistics as st
 
-# --- Tier 1: replace on sight. Sense-gated entries carry their qualifier. ---
-TIER1 = {
+# --- Vocabulary tiers -----------------------------------------------------------
+# The catalogue lives in references/vocabulary.md. This script READS it rather
+# than carrying a copy, because a copy drifted within a day of being written:
+# 'robust' was Tier 1 in the catalogue and Tier 2 here. The lists below are a
+# fallback for running the script outside the skill, and the report says which
+# source was used so a drifted fallback cannot pass as the catalogue.
+_FALLBACK_TIER1 = {
     "delve": None, "tapestry": "figurative", "testament to": None, "underscore": "verb",
     "leverage": "verb", "seamless": None, "multifaceted": None, "realm": None,
     "interplay": None, "pivotal": None, "landscape": "metaphor", "harness": "metaphor",
     "it's worth noting": None, "it is worth noting": None, "in today's": None,
 }
-TIER2 = ["crucial", "vibrant", "robust", "foster", "enhance", "showcase", "notably",
-         "moreover", "furthermore", "garner", "bolster", "utilize", "supercharge"]
-TIER3 = ["key", "important", "significant", "various", "effective", "valuable",
-         "powerful", "essential", "comprehensive"]
+_FALLBACK_TIER2 = ["crucial", "foster", "enhance", "showcase", "notably",
+                   "moreover", "furthermore", "garner", "bolster", "supercharge"]
+_FALLBACK_TIER3 = ["key", "important", "significant", "various", "effective",
+                   "valuable", "powerful", "essential", "comprehensive"]
+
+def load_vocabulary():
+    """Parse references/vocabulary.md into (tier1 dict, tier2 list, tier3 list, source)."""
+    import os
+    here = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(here, "..", "references", "vocabulary.md")
+    if not os.path.exists(path):
+        return _FALLBACK_TIER1, _FALLBACK_TIER2, _FALLBACK_TIER3, "built-in fallback (vocabulary.md not found)"
+    t1, t2, t3, tier = {}, [], [], None
+    for line in open(path, encoding="utf-8"):
+        h = re.match(r"^##+\s*Tier\s*(\d)", line)
+        if h:
+            tier = int(h.group(1)); continue
+        m = re.match(r"^\|\s*([^|]+?)\s*\|", line)
+        if not m or tier is None: continue
+        term = m.group(1).strip().strip("`*")
+        if not term or term.lower() in {"word", "phrase", "term", "pattern"} or set(term) <= set("-: "):
+            continue
+        sense = None
+        s = re.match(r"^(.*?)\s*\((?:as )?(\w[\w ]*)\)\s*$", term)
+        if s:
+            term, sense = s.group(1).strip(), s.group(2).strip()
+        term = term.lower()
+        if tier == 1: t1[term] = sense
+        elif tier == 2: t2.append(term)
+        elif tier == 3: t3.append(term)
+    if not t1:
+        return _FALLBACK_TIER1, _FALLBACK_TIER2, _FALLBACK_TIER3, "built-in fallback (vocabulary.md parsed empty)"
+    # A term the catalogue lists in more than one tier belongs to the strictest one.
+    # Keeping it in both double-counts it everywhere downstream.
+    t2 = [w for w in dict.fromkeys(t2) if w not in t1]
+    t3 = [w for w in dict.fromkeys(t3) if w not in t1 and w not in t2]
+    return t1, t2, t3, f"references/vocabulary.md ({len(t1)}/{len(t2)}/{len(t3)} terms)"
+
+TIER1, TIER2, TIER3, VOCAB_SOURCE = load_vocabulary()
 
 ARTIFACTS = [
     (r"\b(great|excellent|good) question\b", "sycophantic opener"),
@@ -86,16 +127,31 @@ def find(text):
             out.append(("HOMOGLYPH", f"{unicodedata.name(m.group(), '?')} in \"{ctx.strip()}\""))
             break
 
+    # An artifact quoted as an example is not an artifact. Skip hits that sit
+    # inside quotation marks, in a table row, or in a blockquote, and say how many.
+    def quoted(i):
+        ls = prose.rfind("\n", 0, i) + 1; le = prose.find("\n", i)
+        line = prose[ls:le if le != -1 else None]
+        if line.lstrip().startswith(("|", ">", '- "', '* "', '1. "')): return True
+        before = line[:i - ls]
+        return (before.count('"') + before.count("\u201c") + before.count("\u201d")) % 2 == 1
+    art_skipped = 0
     for pat, label in ARTIFACTS:
         for m in re.finditer(pat, prose, re.I):
+            if quoted(m.start()):
+                art_skipped += 1; continue
             out.append(("ARTIFACT", f'{label}: "{m.group()[:48]}"'))
+    if art_skipped:
+        out.append(("SKIPPED", f"{art_skipped} artifact hits ignored because they sit inside quotes, "
+                               "a table row, or a blockquote, which reads as an example"))
 
     low = prose.lower()
     # A line listing four or more flagged words is a catalogue of them, not prose
     # written with them. Text about AI writing quotes its own examples constantly,
     # and the skill exempts quoted examples, so the scan must too.
+    _ALL = list(dict.fromkeys(list(TIER1) + TIER2 + TIER3))
     def is_catalogue(line):
-        n = sum(1 for w in list(TIER1) + TIER2 + TIER3 if re.search(rf"\b{re.escape(w)}", line, re.I))
+        n = sum(1 for w in _ALL if re.search(rf"\b{re.escape(w)}", line, re.I))
         return n >= 4
     lines = prose.split("\n")
     starts, off = [], 0
@@ -166,9 +222,57 @@ def find(text):
         out.append(("RHYTHM", f"paragraphs are near-identical in length (mean {st.mean(pl):.0f} words)"))
     return out, wc
 
+NUM   = re.compile(r"(?<![\w.])\d[\d,]*(?:\.\d+)?\s?(?:%|percent|ms|s|x|k|m|bn|million|billion)?(?![\w])", re.I)
+YEAR  = re.compile(r"\b(1[89]\d\d|20\d\d)\b")
+CITE  = re.compile(r"\(([A-Z][\w&.\- ]+?),?\s+(?:19|20)\d\d[a-z]?\)")
+PROPER = re.compile(r"\b(?:[A-Z][a-z]+(?:[-'][A-Z]?[a-z]+)?)(?:\s+(?:[A-Z][a-z]+|&|and|of|de|van|von)){0,3}\b")
+_COMMON_CAPS = set("The A An In On At For To Of And But Or If When While Before After "
+                   "This That These Those It Its We You They He She I My Our Your Their "
+                   "Example Fix Note Step Tier".split())
+
+def facts(text):
+    """Specifics a rewrite is not allowed to introduce: numbers, years, citations,
+    and capitalised names that are not sentence-initial function words."""
+    t = strip_code(text)
+    nums  = {n.strip().rstrip(".") for n in NUM.findall(t)}
+    years = set(YEAR.findall(t))
+    cites = {c.strip() for c in CITE.findall(t)}
+    names = set()
+    for m in PROPER.finditer(t):
+        s = m.group().strip()
+        first = s.split()[0]
+        if first in _COMMON_CAPS and len(s.split()) == 1: continue
+        i = m.start(); prev = t[max(0, i - 2):i]
+        if len(s.split()) == 1 and (i == 0 or prev.strip().endswith((".", "!", "?", ":")) or not prev.strip()):
+            continue
+        names.add(s)
+    return {"numbers": nums, "years": years, "citations": cites, "names": names}
+
+def compare(src_path, new_path):
+    """Report every specific in the rewrite that the source does not contain.
+    Zero is the target. This is the no-fabrication rule as a check instead of
+    a promise: a model can say it invented nothing; this shows whether it did."""
+    src_text = open(src_path, encoding="utf-8").read()
+    a, b = facts(src_text), facts(open(new_path, encoding="utf-8").read())
+    src_tokens = set(re.findall(r"[a-z]+", src_text.lower()))
+    print(f"\n=== compare: {new_path} against {src_path} ===")
+    total = 0
+    for k, label in (("numbers", "NEW-NUMBER"), ("years", "NEW-YEAR"), ("citations", "NEW-CITATION"), ("names", "NEW-NAME")):
+        new = sorted(b[k] - a[k])
+        if k == "names":
+            new = [n for n in new if not all(w.lower() in src_tokens for w in n.split())]
+        total += len(new)
+        if new:
+            print(f"  [{label}] {len(new)}: " + ", ".join(new[:12]) + (" ..." if len(new) > 12 else ""))
+    if not total:
+        print("  no specifics in the rewrite that were absent from the source")
+    print("\n  The rewrite may still be wrong in ways this cannot see; it can only see what was added.")
+    return total
+
 def report(name, text):
     out, wc = find(text)
     print(f"\n=== {name} ({wc} words) ===")
+    print(f"  vocabulary: {VOCAB_SOURCE}")
     if not out:
         print("  clean on the mechanical passes")
     for kind, msg in out:
@@ -176,30 +280,43 @@ def report(name, text):
     print("\n  These are counts, not a verdict. Judgment checks are in references/preflight.md.")
     return out
 
-DEMO = """# The Evolving Landscape Of Modern Systems
+def _demo_text():
+    """Built from the LOADED tiers, so this self-check tracks the catalogue instead of
+    a copy of it. Two Tier 2 words in one paragraph; a Tier 3 word repeated past 3%."""
+    t2 = [w for w in TIER2 if " " not in w][:2] or ["crucial", "foster"]
+    t3 = next((w for w in TIER3 if " " not in w), "key")
+    return f"""# The Evolving Landscape Of Modern Systems
 
-We delve into a rich tapestry of ideas here — and it is worth noting that the
+We delve into a rich tapestry of ideas here \u2014 and it is worth noting that the
 approach is seamless. Great question!
 
-A crucial finding. The team built a robust pipeline over the quarter and shipped
+A {t2[0]} finding. The team built a {t2[1]} pipeline over the quarter and shipped
 it without incident, which mattered.
 
-The key significant important various effective points are essential and valuable.
+The {t3} point is the {t3} point and the {t3} point, a {t3} one, and {t3} again.
 
 - **First:** first
 - **Second:** second
 - **Third:** third
 
-Here is a “quoted” phrase with a zero​width space. See https://x.com/?utm_source=chatgpt.com
+Here is a \u201cquoted\u201d phrase with a zero\u200bwidth space. See https://x.com/?utm_source=chatgpt.com
 """
+DEMO = None
 
 if __name__ == "__main__":
     if "--demo" in sys.argv:
-        got = {k for k, _ in report("demo", DEMO)}
+        got = {k for k, _ in report("demo", _demo_text())}
         want = {"DASH", "TIER1", "TIER2", "TIER3", "ARTIFACT", "FORMAT", "QUOTES", "INVISIBLE"}
         missing = want - got
         print(f"\n  self-check: {'PASS' if not missing else 'FAIL, missed ' + ', '.join(sorted(missing))}")
         sys.exit(1 if missing else 0)
+    if "--compare" in sys.argv:
+        i = sys.argv.index("--compare")
+        try:
+            src, new = sys.argv[i + 1], sys.argv[i + 2]
+        except IndexError:
+            print("usage: prose-scan.py --compare SOURCE REWRITE"); sys.exit(2)
+        sys.exit(1 if compare(src, new) else 0)
     if len(sys.argv) < 2:
         print(__doc__); sys.exit(2)
     for path in sys.argv[1:]:

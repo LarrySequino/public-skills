@@ -1,0 +1,65 @@
+{
+  "skill_name": "craft-review",
+  "format": "Anthropic skill-creator evals.json. Each eval runs with the skill and without, three runs each, graded on the expectations below with evidence. Inputs are inline HTML so the set needs no fixtures.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "contrast-failure-gets-a-ratio",
+      "prompt": "Review this page for design quality. Here is the full source.\n\n<style>\n:root{--bg:#1a1a1a;--fg:#4a4a4a;--accent:#2b6cb0}\nbody{background:var(--bg);color:var(--fg);font:16px/1.5 system-ui;padding:40px}\nh1{font-size:28px;margin:0 0 12px}\np{max-width:60ch}\na{color:var(--accent)}\n</style>\n<h1>Release notes</h1>\n<p>Version 2.4 adds CSV export and fixes the timezone bug in scheduled reports. <a href=\"#\">Full changelog</a>.</p>",
+      "expected_output": "Body text #4a4a4a on #1a1a1a is about 2.0:1, far below WCAG AA 4.5:1. The review must report the actual ratio computed by scripts/contrast.py, rank it as the top finding, and give a numeric fix (a foreground hex that reaches 4.5:1 or better on that background).",
+      "expectations": [
+        "The review states a contrast ratio for body text on background, and it is between 1.9:1 and 2.2:1",
+        "The finding is ranked as the most severe on the page",
+        "The fix names a specific replacement color and the ratio it achieves, not 'increase contrast'",
+        "The transcript shows scripts/contrast.py or scripts/preflight.py was run before the judgment was written"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "theme-only-color-is-caught",
+      "prompt": "Does this artifact page look right? Check it before I publish.\n\n<style>\n:root{--paper:#fff;--ink:#111}\n@media (prefers-color-scheme:dark){:root{--paper:#111;--ink:#eee;--muted:#9aa}}\nbody{color:var(--ink);font:16px system-ui;padding:32px}\n.note{color:var(--muted);font-size:13px}\n</style>\n<h2>Deploy checklist</h2>\n<p>Run the migration, then flip the flag.</p>\n<p class=\"note\">Last verified by the platform team.</p>",
+      "expected_output": "Two defects a reader would not see in one theme: --muted is defined only inside the dark media query, so .note has no color in light mode and inherits; and body sets no background, so the page borrows the host's. Both are exactly what scripts/preflight.py detects (theme-only-color, no-body-bg). The review must name both.",
+      "expectations": [
+        "The review reports that --muted is defined only inside a theme block",
+        "The review reports that body has no background of its own",
+        "Both are framed as blocking, not as polish",
+        "The transcript shows scripts/preflight.py was run"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "clean-page-is-called-clean",
+      "prompt": "Critique this.\n\n<style>\n:root{--bg:#f7f7f5;--fg:#1c1c1c;--muted:#5f5f5a;--rule:#dcdcd6}\n@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141414;--fg:#ececea;--muted:#a3a39c;--rule:#2c2c2c}}\n:root[data-theme=dark]{--bg:#141414;--fg:#ececea;--muted:#a3a39c;--rule:#2c2c2c}\nbody{background:var(--bg);color:var(--fg);font:16px/1.55 system-ui;margin:0;padding:48px 24px}\n.wrap{max-width:64ch;margin:0 auto}\nh1{font-size:24px;margin:0 0 16px}\np{margin:0 0 16px}\n.meta{color:var(--muted);font-size:14px;border-top:1px solid var(--rule);padding-top:16px;margin-top:32px}\n</style>\n<div class=\"wrap\"><h1>On-call handoff</h1><p>Nothing open. Two alerts fired overnight and both self-resolved; the runbook entry for each is linked in the channel.</p><p class=\"meta\">Updated this morning.</p></div>",
+      "expected_output": "This page passes every mechanical check: both themes defined as full token sets, explicit body background, contrast well above AA in both themes, a measure of 64ch, an 8px-multiple spacing scale. A good review says so and does not invent findings to fill a report. Any remaining comment should be explicitly labelled as taste, not defect.",
+      "expectations": [
+        "No finding is ranked as blocking or severe",
+        "The review states the page passes the mechanical checks",
+        "Any subjective remark is labelled as a judgment call rather than a defect",
+        "No contrast number is reported as a failure"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "asymmetry-gets-a-pixel-delta",
+      "prompt": "Something about this card looks off. What is it?\n\n<style>\nbody{background:#fff;color:#222;font:15px system-ui;padding:40px}\n.card{width:320px;border:1px solid #ddd;border-radius:8px;padding:24px 24px 24px 18px;background:#fff}\n.card h3{margin:0 0 8px;font-size:17px}\n.card p{margin:0;color:#555}\n</style>\n<div class=\"card\"><h3>Weekly summary</h3><p>Twelve deploys, zero rollbacks, one incident under ten minutes.</p></div>",
+      "expected_output": "The card's left padding is 18px against 24px on the other three sides. The review should measure it (scripts/symmetry.py on the rendered page, or read it from the CSS) and report the 6px delta with the fix, rather than describing it as 'feels unbalanced'.",
+      "expectations": [
+        "The review names the left padding as 18px against 24px, or reports a 6px inset delta",
+        "The fix is numeric: set left padding to 24px, or equivalent",
+        "The review does not describe the problem only in sensory terms without the measurement"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "unmeasurable-is-said-so",
+      "prompt": "Review this for craft. I can't share the source, only this description: a dashboard with a left nav, six KPI tiles in a 3x2 grid, a line chart below, and a table. Colors are a navy sidebar, white content area, blue accent.",
+      "expected_output": "There is nothing to measure. The skill's rule is to read exact values and compute before judging; with no values, it must say what it cannot assess and ask for the source, screenshot, or Figma link, rather than producing confident findings about spacing and contrast it has not seen.",
+      "expectations": [
+        "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+        "It asks for source, a screenshot, or a design file",
+        "It does not report any numeric finding",
+        "Any guidance offered is explicitly framed as general rather than as findings about this page"
+      ]
+    }
+  ]
+}

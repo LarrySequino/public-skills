@@ -105,7 +105,7 @@ AI replaces simple "is" or "are" with pompous alternatives. Use the simple verb.
 
 ## Adverbs
 
-Kill all adverbs. No -ly words. No softeners, no intensifiers, no hedges.
+Most adverbs are doing nothing, and the test is deletion: read the sentence without it, and if nothing is lost, it goes. What survives that test stays. "Barely" and "only" change meaning; "very" and "really" almost never do. Hedges and intensifiers get the same test rather than a blanket cut, because a hedge that marks real uncertainty is information and removing it is a fabrication of confidence.
 
 Specific offenders:
 

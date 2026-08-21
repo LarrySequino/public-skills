@@ -1,0 +1,89 @@
+{
+  "skill_name": "natural-writing",
+  "format": "Anthropic skill-creator evals.json; see references/schemas.md in that skill. Each eval runs with the skill and without, three runs each, graded on the expectations below with evidence.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "already-good-prose-is-left-alone",
+      "prompt": "Deslop this.\n\nWe shipped the cutover at 02:10. Replica lag was 4s, well under the 30s we'd budgeted — and then the alarms went quiet for the first time in a week. Two things bit us: the connection pool on the old primary stayed warm for nine minutes after we'd drained it, and one batch job had a hardcoded host. Both are fixed. Both were our fault. The dashboard, the runbook, and the on-call notes are updated; if you're on rotation tonight you'll see the new topology in the first panel. I'm not going to pretend this was smooth — it wasn't — but it's done, and the data matches to the row.",
+      "expected_output": "The text is already human and blunt. The skill should change very little: at most light edits, and it should say the piece is largely clean. The em dashes sit inside a strong voice and the three-item list is natural, not compulsive.",
+      "expectations": [
+        "Fewer than 10 percent of the words are changed",
+        "At least one em dash survives, or the response states explicitly why it removed them and names the voice it was protecting",
+        "No sentence containing a number or a time is rewritten",
+        "The response says the text is already largely human rather than manufacturing findings"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "fabrication-under-pressure",
+      "prompt": "Rewrite this and make it specific. It's too vague.\n\nThe new caching layer significantly improved performance and reduced costs. Users noticed the difference and engagement went up. Overall it was a big win for the team.",
+      "expected_output": "The skill cannot invent the missing numbers. It should tighten the prose, cut the padding, and either flag where a specific is needed ([needs a number: how much faster?]) or ask. It must not produce a latency figure, a percentage, a user count, or a date that the source does not contain.",
+      "expectations": [
+        "The rewrite contains no number, percentage, date, or named metric that the source lacked",
+        "The response flags at least one place where a specific is missing, in the skill's flag style, or asks the author for it",
+        "Filler (significantly, overall, big win) is cut rather than replaced with invented specifics",
+        "Running scripts/prose-scan.py --compare source rewrite reports zero new numbers and zero new citations"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "rhythm-without-staccato",
+      "prompt": "Rewrite this so it doesn't read as machine-written.\n\nThe migration process involves several important steps that must be completed in order. First, the team needs to assess the current database schema and identify potential issues. Second, the team should create a comprehensive migration plan that addresses all the identified concerns. Third, the team must execute the migration in a staging environment to validate the approach. Fourth, the team needs to monitor the results carefully and address any problems. Finally, the team should document the entire process for future reference and knowledge sharing.",
+      "expected_output": "Sentence lengths should vary and the numbered-march structure should go, but the fix is not a burst of fragments. A mix of short and long sentences, with the sentences inside a paragraph allowed to build on each other.",
+      "expectations": [
+        "Sentence-length variation rises: the coefficient of variation reported by scripts/prose-scan.py is above 0.35 where the source was below 0.2",
+        "There is no run of three consecutive sentences under eight words",
+        "The First/Second/Third scaffold is gone",
+        "No step from the source is dropped"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "false-positive-restraint",
+      "prompt": "Audit this for AI writing patterns. Flag only; don't rewrite.\n\nThe trail climbs through a landscape of granite and stunted pine for the first two miles, then levels out along the ridge. Water is the crucial thing to get right: there's none between the trailhead and the lake, and on a hot day you'll want three litres, not two. Bring a map, a headlamp, and more food than you think. The last mile down to the car is steeper than it looks on paper.",
+      "expected_output": "This is clean human writing. 'Landscape' is literal and geographic, 'crucial' is a single Tier 2 word with no cluster, and the three-item list is natural. The audit should report no P0 or P1 findings and say the piece is clean.",
+      "expectations": [
+        "No P0 or P1 findings are reported",
+        "'landscape' is not flagged, or is explicitly noted as literal and exempt",
+        "'crucial' is not flagged as a lone Tier 2 word",
+        "The response states that the text is clean rather than producing findings to fill the report"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "voice-sample-precedence",
+      "prompt": "Here's how I write. Match it and draft me 250 words introducing our new on-call rotation to the team.\n\n---\nOkay so — quick one. The deploy thing from Tuesday? Fixed. Root cause was dumb (a stale env var — yes, again) but the fix is real this time, I promise. Couple of other bits: the dashboard stuff is live, the alerting stuff is half-live, and the docs stuff is... a work in progress, let's say. If any of it looks wrong, ping me — I'd rather hear about it now than at 3am.\n---",
+      "expected_output": "The writer's sample uses em dashes freely and says 'stuff' and 'thing'. The voice-sample rule outranks the em-dash cap and the vocabulary upgrades. The draft should carry dashes and the casual diction.",
+      "expectations": [
+        "The draft contains at least two em dashes",
+        "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+        "The register matches the sample: contractions, asides, a 'ping me' style closer",
+        "The response does not apologise for or flag the em dashes"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "short-sample-floor",
+      "prompt": "Is this AI-written? \"Save changes before leaving this page.\"",
+      "expected_output": "Eight words. Below the floor. The skill should say the sample is too short to carry any signal and decline to render a verdict, while still being willing to edit the microcopy for voice if asked.",
+      "expectations": [
+        "The response states the sample is too short to judge authorship",
+        "No authorship verdict is given, in either direction",
+        "Running scripts/prose-scan.py on the text reports the FLOOR finding"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "quoted-material-is-untouched",
+      "prompt": "Edit this file in place to remove AI patterns. Do not change anything inside the blockquote; that's a quote from the vendor's docs.\n\nOur vendor's documentation delves into the topic at length. It is worth noting that their recommended approach leverages a multifaceted strategy. As they put it:\n\n> Our seamless integration leverages a robust, multifaceted architecture to deliver a truly transformative experience across the entire ecosystem landscape.\n\nIn practice we found that the integration required three manual steps they don't mention.",
+      "expected_output": "The surrounding prose gets cleaned. The blockquote is left byte-identical and its vocabulary is not flagged as the author's. The final sentence, which is already clean, is untouched.",
+      "expectations": [
+        "The blockquote text is unchanged",
+        "Tier 1 words in the surrounding prose (delves, it is worth noting, leverages, multifaceted) are removed or replaced",
+        "The final sentence is unchanged",
+        "The report lists only the spans it touched"
+      ]
+    }
+  ]
+}
