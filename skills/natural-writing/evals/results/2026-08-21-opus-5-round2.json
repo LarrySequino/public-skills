@@ -1,0 +1,354 @@
+{
+  "metadata": {
+    "skill_name": "natural-writing",
+    "skill_path": "/Users/larry/projects/skills/skills/natural-writing",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21-round2",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "5 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "5 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "4 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "6 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "5 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "voice-sample-precedence",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The draft contains at least two em dashes",
+          "passed": true,
+          "evidence": "4 em dashes in draft",
+          "method": "script"
+        },
+        {
+          "text": "Casual diction from the sample survives: 'stuff', 'thing', 'bits', or equivalents are not upgraded to 'components' or 'items'",
+          "passed": true,
+          "evidence": "casual diction present",
+          "method": "script"
+        },
+        {
+          "text": "The register matches the sample: contractions, asides, a 'ping me' style closer",
+          "passed": true,
+          "evidence": "contractions / ping present",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes",
+          "passed": true,
+          "evidence": "no apology about dashes",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "pass_rate_behavior_only": "+0.00",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "voice-sample-precedence: with 1.00 vs without 1.00 (+0.00), n=3+3"
+  ]
+}

@@ -1,0 +1,624 @@
+{
+  "metadata": {
+    "skill_name": "craft-review",
+    "skill_path": "/Users/larry/projects/skills/skills/craft-review",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21-round2",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": true,
+          "evidence": "11 finding headers, 0 chipped as [judged]",
+          "method": "script"
+        },
+        {
+          "text": "Each chipped finding names its evidence class",
+          "passed": true,
+          "evidence": "0 of 11 headers lack an evidence class",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labeled as a judgment call rather than a defect",
+          "passed": true,
+          "evidence": "## Judgment calls\n*Unranked, no chips \u2014 take them or leave them.* ... 'I would flip the emphasis'; 'The 1px rule is doing almost nothing.'",
+          "method": "agent"
+        },
+        {
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": true,
+          "evidence": "taste section: True; chipped headers inside it: 0",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": true,
+          "evidence": "12 finding headers, 0 chipped as [judged]",
+          "method": "script"
+        },
+        {
+          "text": "Each chipped finding names its evidence class",
+          "passed": true,
+          "evidence": "0 of 12 headers lack an evidence class",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labeled as a judgment call rather than a defect",
+          "passed": true,
+          "evidence": "## Judgment calls *(No chips, no deductions. Take them or leave them.)* \u2014 'The divider may not earn its place.' / 'Distinctiveness \u2014 68/100, and I would not act on it.'",
+          "method": "agent"
+        },
+        {
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": true,
+          "evidence": "taste section: True; chipped headers inside it: 0",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": true,
+          "evidence": "7 finding headers, 0 chipped as [judged]",
+          "method": "script"
+        },
+        {
+          "text": "Each chipped finding names its evidence class",
+          "passed": true,
+          "evidence": "0 of 7 headers lack an evidence class",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labeled as a judgment call rather than a defect",
+          "passed": true,
+          "evidence": "## Judgment calls \u2014 'Unranked, no chips \u2014 these are what I would try and why, not defects.' ... 'that is a decision about what the rule means, not a bug'; 'Optional; the current setting is not wrong.'",
+          "method": "agent"
+        },
+        {
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": true,
+          "evidence": "taste section: True; chipped headers inside it: 0",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": true,
+          "evidence": "0 finding headers, 0 chipped as [judged]",
+          "method": "script"
+        },
+        {
+          "text": "Each chipped finding names its evidence class",
+          "passed": true,
+          "evidence": "0 of 0 headers lack an evidence class",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labeled as a judgment call rather than a defect",
+          "passed": false,
+          "evidence": "Under 'What I'd actually change' / 'Small stuff': 'The h1 and the p below it are both margin-bottom: 16px ... Dropping the h1's bottom margin to 8px would help.' \u2014 a proximity/taste call listed as a change to make, with no judgment framing.",
+          "method": "agent"
+        },
+        {
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": false,
+          "evidence": "taste section: False; chipped headers inside it: 0",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": true,
+          "evidence": "0 finding headers, 0 chipped as [judged]",
+          "method": "script"
+        },
+        {
+          "text": "Each chipped finding names its evidence class",
+          "passed": true,
+          "evidence": "0 of 0 headers lack an evidence class",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labeled as a judgment call rather than a defect",
+          "passed": false,
+          "evidence": "'**.meta** is separated four times over ... All four make one line of text feel like a different document. I'd keep the muted color and the space, and drop the rule.' and 'The h1 step is thin' \u2014 taste items listed among fixes, unlabeled.",
+          "method": "agent"
+        },
+        {
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": false,
+          "evidence": "taste section: False; chipped headers inside it: 0",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "clean-page-is-called-clean",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": true,
+          "evidence": "0 finding headers, 0 chipped as [judged]",
+          "method": "script"
+        },
+        {
+          "text": "Each chipped finding names its evidence class",
+          "passed": true,
+          "evidence": "0 of 0 headers lack an evidence class",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any subjective remark is labeled as a judgment call rather than a defect",
+          "passed": true,
+          "evidence": "'## Deliberately not flagging \u2014 64ch measure. Top of the comfortable range (45-75) ... Leave it.' / 'Unquoted attribute selector values ... A style preference, not a finding.'",
+          "method": "agent"
+        },
+        {
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": false,
+          "evidence": "taste section: False; chipped headers inside it: 0",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "So: no scores, no findings, not even chipped ones. Anything I said about your dashboard would be invented.",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": true,
+          "evidence": "## General guidance for the category \u2014 not a review of your screen",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "I'm not going to score one or hand you findings that would be invented rather than measured.",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": true,
+          "evidence": "## General guidance for this category (not findings about your screen)",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "there are no findings and no scores in this reply",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": true,
+          "evidence": "Everything\nbelow the line is general guidance about dashboards as a category, not an assessment of your screen.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "A lot of \"brand blue\" values land around #3B82F6, which is roughly 3.7:1 on white \u2014 fine for a 40px chart line",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": true,
+          "evidence": "Treat everything below as \"check this,\" not \"this is wrong.\"",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "needs 4.5:1 for text, 3:1 for UI elements and chart strokes",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": true,
+          "evidence": "treat the below as a checklist to run against your screen rather than a verdict on it",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "unmeasurable-is-said-so",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "The response states that it cannot measure spacing, contrast, or alignment from a verbal description",
+          "passed": true,
+          "evidence": "states it cannot measure",
+          "method": "script"
+        },
+        {
+          "text": "It asks for source, a screenshot, or a design file",
+          "passed": true,
+          "evidence": "asks for source",
+          "method": "script"
+        },
+        {
+          "text": "It does not report any numeric finding",
+          "passed": true,
+          "evidence": "Body-size nav text needs 4.5:1 against the navy",
+          "method": "agent"
+        },
+        {
+          "text": "Any guidance offered is explicitly framed as general rather than as findings about this page",
+          "passed": false,
+          "evidence": "The structure is sound and conventional ... **2. Navy and blue accent are close neighbors.**",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.75,
+        "stddev": 0.204,
+        "min": 0.5,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 0.75,
+        "stddev": 0.204,
+        "min": 0.5,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.25",
+      "pass_rate_behavior_only": "+0.25",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "clean-page-is-called-clean: with 1.00 vs without 0.58 (+0.42), n=3+3",
+    "unmeasurable-is-said-so: with 1.00 vs without 0.92 (+0.08), n=3+3",
+    "2 of 19 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 1.0 vs without 0.75, delta +0.25."
+  ]
+}

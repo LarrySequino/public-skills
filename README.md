@@ -137,32 +137,54 @@ quoted line of evidence per verdict. The full per-run record is in each skill's
 |---|---|---|---|---|
 | natural-writing | 0.905 | 0.790 | **+0.11** | +0.11 |
 | skill-curator | 0.979 | 0.804 | **+0.17** | +0.12 |
-| craft-review | 0.800 | 0.850 | **−0.05** | −0.09 |
+| craft-review | 0.750 | 0.833 | **−0.08** | −0.13 |
 
 *Excluding expectations of the form "the transcript shows the skill's script was run,"
 which can only pass with the skill present and so measure availability, not behavior.
 
-**craft-review lost to its own baseline**, and the per-eval record says why. It wins
-where its scripts catch what a reader misses (a color defined only inside a dark-mode
-block: +0.33), ties where the model already does the arithmetic unaided (contrast
-ratios, a 6px inset), and loses on the two evals that test restraint: handed a one-line
-verbal description with nothing to measure, all three with-skill runs scored the page
-anyway ("Distinctiveness 3/10, in the rework band") and issued severity-tagged findings
-about a screen they had never seen, while the baseline said it could not review from a
-description. The skill's severity and scoring machinery fires on things it has not
-measured. That is a defect, it is now known, and the fix and re-run are the next entry
-in this table.
+**craft-review lost to its own baseline in round 1**, and the per-eval record says why. It wins
+where its scripts catch what a reader misses (a color defined only inside a dark-mode block:
++0.33), ties where the model already does the arithmetic unaided (contrast ratios, a 6px
+inset), and loses on the two evals that test restraint. Handed a one-line verbal description
+with nothing to measure, all three with-skill runs scored the page anyway ("Distinctiveness
+3/10, in the rework band") and issued severity-tagged findings about a screen they had never
+seen. On a well-built page, it tagged taste remarks `[judged]` and still chipped them Major.
+One defect: the severity and scoring machinery fired on things it had not measured.
 
-**natural-writing** is ahead on five of seven evals, even on one, and behind on one by a
-single check: one run in three produced one em dash against a six-dash voice sample,
-the predicted collision between the dash cap and the voice-sample override.
+**Round 2** re-ran the three affected evals against the fixed skills, same day, same model,
+3+3 runs each, round 1 left intact at `76d11d7` for comparison:
 
-The grader was wrong three times before any skill was, and each time against the
-skill: a regex that read "named `landscape` and cleared it" as flagging it, a synonym
-check that failed "watch the results" for not saying "monitor," and "AA needs 4.5:1"
-cited as a standard read as a reported finding. Each was caught by reading the answers
-and each would have published a wrong number. The method held up; the first draft of
-the grader did not, which is the argument for the method.
+| Eval | Skill | Round 1 | Round 2 |
+|---|---|---|---|
+| unmeasurable-is-said-so | craft-review | 0.50 vs 1.00 | **1.00 vs 0.92** |
+| clean-page-is-called-clean | craft-review | 0.25 vs 0.50 | **1.00 vs 0.58** |
+| voice-sample-precedence | natural-writing | 0.92 vs 1.00 | **1.00 vs 1.00** |
+
+All three with-skill runs on the description-only prompt now refuse to score and quarantine
+advice under a heading that says it is not a review of the screen. On the well-built page,
+every severity chip traces to `[computed]` or `[observed]` evidence and taste sits unchipped
+under a Judgment calls section; the baseline put taste among its fixes in 2 of 3 runs. The
+voice sample's dash rate now wins 3 of 3.
+
+Two things the second round exposed about the evals themselves, recorded in each
+`evals.json`. The "clean" page was not clean under a review deeper than `preflight.py`: a
+`64ch` measure runs about 87 characters, and the page had no `lang`, no `color-scheme`, and a
+48/64px frame. The skill was right to find those, and the round-1 expectations that rewarded
+not looking were rewritten to test reporting discipline instead; round 1 was re-graded on the
+same yardstick, which is why its craft-review number above is lower than first published. And
+four of the sixteen evals are floors both arms clear, because inline CSS hands the baseline
+every value. The skills' edge is on inputs a reader cannot hold in their head, and the next
+set of fixtures has to be built that way.
+
+**natural-writing** is ahead on five of seven evals, even on one, and behind on none after
+round 2.
+
+The grader was wrong before any skill was, each time against the skill: a regex that read
+"named `landscape` and cleared it" as flagging it, a synonym check that failed "watch the
+results" for not saying "monitor," "AA needs 4.5:1" cited as a standard read as a reported
+finding, and a chip counter that took "a minor point" for a severity label. Each was caught
+by reading the answers, and each would have published a wrong number. The method held; the
+first draft of the grader did not, which is the argument for the method.
 
 ## This repo is generated
 

@@ -561,28 +561,28 @@
       "configuration": "with_skill",
       "run_number": 1,
       "result": {
-        "pass_rate": 0.75,
-        "passed": 3,
-        "failed": 1,
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
         "total": 4,
         "undecided": 0,
         "time_seconds": null,
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behavior_only": 0.75
+        "pass_rate_behavior_only": 0.25
       },
       "expectations": [
         {
-          "text": "No finding is ranked as blocking or severe",
-          "passed": true,
-          "evidence": "no blocking language",
-          "method": "script-heuristic"
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": false,
+          "evidence": "14 finding headers, 6 chipped as [judged]",
+          "method": "script"
         },
         {
-          "text": "The review states the page passes the mechanical checks",
+          "text": "Each chipped finding names its evidence class",
           "passed": true,
-          "evidence": "says passes/clean",
+          "evidence": "0 of 14 headers lack an evidence class",
           "method": "script-heuristic"
         },
         {
@@ -592,9 +592,9 @@
           "method": "agent"
         },
         {
-          "text": "No contrast number is reported as a failure",
-          "passed": true,
-          "evidence": "no failing ratio reported",
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": false,
+          "evidence": "taste section: False; chipped headers inside it: 0",
           "method": "script-heuristic"
         }
       ],
@@ -619,15 +619,15 @@
       },
       "expectations": [
         {
-          "text": "No finding is ranked as blocking or severe",
-          "passed": false,
-          "evidence": "no blocking language",
-          "method": "script-heuristic"
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": true,
+          "evidence": "10 finding headers, 0 chipped as [judged]",
+          "method": "script"
         },
         {
-          "text": "The review states the page passes the mechanical checks",
-          "passed": true,
-          "evidence": "says passes/clean",
+          "text": "Each chipped finding names its evidence class",
+          "passed": false,
+          "evidence": "10 of 10 headers lack an evidence class",
           "method": "script-heuristic"
         },
         {
@@ -637,9 +637,9 @@
           "method": "agent"
         },
         {
-          "text": "No contrast number is reported as a failure",
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
           "passed": false,
-          "evidence": "no failing ratio reported",
+          "evidence": "taste section: False; chipped headers inside it: 0",
           "method": "script-heuristic"
         }
       ],
@@ -651,28 +651,28 @@
       "configuration": "with_skill",
       "run_number": 3,
       "result": {
-        "pass_rate": 0.5,
-        "passed": 2,
-        "failed": 2,
+        "pass_rate": 0.25,
+        "passed": 1,
+        "failed": 3,
         "total": 4,
         "undecided": 0,
         "time_seconds": null,
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behavior_only": 0.5
+        "pass_rate_behavior_only": 0.25
       },
       "expectations": [
         {
-          "text": "No finding is ranked as blocking or severe",
-          "passed": true,
-          "evidence": "no blocking language",
-          "method": "script-heuristic"
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": false,
+          "evidence": "9 finding headers, 2 chipped as [judged]",
+          "method": "script"
         },
         {
-          "text": "The review states the page passes the mechanical checks",
+          "text": "Each chipped finding names its evidence class",
           "passed": true,
-          "evidence": "says passes/clean",
+          "evidence": "0 of 9 headers lack an evidence class",
           "method": "script-heuristic"
         },
         {
@@ -682,9 +682,9 @@
           "method": "agent"
         },
         {
-          "text": "No contrast number is reported as a failure",
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
           "passed": false,
-          "evidence": "no failing ratio reported",
+          "evidence": "taste section: False; chipped headers inside it: 0",
           "method": "script-heuristic"
         }
       ],
@@ -709,15 +709,15 @@
       },
       "expectations": [
         {
-          "text": "No finding is ranked as blocking or severe",
-          "passed": false,
-          "evidence": "no blocking language",
-          "method": "script-heuristic"
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
+          "passed": true,
+          "evidence": "0 finding headers, 0 chipped as [judged]",
+          "method": "script"
         },
         {
-          "text": "The review states the page passes the mechanical checks",
+          "text": "Each chipped finding names its evidence class",
           "passed": true,
-          "evidence": "says passes/clean",
+          "evidence": "0 of 0 headers lack an evidence class",
           "method": "script-heuristic"
         },
         {
@@ -727,9 +727,9 @@
           "method": "agent"
         },
         {
-          "text": "No contrast number is reported as a failure",
-          "passed": true,
-          "evidence": "no failing ratio reported",
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": false,
+          "evidence": "taste section: False; chipped headers inside it: 0",
           "method": "script-heuristic"
         }
       ],
@@ -741,28 +741,28 @@
       "configuration": "without_skill",
       "run_number": 2,
       "result": {
-        "pass_rate": 0.75,
-        "passed": 3,
-        "failed": 1,
+        "pass_rate": 0.5,
+        "passed": 2,
+        "failed": 2,
         "total": 4,
         "undecided": 0,
         "time_seconds": null,
         "tokens": null,
         "tool_calls": null,
         "errors": 0,
-        "pass_rate_behavior_only": 0.75
+        "pass_rate_behavior_only": 0.5
       },
       "expectations": [
         {
-          "text": "No finding is ranked as blocking or severe",
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
           "passed": true,
-          "evidence": "no blocking language",
-          "method": "script-heuristic"
+          "evidence": "0 finding headers, 0 chipped as [judged]",
+          "method": "script"
         },
         {
-          "text": "The review states the page passes the mechanical checks",
+          "text": "Each chipped finding names its evidence class",
           "passed": true,
-          "evidence": "says passes/clean",
+          "evidence": "0 of 0 headers lack an evidence class",
           "method": "script-heuristic"
         },
         {
@@ -772,9 +772,9 @@
           "method": "agent"
         },
         {
-          "text": "No contrast number is reported as a failure",
-          "passed": true,
-          "evidence": "no failing ratio reported",
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": false,
+          "evidence": "taste section: False; chipped headers inside it: 0",
           "method": "script-heuristic"
         }
       ],
@@ -799,15 +799,15 @@
       },
       "expectations": [
         {
-          "text": "No finding is ranked as blocking or severe",
+          "text": "Every severity-chipped finding carries [computed] or [observed] evidence; no chip sits on a [judged] item",
           "passed": true,
-          "evidence": "no blocking language",
-          "method": "script-heuristic"
+          "evidence": "0 finding headers, 0 chipped as [judged]",
+          "method": "script"
         },
         {
-          "text": "The review states the page passes the mechanical checks",
-          "passed": false,
-          "evidence": "says passes/clean",
+          "text": "Each chipped finding names its evidence class",
+          "passed": true,
+          "evidence": "0 of 0 headers lack an evidence class",
           "method": "script-heuristic"
         },
         {
@@ -817,9 +817,9 @@
           "method": "agent"
         },
         {
-          "text": "No contrast number is reported as a failure",
-          "passed": true,
-          "evidence": "no failing ratio reported",
+          "text": "Taste and preference remarks appear under a Judgment calls section with no severity chip",
+          "passed": false,
+          "evidence": "taste section: False; chipped headers inside it: 0",
           "method": "script-heuristic"
         }
       ],
@@ -1333,8 +1333,8 @@
   "run_summary": {
     "with_skill": {
       "pass_rate": {
-        "mean": 0.8,
-        "stddev": 0.261,
+        "mean": 0.75,
+        "stddev": 0.316,
         "min": 0.25,
         "max": 1.0
       },
@@ -1351,16 +1351,16 @@
         "max": null
       },
       "pass_rate_behavior_only": {
-        "mean": 0.8,
-        "stddev": 0.261,
+        "mean": 0.75,
+        "stddev": 0.316,
         "min": 0.25,
         "max": 1.0
       }
     },
     "without_skill": {
       "pass_rate": {
-        "mean": 0.85,
-        "stddev": 0.2,
+        "mean": 0.833,
+        "stddev": 0.217,
         "min": 0.5,
         "max": 1.0
       },
@@ -1377,15 +1377,15 @@
         "max": null
       },
       "pass_rate_behavior_only": {
-        "mean": 0.894,
-        "stddev": 0.184,
+        "mean": 0.878,
+        "stddev": 0.206,
         "min": 0.5,
         "max": 1.0
       }
     },
     "delta": {
-      "pass_rate": "-0.05",
-      "pass_rate_behavior_only": "-0.09",
+      "pass_rate": "-0.08",
+      "pass_rate_behavior_only": "-0.13",
       "time_seconds": "n/a",
       "tokens": "n/a"
     }
@@ -1393,9 +1393,9 @@
   "notes": [
     "contrast-failure-gets-a-ratio: with 1.00 vs without 1.00 (+0.00), n=3+3",
     "theme-only-color-is-caught: with 1.00 vs without 0.67 (+0.33), n=3+3",
-    "clean-page-is-called-clean: with 0.50 vs without 0.58 (-0.08), n=3+3",
+    "clean-page-is-called-clean: with 0.25 vs without 0.50 (-0.25), n=3+3",
     "asymmetry-gets-a-pixel-delta: with 1.00 vs without 1.00 (+0.00), n=3+3",
     "unmeasurable-is-said-so: with 0.50 vs without 1.00 (-0.50), n=3+3",
-    "2 of 19 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 0.8 vs without 0.894, delta -0.09."
+    "2 of 19 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 0.75 vs without 0.878, delta -0.13."
   ]
 }
