@@ -4,7 +4,7 @@ Words organized by how reliably they signal AI-generated text. The tiering preve
 
 - **Tier 1, always replace.** These appear 5–20x more often in AI text than human text.
 - **Tier 2, flag in clusters.** Individually fine; two or more in the same paragraph is a strong signal.
-- **Tier 3, flag by density.** Normal words AI overuses. Only flag when the text is saturated with them (roughly 3%+ of total words).
+- **Tier 3, flag by density or company.** Normal words AI overuses. Flag when the text is saturated with them (roughly 3%+ of total words), or when several land in a paragraph that also carries a Tier 1 or Tier 2 hit. A lone Tier 3 word is never evidence; a short document can stay under the density threshold and still have one badly clustered paragraph.
 
 Replacements are defaults, not mandates. If a flagged word is clearly the right choice in context, keep it.
 
@@ -14,7 +14,7 @@ Replacements are defaults, not mandates. If a flagged word is clearly the right 
 |---|---|
 | delve / delve into | explore, dig into, look at |
 | landscape (metaphor) | field, space, industry, world |
-| tapestry | (describe the actual complexity) |
+| tapestry (figurative) | (describe the actual complexity) |
 | realm | area, field, domain |
 | paradigm | model, approach, framework |
 | embark | start, begin |
@@ -25,7 +25,7 @@ Replacements are defaults, not mandates. If a flagged word is clearly the right 
 | cutting-edge | latest, newest, advanced |
 | leverage (verb) | use |
 | pivotal | important, key, critical |
-| underscores | highlights, shows |
+| underscore (verb) | highlight, show |
 | meticulous / meticulously | careful, detailed, precise |
 | seamless / seamlessly | smooth, easy, without friction |
 | game-changer / game-changing | describe what specifically changed and why it matters |
