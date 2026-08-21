@@ -152,6 +152,18 @@ A fork inherits its parent's credits. Read what the parent credited and carry th
 
 Treat a skill's existing attribution file as a claim to verify, not a fact to trust. "Verified against every source" is true of the sources that were listed and says nothing about the one that was missing. When you correct such a claim, correct it in place and say what was wrong, rather than quietly replacing it; anyone who read the old version deserves to see the change.
 
+### Verify a delegated judgment before repeating it
+
+A summary of a comparison is not the comparison. When a reader you dispatched reports that
+one skill covers everything another has, or gates nothing the target flat-bans, that is a
+conclusion, and conclusions are where reading goes wrong even when every file was read
+carefully. Spot-check the rows it rests on. Two greps against the two files settle it, and
+the cost of not doing it is repeating a wrong finding in your own voice.
+
+The failure has a shape: a claim about *absence* is the one to check. "It contains nothing
+new" requires having compared every item against every item, which is exactly the work a
+summary compresses away. A claim about presence carries its own evidence and needs less.
+
 ### A source that gives nothing can still be the finding
 
 A zero-harvest verdict is not a wasted read. The source that contributed no rules may be the one that exposes where the skill actually came from. Record the scan result for every source, including the ones you rejected, and especially the ones that gave nothing.

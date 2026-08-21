@@ -40,12 +40,14 @@ Run after every rewrite or edit, before returning the draft. Answer each check p
 
 ## Mechanical scans
 
+**Before working through this list, run `../scripts/prose-scan.py <file>`.** Checks 13 and 16 through 19 are arithmetic, and it does them exactly in about a second. What is left is the part that needs a reader.
+
 17. Dash scan: does a search for `—`, `–`, and `--` come back clean (at most one per 1,000 words, with en dashes in numeric ranges exempt), unless the writer's own voice sample uses them?
 18. Artifact scan: no chatbot phrases, placeholders, leaked citation tokens, AI-tool URL parameters, cutoff disclaimers, or invisible characters anywhere?
 19. Enough text to judge? Under roughly forty words, report that the sample is too short instead of returning a verdict.
 
 ## Final read
 
-19. Self-audit: reading the draft fresh, what would make it look obviously AI-generated? (Fix whatever the answer is.)
-20. Would the draft sound natural read aloud to a sharp colleague?
-21. Does the output include what the mode requires (issues found, rewrite, what changed, second-pass audit for rewrite mode; edits + verification for edit mode)?
+20. Self-audit: reading the draft fresh, what would make it look obviously AI-generated? (Fix whatever the answer is.)
+21. Would the draft sound natural read aloud to a sharp colleague?
+22. Does the output include what the mode requires (issues found, rewrite, what changed, second-pass audit for rewrite mode; edits + verification for edit mode)?

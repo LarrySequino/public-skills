@@ -127,6 +127,15 @@ Applying answer discipline to a deliverable produces a thin artifact. Applying d
 
 ## Quick checks
 
+**Run `scripts/prose-scan.py <file>` first.** It does every pass on this list that is
+arithmetic rather than judgment: dash density against the per-1,000 cap with numeric ranges
+and markdown rules exempted, Tier 1 hits with their sense gates flagged, Tier 2 paragraph
+density, Tier 3 saturation and co-occurrence, chatbot artifacts and leaked tokens, invisible
+characters and homoglyphs, Title Case headings, curly quotes, and sentence and paragraph
+uniformity. It reports counts and never a score, and it skips lines that list four or more
+flagged words, since text about AI writing quotes its own examples. Seconds, exact, and it
+frees the read for the things below that actually need a reader.
+
 The in-flight scan, for write mode and short pieces. Full verification is [references/preflight.md](references/preflight.md), which is authoritative for every rewrite and edit; these are the mechanical passes worth running even when a full Evaluator pass is overkill.
 
 - **Dash scan (mandatory, all modes):** search for `—`, `–`, and `--`. Any hit over one per 1,000 words means the draft isn't done. En dashes inside numeric ranges (5–20x, 1990–2000) are exempt; the scan is for dashes doing parenthetical work.
