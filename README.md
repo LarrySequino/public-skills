@@ -16,11 +16,11 @@ text came from as a measurement rather than a recollection.
 
 ## The skills
 
-| Skill | What it does |
-|---|---|
-| [**natural-writing**](skills/natural-writing/SKILL.md) | Strips AI patterns from prose: write, rewrite, audit, or edit a file in place. Tiered vocabulary read live from the catalogue, false-positive gates, a hard no-fabrication rule with a `--compare` check that lists every specific a rewrite added. |
-| [**craft-review**](skills/craft-review/SKILL.md) | Reviews UI screens and flows. Reads exact values from source or Figma, computes contrast, spacing and symmetry with bundled scripts, then reports severity-ranked findings with numeric fixes. |
-| [**skill-curator**](skills/skill-curator/SKILL.md) | Maintains a skill library: audits for description collisions and bloat, vets third-party skills before install, harvests ideas without carrying phrasing, and scans for verbatim overlap against every source. |
+| Skill | What it does | Use when |
+|---|---|---|
+| [**natural-writing**](skills/natural-writing/SKILL.md) | Strips AI patterns from prose: write, rewrite, audit, or edit a file in place. Tiered vocabulary read live from the catalogue, false-positive gates, a hard no-fabrication rule with a `--compare` check that lists every specific a rewrite added. | You say "deslop", "humanize", "make it sound human", or ask what AI tells are in a text; or you're drafting prose for publication. Fires on its own for those. Not for code or commit messages. |
+| [**craft-review**](skills/craft-review/SKILL.md) | Reviews UI screens and flows. Reads exact values from source or Figma, computes contrast, spacing and symmetry with bundled scripts, then reports severity-ranked findings with numeric fixes. | You ask "does this look right", "review this screen", or share a screenshot or Figma link for feedback. Fires on its own. Not for turning mocks into a decision doc. |
+| [**skill-curator**](skills/skill-curator/SKILL.md) | Maintains a skill library: audits for description collisions and bloat, vets third-party skills before install, harvests ideas without carrying phrasing, and scans for verbatim overlap against every source. | You ask to clean up or audit your skills, vet a skill before installing it, merge two that overlap, or check a skill's sources for updates. Not for writing a new skill from scratch. |
 
 ## What you get
 
@@ -86,6 +86,13 @@ Three details, because each one is easy to get wrong:
 - **Codex and Cursor get no directory of their own.** They read the shared store at
   `~/.agents/skills`. Claude Code and Grok get symlinks. All four work even though
   only two have folders.
+
+Then confirm it landed, because a partial install is silent:
+
+```bash
+ls ~/.agents/skills            # natural-writing  craft-review  skill-curator
+head -3 ~/.agents/skills/natural-writing/SKILL.md
+```
 
 Leave off `-a` entirely to be asked which agents you have; `--agent '*'` writes a
 directory into your home folder for every agent the CLI knows about, installed or not.
