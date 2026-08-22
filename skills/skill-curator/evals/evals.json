@@ -59,6 +59,76 @@
         "The response notes that the source flat-bans things natural-writing gates, and does not weaken the gates",
         "The response records the source as evaluated-and-rejected for the harvest log"
       ]
+    },
+    {
+      "id": 5,
+      "name": "twelve-skill-audit",
+      "round": 3,
+      "prompt": "Audit the skill library at evals/files/library12 and tell me what to fix, in priority order.",
+      "files": [
+        "evals/files/library12/figma-handoff/SKILL.md",
+        "evals/files/library12/design-tokens-sync/SKILL.md",
+        "evals/files/library12/pdf-form-fill/SKILL.md",
+        "evals/files/library12/pdf-report-build/SKILL.md",
+        "evals/files/library12/release-notes-draft/SKILL.md",
+        "evals/files/library12/csv-profiler/SKILL.md",
+        "evals/files/library12/flaky-test-triage/SKILL.md",
+        "evals/files/library12/k8s-rollout-check/SKILL.md",
+        "evals/files/library12/spreadsheet-formulas/SKILL.md",
+        "evals/files/library12/sql-query-review/SKILL.md",
+        "evals/files/library12/api-docs-publish/SKILL.md",
+        "evals/files/library12/incident-postmortem/SKILL.md"
+      ],
+      "expected_output": "Twelve skills is past the point where pairwise reading is reliable, so the run should start with scripts/audit.py and then judge what it reports. The mechanical findings are: figma-handoff and design-tokens-sync share figma, design, tokens and color and neither names the other, so 'get the tokens out of Figma' matches both; release-notes-draft is 492 lines; csv-profiler links references/missing.md, which does not exist; flaky-test-triage names scripts/run.py and does not ship it; k8s-rollout-check and spreadsheet-formulas have no provenance record; and twelve skills in one scope is over the discovery budget. pdf-form-fill and pdf-report-build share surface words but each description names the other as the place to go instead, so they are disambiguated and must not be reported as a collision. The fix for the collision is a NOT-for clause in each description or a merge, not a body rewrite.",
+      "expectations": [
+        "The report names figma-handoff and design-tokens-sync as the colliding pair, and says a prompt about getting tokens out of Figma would match both",
+        "The recommended fix for that pair is a boundary clause in each description or a merge, not an edit to the bodies",
+        "pdf-form-fill and pdf-report-build are NOT reported as a collision; if mentioned at all, they are called already disambiguated because each description names the other",
+        "release-notes-draft is named as bloated, quantified explicitly in some unit (492 lines, over 400 lines, ~20 KB, or a multiple of the other skills' size)",
+        "csv-profiler is named as linking a reference file that does not exist (references/missing.md)",
+        "flaky-test-triage is named as referring to scripts/run.py without shipping it",
+        "k8s-rollout-check and spreadsheet-formulas are both named as having no provenance record",
+        "The report notes that twelve skills in one scope is past the discovery budget of roughly ten",
+        "The transcript shows scripts/audit.py was run against the library before the written assessment",
+        "Findings are given in priority order rather than as an unranked list"
+      ]
+    },
+    {
+      "id": 6,
+      "round": 4,
+      "name": "copied-code-under-original-prose",
+      "prompt": "I want to install the skill at evals/files/round4/borrowed/. The writing looks original to me. Vet it before I add it \u2014 the upstream projects it may have drawn on are under evals/files/round4/sources/.",
+      "files": [
+        "evals/files/round4/borrowed/SKILL.md",
+        "evals/files/round4/sources/upstream/logfmt-tools.md"
+      ],
+      "expected_output": "The prose of borrowed/SKILL.md genuinely is original: the 8-word prose scan returns nothing, and a reader comparing the two documents would clear it. The fenced python block is a different matter \u2014 parse_line/parse is copied verbatim from sources/upstream/logfmt-tools.md, which states its license in the surrounding prose ('Take it, it is MIT'). scripts/overlap.py scans fenced blocks separately at 12-token runs and reports '[CODE] 123 shared 12-token runs', with 'no shared 8-word runs in prose' underneath. The verdict is not 'do not install': it is that copied code carries its own license, so the source and its MIT terms belong in an ATTRIBUTION.md the candidate does not currently ship.",
+      "expectations": [
+        "The response reports that the fenced python block in borrowed/SKILL.md is copied verbatim from evals/files/round4/sources/upstream/logfmt-tools.md",
+        "The response states that the prose shares no runs with the source, so the copy would not be caught by reading",
+        "The transcript shows scripts/overlap.py was run against the candidate and the sources directory before the written verdict",
+        "The remedy names attribution: record the source and its license (MIT, stated in the source document) in ATTRIBUTION.md, which the candidate does not ship",
+        "The response does not describe the prose as copied or plagiarized"
+      ]
+    },
+    {
+      "id": 7,
+      "round": 4,
+      "name": "disowned-script-is-not-a-missing-script",
+      "prompt": "Audit the skill library at evals/files/round4/library-disowned and tell me what to fix.",
+      "files": [
+        "evals/files/round4/library-disowned/deploy-window-check/SKILL.md",
+        "evals/files/round4/library-disowned/schema-migrate-plan/SKILL.md",
+        "evals/files/round4/library-disowned/alt-text-sweep/SKILL.md"
+      ],
+      "expected_output": "Three skills, two of which name a script under scripts/ and neither of which ships one. Only one is a defect. deploy-window-check tells the reader to run `scripts/freeze.py <calendar.ics>` as step 2 of its procedure, and that file does not exist, so the procedure stops there. schema-migrate-plan names `scripts/migrate.py` on a line that disowns it in the same breath ('Older releases used `scripts/migrate.py` to apply the plan in one pass. Do not run it'), which is documentation of something deliberately removed, not a broken reference. alt-text-sweep names no scripts at all. scripts/audit.py reports exactly one MISSING-SCRIPT, against deploy-window-check, and is otherwise clean on this library.",
+      "expectations": [
+        "deploy-window-check is reported as naming scripts/freeze.py without shipping it",
+        "schema-migrate-plan is NOT reported as missing scripts/migrate.py; if it is mentioned at all, it is called a deliberately disowned reference rather than a defect",
+        "alt-text-sweep is not reported as missing a script",
+        "Exactly one missing-script finding is given for the whole library",
+        "The transcript shows scripts/audit.py was run against the library before the written assessment"
+      ]
     }
   ],
   "notes": {
@@ -74,6 +144,15 @@
         "license-first-ideas-only: +0.33, the skill grep-checks existing files and names an overlap scan; the baseline does not know to."
       ],
       "design-gap": "Fixtures are too small to show where the audit script beats a reader. Same lesson as craft-review: the skill's value is on inputs a reader cannot hold in their head, and the round-1 fixtures fit in one glance."
+    },
+    "round-3 correction (2026-08-21)": "Expectation 4 of twelve-skill-audit originally demanded the line count (492) or 'over 400 lines'. Two baseline runs found the bloat and quantified it in bytes instead ('19.9 KB, 13x the size of every other skill'). Same finding, different units, so the expectation tested unit choice rather than detection and was loosened to accept any explicit quantification. The change favors the baseline arm.",
+    "round-4 (2026-08-21)": {
+      "design": "Two fixtures for checks added the same day and previously untested: overlap.py's separate 12-token scan of fenced code blocks, and audit.py's disowned-reference exemption in the missing-script check. Each fixture pairs the case that must fire with the case that must not.",
+      "plants": {
+        "6": "borrowed/SKILL.md carries original prose over a verbatim copy of the parse_line/parse block from sources/upstream/logfmt-tools.md. Verified: overlap.py reports 123 shared 12-token code runs and zero shared 8-word prose runs, so the prose scan alone clears it.",
+        "7": "deploy-window-check invokes scripts/freeze.py and does not ship it (must fire); schema-migrate-plan names scripts/migrate.py on a line beginning 'Older releases used' and continuing 'Do not run it' (must not fire); alt-text-sweep names none. Verified: audit.py returns exactly one MISSING-SCRIPT and no other finding."
+      },
+      "guard": "Eval 7 fails if the missing-script check is ever widened back to matching every scripts/ mention. Verified by running that earlier predicate against the fixture: it reports two MISSING-SCRIPT findings instead of one."
     }
   }
 }

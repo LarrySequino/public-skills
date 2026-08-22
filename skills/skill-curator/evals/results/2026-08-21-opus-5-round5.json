@@ -1,0 +1,647 @@
+{
+  "metadata": {
+    "skill_name": "skill-curator",
+    "skill_path": "skills/skill-curator",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21-round5",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 6,
+      "eval_name": "copied-code-under-original-prose",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response reports that the fenced python block in borrowed/SKILL.md is copied verbatim from evals/files/round4/sources/upstream/logfmt-tools.md",
+          "passed": true,
+          "evidence": "names the source and the copy",
+          "method": "script"
+        },
+        {
+          "text": "The response states that the prose shares no runs with the source, so the copy would not be caught by reading",
+          "passed": true,
+          "evidence": "| `sources/upstream/logfmt-tools.md` | 2026-08-21 | 0 | 123 | the single fenced Python block | Code copied verbatim; prose written fresh |",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/overlap.py was run against the candidate and the sources directory before the written verdict",
+          "passed": true,
+          "evidence": "overlap.py named",
+          "method": "script"
+        },
+        {
+          "text": "The remedy names attribution: record the source and its license (MIT, stated in the source document) in ATTRIBUTION.md, which the candidate does not ship",
+          "passed": true,
+          "evidence": "remedy names attribution + license",
+          "method": "script"
+        },
+        {
+          "text": "The response does not describe the prose as copied or plagiarized",
+          "passed": true,
+          "evidence": "The prose in `SKILL.md` is original to this skill.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "copied-code-under-original-prose",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response reports that the fenced python block in borrowed/SKILL.md is copied verbatim from evals/files/round4/sources/upstream/logfmt-tools.md",
+          "passed": true,
+          "evidence": "names the source and the copy",
+          "method": "script"
+        },
+        {
+          "text": "The response states that the prose shares no runs with the source, so the copy would not be caught by reading",
+          "passed": true,
+          "evidence": "**Prose: zero shared 8-word runs.** Your read was correct.",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/overlap.py was run against the candidate and the sources directory before the written verdict",
+          "passed": true,
+          "evidence": "overlap.py named",
+          "method": "script"
+        },
+        {
+          "text": "The remedy names attribution: record the source and its license (MIT, stated in the source document) in ATTRIBUTION.md, which the candidate does not ship",
+          "passed": true,
+          "evidence": "remedy names attribution + license",
+          "method": "script"
+        },
+        {
+          "text": "The response does not describe the prose as copied or plagiarized",
+          "passed": true,
+          "evidence": "surrounding prose is original \u2014 zero shared 8-word runs against the same source.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "copied-code-under-original-prose",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response reports that the fenced python block in borrowed/SKILL.md is copied verbatim from evals/files/round4/sources/upstream/logfmt-tools.md",
+          "passed": true,
+          "evidence": "names the source and the copy",
+          "method": "script"
+        },
+        {
+          "text": "The response states that the prose shares no runs with the source, so the copy would not be caught by reading",
+          "passed": true,
+          "evidence": "| logfmt-tools | 0 | 123 | the single fenced `parse_line`/`parse` block | Code lifted verbatim; prose written fresh |",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/overlap.py was run against the candidate and the sources directory before the written verdict",
+          "passed": true,
+          "evidence": "overlap.py named",
+          "method": "script"
+        },
+        {
+          "text": "The remedy names attribution: record the source and its license (MIT, stated in the source document) in ATTRIBUTION.md, which the candidate does not ship",
+          "passed": true,
+          "evidence": "remedy names attribution + license",
+          "method": "script"
+        },
+        {
+          "text": "The response does not describe the prose as copied or plagiarized",
+          "passed": true,
+          "evidence": "Zero prose runs across a whole skill on the same subject as its source is a real result",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "copied-code-under-original-prose",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response reports that the fenced python block in borrowed/SKILL.md is copied verbatim from evals/files/round4/sources/upstream/logfmt-tools.md",
+          "passed": true,
+          "evidence": "names the source and the copy",
+          "method": "script"
+        },
+        {
+          "text": "The response states that the prose shares no runs with the source, so the copy would not be caught by reading",
+          "passed": true,
+          "evidence": "No shared 8-word run at all. The candidate's 394 words of prose are independently written.",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/overlap.py was run against the candidate and the sources directory before the written verdict",
+          "passed": false,
+          "evidence": "overlap.py named",
+          "method": "script"
+        },
+        {
+          "text": "The remedy names attribution: record the source and its license (MIT, stated in the source document) in ATTRIBUTION.md, which the candidate does not ship",
+          "passed": true,
+          "evidence": "remedy names attribution + license",
+          "method": "script"
+        },
+        {
+          "text": "The response does not describe the prose as copied or plagiarized",
+          "passed": true,
+          "evidence": "## Finding 3: the prose really is original",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "copied-code-under-original-prose",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response reports that the fenced python block in borrowed/SKILL.md is copied verbatim from evals/files/round4/sources/upstream/logfmt-tools.md",
+          "passed": true,
+          "evidence": "names the source and the copy",
+          "method": "script"
+        },
+        {
+          "text": "The response states that the prose shares no runs with the source, so the copy would not be caught by reading",
+          "passed": true,
+          "evidence": "The overlap scan found exactly one non-code prose match at 5 words or longer",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/overlap.py was run against the candidate and the sources directory before the written verdict",
+          "passed": false,
+          "evidence": "overlap.py named",
+          "method": "script"
+        },
+        {
+          "text": "The remedy names attribution: record the source and its license (MIT, stated in the source document) in ATTRIBUTION.md, which the candidate does not ship",
+          "passed": true,
+          "evidence": "remedy names attribution + license",
+          "method": "script"
+        },
+        {
+          "text": "The response does not describe the prose as copied or plagiarized",
+          "passed": true,
+          "evidence": "## Finding 2 \u2014 the prose is original",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "copied-code-under-original-prose",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The response reports that the fenced python block in borrowed/SKILL.md is copied verbatim from evals/files/round4/sources/upstream/logfmt-tools.md",
+          "passed": true,
+          "evidence": "names the source and the copy",
+          "method": "script"
+        },
+        {
+          "text": "The response states that the prose shares no runs with the source, so the copy would not be caught by reading",
+          "passed": true,
+          "evidence": "- shared 8-grams: **zero**",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/overlap.py was run against the candidate and the sources directory before the written verdict",
+          "passed": false,
+          "evidence": "overlap.py named",
+          "method": "script"
+        },
+        {
+          "text": "The remedy names attribution: record the source and its license (MIT, stated in the source document) in ATTRIBUTION.md, which the candidate does not ship",
+          "passed": true,
+          "evidence": "remedy names attribution + license",
+          "method": "script"
+        },
+        {
+          "text": "The response does not describe the prose as copied or plagiarized",
+          "passed": true,
+          "evidence": "## 1. Prose: original",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "disowned-script-is-not-a-missing-script",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "deploy-window-check is reported as naming scripts/freeze.py without shipping it",
+          "passed": true,
+          "evidence": "flags the real one",
+          "method": "script"
+        },
+        {
+          "text": "schema-migrate-plan is NOT reported as missing scripts/migrate.py; if it is mentioned at all, it is called a deliberately disowned reference rather than a defect",
+          "passed": true,
+          "evidence": "That is a disowned script, not a missing one, and the distinction is the whole point of the",
+          "method": "agent"
+        },
+        {
+          "text": "alt-text-sweep is not reported as missing a script",
+          "passed": true,
+          "evidence": "alt-text-sweep not flagged",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Exactly one missing-script finding is given for the whole library",
+          "passed": true,
+          "evidence": "[MISSING-SCRIPT] deploy-window-check: names scripts/freeze.py but does not ship it",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": true,
+          "evidence": "audit.py named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "disowned-script-is-not-a-missing-script",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "deploy-window-check is reported as naming scripts/freeze.py without shipping it",
+          "passed": true,
+          "evidence": "flags the real one",
+          "method": "script"
+        },
+        {
+          "text": "schema-migrate-plan is NOT reported as missing scripts/migrate.py; if it is mentioned at all, it is called a deliberately disowned reference rather than a defect",
+          "passed": true,
+          "evidence": "**2. schema-migrate-plan's `scripts/migrate.py` is not a missing script. (leave alone)**",
+          "method": "agent"
+        },
+        {
+          "text": "alt-text-sweep is not reported as missing a script",
+          "passed": true,
+          "evidence": "alt-text-sweep not flagged",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Exactly one missing-script finding is given for the whole library",
+          "passed": true,
+          "evidence": "`scripts/audit.py` raised exactly one mechanical finding:",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": true,
+          "evidence": "audit.py named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "disowned-script-is-not-a-missing-script",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "deploy-window-check is reported as naming scripts/freeze.py without shipping it",
+          "passed": true,
+          "evidence": "flags the real one",
+          "method": "script"
+        },
+        {
+          "text": "schema-migrate-plan is NOT reported as missing scripts/migrate.py; if it is mentioned at all, it is called a deliberately disowned reference rather than a defect",
+          "passed": true,
+          "evidence": "## 2. Not a bug: `schema-migrate-plan`'s `scripts/migrate.py`",
+          "method": "agent"
+        },
+        {
+          "text": "alt-text-sweep is not reported as missing a script",
+          "passed": true,
+          "evidence": "alt-text-sweep not flagged",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Exactly one missing-script finding is given for the whole library",
+          "passed": true,
+          "evidence": "There is no `deploy-window-check/scripts/` directory and no `freeze.py` anywhere in",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": false,
+          "evidence": "audit.py named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "disowned-script-is-not-a-missing-script",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "deploy-window-check is reported as naming scripts/freeze.py without shipping it",
+          "passed": true,
+          "evidence": "flags the real one",
+          "method": "script"
+        },
+        {
+          "text": "schema-migrate-plan is NOT reported as missing scripts/migrate.py; if it is mentioned at all, it is called a deliberately disowned reference rather than a defect",
+          "passed": true,
+          "evidence": "**`schema-migrate-plan`'s reference to `scripts/migrate.py` is correct as written.**",
+          "method": "agent"
+        },
+        {
+          "text": "alt-text-sweep is not reported as missing a script",
+          "passed": true,
+          "evidence": "alt-text-sweep not flagged",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Exactly one missing-script finding is given for the whole library",
+          "passed": true,
+          "evidence": "`deploy-window-check/scripts/freeze.py` does not exist.",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": false,
+          "evidence": "audit.py named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "disowned-script-is-not-a-missing-script",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "deploy-window-check is reported as naming scripts/freeze.py without shipping it",
+          "passed": true,
+          "evidence": "flags the real one",
+          "method": "script"
+        },
+        {
+          "text": "schema-migrate-plan is NOT reported as missing scripts/migrate.py; if it is mentioned at all, it is called a deliberately disowned reference rather than a defect",
+          "passed": true,
+          "evidence": "## 2. Not a bug: `schema-migrate-plan`'s reference to `scripts/migrate.py`",
+          "method": "agent"
+        },
+        {
+          "text": "alt-text-sweep is not reported as missing a script",
+          "passed": true,
+          "evidence": "alt-text-sweep not flagged",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Exactly one missing-script finding is given for the whole library",
+          "passed": true,
+          "evidence": "5. Leave `scripts/migrate.py` missing. That one is correct as-is.",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": false,
+          "evidence": "audit.py named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.8,
+        "stddev": 0.0,
+        "min": 0.8,
+        "max": 0.8
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.20",
+      "pass_rate_behavior_only": "+0.00",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "copied-code-under-original-prose: with 1.00 vs without 0.80 (+0.20), n=3+3",
+    "disowned-script-is-not-a-missing-script: with 1.00 vs without 0.80 (+0.20), n=2+3",
+    "4 of 37 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 1.0 vs without 1.0, delta +0.00."
+  ]
+}

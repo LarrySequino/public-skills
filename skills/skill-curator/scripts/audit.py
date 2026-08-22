@@ -115,7 +115,16 @@ def audit(root):
             if not target.exists():
                 findings.append(("DEAD-LINK", f"{s['name']}: SKILL.md links {link}, which is missing"))
         # a script it names but does not ship
-        for m in re.findall(r"`?(?:scripts/)([\w-]+\.(?:py|js|sh))`?", s["text"]):
+        # Every mention counts EXCEPT one the same line disowns. Requiring an
+        # interpreter missed the usual "Run `scripts/run.py <args>`"; matching
+        # everything flagged "older releases used scripts/migrate.py. Do not run it."
+        DISOWNED = re.compile(r"\b(do not|don't|never|no longer|obsolete|deprecated|removed|"
+                              r"used to|formerly|older releases?|previously)\b", re.I)
+        refs = set()
+        for line in s["text"].split("\n"):
+            if DISOWNED.search(line): continue
+            refs.update(re.findall(r"`?(?:\./)?scripts/([\w-]+\.(?:py|js|sh))`?", line))
+        for m in sorted(refs):
             if not any(x.name == m for x in s["scripts"]):
                 findings.append(("MISSING-SCRIPT", f"{s['name']}: names scripts/{m} but does not ship it"))
         # Provenance means a RECORD, not a file with the right name. A harvest log is
@@ -139,8 +148,12 @@ def report(root):
     findings, skills = audit(root)
     print(f"\n=== {root} ===")
     for s in skills:
+        # Step 1 of the audit asks for a version or last-updated marker; without it
+        # the staleness pass has nothing to sort by.
+        fm = s.get("fm") or {}
+        stamp = fm.get("version") or fm.get("updated") or fm.get("last-updated") or "-"
         print(f"  {s['name']:<24}{s['lines']:>5} lines  {len(s['refs'])} refs  "
-              f"{len(s['scripts'])} scripts  desc {len(s['desc'])} chars")
+              f"{len(s['scripts'])} scripts  desc {len(s['desc'])} chars  v/updated {stamp}")
     print()
     for kind, msg in sorted(findings):
         print(f"  [{kind}] {msg}")

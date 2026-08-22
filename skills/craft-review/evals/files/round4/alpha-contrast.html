@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Shipment 44182 — Cargoline</title>
+<style>
+/* ---------------------------------------------------------------
+   Cargoline operations console. Plain CSS, no custom properties:
+   this screen predates the token migration and is still on hex.
+   --------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f6f7f9;
+  color: #14213a;
+  font: 15px/1.55 -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- top bar ------------------------------------------------- */
+
+.topbar {
+  background: #14213a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 32px;
+}
+
+.topbar__mark { font-size: 15px; font-weight: 650; letter-spacing: 0.02em; }
+.topbar__crumb { color: #c9d4ea; font-size: 13px; }
+.topbar__spacer { flex: 1 1 auto; }
+
+/* --- buttons -------------------------------------------------- */
+
+.btn {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.btn--primary { background: #1b4dad; color: #ffffff; }
+
+.btn--ghost {
+  background: #ffffff;
+  color: #1b4dad;
+  border-color: #b6c6e6;
+}
+
+/* --- page shell ----------------------------------------------- */
+
+.shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.page-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 24px;
+}
+
+h1 { font-size: 24px; line-height: 1.25; margin: 0; }
+.page-head__sub { color: #4a5568; font-size: 14px; }
+
+/* --- summary cards -------------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0 0 32px;
+}
+
+.card {
+  background: #ffffff;
+  color: #14213a;
+  border: 1px solid #e2e6ee;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.card__label {
+  color: #52607d;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+
+.card__value { font-size: 24px; font-weight: 650; margin: 0; }
+
+.card__note {
+  background: #f2f4f8;
+  color: #3d4a63;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 12px 0 0;
+  padding: 8px 12px;
+}
+
+/* --- status chips --------------------------------------------- */
+
+.chip {
+  border-radius: 999px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+}
+
+.chip--ontime { background: #e2f4e9; color: #0f5132; }
+.chip--hold   { background: #fdefd9; color: #7a4a06; }
+.chip--late   { background: #fde7e9; color: #8c1d28; }
+
+/* The relative timestamp is set back so it never competes with the
+   event title beside it. */
+.stamp {
+  background: #eef1f6;
+  color: rgba(52, 64, 84, 0.65);
+  border-radius: 6px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+/* --- timeline -------------------------------------------------- */
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #e2e6ee;
+  border-radius: 12px;
+  margin: 0 0 24px;
+  padding: 24px;
+}
+
+.panel h2 { font-size: 16px; margin: 0 0 16px; }
+.events { list-style: none; margin: 0; padding: 0; }
+
+.events li {
+  align-items: center;
+  border-top: 1px solid #eceff5;
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.events li:first-child { border-top: 0; }
+.events__title { flex: 1 1 auto; }
+.events__where { color: #52607d; font-size: 13px; }
+
+/* --- table ----------------------------------------------------- */
+
+table {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+}
+
+thead th {
+  background: #eef1f6;
+  color: #2b3a55;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 8px 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+tbody td { border-top: 1px solid #eceff5; padding: 12px; }
+tbody td:last-child { text-align: right; }
+
+/* --- footer ---------------------------------------------------- */
+
+.footer {
+  background: #14213a;
+  color: #c9d4ea;
+  font-size: 13px;
+  margin: 48px 0 0;
+  padding: 24px 32px;
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="topbar__mark">Cargoline</span>
+  <span class="topbar__crumb">Operations / Shipments / 44182</span>
+  <span class="topbar__spacer"></span>
+  <button class="btn btn--ghost" type="button">Export manifest</button>
+  <button class="btn btn--primary" type="button">Update status</button>
+</header>
+
+<main class="shell">
+
+  <div class="page-head">
+    <h1>Shipment 44182</h1>
+    <span class="page-head__sub">Rotterdam to Duluth, container MSKU 704 118 2</span>
+  </div>
+
+  <section class="grid">
+    <div class="card">
+      <p class="card__label">Status</p>
+      <p class="card__value"><span class="chip chip--hold">On hold</span></p>
+      <p class="card__note">Customs released the paperwork; the carrier has not confirmed a slot.</p>
+    </div>
+    <div class="card">
+      <p class="card__label">Arrival window</p>
+      <p class="card__value">14&ndash;16 Mar</p>
+      <p class="card__note">Widened by two days after the Antwerp transfer.</p>
+    </div>
+    <div class="card">
+      <p class="card__label">Declared value</p>
+      <p class="card__value">$284,900</p>
+      <p class="card__note">Insured through the consignee's own policy.</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Recent events</h2>
+    <ul class="events">
+      <li>
+        <span class="events__title">Held pending carrier slot</span>
+        <span class="events__where">Antwerp</span>
+        <span class="stamp">4 hours ago</span>
+      </li>
+      <li>
+        <span class="events__title">Customs cleared</span>
+        <span class="events__where">Antwerp</span>
+        <span class="stamp">yesterday</span>
+      </li>
+      <li>
+        <span class="events__title">Transferred from feeder vessel</span>
+        <span class="events__where">Antwerp</span>
+        <span class="stamp">2 days ago</span>
+      </li>
+      <li>
+        <span class="events__title">Departed origin port</span>
+        <span class="events__where">Rotterdam</span>
+        <span class="stamp">6 days ago</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <h2>Legs</h2>
+    <table>
+      <thead>
+        <tr><th>Leg</th><th>Carrier</th><th>Status</th><th>Cost</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Rotterdam &rarr; Antwerp</td><td>Feeder North</td><td><span class="chip chip--ontime">Delivered</span></td><td>$1,240</td></tr>
+        <tr><td>Antwerp &rarr; Halifax</td><td>Blue Meridian</td><td><span class="chip chip--hold">On hold</span></td><td>$8,600</td></tr>
+        <tr><td>Halifax &rarr; Duluth</td><td>Lakeline Rail</td><td><span class="chip chip--late">Not booked</span></td><td>$2,150</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer class="footer">
+  Operations console &middot; figures refresh every fifteen minutes from the carrier feed.
+</footer>
+
+</body>
+</html>

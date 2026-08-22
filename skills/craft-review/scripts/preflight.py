@@ -96,11 +96,15 @@ def theme_of(sel, at):
 
 def collect(html):
     tokens = {"base": {}, "dark-media": {}, "dark-attr": {}, "light-attr": {}}
+    uses = {}          # token name -> themes whose rules read it
     pairs, spacing, findings = [], [], []
     for css in blocks(html):
         for sel, body, at in rules(css):
             t = theme_of(sel, at)
             d = decls(body)
+            for v in d.values():
+                for name in VAR.findall(v):
+                    uses.setdefault(name, set()).add(t)
             for k, v in d.items():
                 if k.startswith("--") and COLORISH.search(v):
                     tokens[t][k] = v.strip()
@@ -113,7 +117,7 @@ def collect(html):
             bg = d.get("background-color") or d.get("background")
             if fg and bg and COLORISH.search(bg + fg + "x") or (fg and bg and VAR.search(fg + bg)):
                 pairs.append((sel, t, fg, bg))
-    return tokens, pairs, spacing, findings
+    return tokens, pairs, spacing, findings, uses
 
 
 def resolve(val, tokens, theme):
@@ -132,21 +136,41 @@ def resolve(val, tokens, theme):
 
 
 def check(html, baseline=None):
-    tokens, pairs, spacing, out = collect(html)
+    tokens, pairs, spacing, out, uses = collect(html)
 
-    # 1. colors that exist only in a themed block
+    # 1. colors that exist only in a themed block AND are read from outside it.
+    # A token defined and consumed entirely inside dark mode is correct; blocking
+    # it made a false positive the top finding, since a BLOCK now ranks first.
     base_names = set(tokens["base"])
+    # dark-media and dark-attr are the same theme reached two ways. Treating them
+    # as separate scopes reported a legitimate dark-only token twice, each block
+    # citing the other dark scope as "outside".
+    SAME = {"dark-media": {"dark-media", "dark-attr"}, "dark-attr": {"dark-media", "dark-attr"},
+            "light-attr": {"light-attr", "base"}}
+    reported = set()
     for theme in ("dark-media", "dark-attr", "light-attr"):
         for name in tokens[theme]:
-            if name not in base_names:
-                out.append(
-                    dict(
-                        level="BLOCK",
-                        check="theme-only-color",
-                        detail=f"{name} is defined only in {theme}; it never applies in the "
-                        f"un-stamped default state",
-                    )
+            if name in base_names or name in reported:
+                continue
+            # defined in the sibling scope too? then it resolves wherever it is read
+            if any(name in tokens[t] for t in SAME[theme] - {theme}):
+                sibling_covered = True
+            else:
+                sibling_covered = False
+            outside = sorted(uses.get(name, set()) - SAME[theme])
+            if sibling_covered and not outside:
+                continue
+            if not outside:
+                continue
+            reported.add(name)
+            out.append(
+                dict(
+                    level="BLOCK",
+                    check="theme-only-color",
+                    detail=f"{name} is read by {', '.join(outside)} rules but defined only in "
+                    f"{theme}, so it never resolves in the un-stamped default state",
                 )
+            )
 
     # 2. body must paint its own ground
     body_bg = any(
@@ -170,14 +194,22 @@ def check(html, baseline=None):
         # a rule authored in the base block still applies while a dark/light token set
         # is active, with different values. Checking only "base" misses exactly half
         # the failures, which is how the dark-theme miss below went unreported.
-        scopes = [k for k in tokens if tokens[k]] if t == "base" else [t]
+        # With no custom properties anywhere, every tokens[k] is empty and this used
+        # to produce an empty scope list, so a plain-CSS page got no contrast pass
+        # at all. Base is always a scope.
+        scopes = ([k for k in tokens if tokens[k]] or ["base"]) if t == "base" else [t]
         for theme in scopes:
             fg, bg = resolve(fg_raw, tokens, theme), resolve(bg_raw, tokens, theme)
             if not fg or not bg:
                 continue
             try:
                 r = get_ratio(parse_color(fg), parse_color(bg))
-            except Exception:
+            except Exception as e:
+                # Swallowing this silently turned an uncheckable pair into a pass,
+                # which is the one thing a gate must never do.
+                out.append(dict(level="WARN", check="uncheckable-color",
+                                detail=f"{sel}: could not compute {fg_raw} on {bg_raw} ({e}); "
+                                       "check this pair by hand"))
                 continue
             key = (round(r, 2), fg, bg)
             if key in seen:
@@ -259,7 +291,7 @@ def demo():
     bad = """<style>
     :root { --ink: #111; }
     @media (prefers-color-scheme: dark) { :root { --ghost: #222; } }
-    .x { color: var(--ink); background: #1a1a1a; }
+    .x { color: var(--ink); background: #1a1a1a; border-color: var(--ghost); }
     .y { padding: 13px; margin: 7px; }
     </style><body><script>x.addEventListener('click',f)</script></body>"""
     f = check(bad)

@@ -59,9 +59,11 @@ Adjacent targets need spacing so they are not mis-tapped, regardless of size.
 ## Spacing & grid
 
 - Base grid **8pt**; **4pt** for fine adjustments only.
-- Every gap/margin/padding should resolve to a scale token (see `design-system.md`).
+- Every gap/margin/padding should resolve to a scale token. The scale is the product's own if it
+  has one; with no adopted system, take the artifact's modal base (`preflight.py` assumes 4/8px,
+  which is the near-universal default) and report deviations from that, labeled `(inferred)`.
 - Vertical rhythm: consistent step between stacked bands. Inconsistent steps (48/56/72/84) are a finding.
-- **[U] Spacing must encode nesting depth, not merely land on the scale.** Each level
+- **[P] Spacing should encode nesting depth, not merely land on the scale.** Each level
   outward takes roughly **1.4x** its child, snapped to the scale (8pt, or 4pt when that
   lands closer). Grounded in Gestalt proximity: grouping is communicated by relative
   distance, so a card whose inner padding equals the page padding has no grouping at all,
@@ -69,7 +71,9 @@ Adjacent targets need spacing so they are not mis-tapped, regardless of size.
   1.0 means the levels are indistinguishable, and inverted means the hierarchy reads
   backward. Cap the outermost value (48-64pt) on structures deeper than four levels and
   compress inward, keeping the progression monotonic.
-- Paired/repeated components: identical internal padding — no exceptions.
+- Paired/repeated components: identical internal padding, unless the pair carries a
+  state marker that consumes layout (a status stripe under `border-box`), in which case
+  the CONTENT inset must match and the declaration may differ.
 
 ## Typography
 

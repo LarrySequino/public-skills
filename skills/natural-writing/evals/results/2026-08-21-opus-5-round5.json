@@ -1,0 +1,775 @@
+{
+  "metadata": {
+    "skill_name": "natural-writing",
+    "skill_path": "skills/natural-writing",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21-round5",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 11,
+      "eval_name": "light-edit-keeps-facts-and-voice",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.83,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/dense-facts.md <edit> reports no LOST-NUMBER, no LOST-YEAR, no LOST-CITATION and no REWRITE-SCOPE",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports no NEW-NUMBER, NEW-YEAR, NEW-NAME or RECOMBINED-NAME: no specific is invented to replace one that was cut",
+          "passed": true,
+          "evidence": "no invented specifics",
+          "method": "script"
+        },
+        {
+          "text": "At least 70 percent of the source words survive in matching runs, which is what the REWRITE-SCOPE check measures",
+          "passed": true,
+          "evidence": "595/595 = 100% survived",
+          "method": "script"
+        },
+        {
+          "text": "Every named specific survives verbatim: 4 hours 40 minutes, 11 minutes, 71 percent, 9.4 GB, 2.1 million, 512 MB, 6.8 GB, 240 MB, v2.7.0, pgbouncer 1.21, py-spy, PLAT-4471, and the names Dan Okafor and Priya",
+          "passed": false,
+          "evidence": "missing specifics: ['pgbouncer 1.21']",
+          "method": "script"
+        },
+        {
+          "text": "The fragments and the first-person voice survive: \"I assumed Postgres. Everyone assumes Postgres.\" and the \"Four more minutes.\" / \"Zero minutes.\" beats are not smoothed into full declaratives",
+          "passed": true,
+          "evidence": "I assumed Postgres. Everyone assumes Postgres.\n\n## Three weeks I would like back\n\nSo I tuned Postgres. Bumped work_mem from 4 MB to 512 MB, which made the sort spills go away and moved the finish time by about four minutes. Rebuilt the two indexes on `customer_events` that pg_stat_user_tables said w",
+          "method": "agent"
+        },
+        {
+          "text": "The response says the piece is already largely clean rather than manufacturing findings, and no section is reordered or retitled",
+          "passed": true,
+          "evidence": "says the piece is largely clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "light-edit-keeps-facts-and-voice",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.83,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/dense-facts.md <edit> reports no LOST-NUMBER, no LOST-YEAR, no LOST-CITATION and no REWRITE-SCOPE",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports no NEW-NUMBER, NEW-YEAR, NEW-NAME or RECOMBINED-NAME: no specific is invented to replace one that was cut",
+          "passed": true,
+          "evidence": "no invented specifics",
+          "method": "script"
+        },
+        {
+          "text": "At least 70 percent of the source words survive in matching runs, which is what the REWRITE-SCOPE check measures",
+          "passed": true,
+          "evidence": "593/595 = 100% survived",
+          "method": "script"
+        },
+        {
+          "text": "Every named specific survives verbatim: 4 hours 40 minutes, 11 minutes, 71 percent, 9.4 GB, 2.1 million, 512 MB, 6.8 GB, 240 MB, v2.7.0, pgbouncer 1.21, py-spy, PLAT-4471, and the names Dan Okafor and Priya",
+          "passed": false,
+          "evidence": "missing specifics: ['pgbouncer 1.21']",
+          "method": "script"
+        },
+        {
+          "text": "The fragments and the first-person voice survive: \"I assumed Postgres. Everyone assumes Postgres.\" and the \"Four more minutes.\" / \"Zero minutes.\" beats are not smoothed into full declaratives",
+          "passed": true,
+          "evidence": "I assumed Postgres. Everyone assumes Postgres.\n\n## Three weeks I would like back\n\nSo I tuned Postgres. Bumped work_mem from 4 MB to 512 MB, which made the sort spills go away and moved the finish time by about four minutes. Rebuilt the two indexes on `customer_events` that pg_stat_user_tables said w",
+          "method": "agent"
+        },
+        {
+          "text": "The response says the piece is already largely clean rather than manufacturing findings, and no section is reordered or retitled",
+          "passed": true,
+          "evidence": "says the piece is largely clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "light-edit-keeps-facts-and-voice",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 4,
+        "failed": 2,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/dense-facts.md <edit> reports no LOST-NUMBER, no LOST-YEAR, no LOST-CITATION and no REWRITE-SCOPE",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports no NEW-NUMBER, NEW-YEAR, NEW-NAME or RECOMBINED-NAME: no specific is invented to replace one that was cut",
+          "passed": true,
+          "evidence": "no invented specifics",
+          "method": "script"
+        },
+        {
+          "text": "At least 70 percent of the source words survive in matching runs, which is what the REWRITE-SCOPE check measures",
+          "passed": true,
+          "evidence": "595/595 = 100% survived",
+          "method": "script"
+        },
+        {
+          "text": "Every named specific survives verbatim: 4 hours 40 minutes, 11 minutes, 71 percent, 9.4 GB, 2.1 million, 512 MB, 6.8 GB, 240 MB, v2.7.0, pgbouncer 1.21, py-spy, PLAT-4471, and the names Dan Okafor and Priya",
+          "passed": false,
+          "evidence": "missing specifics: ['pgbouncer 1.21']",
+          "method": "script"
+        },
+        {
+          "text": "The fragments and the first-person voice survive: \"I assumed Postgres. Everyone assumes Postgres.\" and the \"Four more minutes.\" / \"Zero minutes.\" beats are not smoothed into full declaratives",
+          "passed": true,
+          "evidence": "I assumed Postgres. Everyone assumes Postgres.\n\n## Three weeks I would like back\n\nSo I tuned Postgres. Bumped work_mem from 4 MB to 512 MB, which made the sort spills go away and moved the finish time by about four minutes. Rebuilt the two indexes on `customer_events` that pg_stat_user_tables said w",
+          "method": "agent"
+        },
+        {
+          "text": "The response says the piece is already largely clean rather than manufacturing findings, and no section is reordered or retitled",
+          "passed": false,
+          "evidence": "says the piece is largely clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "light-edit-keeps-facts-and-voice",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 4,
+        "failed": 2,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/dense-facts.md <edit> reports no LOST-NUMBER, no LOST-YEAR, no LOST-CITATION and no REWRITE-SCOPE",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports no NEW-NUMBER, NEW-YEAR, NEW-NAME or RECOMBINED-NAME: no specific is invented to replace one that was cut",
+          "passed": true,
+          "evidence": "no invented specifics",
+          "method": "script"
+        },
+        {
+          "text": "At least 70 percent of the source words survive in matching runs, which is what the REWRITE-SCOPE check measures",
+          "passed": true,
+          "evidence": "593/595 = 100% survived",
+          "method": "script"
+        },
+        {
+          "text": "Every named specific survives verbatim: 4 hours 40 minutes, 11 minutes, 71 percent, 9.4 GB, 2.1 million, 512 MB, 6.8 GB, 240 MB, v2.7.0, pgbouncer 1.21, py-spy, PLAT-4471, and the names Dan Okafor and Priya",
+          "passed": false,
+          "evidence": "missing specifics: ['pgbouncer 1.21']",
+          "method": "script"
+        },
+        {
+          "text": "The fragments and the first-person voice survive: \"I assumed Postgres. Everyone assumes Postgres.\" and the \"Four more minutes.\" / \"Zero minutes.\" beats are not smoothed into full declaratives",
+          "passed": true,
+          "evidence": "I assumed Postgres. Everyone assumes Postgres.\n\n## Three weeks I would like back\n\nSo I tuned Postgres. Bumped work_mem from 4 MB to 512 MB, which made the sort spills go away and moved the finish time by about four minutes. Rebuilt the two indexes on `customer_events` that pg_stat_user_tables said w",
+          "method": "agent"
+        },
+        {
+          "text": "The response says the piece is already largely clean rather than manufacturing findings, and no section is reordered or retitled",
+          "passed": false,
+          "evidence": "says the piece is largely clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "light-edit-keeps-facts-and-voice",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 4,
+        "failed": 2,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/dense-facts.md <edit> reports no LOST-NUMBER, no LOST-YEAR, no LOST-CITATION and no REWRITE-SCOPE",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports no NEW-NUMBER, NEW-YEAR, NEW-NAME or RECOMBINED-NAME: no specific is invented to replace one that was cut",
+          "passed": true,
+          "evidence": "no invented specifics",
+          "method": "script"
+        },
+        {
+          "text": "At least 70 percent of the source words survive in matching runs, which is what the REWRITE-SCOPE check measures",
+          "passed": true,
+          "evidence": "588/595 = 99% survived",
+          "method": "script"
+        },
+        {
+          "text": "Every named specific survives verbatim: 4 hours 40 minutes, 11 minutes, 71 percent, 9.4 GB, 2.1 million, 512 MB, 6.8 GB, 240 MB, v2.7.0, pgbouncer 1.21, py-spy, PLAT-4471, and the names Dan Okafor and Priya",
+          "passed": false,
+          "evidence": "missing specifics: ['pgbouncer 1.21']",
+          "method": "script"
+        },
+        {
+          "text": "The fragments and the first-person voice survive: \"I assumed Postgres. Everyone assumes Postgres.\" and the \"Four more minutes.\" / \"Zero minutes.\" beats are not smoothed into full declaratives",
+          "passed": true,
+          "evidence": "I assumed Postgres. Everyone assumes Postgres.\n\n## Three weeks I would like back\n\nSo I tuned Postgres. Bumped work_mem from 4 MB to 512 MB, which made the sort spills go away and moved the finish time by about four minutes. Rebuilt the two indexes on `customer_events` that pg_stat_user_tables said w",
+          "method": "agent"
+        },
+        {
+          "text": "The response says the piece is already largely clean rather than manufacturing findings, and no section is reordered or retitled",
+          "passed": false,
+          "evidence": "says the piece is largely clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "light-edit-keeps-facts-and-voice",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 4,
+        "failed": 2,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/dense-facts.md <edit> reports no LOST-NUMBER, no LOST-YEAR, no LOST-CITATION and no REWRITE-SCOPE",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports no NEW-NUMBER, NEW-YEAR, NEW-NAME or RECOMBINED-NAME: no specific is invented to replace one that was cut",
+          "passed": true,
+          "evidence": "no invented specifics",
+          "method": "script"
+        },
+        {
+          "text": "At least 70 percent of the source words survive in matching runs, which is what the REWRITE-SCOPE check measures",
+          "passed": true,
+          "evidence": "589/595 = 99% survived",
+          "method": "script"
+        },
+        {
+          "text": "Every named specific survives verbatim: 4 hours 40 minutes, 11 minutes, 71 percent, 9.4 GB, 2.1 million, 512 MB, 6.8 GB, 240 MB, v2.7.0, pgbouncer 1.21, py-spy, PLAT-4471, and the names Dan Okafor and Priya",
+          "passed": false,
+          "evidence": "missing specifics: ['pgbouncer 1.21']",
+          "method": "script"
+        },
+        {
+          "text": "The fragments and the first-person voice survive: \"I assumed Postgres. Everyone assumes Postgres.\" and the \"Four more minutes.\" / \"Zero minutes.\" beats are not smoothed into full declaratives",
+          "passed": true,
+          "evidence": "I assumed Postgres. Everyone assumes Postgres.\n\n## Three weeks I would like back\n\nSo I tuned Postgres. Bumped work_mem from 4 MB to 512 MB, which made the sort spills go away and moved the finish time by about four minutes. Rebuilt the two indexes on `customer_events` that pg_stat_user_tables said w",
+          "method": "agent"
+        },
+        {
+          "text": "The response says the piece is already largely clean rather than manufacturing findings, and no section is reordered or retitled",
+          "passed": false,
+          "evidence": "says the piece is largely clean",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 12,
+      "eval_name": "no-invented-names-when-made-concrete",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.83,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/coinable-terms.md <rewrite> reports zero RECOMBINED-NAME and zero NEW-NAME",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports zero NEW-NUMBER and zero NEW-YEAR: no uptime figure, event count, growth rate, spend reduction or date is invented",
+          "passed": true,
+          "evidence": "no invented figures",
+          "method": "script"
+        },
+        {
+          "text": "Atlas, Vault and Relay each appear on their own where the source has them, and no two of them, and neither of Cloud or Northern, are joined into a new capitalized product name",
+          "passed": true,
+          "evidence": "coined names present: []",
+          "method": "script"
+        },
+        {
+          "text": "At least three gaps are flagged in the skill's flag style or put to the author as questions, rather than filled in",
+          "passed": true,
+          "evidence": "11 flags or questions in the rewrite",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The Tier 1 words robust, leverage and seamless are gone, and the streamline/empower pair in the \"Why customers stay\" section is broken up",
+          "passed": false,
+          "evidence": "tier-1 words remaining: ['seamless']",
+          "method": "script"
+        },
+        {
+          "text": "Claims the source cannot support are cut or flagged rather than sharpened into specifics, and the rewrite does not promise a rebalance timeline the source calls undecided",
+          "passed": true,
+          "evidence": "We plan to rebalance, and the timeline is still being discussed internally.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 12,
+      "eval_name": "no-invented-names-when-made-concrete",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/coinable-terms.md <rewrite> reports zero RECOMBINED-NAME and zero NEW-NAME",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports zero NEW-NUMBER and zero NEW-YEAR: no uptime figure, event count, growth rate, spend reduction or date is invented",
+          "passed": true,
+          "evidence": "no invented figures",
+          "method": "script"
+        },
+        {
+          "text": "Atlas, Vault and Relay each appear on their own where the source has them, and no two of them, and neither of Cloud or Northern, are joined into a new capitalized product name",
+          "passed": true,
+          "evidence": "coined names present: []",
+          "method": "script"
+        },
+        {
+          "text": "At least three gaps are flagged in the skill's flag style or put to the author as questions, rather than filled in",
+          "passed": true,
+          "evidence": "10 flags or questions in the rewrite",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The Tier 1 words robust, leverage and seamless are gone, and the streamline/empower pair in the \"Why customers stay\" section is broken up",
+          "passed": true,
+          "evidence": "tier-1 words remaining: []",
+          "method": "script"
+        },
+        {
+          "text": "Claims the source cannot support are cut or flagged rather than sharpened into specifics, and the rewrite does not promise a rebalance timeline the source calls undecided",
+          "passed": true,
+          "evidence": "We plan to rebalance, and the timeline is still being discussed internally. [needs specifics: which regions we can name to partners, the current write split, and a target quarter for the rebalance]",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 12,
+      "eval_name": "no-invented-names-when-made-concrete",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/coinable-terms.md <rewrite> reports zero RECOMBINED-NAME and zero NEW-NAME",
+          "passed": true,
+          "evidence": "  no specifics added or dropped, and the source survived the edit",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports zero NEW-NUMBER and zero NEW-YEAR: no uptime figure, event count, growth rate, spend reduction or date is invented",
+          "passed": true,
+          "evidence": "no invented figures",
+          "method": "script"
+        },
+        {
+          "text": "Atlas, Vault and Relay each appear on their own where the source has them, and no two of them, and neither of Cloud or Northern, are joined into a new capitalized product name",
+          "passed": true,
+          "evidence": "coined names present: []",
+          "method": "script"
+        },
+        {
+          "text": "At least three gaps are flagged in the skill's flag style or put to the author as questions, rather than filled in",
+          "passed": true,
+          "evidence": "11 flags or questions in the rewrite",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The Tier 1 words robust, leverage and seamless are gone, and the streamline/empower pair in the \"Why customers stay\" section is broken up",
+          "passed": true,
+          "evidence": "tier-1 words remaining: []",
+          "method": "script"
+        },
+        {
+          "text": "Claims the source cannot support are cut or flagged rather than sharpened into specifics, and the rewrite does not promise a rebalance timeline the source calls undecided",
+          "passed": true,
+          "evidence": "We plan to rebalance, but the timeline is still being discussed internally.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 12,
+      "eval_name": "no-invented-names-when-made-concrete",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/coinable-terms.md <rewrite> reports zero RECOMBINED-NAME and zero NEW-NAME",
+          "passed": false,
+          "evidence": "  [NEW-NAME] 1: Type",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports zero NEW-NUMBER and zero NEW-YEAR: no uptime figure, event count, growth rate, spend reduction or date is invented",
+          "passed": false,
+          "evidence": "no invented figures",
+          "method": "script"
+        },
+        {
+          "text": "Atlas, Vault and Relay each appear on their own where the source has them, and no two of them, and neither of Cloud or Northern, are joined into a new capitalized product name",
+          "passed": true,
+          "evidence": "coined names present: []",
+          "method": "script"
+        },
+        {
+          "text": "At least three gaps are flagged in the skill's flag style or put to the author as questions, rather than filled in",
+          "passed": false,
+          "evidence": "0 flags or questions in the rewrite",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The Tier 1 words robust, leverage and seamless are gone, and the streamline/empower pair in the \"Why customers stay\" section is broken up",
+          "passed": true,
+          "evidence": "tier-1 words remaining: []",
+          "method": "script"
+        },
+        {
+          "text": "Claims the source cannot support are cut or flagged rather than sharpened into specifics, and the rewrite does not promise a rebalance timeline the source calls undecided",
+          "passed": true,
+          "evidence": "A rebalance is planned for [quarter/year] \u2014 do not commit to that date with customers until [owner] confirms it.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 12,
+      "eval_name": "no-invented-names-when-made-concrete",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/coinable-terms.md <rewrite> reports zero RECOMBINED-NAME and zero NEW-NAME",
+          "passed": false,
+          "evidence": "  [NEW-NAME] 9: Audit, Build, Channel, Median, Named, Needed, Owner, Region, Sev",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports zero NEW-NUMBER and zero NEW-YEAR: no uptime figure, event count, growth rate, spend reduction or date is invented",
+          "passed": false,
+          "evidence": "no invented figures",
+          "method": "script"
+        },
+        {
+          "text": "Atlas, Vault and Relay each appear on their own where the source has them, and no two of them, and neither of Cloud or Northern, are joined into a new capitalized product name",
+          "passed": true,
+          "evidence": "coined names present: []",
+          "method": "script"
+        },
+        {
+          "text": "At least three gaps are flagged in the skill's flag style or put to the author as questions, rather than filled in",
+          "passed": false,
+          "evidence": "0 flags or questions in the rewrite",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The Tier 1 words robust, leverage and seamless are gone, and the streamline/empower pair in the \"Why customers stay\" section is broken up",
+          "passed": true,
+          "evidence": "tier-1 words remaining: []",
+          "method": "script"
+        },
+        {
+          "text": "Claims the source cannot support are cut or flagged rather than sharpened into specifics, and the rewrite does not promise a rebalance timeline the source calls undecided",
+          "passed": true,
+          "evidence": "A rebalance to `[target split]` is `[scoped for [quarter] / not yet scheduled]` \u2014 do not give partners a date.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 12,
+      "eval_name": "no-invented-names-when-made-concrete",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "Running scripts/prose-scan.py --compare evals/files/round4/coinable-terms.md <rewrite> reports zero RECOMBINED-NAME and zero NEW-NAME",
+          "passed": false,
+          "evidence": "  [NEW-NAME] 4: Channel, Finance, Finance and Legal, Owner of",
+          "method": "script"
+        },
+        {
+          "text": "The same --compare reports zero NEW-NUMBER and zero NEW-YEAR: no uptime figure, event count, growth rate, spend reduction or date is invented",
+          "passed": false,
+          "evidence": "no invented figures",
+          "method": "script"
+        },
+        {
+          "text": "Atlas, Vault and Relay each appear on their own where the source has them, and no two of them, and neither of Cloud or Northern, are joined into a new capitalized product name",
+          "passed": true,
+          "evidence": "coined names present: []",
+          "method": "script"
+        },
+        {
+          "text": "At least three gaps are flagged in the skill's flag style or put to the author as questions, rather than filled in",
+          "passed": false,
+          "evidence": "0 flags or questions in the rewrite",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The Tier 1 words robust, leverage and seamless are gone, and the streamline/empower pair in the \"Why customers stay\" section is broken up",
+          "passed": true,
+          "evidence": "tier-1 words remaining: []",
+          "method": "script"
+        },
+        {
+          "text": "Claims the source cannot support are cut or flagged rather than sharpened into specifics, and the rewrite does not promise a rebalance timeline the source calls undecided",
+          "passed": true,
+          "evidence": "A rebalance is under discussion with no committed date; say \"no committed date\" rather than implying one.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.86,
+        "stddev": 0.114,
+        "min": 0.67,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 0.861,
+        "stddev": 0.115,
+        "min": 0.667,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.585,
+        "stddev": 0.085,
+        "min": 0.5,
+        "max": 0.67
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 0.583,
+        "stddev": 0.083,
+        "min": 0.5,
+        "max": 0.667
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.28",
+      "pass_rate_behavior_only": "+0.28",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "light-edit-keeps-facts-and-voice: with 0.78 vs without 0.67 (+0.11), n=3+3",
+    "no-invented-names-when-made-concrete: with 0.94 vs without 0.50 (+0.44), n=3+3",
+    "1 of 57 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 0.861 vs without 0.583, delta +0.28."
+  ]
+}

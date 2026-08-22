@@ -1,6 +1,6 @@
 {
   "skill_name": "craft-review",
-  "format": "Anthropic skill-creator evals.json. Each eval runs with the skill and without, three runs each, graded on the expectations below with evidence. Inputs are inline HTML so the set needs no fixtures.",
+  "format": "Anthropic skill-creator evals.json. Each eval runs with the skill and without, three runs each, graded on the expectations below with evidence. Rounds 1-2 (ids 1-5) inline the HTML in the prompt; round 3 (ids 6-9) passes a file path instead, with the defect buried in a long stylesheet under evals/files/round3/.",
   "evals": [
     {
       "id": 1,
@@ -60,6 +60,106 @@
         "It does not report any numeric finding",
         "Any guidance offered is explicitly framed as general rather than as findings about this page"
       ]
+    },
+    {
+      "id": 6,
+      "round": 3,
+      "name": "buried-contrast-in-a-long-stylesheet",
+      "prompt": "Review this page for design quality. The full source is at evals/files/round3/buried-contrast.html.",
+      "files": [
+        "evals/files/round3/buried-contrast.html"
+      ],
+      "expected_output": "A 442-line settlements dashboard with a three-tier token system (primitive ramp, semantic role, component-scoped chip token). Exactly one text/background pair fails WCAG AA, and only in dark mode: the 'In review' status chip, `.ledger .pill--review`, resolves through --pill-warn-fg -> --amber-500 (#a8802f) on --pill-warn-bg -> --amber-950 (#3a2c10) = 3.74:1 against the 4.5:1 body minimum. It passes in light mode (#7a4a06 on #fbf1de = 6.67:1), so reading the base stylesheet alone will not find it, and the values are three var() hops from the hex. Every other pair on the page clears AA in both themes. scripts/preflight.py resolves tokens per theme and reports this one line.",
+      "expectations": [
+        "The review reports a contrast failure on the .ledger .pill--review status chip in the dark theme, with a ratio between 3.0:1 and 4.3:1",
+        "No other TEXT contrast failure is reported: the other two chips, the buttons, the table header and body text are not flagged for text-on-background contrast (a finding about a control BORDER under WCAG 1.4.11 is correct and does not count)",
+        "The failure is scoped to dark mode rather than stated as failing everywhere",
+        "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+        "The fix names a specific replacement hex and the ratio it reaches on #3a2c10"
+      ]
+    },
+    {
+      "id": 7,
+      "round": 3,
+      "name": "theme-only-token-buried-in-a-theme-layer",
+      "prompt": "Review this page for design quality. The full source is at evals/files/round3/buried-theme-only.html.",
+      "files": [
+        "evals/files/round3/buried-theme-only.html"
+      ],
+      "expected_output": "A 422-line workspace settings screen. One custom property, --accent-edge, is declared only inside the dark `@media (prefers-color-scheme: dark)` block (line 254, in a theme layer appended at the end of the stylesheet) and never in the base :root or the [data-theme=\"dark\"] block. It is read 67 lines earlier by `.notice`, the data-retention callout, as `border-left: 3px solid var(--accent-edge)`, so in light mode the border falls back to currentColor and the callout's accent edge disappears. body paints its own background, contrast clears AA in both themes, and every spacing value is on the 4/8 scale, so this is the only finding scripts/preflight.py returns.",
+      "expectations": [
+        "The review reports that --accent-edge is defined only inside a dark theme block and never applies in the default light state",
+        "It names the component that reads the token (the .notice retention callout's left border) and what happens there in light mode",
+        "It is ranked blocking or critical, not polish",
+        "The token defect is ranked first among all findings, and any other finding ranked blocking carries a computed value rather than an impression",
+        "The transcript shows scripts/preflight.py was run against the file"
+      ]
+    },
+    {
+      "id": 8,
+      "round": 3,
+      "name": "one-off-scale-value-among-sixty",
+      "prompt": "Review this page for design quality. The full source is at evals/files/round3/off-scale-once.html.",
+      "files": [
+        "evals/files/round3/off-scale-once.html"
+      ],
+      "expected_output": "A 467-line support triage screen with 62 spacing declarations. Sixty-one are on the 4/8px scale. One is not: `.composer` (the reply box in the detail panel, line 247) uses `padding: 13px 17px`. Nothing else is wrong \u2014 contrast clears AA in both themes, body paints its own ground, no theme-only token. Finding it by eye means checking every padding, margin and gap on the page against the scale, which is exactly what scripts/preflight.py's off-scale check does in one pass.",
+      "expectations": [
+        "The review reports 13px and 17px padding on .composer as off the 4/8px spacing scale",
+        "No other spacing value on the page is reported as off-scale",
+        "The fix is numeric: an on-scale replacement such as 12px 16px",
+        "The transcript shows scripts/preflight.py was run against the file"
+      ]
+    },
+    {
+      "id": 9,
+      "round": 3,
+      "name": "asymmetry-only-visible-after-layout",
+      "prompt": "Review this page for design quality. The full source is at evals/files/round3/rendered-asymmetry.html.",
+      "files": [
+        "evals/files/round3/rendered-asymmetry.html"
+      ],
+      "expected_output": "A 311-line release-health page with three identical .kpi cards in a flex row. All three declare `padding: 24px`. The middle card carries `data-state=\"breached\"`, which adds `border-left: 8px solid var(--alert)` as a status stripe; under `box-sizing: border-box` that eats 8px of the card's left padding box, so its content sits 32px from the card's left edge against 24px on both neighbors and the three labels no longer share a left edge. No single CSS value states 32px anywhere; it exists only after layout. `python3 scripts/symmetry.py <file>` renders the page headless and returns exactly one finding: a MAJOR paired-component mismatch, left inset 24px vs 32px. scripts/preflight.py is clean on this page.",
+      "expectations": [
+        "The review reports that the breached KPI card's content starts 32px from its left edge against 24px on the two sibling cards, or names the 8px delta",
+        "It attributes the delta to the 8px border-left status stripe on the [data-state=\"breached\"] card interacting with border-box sizing",
+        "The transcript shows scripts/symmetry.py was run on the HTML file, and the measurement is presented as computed rather than as an impression",
+        "The fix is numeric and preserves the stripe: reduce that card's left padding to 16px, or move the stripe to an inset box-shadow or pseudo-element so it costs no layout space"
+      ]
+    },
+    {
+      "id": 10,
+      "round": 4,
+      "name": "alpha-only-contrast-failure",
+      "prompt": "Review this page for design quality. The full source is at evals/files/round4/alpha-contrast.html.",
+      "files": [
+        "evals/files/round4/alpha-contrast.html"
+      ],
+      "expected_output": "A 281-line shipment console with no CSS custom properties anywhere \u2014 plain hex, one theme. Two things are being tested at once. First, a page with no tokens still gets a contrast pass at all: preflight.py used to skip the whole contrast check when a document declared no custom properties, so a plain-CSS page was never measured. Second, the one failure only exists after alpha compositing: `.stamp` (the relative timestamp beside each timeline event) sets `color: rgba(52, 64, 84, 0.65)` on `background: #eef1f6`. Composited that is 3.62:1 against AA's 4.5 for 12px text. Read as an opaque #344054 \u2014 which is what dropping the alpha does \u2014 it is 9.24:1 and passes with room to spare, so the defect is invisible to anyone eyeballing the declared hex. Every other pair on the page clears 6.5:1 or better, and preflight.py returns this single line and nothing else.",
+      "expectations": [
+        "The review reports a contrast failure on the .stamp timestamp, with a ratio between 3.4:1 and 3.9:1",
+        "The finding attributes the failure to the 0.65 alpha being composited over #eef1f6, not to the declared color value on its own",
+        "No other text contrast pair on the page is reported as failing (the chips, buttons, table header, card notes and footer all clear AA)",
+        "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+        "The fix is numeric: a specific replacement alpha or hex, with the ratio it reaches on #eef1f6 (for example rgba(52,64,84,0.8) = 5.33:1, or #525c70 = 5.94:1)"
+      ]
+    },
+    {
+      "id": 11,
+      "round": 4,
+      "name": "dark-only-token-is-not-a-defect",
+      "prompt": "Review this page for design quality. The full source is at evals/files/round4/legit-theme-token.html.",
+      "files": [
+        "evals/files/round4/legit-theme-token.html"
+      ],
+      "expected_output": "A 264-line digest page with a correct two-state token system: the base :root carries the light palette and a `@media (prefers-color-scheme: dark)` block overrides it. Ten tokens are declared in base and overridden in dark. Two more \u2014 --lift-shadow and --hairline-warm \u2014 are declared ONLY inside the dark block, and are read only by rules inside that same block (.card and .aside). That is correct: a lifted shadow and a warmed hairline have no light-mode counterpart, and neither token is ever referenced from a state where it would not resolve. This is the false-positive guard for eval 7's check. preflight.py returns 'clean: no showstoppers' \u2014 zero blocking, zero warnings \u2014 and the earlier version of the theme-only-color rule, which blocked any token absent from base, reported both of these as BLOCK findings and ranked the false positive first.",
+      "expectations": [
+        "Neither --lift-shadow nor --hairline-warm is reported as a defect for being declared only inside the dark theme block",
+        "No finding claims a custom property on this page fails to resolve in the default light state",
+        "The transcript shows scripts/preflight.py was run against the file, and the review reflects that it returned no blocking findings",
+        "If the dark-only tokens are discussed at all, they are described as correct because they are read only by rules inside the same dark block",
+        "Any finding that is reported carries a computed or observed value rather than an impression"
+      ]
     }
   ],
   "notes": {
@@ -82,6 +182,26 @@
       "clean-page-is-called-clean": "Round-1 expectations E1/E4 rewarded not-looking: they assumed the fixture was flawless. Round-2 with-skill runs chipped only [computed]/[observed] items (87-char measure, no lang/color-scheme, 48/64 frame, theme contrast mismatch), all real, and quarantined [judged] items unchipped under Judgment calls, which is the rule the fix encodes. Expectations recalibrated to test that rule. The fixture itself is a round-3 item: make it actually pass a full review, or keep it as is and test reporting discipline, which is what it now does.",
       "unmeasurable-is-said-so": "With-skill 6/6 on the judgment checks, up from 0/6. All three refuse to score a description and quarantine guidance.",
       "voice-sample-precedence (natural-writing)": "With-skill 3/3; dashes per draft 5/5/4 against round 1's 7/5/1."
-    }
+    },
+    "round-3 (2026-08-21)": {
+      "design": "Answers round 1's design-gap note. Each fixture is a 300-470 line page whose values cannot be held in the reader's head: tokens resolve through two or three var() hops, defects sit 150-290 lines down, and the prompt carries a path rather than the source. Every fixture was verified so the bundled script returns the plant and nothing else \u2014 preflight.py for ids 6-8, symmetry.py (headless Chromium) for id 9, which preflight cannot see at all.",
+      "plants": {
+        "6": ".ledger .pill--review, dark theme only, #a8802f on #3a2c10 = 3.74:1 (WARN, not a dramatic 1.5:1)",
+        "7": "--accent-edge declared only in the dark @media block, read by .notice 67 lines earlier",
+        "8": ".composer padding: 13px 17px, the only off-scale pair among 62 spacing declarations",
+        "9": "8px border-left stripe on the middle .kpi card; content inset 32px vs 24px, visible only after layout"
+      }
+    },
+    "round-3/4 correction (2026-08-21)": "round-3/4 correction (2026-08-21): expectation 4 of this eval originally read 'No other blocking defect is reported: no contrast failure, no off-scale spacing, no missing body background'. That encoded a false premise: the fixture also has form-control borders at 1.53:1 light / 1.27:1 dark (WCAG 1.4.11 wants 3:1) and no layout breakpoint at all, both real blocking defects the fixture author never planted and preflight.py does not check. Reporting them is correct, so the expectation was rewarding not-looking, the same defect round 2 found in clean-page-is-called-clean. It now tests ranking discipline instead. Round 3 was re-graded on the new wording so both rounds use one yardstick.",
+    "round-3 correction, expectation 2 of eval 6 (2026-08-21)": "Originally 'No other contrast failure is reported: the other two chips, the buttons, the table header, and body text are not flagged'. One run flagged the .btn--quiet BORDER, which resolves to #cfd6e0 on #fcfcfd = 1.43:1 light and #27313f on #161d26 = 1.29:1 dark, both under the 3:1 WCAG 1.4.11 wants for a control boundary. That finding is correct. The expectation meant text contrast and now says so. Third false premise of this kind in this eval set; every one came from verifying a fixture only with the tool under test.",
+    "round-4 (2026-08-21)": {
+      "design": "Two fixtures for checks added the same day and previously untested. Eval 10 is a positive case for two script changes at once (alpha compositing in contrast.py, and contrast running on a page with no custom properties in preflight.py). Eval 11 is a negative case: a legitimate theme-scoped token that the earlier theme-only-color rule flagged, which is the false positive the rule was narrowed to stop.",
+      "plants": {
+        "10": ".stamp color rgba(52,64,84,0.65) on #eef1f6 = 3.62:1 composited, 9.24:1 if the alpha is dropped; no custom properties anywhere on the page",
+        "11": "no plant \u2014 --lift-shadow and --hairline-warm are declared and consumed entirely inside the dark block, and preflight.py must stay silent"
+      },
+      "guard": "Eval 11 fails if the theme-only-color check is ever widened back to 'defined in a theme block and not in base'. Verified by re-running that earlier predicate against the fixture: it reports both tokens as BLOCK."
+    },
+    "round-4 note on eval 11 (2026-08-21)": "dark-only-token-is-not-a-defect is a REGRESSION GUARD, not a discriminator, and its headline delta should not be read as a behavioral win. Neither arm reports the dark-only tokens as defects; the baseline's only failure is the check that preflight.py was run, which no arm without the skill can pass. Its job is to fail loudly if a future change re-breaks the theme check, which today's narrowing did in one form and this morning's did in another."
   }
 }

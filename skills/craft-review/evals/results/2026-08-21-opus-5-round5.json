@@ -1,0 +1,702 @@
+{
+  "metadata": {
+    "skill_name": "craft-review",
+    "skill_path": "skills/craft-review",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21-round5",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 10,
+      "eval_name": "alpha-only-contrast-failure",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .stamp timestamp, with a ratio between 3.4:1 and 3.9:1",
+          "passed": true,
+          "evidence": "ratios ['3.62', '4.5', '5.66', '5.02', '2.9', '4.55']; names the element: True",
+          "method": "script"
+        },
+        {
+          "text": "The finding attributes the failure to the 0.65 alpha being composited over #eef1f6, not to the declared color value on its own",
+          "passed": true,
+          "evidence": "attributes it to alpha",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No other text contrast pair on the page is reported as failing (the chips, buttons, table header, card notes and footer all clear AA)",
+          "passed": true,
+          "evidence": "Every other text pair on the page passes",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: a specific replacement alpha or hex, with the ratio it reaches on #eef1f6 (for example rgba(52,64,84,0.8) = 5.33:1, or #525c70 = 5.94:1)",
+          "passed": true,
+          "evidence": "numeric fix given",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "alpha-only-contrast-failure",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .stamp timestamp, with a ratio between 3.4:1 and 3.9:1",
+          "passed": true,
+          "evidence": "ratios ['3.62', '4.5', '9.24', '4.69', '2.07', '6.05']; names the element: True",
+          "method": "script"
+        },
+        {
+          "text": "The finding attributes the failure to the 0.65 alpha being composited over #eef1f6, not to the declared color value on its own",
+          "passed": true,
+          "evidence": "attributes it to alpha",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No other text contrast pair on the page is reported as failing (the chips, buttons, table header, card notes and footer all clear AA)",
+          "passed": true,
+          "evidence": "the white label is 7.74:1, so the control is identifiable",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: a specific replacement alpha or hex, with the ratio it reaches on #eef1f6 (for example rgba(52,64,84,0.8) = 5.33:1, or #525c70 = 5.94:1)",
+          "passed": true,
+          "evidence": "numeric fix given",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "alpha-only-contrast-failure",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .stamp timestamp, with a ratio between 3.4:1 and 3.9:1",
+          "passed": true,
+          "evidence": "ratios ['3.62', '3.62', '4.5', '3.62', '9.24', '5.24']; names the element: True",
+          "method": "script"
+        },
+        {
+          "text": "The finding attributes the failure to the 0.65 alpha being composited over #eef1f6, not to the declared color value on its own",
+          "passed": true,
+          "evidence": "attributes it to alpha",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No other text contrast pair on the page is reported as failing (the chips, buttons, table header, card notes and footer all clear AA)",
+          "passed": true,
+          "evidence": "both below 3:1, though WCAG exempts purely decorative",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: a specific replacement alpha or hex, with the ratio it reaches on #eef1f6 (for example rgba(52,64,84,0.8) = 5.33:1, or #525c70 = 5.94:1)",
+          "passed": true,
+          "evidence": "numeric fix given",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "alpha-only-contrast-failure",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .stamp timestamp, with a ratio between 3.4:1 and 3.9:1",
+          "passed": true,
+          "evidence": "ratios ['3.62', '4.5', '3.62', '4.5', '9.24', '5.57']; names the element: True",
+          "method": "script"
+        },
+        {
+          "text": "The finding attributes the failure to the 0.65 alpha being composited over #eef1f6, not to the declared color value on its own",
+          "passed": true,
+          "evidence": "attributes it to alpha",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No other text contrast pair on the page is reported as failing (the chips, buttons, table header, card notes and footer all clear AA)",
+          "passed": true,
+          "evidence": "Worth noting this is the *only* failure on the page.",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: a specific replacement alpha or hex, with the ratio it reaches on #eef1f6 (for example rgba(52,64,84,0.8) = 5.33:1, or #525c70 = 5.94:1)",
+          "passed": true,
+          "evidence": "numeric fix given",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "alpha-only-contrast-failure",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .stamp timestamp, with a ratio between 3.4:1 and 3.9:1",
+          "passed": true,
+          "evidence": "ratios ['3.62', '4.5', '9.24', '6.31', '9.24', '7.01']; names the element: True",
+          "method": "script"
+        },
+        {
+          "text": "The finding attributes the failure to the 0.65 alpha being composited over #eef1f6, not to the declared color value on its own",
+          "passed": true,
+          "evidence": "attributes it to alpha",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No other text contrast pair on the page is reported as failing (the chips, buttons, table header, card notes and footer all clear AA)",
+          "passed": true,
+          "evidence": "they are the only thing on the page that does",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: a specific replacement alpha or hex, with the ratio it reaches on #eef1f6 (for example rgba(52,64,84,0.8) = 5.33:1, or #525c70 = 5.94:1)",
+          "passed": true,
+          "evidence": "numeric fix given",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "alpha-only-contrast-failure",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .stamp timestamp, with a ratio between 3.4:1 and 3.9:1",
+          "passed": true,
+          "evidence": "ratios ['3.62', '3.62', '4.5', '6.31', '9.24', '5.57']; names the element: True",
+          "method": "script"
+        },
+        {
+          "text": "The finding attributes the failure to the 0.65 alpha being composited over #eef1f6, not to the declared color value on its own",
+          "passed": true,
+          "evidence": "attributes it to alpha",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No other text contrast pair on the page is reported as failing (the chips, buttons, table header, card notes and footer all clear AA)",
+          "passed": true,
+          "evidence": "There is one real accessibility failure",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric: a specific replacement alpha or hex, with the ratio it reaches on #eef1f6 (for example rgba(52,64,84,0.8) = 5.33:1, or #525c70 = 5.94:1)",
+          "passed": true,
+          "evidence": "numeric fix given",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "dark-only-token-is-not-a-defect",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Neither --lift-shadow nor --hairline-warm is reported as a defect for being declared only inside the dark theme block",
+          "passed": true,
+          "evidence": "dark-only token reported as a defect: False",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No finding claims a custom property on this page fails to resolve in the default light state",
+          "passed": true,
+          "evidence": "no unresolved-token claim",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any finding that is reported carries a computed or observed value rather than an impression",
+          "passed": true,
+          "evidence": ".btn renders 124.6 x 38.4px at both 1440px and 390px",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file, and the review reflects that it returned no blocking findings",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        },
+        {
+          "text": "If the dark-only tokens are discussed at all, they are described as correct because they are read only by rules inside the same dark block",
+          "passed": true,
+          "evidence": "The dark-only tokens are not a defect, and I checked.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "dark-only-token-is-not-a-defect",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Neither --lift-shadow nor --hairline-warm is reported as a defect for being declared only inside the dark theme block",
+          "passed": true,
+          "evidence": "dark-only token reported as a defect: False",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No finding claims a custom property on this page fails to resolve in the default light state",
+          "passed": true,
+          "evidence": "no unresolved-token claim",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any finding that is reported carries a computed or observed value rather than an impression",
+          "passed": true,
+          "evidence": "`.btn` renders 124.6 \u00d7 38.4px (14px text, line-height 22.4, padding 8px 16px)",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file, and the review reflects that it returned no blocking findings",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        },
+        {
+          "text": "If the dark-only tokens are discussed at all, they are described as correct because they are read only by rules inside the same dark block",
+          "passed": true,
+          "evidence": "The dark-only tokens are correct, not a bug.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "dark-only-token-is-not-a-defect",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Neither --lift-shadow nor --hairline-warm is reported as a defect for being declared only inside the dark theme block",
+          "passed": true,
+          "evidence": "dark-only token reported as a defect: False",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No finding claims a custom property on this page fails to resolve in the default light state",
+          "passed": true,
+          "evidence": "no unresolved-token claim",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any finding that is reported carries a computed or observed value rather than an impression",
+          "passed": true,
+          "evidence": ".btn renders 124.6 \u00d7 38.4px (measured; 14px text \u00d7 1.6 line-height = 22.4px, + 8px padding",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file, and the review reflects that it returned no blocking findings",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        },
+        {
+          "text": "If the dark-only tokens are discussed at all, they are described as correct because they are read only by rules inside the same dark block",
+          "passed": true,
+          "evidence": "The dark-only tokens are not a defect.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "dark-only-token-is-not-a-defect",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Neither --lift-shadow nor --hairline-warm is reported as a defect for being declared only inside the dark theme block",
+          "passed": true,
+          "evidence": "dark-only token reported as a defect: False",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No finding claims a custom property on this page fails to resolve in the default light state",
+          "passed": true,
+          "evidence": "no unresolved-token claim",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any finding that is reported carries a computed or observed value rather than an impression",
+          "passed": true,
+          "evidence": "The button computes to roughly 38px tall (8 + 8 padding + 22.4 line box)",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file, and the review reflects that it returned no blocking findings",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        },
+        {
+          "text": "If the dark-only tokens are discussed at all, they are described as correct because they are read only by rules inside the same dark block",
+          "passed": true,
+          "evidence": "The two dark-only tokens are correct, not a defect.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "dark-only-token-is-not-a-defect",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Neither --lift-shadow nor --hairline-warm is reported as a defect for being declared only inside the dark theme block",
+          "passed": true,
+          "evidence": "dark-only token reported as a defect: False",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No finding claims a custom property on this page fails to resolve in the default light state",
+          "passed": true,
+          "evidence": "no unresolved-token claim",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any finding that is reported carries a computed or observed value rather than an impression",
+          "passed": true,
+          "evidence": "the button renders **125 \u00d7 38**",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file, and the review reflects that it returned no blocking findings",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        },
+        {
+          "text": "If the dark-only tokens are discussed at all, they are described as correct because they are read only by rules inside the same dark block",
+          "passed": true,
+          "evidence": "The two dark-only tokens are correct",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "eval_name": "dark-only-token-is-not-a-defect",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.6,
+        "passed": 3,
+        "failed": 2,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "Neither --lift-shadow nor --hairline-warm is reported as a defect for being declared only inside the dark theme block",
+          "passed": false,
+          "evidence": "dark-only token reported as a defect: True",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No finding claims a custom property on this page fails to resolve in the default light state",
+          "passed": true,
+          "evidence": "no unresolved-token claim",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "Any finding that is reported carries a computed or observed value rather than an impression",
+          "passed": true,
+          "evidence": "`.btn` renders **38.4px tall** (8px padding, top",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file, and the review reflects that it returned no blocking findings",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        },
+        {
+          "text": "If the dark-only tokens are discussed at all, they are described as correct because they are read only by rules inside the same dark block",
+          "passed": true,
+          "evidence": "correct scoping, not a defect",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.867,
+        "stddev": 0.149,
+        "min": 0.6,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 0.958,
+        "stddev": 0.093,
+        "min": 0.75,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.13",
+      "pass_rate_behavior_only": "+0.04",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "alpha-only-contrast-failure: with 1.00 vs without 1.00 (+0.00), n=3+3",
+    "dark-only-token-is-not-a-defect: with 1.00 vs without 0.73 (+0.27), n=3+3",
+    "8 of 47 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 1.0 vs without 0.958, delta +0.04."
+  ]
+}

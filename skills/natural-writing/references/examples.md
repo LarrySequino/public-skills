@@ -42,9 +42,9 @@
 > "It was observed that model performance degraded at longer forecast horizons. The uncertainty naturally increased as the prediction window expanded. These results emerged from our analysis of 54 state-level forecasts."
 
 **After:**
-> "We observed that model performance degraded at longer forecast horizons, and uncertainty grew as the prediction window expanded [needs a number: how much per week of lead time?]. We saw this pattern across all 54 state-level forecasts."
+> "We observed that model performance degraded at longer forecast horizons, and uncertainty grew as the prediction window expanded [needs a number: how much per week of lead time?]. Our analysis covered 54 state-level forecasts [needs a specific: in how many of them did the pattern hold?]."
 
-**Changes:** Named the actor ("we"). Replaced false agency ("uncertainty naturally increased," "results emerged") with claims someone made. The 54 forecasts come from the source; the rate of growth does not, so it is flagged.
+**Changes:** Named the actor ("we"). Replaced false agency ("uncertainty naturally increased," "results emerged") with claims someone made. The 54 forecasts come from the source; the rate of growth does not, and neither does "in all 54," so both are flagged rather than asserted.
 
 ---
 
@@ -66,9 +66,9 @@
 > "The FluSight initiative serves as a foundational framework for influenza forecasting in the United States, contributing to public health preparedness and underscoring the importance of collaborative forecasting efforts."
 
 **After:**
-> "The FluSight initiative coordinates collaborative influenza forecasting in the United States and feeds into public health preparedness. [needs a specific: what does it standardize, and for how many groups?]"
+> "The FluSight initiative is a framework for collaborative influenza forecasting in the United States, and the source says it contributes to public health preparedness without saying how. [needs a specific: what does the framework actually do, and for how many groups?]"
 
-**Changes:** Replaced "serves as a foundational framework" with what FluSight does, using only what the source claims. The two participle phrases became one flagged gap instead of an invented fact.
+**Changes:** Dropped "serves as" and "foundational" without inventing a mechanism to replace them: the source never says the initiative coordinates anything, so neither does the rewrite. The two participle phrases became one flagged gap instead of an invented fact.
 
 ---
 
@@ -114,9 +114,9 @@
 > "Apple didn't build Uber. Facebook didn't build Spotify. Stripe didn't build Shopify. AWS didn't build Airbnb. Every major technological shift follows the same pattern."
 
 **After:**
-> "AWS sold infrastructure. Airbnb built a business on top of it. That split between platform and product repeats across the industry."
+> "The source offers four platform-and-product pairs as one pattern without explaining any of them. [needs one worked example: name the platform, the product built on it, and what the distinction is doing for the argument.]"
 
-**Changes:** One concrete example examined in depth instead of four name-drops. Named the specific pattern.
+**Changes:** Four name-drops became a request for one worked example. The earlier version of this entry wrote out the AWS and Airbnb relationship, which reads better and breaks the hard rule: the source says only that AWS did not build Airbnb. What a rewrite cannot get from the source, it asks for.
 
 ---
 

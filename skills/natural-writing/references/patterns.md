@@ -62,10 +62,13 @@ A piece that changes voice partway through, with no reason in the content, was w
 Structure is the #1 detection signal, and detectors weight rhythm regularity above vocabulary. Fixing every flagged word while leaving the rhythm untouched still reads as AI.
 
 ### Sentence and paragraph uniformity
-If most sentences are 15–25 words, the text sounds robotic. Mix 3–8 word sentences with 20+ word ones; fragments and questions break monotony. Same for paragraphs: some should be one sentence, some longer. If every paragraph is 3–5 sentences of the same size, vary deliberately.
+If most sentences are 15–25 words, the text sounds robotic. Vary length and shape where the prose has gone monotonous: a 5-word sentence next to a 25-word one, a fragment, a question. The target is variance, not the extremes themselves, and forcing them into concise technical, legal, or scientific prose damages it. Same for paragraphs: some should be one sentence, some longer. If every paragraph is 3–5 sentences of the same size, vary deliberately.
 
 ### Read-aloud test
-If a text-to-speech engine could read the piece without sounding weird, it's too uniform.
+Read it aloud, or have a text-to-speech engine read it. Listen for one cadence repeating,
+for clauses that attach ambiguously, and for sentences that run out of breath. Smooth
+delivery is not the defect: a piece that reads well aloud is usually punctuated well.
+What you are listening for is sameness, not fluency.
 
 ### Vocabulary diversity
 In pieces over ~200 words, eyeball the range of vocabulary. AI text trends flat, recycling the same abstract nouns. The fix is rarely a thesaurus; it's broadening the *what*: name specific things, cite specific cases, replace a reused abstraction with the concrete instance behind it. (Narrow technical topics and second-language writing legitimately compress vocabulary, so this is a soft signal.)

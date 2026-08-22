@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Triage — Beacon Support</title>
+<style>
+/* =====================================================================
+   1. Primitives
+   ===================================================================== */
+:root {
+  --chalk:      #fdfefd;
+  --fern-025:   #f4f6f5;
+  --fern-050:   #e9ecea;
+  --fern-100:   #dee2e0;
+  --fern-200:   #c8cfcb;
+  --fern-300:   #a6b0ab;
+  --fern-400:   #7e8b85;
+  --fern-600:   #4f5d57;
+  --fern-700:   #3c4a44;
+  --fern-800:   #2c3a34;
+  --fern-900:   #16201c;
+
+  --pine-900:   #0e1412;
+  --pine-800:   #151d1a;
+  --pine-700:   #1c2622;
+  --pine-600:   #28332e;
+
+  --jade-050:   #dcefe7;
+  --jade-200:   #bfe9d9;
+  --jade-300:   #63c9a5;
+  --jade-600:   #14634a;
+  --jade-800:   #0b4133;
+  --jade-950:   #10322a;
+
+  --rose-050:   #fae9eb;
+  --rose-300:   #f0a3ad;
+  --rose-700:   #8d2230;
+  --rose-950:   #31151a;
+
+  --steel-050:  #e6eef6;
+  --steel-300:  #a8c6e4;
+  --steel-700:  #33526e;
+  --steel-950:  #16232f;
+}
+
+/* =====================================================================
+   2. Roles
+   ===================================================================== */
+:root {
+  --surface-page:    var(--fern-025, #f4f6f5);
+  --surface-raised:  var(--chalk, #fdfefd);
+  --surface-rail:    var(--fern-050, #e9ecea);
+  --surface-sunken:  var(--fern-100, #dee2e0);
+
+  --text-primary:    var(--fern-900, #16201c);
+  --text-secondary:  var(--fern-700, #3c4a44);
+  --text-muted:      var(--fern-600, #4f5d57);
+
+  --line:            var(--fern-200, #c8cfcb);
+  --accent:          var(--jade-600, #14634a);
+  --accent-on:       var(--chalk, #fdfefd);
+  --accent-wash:     var(--jade-050, #dcefe7);
+  --accent-ink:      var(--jade-800, #0b4133);
+  --avatar-bg:       var(--fern-800, #2c3a34);
+  --avatar-on:       var(--chalk, #fdfefd);
+}
+
+/* =====================================================================
+   3. Frame
+   ===================================================================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background: var(--surface-page);
+  font: 15px/1.55 "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.shell { display: grid; grid-template-columns: 208px 1fr 360px; min-height: 100vh; }
+
+.masthead {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--line);
+}
+.masthead__mark { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.masthead__mark span { color: var(--text-muted); font-weight: 400; }
+.masthead__spacer { flex: 1; }
+.masthead__who {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--avatar-on);
+  background: var(--avatar-bg);
+  border-radius: 999px;
+}
+
+.btn {
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 500;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn--primary { color: var(--accent-on); background: var(--accent); border-color: transparent; }
+.btn--quiet { color: var(--text-secondary); background: var(--surface-raised); }
+.btn--small { padding: 4px 12px; font-size: 13px; }
+
+/* =====================================================================
+   4. Saved views rail
+   ===================================================================== */
+.rail {
+  padding: 16px 8px;
+  color: var(--text-secondary);
+  background: var(--surface-rail);
+  border-right: 1px solid var(--line);
+}
+.rail h2 {
+  margin: 0 0 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.rail a {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 0 0 2px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+}
+.rail a[aria-current="page"] {
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent-wash);
+}
+.rail a b { font-weight: 500; font-variant-numeric: tabular-nums; }
+.rail hr { margin: 16px 12px; border: 0; border-top: 1px solid var(--line); }
+
+/* =====================================================================
+   5. Queue
+   ===================================================================== */
+.queue { padding: 16px 24px 48px; }
+.queue__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.queue__bar h1 { margin: 0 8px 0 0; font-size: 16px; font-weight: 600; }
+.queue__bar p { margin: 0; font-size: 13px; color: var(--text-muted); }
+.queue__bar .spacer { flex: 1; }
+
+.ticket {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 12px;
+  padding: 16px;
+  margin: 0 0 8px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.ticket__avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--avatar-on);
+  background: var(--avatar-bg);
+  border-radius: 999px;
+}
+.ticket__body h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; }
+.ticket__body p { margin: 0 0 8px; font-size: 13px; color: var(--text-secondary); }
+.ticket__meta { display: flex; gap: 12px; font-size: 12px; color: var(--text-muted); }
+.ticket__side { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+
+.tag {
+  --tag-high-fg:   var(--rose-700, #8d2230);
+  --tag-high-bg:   var(--rose-050, #fae9eb);
+  --tag-normal-fg: var(--steel-700, #33526e);
+  --tag-normal-bg: var(--steel-050, #e6eef6);
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+.ticket .tag--high { color: var(--tag-high-fg); background: var(--tag-high-bg); }
+.ticket .tag--normal { color: var(--tag-normal-fg); background: var(--tag-normal-bg); }
+
+/* =====================================================================
+   6. Detail panel
+   ===================================================================== */
+.detail {
+  padding: 16px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border-left: 1px solid var(--line);
+}
+.detail header { margin: 0 0 16px; padding: 0 0 16px; border-bottom: 1px solid var(--line); }
+.detail header h2 { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
+.detail header p { margin: 0; font-size: 13px; color: var(--text-muted); }
+.detail dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 0 0 24px; font-size: 13px; }
+.detail dt { color: var(--text-muted); }
+.detail dd { margin: 0; color: var(--text-secondary); }
+
+.thread { margin: 0 0 16px; padding: 0; list-style: none; }
+.thread li {
+  padding: 12px;
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--surface-sunken);
+  border-radius: 8px;
+}
+.thread li b { display: block; margin: 0 0 4px; color: var(--text-primary); font-weight: 600; }
+
+/* The composer was nudged off the scale to line its first text row up with
+   the thread bubble above it. It never got put back. */
+.composer {
+  padding: 13px 17px;
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.composer p { margin: 0 0 8px; font-size: 13px; color: var(--text-muted); }
+.composer__actions { display: flex; gap: 8px; }
+
+.detail footer { margin: 24px 0 0; padding: 16px 0 0; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-muted); }
+
+.footer {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 16px;
+  padding: 16px 24px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--surface-rail);
+  border-top: 1px solid var(--line);
+}
+
+/* =====================================================================
+   8. Narrow window: the detail panel drops under the queue
+   ===================================================================== */
+@media (max-width: 1180px) {
+  .shell { grid-template-columns: 208px 1fr; }
+  .detail { grid-column: 2; border-left: 0; border-top: 1px solid var(--line); padding: 24px 24px 32px; }
+  .detail dl { gap: 8px 12px; margin: 0 0 16px; }
+  .queue { padding: 16px 16px 24px; }
+  .queue__bar { padding: 8px; gap: 8px; }
+  .ticket { padding: 12px; gap: 8px; }
+  .masthead { padding: 12px 16px; }
+  .footer { padding: 12px 16px; gap: 12px; }
+}
+
+@media (max-width: 820px) {
+  .shell { grid-template-columns: 1fr; }
+  .rail { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 16px; border-right: 0; }
+  .rail h2, .rail hr { display: none; }
+  .rail a { margin: 0; padding: 4px 12px; }
+}
+
+/* =====================================================================
+   7. Theme overrides
+   ===================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-page:    var(--pine-900, #0e1412);
+    --surface-raised:  var(--pine-800, #151d1a);
+    --surface-rail:    var(--pine-800, #151d1a);
+    --surface-sunken:  var(--pine-700, #1c2622);
+
+    --text-primary:    var(--fern-025, #f4f6f5);
+    --text-secondary:  var(--fern-200, #c8cfcb);
+    --text-muted:      var(--fern-400, #7e8b85);
+
+    --line:            var(--pine-600, #28332e);
+    --accent:          var(--jade-300, #63c9a5);
+    --accent-on:       var(--pine-900, #0e1412);
+    --accent-wash:     var(--jade-950, #10322a);
+    --accent-ink:      var(--jade-200, #bfe9d9);
+    --avatar-bg:       var(--fern-200, #c8cfcb);
+    --avatar-on:       var(--pine-900, #0e1412);
+  }
+  :root:not([data-theme="light"]) .tag {
+    --tag-high-fg:   var(--rose-300, #f0a3ad);
+    --tag-high-bg:   var(--rose-950, #31151a);
+    --tag-normal-fg: var(--steel-300, #a8c6e4);
+    --tag-normal-bg: var(--steel-950, #16232f);
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface-page:    var(--pine-900, #0e1412);
+  --surface-raised:  var(--pine-800, #151d1a);
+  --surface-rail:    var(--pine-800, #151d1a);
+  --surface-sunken:  var(--pine-700, #1c2622);
+
+  --text-primary:    var(--fern-025, #f4f6f5);
+  --text-secondary:  var(--fern-200, #c8cfcb);
+  --text-muted:      var(--fern-400, #7e8b85);
+
+  --line:            var(--pine-600, #28332e);
+  --accent:          var(--jade-300, #63c9a5);
+  --accent-on:       var(--pine-900, #0e1412);
+  --accent-wash:     var(--jade-950, #10322a);
+  --accent-ink:      var(--jade-200, #bfe9d9);
+  --avatar-bg:       var(--fern-200, #c8cfcb);
+  --avatar-on:       var(--pine-900, #0e1412);
+}
+:root[data-theme="dark"] .tag {
+  --tag-high-fg:   var(--rose-300, #f0a3ad);
+  --tag-high-bg:   var(--rose-950, #31151a);
+  --tag-normal-fg: var(--steel-300, #a8c6e4);
+  --tag-normal-bg: var(--steel-950, #16232f);
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="masthead">
+    <div class="masthead__mark">Beacon <span>/ Support</span></div>
+    <div class="masthead__spacer"></div>
+    <button class="btn btn--quiet btn--small" type="button">Snooze</button>
+    <button class="btn btn--primary btn--small" type="button">Assign to me</button>
+    <div class="masthead__who">AO</div>
+  </header>
+
+  <nav class="rail" aria-label="Saved views">
+    <h2>Queues</h2>
+    <a href="#" aria-current="page">Unassigned <b>24</b></a>
+    <a href="#">Mine <b>7</b></a>
+    <a href="#">Waiting on customer <b>12</b></a>
+    <a href="#">Breaching soon <b>3</b></a>
+    <hr>
+    <h2>Filters</h2>
+    <a href="#">Billing <b>9</b></a>
+    <a href="#">Integrations <b>15</b></a>
+    <a href="#">Onboarding <b>6</b></a>
+  </nav>
+
+  <main class="queue">
+    <div class="queue__bar">
+      <h1>Unassigned</h1>
+      <p>24 open, oldest 4 hours</p>
+      <span class="spacer"></span>
+      <button class="btn btn--quiet btn--small" type="button">Sort: oldest</button>
+    </div>
+
+    <article class="ticket">
+      <div class="ticket__avatar">HM</div>
+      <div class="ticket__body">
+        <h3>Invoice PDF is missing the purchase order number</h3>
+        <p>Finance rejected our last two invoices because the PO field came through blank.</p>
+        <div class="ticket__meta"><span>Hollis Manufacturing</span><span>#4821</span><span>4 hours ago</span></div>
+      </div>
+      <div class="ticket__side">
+        <span class="tag tag--high">High</span>
+        <button class="btn btn--quiet btn--small" type="button">Claim</button>
+      </div>
+    </article>
+
+    <article class="ticket">
+      <div class="ticket__avatar">RV</div>
+      <div class="ticket__body">
+        <h3>Webhook retries stopped after the region move</h3>
+        <p>We see delivery attempts in the log up to 09:14 and nothing after that.</p>
+        <div class="ticket__meta"><span>Riverbend Labs</span><span>#4826</span><span>3 hours ago</span></div>
+      </div>
+      <div class="ticket__side">
+        <span class="tag tag--high">High</span>
+        <button class="btn btn--quiet btn--small" type="button">Claim</button>
+      </div>
+    </article>
+
+    <article class="ticket">
+      <div class="ticket__avatar">TP</div>
+      <div class="ticket__body">
+        <h3>Can we export the audit log for a single member?</h3>
+        <p>Our auditor wants one person's activity for the last quarter, not the whole workspace.</p>
+        <div class="ticket__meta"><span>Tidepool Group</span><span>#4830</span><span>2 hours ago</span></div>
+      </div>
+      <div class="ticket__side">
+        <span class="tag tag--normal">Normal</span>
+        <button class="btn btn--quiet btn--small" type="button">Claim</button>
+      </div>
+    </article>
+
+    <article class="ticket">
+      <div class="ticket__avatar">GC</div>
+      <div class="ticket__body">
+        <h3>Seat count did not drop after two people left</h3>
+        <p>Both accounts are deactivated but the plan still bills for 42 seats.</p>
+        <div class="ticket__meta"><span>Granite City Co-op</span><span>#4833</span><span>1 hour ago</span></div>
+      </div>
+      <div class="ticket__side">
+        <span class="tag tag--normal">Normal</span>
+        <button class="btn btn--quiet btn--small" type="button">Claim</button>
+      </div>
+    </article>
+  </main>
+
+  <aside class="detail" aria-label="Ticket detail">
+    <header>
+      <h2>Invoice PDF is missing the purchase order number</h2>
+      <p>#4821 &middot; Hollis Manufacturing &middot; opened 4 hours ago</p>
+    </header>
+
+    <dl>
+      <dt>Requester</dt><dd>Dana Whitfield</dd>
+      <dt>Plan</dt><dd>Scale, annual</dd>
+      <dt>First response</dt><dd>Due in 2 hours</dd>
+      <dt>Related</dt><dd>#4712, #4498</dd>
+    </dl>
+
+    <ul class="thread">
+      <li><b>Dana Whitfield</b>Finance rejected our last two invoices because the PO field came through blank. It was filled in on both orders.</li>
+      <li><b>Automated check</b>Both invoices were generated before the PO field was added to the billing profile.</li>
+    </ul>
+
+    <div class="composer">
+      <p>Reply as Beacon Support. The customer sees your name and avatar.</p>
+      <div class="composer__actions">
+        <button class="btn btn--primary btn--small" type="button">Send reply</button>
+        <button class="btn btn--quiet btn--small" type="button">Add internal note</button>
+      </div>
+    </div>
+
+    <footer>Last synced 40 seconds ago</footer>
+  </aside>
+
+  <footer class="footer">
+    <span>Beacon Support</span>
+    <span>Queue refreshed 40 seconds ago</span>
+    <span>SLA policy: Scale</span>
+  </footer>
+</div>
+</body>
+</html>

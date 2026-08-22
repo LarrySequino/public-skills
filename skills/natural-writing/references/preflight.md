@@ -23,7 +23,7 @@ Run after every rewrite or edit, before returning the draft. Answer each check p
 ## Structure and rhythm
 
 9. Does the draft lead with what the reader needs while keeping personal setup that adds context, tension, or character?
-9a. Does every unit front-load its point (draft, section, paragraph, sentence) except where a delay is earned?
+9a. Does every unit a reader navigates by front-load its point (draft, section, paragraph) except where a narrative or persuasive setup earns the delay? Not sentences: rule 13 stops at the paragraph on purpose, and front-loading every sentence rebuilds the one-thought-per-sentence profile rule 9 exists to undo.
 9b. If the structure was reorganized, is the reason stated in the What changed summary?
 10. Does it avoid robotic symmetry: repeated sentence shapes, uniform paragraph sizes, stacked punchy fragments?
 11. Are tangled sentences fixed while clear spoken cadence, fragments, and pace changes remain intact?

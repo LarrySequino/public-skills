@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Settlements — Northwind Freight</title>
+<style>
+/* =====================================================================
+   1. Primitives. Raw hex lives here and nowhere else. Ramps are named by
+      perceived lightness, not by role, so a role can be re-pointed per
+      theme without touching a component.
+   ===================================================================== */
+:root {
+  --paper:      #fcfcfd;
+  --slate-025:  #f6f7f9;
+  --slate-050:  #eef1f5;
+  --slate-100:  #e2e7ee;
+  --slate-200:  #cfd6e0;
+  --slate-300:  #aeb8c6;
+  --slate-400:  #8b97a8;
+  --slate-500:  #6b7789;
+  --slate-600:  #566072;
+  --slate-700:  #3f4859;
+  --slate-800:  #2a3140;
+  --slate-900:  #1a2029;
+
+  --ink-900:    #0f141b;
+  --ink-800:    #161d26;
+  --ink-700:    #1c2531;
+  --ink-600:    #27313f;
+
+  --blue-050:   #e2ebfb;
+  --blue-200:   #cfe0ff;
+  --blue-300:   #7aa2f7;
+  --blue-600:   #1d4ed8;
+  --blue-800:   #12305e;
+  --blue-950:   #1b2b45;
+
+  --green-050:  #e6f4ee;
+  --green-300:  #6fd3ac;
+  --green-700:  #116149;
+  --green-950:  #102b23;
+
+  --amber-050:  #fbf1de;
+  --amber-500:  #a8802f;
+  --amber-700:  #7a4a06;
+  --amber-950:  #3a2c10;
+
+  --red-050:    #fbe9ea;
+  --red-300:    #f2a3a8;
+  --red-700:    #8f1d24;
+  --red-950:    #2f1416;
+}
+
+/* =====================================================================
+   2. Roles. Components only ever read these. One hop from a primitive,
+      with the primitive repeated as a fallback so a missing ramp degrades
+      to the value it was authored against instead of to nothing.
+   ===================================================================== */
+:root {
+  --surface-page:    var(--slate-025, #f6f7f9);
+  --surface-raised:  var(--paper, #fcfcfd);
+  --surface-rail:    var(--slate-050, #eef1f5);
+  --surface-sunken:  var(--slate-100, #e2e7ee);
+
+  --text-primary:    var(--slate-900, #1a2029);
+  --text-secondary:  var(--slate-700, #3f4859);
+  --text-muted:      var(--slate-600, #566072);
+
+  --line:            var(--slate-200, #cfd6e0);
+  --accent:          var(--blue-600, #1d4ed8);
+  --accent-on:       var(--paper, #fcfcfd);
+  --accent-wash:     var(--blue-050, #e2ebfb);
+  --accent-ink:      var(--blue-800, #12305e);
+  --avatar-bg:       var(--slate-800, #2a3140);
+  --avatar-on:       var(--paper, #fcfcfd);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-page:    var(--ink-900, #0f141b);
+    --surface-raised:  var(--ink-800, #161d26);
+    --surface-rail:    var(--ink-800, #161d26);
+    --surface-sunken:  var(--ink-700, #1c2531);
+
+    --text-primary:    var(--slate-050, #eef1f5);
+    --text-secondary:  var(--slate-200, #cfd6e0);
+    --text-muted:      var(--slate-400, #8b97a8);
+
+    --line:            var(--ink-600, #27313f);
+    --accent:          var(--blue-300, #7aa2f7);
+    --accent-on:       var(--ink-900, #0f141b);
+    --accent-wash:     var(--blue-950, #1b2b45);
+    --accent-ink:      var(--blue-200, #cfe0ff);
+    --avatar-bg:       var(--slate-200, #cfd6e0);
+    --avatar-on:       var(--ink-900, #0f141b);
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface-page:    var(--ink-900, #0f141b);
+  --surface-raised:  var(--ink-800, #161d26);
+  --surface-rail:    var(--ink-800, #161d26);
+  --surface-sunken:  var(--ink-700, #1c2531);
+
+  --text-primary:    var(--slate-050, #eef1f5);
+  --text-secondary:  var(--slate-200, #cfd6e0);
+  --text-muted:      var(--slate-400, #8b97a8);
+
+  --line:            var(--ink-600, #27313f);
+  --accent:          var(--blue-300, #7aa2f7);
+  --accent-on:       var(--ink-900, #0f141b);
+  --accent-wash:     var(--blue-950, #1b2b45);
+  --accent-ink:      var(--blue-200, #cfe0ff);
+  --avatar-bg:       var(--slate-200, #cfd6e0);
+  --avatar-on:       var(--ink-900, #0f141b);
+}
+
+/* =====================================================================
+   3. Frame
+   ===================================================================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background: var(--surface-page);
+  font: 15px/1.55 "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+
+.topbar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--line);
+}
+.topbar__brand { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.topbar__brand span { color: var(--text-muted); font-weight: 400; }
+.topbar__search {
+  flex: 1;
+  max-width: 360px;
+  margin-left: 16px;
+  padding: 8px 12px;
+  font: inherit;
+  color: var(--text-primary);
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.topbar__spacer { flex: 1; }
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--avatar-on);
+  background: var(--avatar-bg);
+  border-radius: 999px;
+}
+
+.rail {
+  padding: 16px 12px;
+  color: var(--text-secondary);
+  background: var(--surface-rail);
+  border-right: 1px solid var(--line);
+}
+.rail__group { margin: 0 0 24px; }
+.rail__label {
+  margin: 0 0 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.rail__link {
+  display: block;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+}
+.rail__link[aria-current="page"] {
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent-wash);
+}
+
+.main { padding: 24px 32px 48px; }
+.main__head { display: flex; align-items: baseline; gap: 12px; margin: 0 0 24px; }
+.main__head h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.main__head p { margin: 0; color: var(--text-muted); font-size: 13px; }
+
+.btn {
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 500;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn--primary { color: var(--accent-on); background: var(--accent); border-color: transparent; }
+.btn--quiet { color: var(--text-secondary); background: var(--surface-raised); }
+
+/* =====================================================================
+   4. Summary cards
+   ===================================================================== */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 0 0 32px; }
+.stat {
+  padding: 16px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.stat__label { margin: 0 0 8px; font-size: 12px; color: var(--text-muted); }
+.stat__value { margin: 0; font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stat__foot { margin: 8px 0 0; font-size: 12px; color: var(--text-muted); }
+
+/* =====================================================================
+   5. Settlements table
+   ===================================================================== */
+.panel {
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.panel__head { display: flex; align-items: center; gap: 12px; padding: 16px; border-bottom: 1px solid var(--line); }
+.panel__head h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.panel__head p { margin: 0; font-size: 13px; color: var(--text-muted); }
+.ledger { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.ledger th {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  color: var(--text-secondary);
+  background: var(--surface-sunken);
+}
+.ledger td { padding: 12px 16px; border-top: 1px solid var(--line); }
+.ledger td.is-numeric { text-align: right; }
+.ledger .carrier { color: var(--text-primary); }
+.ledger .reference { color: var(--text-muted); font-size: 13px; }
+
+/* Status chips. The role tokens are declared on the chip itself so a chip
+   dropped into a dark panel picks up the panel's theme, not the page's. */
+.pill {
+  --pill-ok-fg:    var(--green-700, #116149);
+  --pill-ok-bg:    var(--green-050, #e6f4ee);
+  --pill-warn-fg:  var(--amber-700, #7a4a06);
+  --pill-warn-bg:  var(--amber-050, #fbf1de);
+  --pill-bad-fg:   var(--red-700, #8f1d24);
+  --pill-bad-bg:   var(--red-050, #fbe9ea);
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pill {
+    --pill-ok-fg:    var(--green-300, #6fd3ac);
+    --pill-ok-bg:    var(--green-950, #102b23);
+    --pill-warn-fg:  var(--amber-500, #a8802f);
+    --pill-warn-bg:  var(--amber-950, #3a2c10);
+    --pill-bad-fg:   var(--red-300, #f2a3a8);
+    --pill-bad-bg:   var(--red-950, #2f1416);
+  }
+}
+:root[data-theme="dark"] .pill {
+  --pill-ok-fg:    var(--green-300, #6fd3ac);
+  --pill-ok-bg:    var(--green-950, #102b23);
+  --pill-warn-fg:  var(--amber-500, #a8802f);
+  --pill-warn-bg:  var(--amber-950, #3a2c10);
+  --pill-bad-fg:   var(--red-300, #f2a3a8);
+  --pill-bad-bg:   var(--red-950, #2f1416);
+}
+.ledger .pill--settled { color: var(--pill-ok-fg); background: var(--pill-ok-bg); }
+.ledger .pill--review  { color: var(--pill-warn-fg); background: var(--pill-warn-bg); }
+.ledger .pill--failed  { color: var(--pill-bad-fg); background: var(--pill-bad-bg); }
+
+.note {
+  margin: 24px 0 0;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--accent-ink);
+  background: var(--accent-wash);
+  border-radius: 8px;
+}
+
+.footer {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 16px;
+  padding: 16px 32px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--surface-rail);
+  border-top: 1px solid var(--line);
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="topbar__brand">Northwind Freight <span>/ Settlements</span></div>
+    <input class="topbar__search" type="search" value="carrier:PACIFIC" aria-label="Filter settlements">
+    <div class="topbar__spacer"></div>
+    <button class="btn btn--quiet" type="button">Export CSV</button>
+    <button class="btn btn--primary" type="button">Run reconciliation</button>
+    <div class="avatar">RS</div>
+  </header>
+
+  <nav class="rail" aria-label="Sections">
+    <div class="rail__group">
+      <p class="rail__label">Operations</p>
+      <a class="rail__link" href="#">Loads</a>
+      <a class="rail__link" href="#">Carriers</a>
+      <a class="rail__link" href="#">Lanes</a>
+    </div>
+    <div class="rail__group">
+      <p class="rail__label">Finance</p>
+      <a class="rail__link" href="#" aria-current="page">Settlements</a>
+      <a class="rail__link" href="#">Invoices</a>
+      <a class="rail__link" href="#">Disputes</a>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="main__head">
+      <h1>Settlements</h1>
+      <p>Cycle closing Friday, 18:00 CT</p>
+    </div>
+
+    <section class="stats" aria-label="Cycle summary">
+      <div class="stat">
+        <p class="stat__label">Payable this cycle</p>
+        <p class="stat__value">$1,284,900</p>
+        <p class="stat__foot">Across 412 loads</p>
+      </div>
+      <div class="stat">
+        <p class="stat__label">Held for review</p>
+        <p class="stat__value">$96,410</p>
+        <p class="stat__foot">19 settlements</p>
+      </div>
+      <div class="stat">
+        <p class="stat__label">Failed transfers</p>
+        <p class="stat__value">$12,075</p>
+        <p class="stat__foot">3 settlements</p>
+      </div>
+      <div class="stat">
+        <p class="stat__label">Average days to pay</p>
+        <p class="stat__value">6.4</p>
+        <p class="stat__foot">Target is 7.0</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Recent settlements">
+      <div class="panel__head">
+        <h2>Recent settlements</h2>
+        <p>Updated 11 minutes ago</p>
+      </div>
+      <table class="ledger">
+        <thead>
+          <tr>
+            <th scope="col">Carrier</th>
+            <th scope="col">Reference</th>
+            <th scope="col">Lane</th>
+            <th scope="col" class="is-numeric">Amount</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="carrier">Pacific Drayage</td>
+            <td class="reference">STL-40217</td>
+            <td>Oakland to Reno</td>
+            <td class="is-numeric">$18,420.00</td>
+            <td><span class="pill pill--settled">Settled</span></td>
+          </tr>
+          <tr>
+            <td class="carrier">Ridgeline Carriers</td>
+            <td class="reference">STL-40218</td>
+            <td>Denver to Salt Lake City</td>
+            <td class="is-numeric">$9,140.50</td>
+            <td><span class="pill pill--review">In review</span></td>
+          </tr>
+          <tr>
+            <td class="carrier">Blue Mesa Logistics</td>
+            <td class="reference">STL-40221</td>
+            <td>Phoenix to El Paso</td>
+            <td class="is-numeric">$22,806.75</td>
+            <td><span class="pill pill--settled">Settled</span></td>
+          </tr>
+          <tr>
+            <td class="carrier">Harbor Point Transit</td>
+            <td class="reference">STL-40224</td>
+            <td>Savannah to Charlotte</td>
+            <td class="is-numeric">$4,025.00</td>
+            <td><span class="pill pill--failed">Transfer failed</span></td>
+          </tr>
+          <tr>
+            <td class="carrier">Cascade Freightways</td>
+            <td class="reference">STL-40229</td>
+            <td>Portland to Boise</td>
+            <td class="is-numeric">$11,318.20</td>
+            <td><span class="pill pill--review">In review</span></td>
+          </tr>
+          <tr>
+            <td class="carrier">Two Rivers Hauling</td>
+            <td class="reference">STL-40233</td>
+            <td>Memphis to Little Rock</td>
+            <td class="is-numeric">$7,690.00</td>
+            <td><span class="pill pill--settled">Settled</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="note">Settlements held for review clear automatically once the carrier's insurance
+      certificate is re-verified. Nineteen are waiting on that check.</p>
+  </main>
+
+  <footer class="footer">
+    <span>Cycle 2026-08-W3</span>
+    <span>Ledger synced 11 minutes ago</span>
+    <span>Northwind Freight, internal use only</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -48,7 +48,10 @@ name gap is 6px; your scale is 4/8/12/16 and the nearest value is 8; it's hardco
    which takes the stricter rule on both sides and so cannot be wrong.
 2. **Load the design system.** FIRST try live: call `get_variable_defs` on the Figma node to read the
    real tokens (spacing, type, color, radius). If it returns tokens, measure against those. If it
-   returns `{}` (none defined yet), fall back to `references/design-system.md`. State which you used.
+   returns `{}` (none defined yet), infer the artifact's own scale from its repeated values and label
+   every finding that rests on it `(inferred)`. Use `references/design-system.md` only when the user
+   has adopted it for this product. Its values are a placeholder, and consistency findings issued
+   against a scale the artifact never claimed are manufactured defects. State which source you used.
 3. **Gather ground truth** (§3). State the input and your confidence.
 4. **Group A pass — compute** (§4). Read exact geometry (`get_metadata` / `get_design_context`); run
    `scripts/symmetry.py` for padding/symmetry/grid deltas and `scripts/contrast.py` for every color
@@ -197,6 +200,13 @@ calls**, phrased as what you would try and why, so the reader can take it or lea
 taste remark `[judged]` and then giving it a Major chip is the thing this rule exists to stop: the
 tag names the evidence class, the chip makes it a defect, and a taste remark is not a defect.
 
+**A `[BLOCK]` from `preflight.py` is Critical and ranks first.** The script blocks on defects that
+make the artifact wrong in a state the reviewer may not be looking at: a token defined only inside a
+theme layer, a body with no background of its own. Those do not compete with findings the same pass
+computed elsewhere on the page. Never demote a BLOCK below Critical, and place it above other
+Critical findings in the priority table. A round-3 eval run demoted a blocked token defect to Major
+and ranked two of its own contrast findings above it, which is how this rule got written.
+
 **Accessibility must state coverage:** `NN/100 (N computed, N judged, N human-required)`, listing
 the human-required ones. A screenshot cannot test keyboard operability, focus order, or
 assistive-tech output; scoring those silently turns an untested criterion into a pass.
@@ -226,7 +236,8 @@ important finding — fix the disagreement, not the symptom.
 
 ## Bundled resources
 
-- `references/design-system.md` — the token source of truth (fallback when Figma has no variables yet).
+- `references/design-system.md` — an example token schema. Only a review baseline when the user has
+  adopted it; otherwise infer the artifact's own scale (see step 2).
 - `references/context-profiles.md` — mobile-app / web-app / marketing-site + domain modifiers.
 - `references/thresholds.md` — exact WCAG, platform, type, grid, and motion numbers.
 - `references/design-tropes.md` — the catalog of AI design tells for the Group E distinctiveness pass.

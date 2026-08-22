@@ -1,0 +1,1242 @@
+{
+  "metadata": {
+    "skill_name": "craft-review",
+    "skill_path": "skills/craft-review",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21-round3",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 6,
+      "eval_name": "buried-contrast-in-a-long-stylesheet",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .ledger .pill--review status chip in the dark theme, with a ratio between 3.0:1 and 4.3:1",
+          "passed": true,
+          "evidence": "ratios ['3.74', '4.5', '8.33', '8.58', '6.25', '1.43']; names the chip: True",
+          "method": "script"
+        },
+        {
+          "text": "No other contrast failure is reported: the other two chips, the buttons, the table header, and body text are not flagged",
+          "passed": true,
+          "evidence": "| 3 | \ud83d\udfe0 | Non-text contrast | Search boundary 1.1\u20131.4:1 vs 3:1 |",
+          "method": "agent"
+        },
+        {
+          "text": "The failure is scoped to dark mode rather than stated as failing everywhere",
+          "passed": true,
+          "evidence": "scoped to dark",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named in transcript/answer: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix names a specific replacement hex and the ratio it reaches on #3a2c10",
+          "passed": true,
+          "evidence": "replacement hexes ['#d9a850', '#cfd6e0', '#fcfcfd', '#e2e7ee']; >=2 ratios given: True",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "buried-contrast-in-a-long-stylesheet",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .ledger .pill--review status chip in the dark theme, with a ratio between 3.0:1 and 4.3:1",
+          "passed": true,
+          "evidence": "ratios ['3.74', '3.74', '3.74', '4.5', '8.33', '8.58']; names the chip: True",
+          "method": "script"
+        },
+        {
+          "text": "No other contrast failure is reported: the other two chips, the buttons, the table header, and body text are not flagged",
+          "passed": true,
+          "evidence": "| 4 | \ud83d\udfe1 | Non-text contrast | Search boundary <1.5:1 both cues |",
+          "method": "agent"
+        },
+        {
+          "text": "The failure is scoped to dark mode rather than stated as failing everywhere",
+          "passed": true,
+          "evidence": "scoped to dark",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named in transcript/answer: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix names a specific replacement hex and the ratio it reaches on #3a2c10",
+          "passed": true,
+          "evidence": "replacement hexes ['#e0b566', '#cfd6e0', '#fcfcfd', '#e2e7ee']; >=2 ratios given: True",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "buried-contrast-in-a-long-stylesheet",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .ledger .pill--review status chip in the dark theme, with a ratio between 3.0:1 and 4.3:1",
+          "passed": true,
+          "evidence": "ratios ['3.74', '3.74', '4.5', '8.33', '8.58', '6.99']; names the chip: True",
+          "method": "script"
+        },
+        {
+          "text": "No other contrast failure is reported: the other two chips, the buttons, the table header, and body text are not flagged",
+          "passed": false,
+          "evidence": "| 4 | \ud83d\udfe1 | Contrast | Control boundaries 1.43:1 (input, quiet button), < 3:1 |",
+          "method": "agent"
+        },
+        {
+          "text": "The failure is scoped to dark mode rather than stated as failing everywhere",
+          "passed": true,
+          "evidence": "scoped to dark",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": true,
+          "evidence": "script named in transcript/answer: True",
+          "method": "script"
+        },
+        {
+          "text": "The fix names a specific replacement hex and the ratio it reaches on #3a2c10",
+          "passed": true,
+          "evidence": "replacement hexes ['#e3b34c', '#e3b34c', '#cfd6e0', '#fcfcfd']; >=2 ratios given: True",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "buried-contrast-in-a-long-stylesheet",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .ledger .pill--review status chip in the dark theme, with a ratio between 3.0:1 and 4.3:1",
+          "passed": true,
+          "evidence": "ratios ['8.33', '8.58', '3.74', '4.5', '6.81', '1.2']; names the chip: True",
+          "method": "script"
+        },
+        {
+          "text": "No other contrast failure is reported: the other two chips, the buttons, the table header, and body text are not flagged",
+          "passed": true,
+          "evidence": "## 5. Minor \u2014 input boundary nearly invisible in dark mode",
+          "method": "agent"
+        },
+        {
+          "text": "The failure is scoped to dark mode rather than stated as failing everywhere",
+          "passed": true,
+          "evidence": "scoped to dark",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": false,
+          "evidence": "script named in transcript/answer: False",
+          "method": "script"
+        },
+        {
+          "text": "The fix names a specific replacement hex and the ratio it reaches on #3a2c10",
+          "passed": true,
+          "evidence": "replacement hexes ['#6fd3ac', '#102b23', '#f2a3a8', '#2f1416']; >=2 ratios given: True",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "buried-contrast-in-a-long-stylesheet",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .ledger .pill--review status chip in the dark theme, with a ratio between 3.0:1 and 4.3:1",
+          "passed": true,
+          "evidence": "ratios ['3.74', '4.5', '8.33', '8.58', '3.74', '7.98']; names the chip: True",
+          "method": "script"
+        },
+        {
+          "text": "No other contrast failure is reported: the other two chips, the buttons, the table header, and body text are not flagged",
+          "passed": true,
+          "evidence": "every other text pair passes AA comfortably (most exceed 6:1; body text is 15\u201316:1)",
+          "method": "agent"
+        },
+        {
+          "text": "The failure is scoped to dark mode rather than stated as failing everywhere",
+          "passed": true,
+          "evidence": "scoped to dark",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": false,
+          "evidence": "script named in transcript/answer: False",
+          "method": "script"
+        },
+        {
+          "text": "The fix names a specific replacement hex and the ratio it reaches on #3a2c10",
+          "passed": true,
+          "evidence": "replacement hexes ['#edc06a', '#edc06a', '#e3b35e', '#f0c674']; >=2 ratios given: True",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "buried-contrast-in-a-long-stylesheet",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports a contrast failure on the .ledger .pill--review status chip in the dark theme, with a ratio between 3.0:1 and 4.3:1",
+          "passed": true,
+          "evidence": "ratios ['3.74', '4.5', '8.33', '8.58', '7.44', '6.2']; names the chip: True",
+          "method": "script"
+        },
+        {
+          "text": "No other contrast failure is reported: the other two chips, the buttons, the table header, and body text are not flagged",
+          "passed": true,
+          "evidence": "**Light-mode contrast is clean.** Everything passes AA",
+          "method": "agent"
+        },
+        {
+          "text": "The failure is scoped to dark mode rather than stated as failing everywhere",
+          "passed": true,
+          "evidence": "scoped to dark",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py or scripts/contrast.py was run against the file",
+          "passed": false,
+          "evidence": "script named in transcript/answer: False",
+          "method": "script"
+        },
+        {
+          "text": "The fix names a specific replacement hex and the ratio it reaches on #3a2c10",
+          "passed": true,
+          "evidence": "replacement hexes ['#e6b96a', '#e6b96a']; >=2 ratios given: True",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "theme-only-token-buried-in-a-theme-layer",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --accent-edge is defined only inside a dark theme block and never applies in the default light state",
+          "passed": true,
+          "evidence": "--accent-edge + only/never",
+          "method": "script"
+        },
+        {
+          "text": "It names the component that reads the token (the .notice retention callout's left border) and what happens there in light mode",
+          "passed": true,
+          "evidence": "component + light-mode consequence",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "It is ranked blocking or critical, not polish",
+          "passed": true,
+          "evidence": "ranked blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The token defect is ranked first among all findings, and any other finding ranked blocking carries a computed value rather than an impression",
+          "passed": true,
+          "evidence": "target ranked first: True; other blocking rows all carry a value: True",
+          "method": "script"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "theme-only-token-buried-in-a-theme-layer",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.75
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --accent-edge is defined only inside a dark theme block and never applies in the default light state",
+          "passed": true,
+          "evidence": "--accent-edge + only/never",
+          "method": "script"
+        },
+        {
+          "text": "It names the component that reads the token (the .notice retention callout's left border) and what happens there in light mode",
+          "passed": true,
+          "evidence": "component + light-mode consequence",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "It is ranked blocking or critical, not polish",
+          "passed": true,
+          "evidence": "ranked blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The token defect is ranked first among all findings, and any other finding ranked blocking carries a computed value rather than an impression",
+          "passed": false,
+          "evidence": "target ranked first: False; other blocking rows all carry a value: True",
+          "method": "script"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "theme-only-token-buried-in-a-theme-layer",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --accent-edge is defined only inside a dark theme block and never applies in the default light state",
+          "passed": true,
+          "evidence": "--accent-edge + only/never",
+          "method": "script"
+        },
+        {
+          "text": "It names the component that reads the token (the .notice retention callout's left border) and what happens there in light mode",
+          "passed": true,
+          "evidence": "component + light-mode consequence",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "It is ranked blocking or critical, not polish",
+          "passed": true,
+          "evidence": "ranked blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The token defect is ranked first among all findings, and any other finding ranked blocking carries a computed value rather than an impression",
+          "passed": true,
+          "evidence": "target ranked first: True; other blocking rows all carry a value: True",
+          "method": "script"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "theme-only-token-buried-in-a-theme-layer",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --accent-edge is defined only inside a dark theme block and never applies in the default light state",
+          "passed": true,
+          "evidence": "--accent-edge + only/never",
+          "method": "script"
+        },
+        {
+          "text": "It names the component that reads the token (the .notice retention callout's left border) and what happens there in light mode",
+          "passed": true,
+          "evidence": "component + light-mode consequence",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "It is ranked blocking or critical, not polish",
+          "passed": true,
+          "evidence": "ranked blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The token defect is ranked first among all findings, and any other finding ranked blocking carries a computed value rather than an impression",
+          "passed": true,
+          "evidence": "target ranked first: True; other blocking rows all carry a value: True",
+          "method": "script"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "theme-only-token-buried-in-a-theme-layer",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --accent-edge is defined only inside a dark theme block and never applies in the default light state",
+          "passed": true,
+          "evidence": "--accent-edge + only/never",
+          "method": "script"
+        },
+        {
+          "text": "It names the component that reads the token (the .notice retention callout's left border) and what happens there in light mode",
+          "passed": true,
+          "evidence": "component + light-mode consequence",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "It is ranked blocking or critical, not polish",
+          "passed": true,
+          "evidence": "ranked blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The token defect is ranked first among all findings, and any other finding ranked blocking carries a computed value rather than an impression",
+          "passed": true,
+          "evidence": "target ranked first: True; other blocking rows all carry a value: True",
+          "method": "script"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "theme-only-token-buried-in-a-theme-layer",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that --accent-edge is defined only inside a dark theme block and never applies in the default light state",
+          "passed": true,
+          "evidence": "--accent-edge + only/never",
+          "method": "script"
+        },
+        {
+          "text": "It names the component that reads the token (the .notice retention callout's left border) and what happens there in light mode",
+          "passed": true,
+          "evidence": "component + light-mode consequence",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "It is ranked blocking or critical, not polish",
+          "passed": true,
+          "evidence": "ranked blocking",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The token defect is ranked first among all findings, and any other finding ranked blocking carries a computed value rather than an impression",
+          "passed": true,
+          "evidence": "target ranked first: True; other blocking rows all carry a value: True",
+          "method": "script"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "one-off-scale-value-among-sixty",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports 13px and 17px padding on .composer as off the 4/8px spacing scale",
+          "passed": true,
+          "evidence": "13px + 17px + .composer named",
+          "method": "script"
+        },
+        {
+          "text": "No other spacing value on the page is reported as off-scale",
+          "passed": true,
+          "evidence": "The composer is the only genuine off-scale element.",
+          "method": "agent"
+        },
+        {
+          "text": "The fix is numeric: an on-scale replacement such as 12px 16px",
+          "passed": true,
+          "evidence": "on-scale replacement given",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "one-off-scale-value-among-sixty",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports 13px and 17px padding on .composer as off the 4/8px spacing scale",
+          "passed": true,
+          "evidence": "13px + 17px + .composer named",
+          "method": "script"
+        },
+        {
+          "text": "No other spacing value on the page is reported as off-scale",
+          "passed": true,
+          "evidence": "the composer is the one off-scale component on the page",
+          "method": "agent"
+        },
+        {
+          "text": "The fix is numeric: an on-scale replacement such as 12px 16px",
+          "passed": true,
+          "evidence": "on-scale replacement given",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "one-off-scale-value-among-sixty",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports 13px and 17px padding on .composer as off the 4/8px spacing scale",
+          "passed": true,
+          "evidence": "13px + 17px + .composer named",
+          "method": "script"
+        },
+        {
+          "text": "No other spacing value on the page is reported as off-scale",
+          "passed": true,
+          "evidence": "59 of 60 spacing values on-scale",
+          "method": "agent"
+        },
+        {
+          "text": "The fix is numeric: an on-scale replacement such as 12px 16px",
+          "passed": true,
+          "evidence": "on-scale replacement given",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": true,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "one-off-scale-value-among-sixty",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports 13px and 17px padding on .composer as off the 4/8px spacing scale",
+          "passed": true,
+          "evidence": "13px + 17px + .composer named",
+          "method": "script"
+        },
+        {
+          "text": "No other spacing value on the page is reported as off-scale",
+          "passed": true,
+          "evidence": "Every spacing value on the page sits on a 4px scale (4/8/12/16/24/48) \u2014 except one",
+          "method": "agent"
+        },
+        {
+          "text": "The fix is numeric: an on-scale replacement such as 12px 16px",
+          "passed": true,
+          "evidence": "on-scale replacement given",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "one-off-scale-value-among-sixty",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports 13px and 17px padding on .composer as off the 4/8px spacing scale",
+          "passed": true,
+          "evidence": "13px + 17px + .composer named",
+          "method": "script"
+        },
+        {
+          "text": "No other spacing value on the page is reported as off-scale",
+          "passed": true,
+          "evidence": "Everything on this page sits on a 4px scale",
+          "method": "agent"
+        },
+        {
+          "text": "The fix is numeric: an on-scale replacement such as 12px 16px",
+          "passed": true,
+          "evidence": "on-scale replacement given",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "one-off-scale-value-among-sixty",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports 13px and 17px padding on .composer as off the 4/8px spacing scale",
+          "passed": true,
+          "evidence": "13px + 17px + .composer named",
+          "method": "script"
+        },
+        {
+          "text": "No other spacing value on the page is reported as off-scale",
+          "passed": true,
+          "evidence": "the composer alone uses `padding: 13px 17px`",
+          "method": "agent"
+        },
+        {
+          "text": "The fix is numeric: an on-scale replacement such as 12px 16px",
+          "passed": true,
+          "evidence": "on-scale replacement given",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/preflight.py was run against the file",
+          "passed": false,
+          "evidence": "preflight named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "asymmetry-only-visible-after-layout",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that the breached KPI card's content starts 32px from its left edge against 24px on the two sibling cards, or names the 8px delta",
+          "passed": true,
+          "evidence": "32/24 or 8px delta",
+          "method": "script"
+        },
+        {
+          "text": "It attributes the delta to the 8px border-left status stripe on the [data-state=\"breached\"] card interacting with border-box sizing",
+          "passed": true,
+          "evidence": "stripe + box-model attribution",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/symmetry.py was run on the HTML file, and the measurement is presented as computed rather than as an impression",
+          "passed": true,
+          "evidence": "symmetry.py named",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric and preserves the stripe: reduce that card's left padding to 16px, or move the stripe to an inset box-shadow or pseudo-element so it costs no layout space",
+          "passed": true,
+          "evidence": "numeric fix preserving stripe",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "asymmetry-only-visible-after-layout",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that the breached KPI card's content starts 32px from its left edge against 24px on the two sibling cards, or names the 8px delta",
+          "passed": true,
+          "evidence": "32/24 or 8px delta",
+          "method": "script"
+        },
+        {
+          "text": "It attributes the delta to the 8px border-left status stripe on the [data-state=\"breached\"] card interacting with border-box sizing",
+          "passed": true,
+          "evidence": "stripe + box-model attribution",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/symmetry.py was run on the HTML file, and the measurement is presented as computed rather than as an impression",
+          "passed": true,
+          "evidence": "symmetry.py named",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric and preserves the stripe: reduce that card's left padding to 16px, or move the stripe to an inset box-shadow or pseudo-element so it costs no layout space",
+          "passed": true,
+          "evidence": "numeric fix preserving stripe",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "asymmetry-only-visible-after-layout",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that the breached KPI card's content starts 32px from its left edge against 24px on the two sibling cards, or names the 8px delta",
+          "passed": true,
+          "evidence": "32/24 or 8px delta",
+          "method": "script"
+        },
+        {
+          "text": "It attributes the delta to the 8px border-left status stripe on the [data-state=\"breached\"] card interacting with border-box sizing",
+          "passed": true,
+          "evidence": "stripe + box-model attribution",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/symmetry.py was run on the HTML file, and the measurement is presented as computed rather than as an impression",
+          "passed": true,
+          "evidence": "symmetry.py named",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric and preserves the stripe: reduce that card's left padding to 16px, or move the stripe to an inset box-shadow or pseudo-element so it costs no layout space",
+          "passed": true,
+          "evidence": "numeric fix preserving stripe",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "asymmetry-only-visible-after-layout",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that the breached KPI card's content starts 32px from its left edge against 24px on the two sibling cards, or names the 8px delta",
+          "passed": true,
+          "evidence": "32/24 or 8px delta",
+          "method": "script"
+        },
+        {
+          "text": "It attributes the delta to the 8px border-left status stripe on the [data-state=\"breached\"] card interacting with border-box sizing",
+          "passed": true,
+          "evidence": "stripe + box-model attribution",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/symmetry.py was run on the HTML file, and the measurement is presented as computed rather than as an impression",
+          "passed": false,
+          "evidence": "symmetry.py named",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric and preserves the stripe: reduce that card's left padding to 16px, or move the stripe to an inset box-shadow or pseudo-element so it costs no layout space",
+          "passed": true,
+          "evidence": "numeric fix preserving stripe",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "asymmetry-only-visible-after-layout",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that the breached KPI card's content starts 32px from its left edge against 24px on the two sibling cards, or names the 8px delta",
+          "passed": true,
+          "evidence": "32/24 or 8px delta",
+          "method": "script"
+        },
+        {
+          "text": "It attributes the delta to the 8px border-left status stripe on the [data-state=\"breached\"] card interacting with border-box sizing",
+          "passed": true,
+          "evidence": "stripe + box-model attribution",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/symmetry.py was run on the HTML file, and the measurement is presented as computed rather than as an impression",
+          "passed": false,
+          "evidence": "symmetry.py named",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric and preserves the stripe: reduce that card's left padding to 16px, or move the stripe to an inset box-shadow or pseudo-element so it costs no layout space",
+          "passed": true,
+          "evidence": "numeric fix preserving stripe",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "asymmetry-only-visible-after-layout",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The review reports that the breached KPI card's content starts 32px from its left edge against 24px on the two sibling cards, or names the 8px delta",
+          "passed": true,
+          "evidence": "32/24 or 8px delta",
+          "method": "script"
+        },
+        {
+          "text": "It attributes the delta to the 8px border-left status stripe on the [data-state=\"breached\"] card interacting with border-box sizing",
+          "passed": true,
+          "evidence": "stripe + box-model attribution",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/symmetry.py was run on the HTML file, and the measurement is presented as computed rather than as an impression",
+          "passed": false,
+          "evidence": "symmetry.py named",
+          "method": "script"
+        },
+        {
+          "text": "The fix is numeric and preserves the stripe: reduce that card's left padding to 16px, or move the stripe to an inset box-shadow or pseudo-element so it costs no layout space",
+          "passed": true,
+          "evidence": "numeric fix preserving stripe",
+          "method": "script-heuristic"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.967,
+        "stddev": 0.075,
+        "min": 0.8,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 0.958,
+        "stddev": 0.093,
+        "min": 0.75,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.775,
+        "stddev": 0.025,
+        "min": 0.75,
+        "max": 0.8
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.19",
+      "pass_rate_behavior_only": "-0.04",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "buried-contrast-in-a-long-stylesheet: with 0.93 vs without 0.80 (+0.13), n=3+3",
+    "theme-only-token-buried-in-a-theme-layer: with 0.93 vs without 0.80 (+0.13), n=3+3",
+    "one-off-scale-value-among-sixty: with 1.00 vs without 0.75 (+0.25), n=3+3",
+    "asymmetry-only-visible-after-layout: with 1.00 vs without 0.75 (+0.25), n=3+3",
+    "6 of 37 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 0.958 vs without 1.0, delta -0.04."
+  ]
+}

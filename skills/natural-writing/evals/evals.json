@@ -84,6 +84,96 @@
         "The final sentence is unchanged",
         "The report lists only the spans it touched"
       ]
+    },
+    {
+      "id": 8,
+      "round": 3,
+      "name": "long-document-scanner-audit",
+      "prompt": "Audit this file for AI writing patterns and report what you find. Flag only; don't rewrite it.\n\nevals/files/round3/long-audit.md",
+      "files": [
+        "evals/files/round3/long-audit.md"
+      ],
+      "expected_output": "A 1,537-word postmortem, mostly clean human prose, with six planted tells spread past the first 495 words: Tier 1 \"leverage\" (line 38), Tier 1 \"robust\" (line 54), Tier 1 \"pivotal\" (line 66), a U+200B zero-width space inside \"database\" (line 50), a leaked chatbot closer \"I hope this helps.\" (line 60), a Title Case subheading \"Rollback Path And Open Questions\" (line 62) among otherwise sentence-case headings, and 2 em dashes (lines 48 and 82), which is 1.3 per 1,000 against a cap of 1. At this length a reader misses the invisible character and at least one Tier 1 word; scripts/prose-scan.py finds all of them in a second. Running the scanner is the behavior under test. Its exact output on this file is: DASH 2 in 1537 words = 1.3 per 1,000; INVISIBLE 1x zero-width space (U+200B); ARTIFACT chatbot closer; TIER1 robust; TIER1 leverage; TIER1 pivotal; FORMAT heading looks Title Case. Nothing else fires, so anything else reported is a false positive against clean prose.",
+      "expectations": [
+        "All three Tier-1 words are named (line numbers 38 \"leverage\", 54 \"robust\", 66 \"pivotal\")",
+        "The zero-width space is reported",
+        "The chatbot artifact \"I hope this helps.\" is reported",
+        "The Title Case heading \"Rollback Path And Open Questions\" is reported",
+        "The em-dash count is reported as over the 1-per-1,000 cap",
+        "No more than 2 false positives are reported against clean prose",
+        "The transcript shows prose-scan.py was run"
+      ]
+    },
+    {
+      "id": 9,
+      "round": 3,
+      "name": "quoted-material-at-scale",
+      "prompt": "Edit this file in place to remove AI writing patterns from my own prose. Everything in a blockquote or in the indented email is quoted third-party material: do not change a character of it.\n\nevals/files/round3/quoted-heavy.md",
+      "files": [
+        "evals/files/round3/quoted-heavy.md"
+      ],
+      "expected_output": "972 words, 40.6 percent of them quoted. Three blockquotes (lines 7, 17, 23) and one indented email (line 29) are saturated with AI tells: delve, tapestry, landscape, ever-evolving, robust, seamless, holistic, embark, paradigm, embrace, leverages, \"not just X but Y\", \"it's worth noting\", and all 4 of the file's em dashes. The author's own prose is clean except for exactly two planted tells: the \"It is worth noting that\" opener on line 19, and Tier 1 \"leverage\" on line 37. prose-scan.py reports 3 TIER1 hits without saying which line each sits on: paradigm and embrace are on line 17 (quoted), and the reported \"leverage\" is the author's on line 37; the quoted email on line 29 carries its own leverage, delve, nuanced and cornerstone but is suppressed by the scanner's catalog skip, so the model editing the file will still encounter those words in the quote and must leave them. The edit fixes lines 19 and 37 and nothing else.",
+      "expectations": [
+        "Every blockquote (lines 7, 17, 23) and the indented email (line 29) are byte-identical after the edit",
+        "Both author tells are fixed: the \"It is worth noting that\" opener on line 19 and \"leverage\" on line 37",
+        "No quoted-material vocabulary is edited or reported as the author's, including the leverage, nuanced and cornerstone inside the line-29 email that the scanner's catalog skip suppresses",
+        "The report lists only the spans touched",
+        "Clean author prose outside lines 19 and 37 is left unchanged"
+      ]
+    },
+    {
+      "id": 10,
+      "round": 3,
+      "name": "voice-sample-at-length",
+      "prompt": "The first section of this file is a sample of how I write. The second section is a draft on the same subject that someone else wrote for me and it does not sound like me at all. Rewrite the draft in my voice. Don't touch the sample.\n\nevals/files/round3/voice-sample-long.md",
+      "files": [
+        "evals/files/round3/voice-sample-long.md"
+      ],
+      "expected_output": "The 452-word sample has measurable signatures: 9 em dashes (2.0 per 100 words), 12 verbless sentence fragments (\"Okay.\", \"Search.\", \"Not really.\", \"Twelve nodes.\", \"Twelve!\", \"So: Postgres.\", \"Yeah, a bit.\", \"Two words, three words.\", \"But better at what, exactly.\", \"Three weeks.\", \"One index.\", \"Twelve fewer nodes to patch...\"), the slang word \"gnarly\" 4 times, and 6 parenthetical asides. The 711-word draft is flat and generic: uniform declaratives, no dashes, no fragments, no asides. The voice sample outranks the em-dash cap, so the rewrite should carry dashes freely, keep fragments, and keep \"gnarly\". It must not import facts from the sample or invent new ones: every number and name in the sample already appears in the draft, so --compare against this file is equivalent to comparing against the draft alone.",
+      "expectations": [
+        "The rewrite's em-dash rate is within 50 percent of the sample's 2.0 per 100 words (between 1.0 and 3.0 per 100 words)",
+        "The slang word \"gnarly\" appears at least 3 times",
+        "At least 5 sentence fragments remain",
+        "No new facts, numbers, or names absent from the draft appear (scripts/prose-scan.py --compare files/round3/voice-sample-long.md <rewrite> reports zero)",
+        "The response does not apologize for or flag the em dashes, and does not cite the 1-per-1,000 cap against the sample",
+        "The voice sample section is unchanged"
+      ]
+    },
+    {
+      "id": 11,
+      "round": 4,
+      "name": "light-edit-keeps-facts-and-voice",
+      "prompt": "Deslop this.\n\nevals/files/round4/dense-facts.md",
+      "files": [
+        "evals/files/round4/dense-facts.md"
+      ],
+      "expected_output": "A 582-word engineering write-up that is already human: first person, blunt, fragments (\"I assumed Postgres. Everyone assumes Postgres.\", \"Four more minutes. ... Zero minutes.\"), dry self-criticism, no dashes, no AI vocabulary. scripts/prose-scan.py reports it clean on every mechanical pass, so there is nothing mechanical to fix and the correct answer is a handful of word-level tightenings plus a statement that the piece is already clean. It carries at least 15 hard specifics that must all survive: May 12, 2026, March 2024, 23:40, 01:20, 04:15, 06:00, 2.1 million rows, 2021, 4 MB, 512 MB, 38 percent, pgbouncer 1.17 and 1.21, March 3, py-spy, 71 percent, 9.4 GB, v2.7.0, March 11, 90 fewer lines, 4 hours 40 minutes, 11 minutes, 14 nights, 13 minutes, 6.8 GB, 240 MB, 40 dashboards, 2022, 40 seconds a week, 90 GB a year, PLAT-4471, and the names Dan Okafor and Priya. The failure mode under test is the rewrite reflex: rewriting good prose wholesale and losing facts on the way out. scripts/prose-scan.py --compare on the result must print \"no specifics added or dropped, and the source survived the edit\"; a wholesale rewrite trips REWRITE-SCOPE and LOST-NUMBER.",
+      "expectations": [
+        "Running scripts/prose-scan.py --compare evals/files/round4/dense-facts.md <edit> reports no LOST-NUMBER, no LOST-YEAR, no LOST-CITATION and no REWRITE-SCOPE",
+        "The same --compare reports no NEW-NUMBER, NEW-YEAR, NEW-NAME or RECOMBINED-NAME: no specific is invented to replace one that was cut",
+        "At least 70 percent of the source words survive in matching runs, which is what the REWRITE-SCOPE check measures",
+        "Every named specific survives verbatim: 4 hours 40 minutes, 11 minutes, 71 percent, 9.4 GB, 2.1 million, 512 MB, 6.8 GB, 240 MB, v2.7.0, pgbouncer 1.21, py-spy, PLAT-4471, and the names Dan Okafor and Priya",
+        "The fragments and the first-person voice survive: \"I assumed Postgres. Everyone assumes Postgres.\" and the \"Four more minutes.\" / \"Zero minutes.\" beats are not smoothed into full declaratives",
+        "The response says the piece is already largely clean rather than manufacturing findings, and no section is reordered or retitled"
+      ]
+    },
+    {
+      "id": 12,
+      "round": 4,
+      "name": "no-invented-names-when-made-concrete",
+      "prompt": "This is too vague to send. Rewrite it so it's concrete and specific.\n\nevals/files/round4/coinable-terms.md",
+      "files": [
+        "evals/files/round4/coinable-terms.md"
+      ],
+      "expected_output": "547 words of partner-briefing marketing copy with no numbers in it at all and four scanner tells: TIER1 robust, TIER1 leverage (verb sense), TIER1 seamless, and TIER2 streamline plus empower in one paragraph. It deserves a rewrite, and the vocabulary should go. What it does not contain is any specific to make it concrete with, so the correct answer flags the gaps (\"[needs a number: location events per day]\") or asks, and cuts the claims it cannot support. The file seeds recombinable capitalized words in separate paragraphs and never adjacent: Atlas (line 13), Vault (line 15), Relay (line 17), \"the northern cluster\" (line 19) and \"Cloud strategy\" (line 33). Inventing a product name from them, such as \"Atlas Cloud\", \"Vault Relay\" or \"Northern Cloud\", is the failure under test and fires RECOMBINED-NAME on --compare. Inventing an uptime figure, an events-per-day count or a spend reduction fires NEW-NUMBER.",
+      "expectations": [
+        "Running scripts/prose-scan.py --compare evals/files/round4/coinable-terms.md <rewrite> reports zero RECOMBINED-NAME and zero NEW-NAME",
+        "The same --compare reports zero NEW-NUMBER and zero NEW-YEAR: no uptime figure, event count, growth rate, spend reduction or date is invented",
+        "Atlas, Vault and Relay each appear on their own where the source has them, and no two of them, and neither of Cloud or Northern, are joined into a new capitalized product name",
+        "At least three gaps are flagged in the skill's flag style or put to the author as questions, rather than filled in",
+        "The Tier 1 words robust, leverage and seamless are gone, and the streamline/empower pair in the \"Why customers stay\" section is broken up",
+        "Claims the source cannot support are cut or flagged rather than sharpened into specifics, and the rewrite does not promise a rebalance timeline the source calls undecided"
+      ]
     }
   ],
   "notes": {
@@ -103,6 +193,8 @@
         "rhythm step check matches by meaning",
         "short-sample E3 was trivially true and is replaced"
       ]
-    }
+    },
+    "round-4 prompt note (2026-08-21)": "Eval 11 was first drafted as \"it's mine and I like how it sounds\", which hands the model the answer, then as \"give this a light copy-edit\". Run against both arms, the second version was a floor: all six runs kept every fact and stayed above 70 percent survival, because \"light copy-edit\" is itself the constraint the eval means to test. The failure this eval exists to catch was measured under \"Deslop this\": on that prompt every one of eight model/harness combinations rewrote already-good prose by 25 to 62 percent and dropped facts doing it. The prompt is now the one that produced the failure. Eval 1 uses the same prompt on 109 words of prose with no specifics in it; this one is 582 words carrying about 30, so LOST-* can fire here and cannot there.",
+    "round-5 finding on eval 11 (2026-08-21)": "Re-run under \"Deslop this\", the prompt that produced the failure across eight model/harness combinations, this eval is STILL a floor: 99 to 100 percent of the source survived in every run of both arms. So the variable is not the prompt and not the harness (codex, an agentic harness, rewrote 50 percent on the corpus fixture). It is the prose. The corpus fixture is 109 words of compressed, voice-heavy paragraph; dense-facts.md is 582 words of already-structured engineering writing with headings, and nothing invites a model to restructure it. Keep this eval as a regression guard for LOST-* and REWRITE-SCOPE, which is real value, but do not count it as a discriminator. A fixture that would discriminate is short, dense and voice-heavy, and eval 1 is already that shape without carrying enough specifics for LOST-* to fire. Both properties in one fixture is the gap."
   }
 }

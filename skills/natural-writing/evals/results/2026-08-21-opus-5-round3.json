@@ -1,0 +1,1116 @@
+{
+  "metadata": {
+    "skill_name": "natural-writing",
+    "skill_path": "skills/natural-writing",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21-round3",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 8,
+      "eval_name": "long-document-scanner-audit",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "All three Tier-1 words are named (line numbers 38 \"leverage\", 54 \"robust\", 66 \"pivotal\")",
+          "passed": true,
+          "evidence": "all three Tier-1 words named",
+          "method": "script"
+        },
+        {
+          "text": "The zero-width space is reported",
+          "passed": true,
+          "evidence": "ZWSP reported",
+          "method": "script"
+        },
+        {
+          "text": "The chatbot artifact \"I hope this helps.\" is reported",
+          "passed": true,
+          "evidence": "artifact quoted",
+          "method": "script"
+        },
+        {
+          "text": "The Title Case heading \"Rollback Path And Open Questions\" is reported",
+          "passed": true,
+          "evidence": "Title Case heading named",
+          "method": "script"
+        },
+        {
+          "text": "The em-dash count is reported as over the 1-per-1,000 cap",
+          "passed": true,
+          "evidence": "dash cap reported",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No more than 2 false positives are reported against clean prose",
+          "passed": true,
+          "evidence": "8 findings: 7 map to planted tells; only extra is the hedged 'Binary-contrast shape in the summary (line 10) - likely intentional', which says 'Flagging for completeness; I would keep it.'",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows prose-scan.py was run",
+          "passed": true,
+          "evidence": "prose-scan named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "long-document-scanner-audit",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "All three Tier-1 words are named (line numbers 38 \"leverage\", 54 \"robust\", 66 \"pivotal\")",
+          "passed": true,
+          "evidence": "all three Tier-1 words named",
+          "method": "script"
+        },
+        {
+          "text": "The zero-width space is reported",
+          "passed": true,
+          "evidence": "ZWSP reported",
+          "method": "script"
+        },
+        {
+          "text": "The chatbot artifact \"I hope this helps.\" is reported",
+          "passed": true,
+          "evidence": "artifact quoted",
+          "method": "script"
+        },
+        {
+          "text": "The Title Case heading \"Rollback Path And Open Questions\" is reported",
+          "passed": true,
+          "evidence": "Title Case heading named",
+          "method": "script"
+        },
+        {
+          "text": "The em-dash count is reported as over the 1-per-1,000 cap",
+          "passed": true,
+          "evidence": "dash cap reported",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No more than 2 false positives are reported against clean prose",
+          "passed": true,
+          "evidence": "All 7 plants found; 2 extra hedged notes only: 'Negative listing, mild' and 'Binary-contrast shapes, low-grade cluster', both marked 'judgment calls'",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows prose-scan.py was run",
+          "passed": true,
+          "evidence": "prose-scan named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "long-document-scanner-audit",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "All three Tier-1 words are named (line numbers 38 \"leverage\", 54 \"robust\", 66 \"pivotal\")",
+          "passed": true,
+          "evidence": "all three Tier-1 words named",
+          "method": "script"
+        },
+        {
+          "text": "The zero-width space is reported",
+          "passed": true,
+          "evidence": "ZWSP reported",
+          "method": "script"
+        },
+        {
+          "text": "The chatbot artifact \"I hope this helps.\" is reported",
+          "passed": true,
+          "evidence": "artifact quoted",
+          "method": "script"
+        },
+        {
+          "text": "The Title Case heading \"Rollback Path And Open Questions\" is reported",
+          "passed": true,
+          "evidence": "Title Case heading named",
+          "method": "script"
+        },
+        {
+          "text": "The em-dash count is reported as over the 1-per-1,000 cap",
+          "passed": true,
+          "evidence": "dash cap reported",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No more than 2 false positives are reported against clean prose",
+          "passed": true,
+          "evidence": "7 findings, all planted tells; nothing else flagged - 'What I did not flag: the parallel constructions ... are all working as voice'",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows prose-scan.py was run",
+          "passed": true,
+          "evidence": "prose-scan named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "long-document-scanner-audit",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.71,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "All three Tier-1 words are named (line numbers 38 \"leverage\", 54 \"robust\", 66 \"pivotal\")",
+          "passed": true,
+          "evidence": "all three Tier-1 words named",
+          "method": "script"
+        },
+        {
+          "text": "The zero-width space is reported",
+          "passed": true,
+          "evidence": "ZWSP reported",
+          "method": "script"
+        },
+        {
+          "text": "The chatbot artifact \"I hope this helps.\" is reported",
+          "passed": true,
+          "evidence": "artifact quoted",
+          "method": "script"
+        },
+        {
+          "text": "The Title Case heading \"Rollback Path And Open Questions\" is reported",
+          "passed": true,
+          "evidence": "Title Case heading named",
+          "method": "script"
+        },
+        {
+          "text": "The em-dash count is reported as over the 1-per-1,000 cap",
+          "passed": false,
+          "evidence": "dash cap reported",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No more than 2 false positives are reported against clean prose",
+          "passed": true,
+          "evidence": "6 plants found; 2 low-confidence extras, both hedged: 'so I would not flag any single one - but the accumulation is worth a second look' and 'this is a weak signal'",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows prose-scan.py was run",
+          "passed": false,
+          "evidence": "prose-scan named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "long-document-scanner-audit",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.71,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "All three Tier-1 words are named (line numbers 38 \"leverage\", 54 \"robust\", 66 \"pivotal\")",
+          "passed": true,
+          "evidence": "all three Tier-1 words named",
+          "method": "script"
+        },
+        {
+          "text": "The zero-width space is reported",
+          "passed": true,
+          "evidence": "ZWSP reported",
+          "method": "script"
+        },
+        {
+          "text": "The chatbot artifact \"I hope this helps.\" is reported",
+          "passed": true,
+          "evidence": "artifact quoted",
+          "method": "script"
+        },
+        {
+          "text": "The Title Case heading \"Rollback Path And Open Questions\" is reported",
+          "passed": true,
+          "evidence": "Title Case heading named",
+          "method": "script"
+        },
+        {
+          "text": "The em-dash count is reported as over the 1-per-1,000 cap",
+          "passed": false,
+          "evidence": "dash cap reported",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No more than 2 false positives are reported against clean prose",
+          "passed": true,
+          "evidence": "Only extra beyond the plants is finding 3 on the pasted note's cadence, a defensible observation: 'has the cadence of an LLM explanation'; triads and em dashes explicitly cleared",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows prose-scan.py was run",
+          "passed": false,
+          "evidence": "prose-scan named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "long-document-scanner-audit",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.71,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "All three Tier-1 words are named (line numbers 38 \"leverage\", 54 \"robust\", 66 \"pivotal\")",
+          "passed": true,
+          "evidence": "all three Tier-1 words named",
+          "method": "script"
+        },
+        {
+          "text": "The zero-width space is reported",
+          "passed": true,
+          "evidence": "ZWSP reported",
+          "method": "script"
+        },
+        {
+          "text": "The chatbot artifact \"I hope this helps.\" is reported",
+          "passed": true,
+          "evidence": "artifact quoted",
+          "method": "script"
+        },
+        {
+          "text": "The Title Case heading \"Rollback Path And Open Questions\" is reported",
+          "passed": true,
+          "evidence": "Title Case heading named",
+          "method": "script"
+        },
+        {
+          "text": "The em-dash count is reported as over the 1-per-1,000 cap",
+          "passed": false,
+          "evidence": "dash cap reported",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No more than 2 false positives are reported against clean prose",
+          "passed": true,
+          "evidence": "Extras limited to 2 hedged stylistic notes: 'the density is a mild LLM fingerprint, though it can equally be one human writer's habit' and 'this is a weak signal at most'",
+          "method": "agent"
+        },
+        {
+          "text": "The transcript shows prose-scan.py was run",
+          "passed": false,
+          "evidence": "prose-scan named",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "quoted-material-at-scale",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every blockquote (lines 7, 17, 23) and the indented email (line 29) are byte-identical after the edit",
+          "passed": true,
+          "evidence": "quoted lines byte-identical: True",
+          "method": "script"
+        },
+        {
+          "text": "Both author tells are fixed: the \"It is worth noting that\" opener on line 19 and \"leverage\" on line 37",
+          "passed": true,
+          "evidence": "line 19 opener fixed: True; line 37 leverage fixed: True",
+          "method": "script"
+        },
+        {
+          "text": "No quoted-material vocabulary is edited or reported as the author's, including the leverage, nuanced and cornerstone inside the line-29 email that the scanner's catalog skip suppresses",
+          "passed": true,
+          "evidence": "\"All remaining flags (four em dashes, \\\"paradigm\\\", \\\"embrace\\\", \\\"delve\\\", \\\"tapestry\\\", \\\"seamless\\\", the other \\\"worth noting\\\"s) sit inside the blockquotes and the email -- quoted third-party material, deliberately left alone.\"",
+          "method": "agent"
+        },
+        {
+          "text": "The report lists only the spans touched",
+          "passed": true,
+          "evidence": "\"Two spans touched, both in your own prose\" - lists line 19 and line 37; diff matches exactly",
+          "method": "agent"
+        },
+        {
+          "text": "Clean author prose outside lines 19 and 37 is left unchanged",
+          "passed": true,
+          "evidence": "lines changed outside 19/37: []",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "quoted-material-at-scale",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every blockquote (lines 7, 17, 23) and the indented email (line 29) are byte-identical after the edit",
+          "passed": true,
+          "evidence": "quoted lines byte-identical: True",
+          "method": "script"
+        },
+        {
+          "text": "Both author tells are fixed: the \"It is worth noting that\" opener on line 19 and \"leverage\" on line 37",
+          "passed": true,
+          "evidence": "line 19 opener fixed: True; line 37 leverage fixed: True",
+          "method": "script"
+        },
+        {
+          "text": "No quoted-material vocabulary is edited or reported as the author's, including the leverage, nuanced and cornerstone inside the line-29 email that the scanner's catalog skip suppresses",
+          "passed": true,
+          "evidence": "\"The remaining hits (em dashes, \\\"paradigm\\\", \\\"embrace\\\", \\\"worth noting\\\", \\\"delve\\\", \\\"tapestry\\\", \\\"seamless\\\") all sit on the quoted lines\" - diff confirms only lines 19 and 37 changed",
+          "method": "agent"
+        },
+        {
+          "text": "The report lists only the spans touched",
+          "passed": true,
+          "evidence": "\"Done. Two edits, both in your own prose\" - the two listed spans are exactly the two diff hunks (lines 19, 37)",
+          "method": "agent"
+        },
+        {
+          "text": "Clean author prose outside lines 19 and 37 is left unchanged",
+          "passed": true,
+          "evidence": "lines changed outside 19/37: []",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "quoted-material-at-scale",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every blockquote (lines 7, 17, 23) and the indented email (line 29) are byte-identical after the edit",
+          "passed": true,
+          "evidence": "quoted lines byte-identical: True",
+          "method": "script"
+        },
+        {
+          "text": "Both author tells are fixed: the \"It is worth noting that\" opener on line 19 and \"leverage\" on line 37",
+          "passed": true,
+          "evidence": "line 19 opener fixed: True; line 37 leverage fixed: True",
+          "method": "script"
+        },
+        {
+          "text": "No quoted-material vocabulary is edited or reported as the author's, including the leverage, nuanced and cornerstone inside the line-29 email that the scanner's catalog skip suppresses",
+          "passed": true,
+          "evidence": "\"the only remaining flags (em dashes, \\\"paradigm\\\", \\\"embrace\\\", \\\"delve\\\", \\\"worth noting\\\", \\\"leverage\\\") are all inside the quoted vendor copy and Marcus's email\" - diff confirms only lines 19 and 37 changed",
+          "method": "agent"
+        },
+        {
+          "text": "The report lists only the spans touched",
+          "passed": true,
+          "evidence": "\"Two spans of your own prose were flagged\" - both listed edits match the diff hunks on lines 19 and 37",
+          "method": "agent"
+        },
+        {
+          "text": "Clean author prose outside lines 19 and 37 is left unchanged",
+          "passed": true,
+          "evidence": "lines changed outside 19/37: []",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "quoted-material-at-scale",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every blockquote (lines 7, 17, 23) and the indented email (line 29) are byte-identical after the edit",
+          "passed": true,
+          "evidence": "quoted lines byte-identical: True",
+          "method": "script"
+        },
+        {
+          "text": "Both author tells are fixed: the \"It is worth noting that\" opener on line 19 and \"leverage\" on line 37",
+          "passed": true,
+          "evidence": "line 19 opener fixed: True; line 37 leverage fixed: True",
+          "method": "script"
+        },
+        {
+          "text": "No quoted-material vocabulary is edited or reported as the author's, including the leverage, nuanced and cornerstone inside the line-29 email that the scanner's catalog skip suppresses",
+          "passed": true,
+          "evidence": "\"every blockquote and the indented email from Marcus Vance are untouched\" - diff confirms only lines 19 and 37 changed",
+          "method": "agent"
+        },
+        {
+          "text": "The report lists only the spans touched",
+          "passed": true,
+          "evidence": "\"Two changes, both in your own prose\" - both listed edits match the diff hunks on lines 19 and 37",
+          "method": "agent"
+        },
+        {
+          "text": "Clean author prose outside lines 19 and 37 is left unchanged",
+          "passed": true,
+          "evidence": "lines changed outside 19/37: []",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "quoted-material-at-scale",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every blockquote (lines 7, 17, 23) and the indented email (line 29) are byte-identical after the edit",
+          "passed": true,
+          "evidence": "quoted lines byte-identical: True",
+          "method": "script"
+        },
+        {
+          "text": "Both author tells are fixed: the \"It is worth noting that\" opener on line 19 and \"leverage\" on line 37",
+          "passed": true,
+          "evidence": "line 19 opener fixed: True; line 37 leverage fixed: True",
+          "method": "script"
+        },
+        {
+          "text": "No quoted-material vocabulary is edited or reported as the author's, including the leverage, nuanced and cornerstone inside the line-29 email that the scanner's catalog skip suppresses",
+          "passed": true,
+          "evidence": "\"every blockquote and the indented email from Marcus are untouched\" - diff confirms only lines 19 and 37 changed",
+          "method": "agent"
+        },
+        {
+          "text": "The report lists only the spans touched",
+          "passed": true,
+          "evidence": "\"Two changes, both in your own prose\" - both listed edits match the diff (the after-text is abbreviated but the changed words are exact)",
+          "method": "agent"
+        },
+        {
+          "text": "Clean author prose outside lines 19 and 37 is left unchanged",
+          "passed": true,
+          "evidence": "lines changed outside 19/37: []",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "eval_name": "quoted-material-at-scale",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "Every blockquote (lines 7, 17, 23) and the indented email (line 29) are byte-identical after the edit",
+          "passed": true,
+          "evidence": "quoted lines byte-identical: True",
+          "method": "script"
+        },
+        {
+          "text": "Both author tells are fixed: the \"It is worth noting that\" opener on line 19 and \"leverage\" on line 37",
+          "passed": true,
+          "evidence": "line 19 opener fixed: True; line 37 leverage fixed: True",
+          "method": "script"
+        },
+        {
+          "text": "No quoted-material vocabulary is edited or reported as the author's, including the leverage, nuanced and cornerstone inside the line-29 email that the scanner's catalog skip suppresses",
+          "passed": true,
+          "evidence": "\"All four quoted blocks - the three blockquotes and Marcus Vance's email - are unchanged.\" - diff confirms only lines 19 and 37 changed",
+          "method": "agent"
+        },
+        {
+          "text": "The report lists only the spans touched",
+          "passed": true,
+          "evidence": "\"I made two changes to your text\" - both listed edits match the diff hunks on lines 19 and 37",
+          "method": "agent"
+        },
+        {
+          "text": "Clean author prose outside lines 19 and 37 is left unchanged",
+          "passed": true,
+          "evidence": "lines changed outside 19/37: []",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "voice-sample-at-length",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.5
+      },
+      "expectations": [
+        {
+          "text": "The rewrite's em-dash rate is within 50 percent of the sample's 2.0 per 100 words (between 1.0 and 3.0 per 100 words)",
+          "passed": true,
+          "evidence": "em-dash rate 1.10 per 100 words",
+          "method": "script"
+        },
+        {
+          "text": "The slang word \"gnarly\" appears at least 3 times",
+          "passed": false,
+          "evidence": "gnarly x2",
+          "method": "script"
+        },
+        {
+          "text": "At least 5 sentence fragments remain",
+          "passed": true,
+          "evidence": "5 sentences of <=4 words",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No new facts, numbers, or names absent from the draft appear (scripts/prose-scan.py --compare files/round3/voice-sample-long.md <rewrite> reports zero)",
+          "passed": false,
+          "evidence": "  [NEW-NUMBER] 1: 2019,",
+          "method": "script"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes, and does not cite the 1-per-1,000 cap against the sample",
+          "passed": false,
+          "evidence": "no apology / no cap citation",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The voice sample section is unchanged",
+          "passed": true,
+          "evidence": "sample lines 1-21 unchanged: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "voice-sample-at-length",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.83,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "The rewrite's em-dash rate is within 50 percent of the sample's 2.0 per 100 words (between 1.0 and 3.0 per 100 words)",
+          "passed": true,
+          "evidence": "em-dash rate 1.16 per 100 words",
+          "method": "script"
+        },
+        {
+          "text": "The slang word \"gnarly\" appears at least 3 times",
+          "passed": false,
+          "evidence": "gnarly x0",
+          "method": "script"
+        },
+        {
+          "text": "At least 5 sentence fragments remain",
+          "passed": true,
+          "evidence": "6 sentences of <=4 words",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No new facts, numbers, or names absent from the draft appear (scripts/prose-scan.py --compare files/round3/voice-sample-long.md <rewrite> reports zero)",
+          "passed": true,
+          "evidence": "  no specifics in the rewrite that were absent from the source",
+          "method": "script"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes, and does not cite the 1-per-1,000 cap against the sample",
+          "passed": true,
+          "evidence": "no apology / no cap citation",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The voice sample section is unchanged",
+          "passed": true,
+          "evidence": "sample lines 1-21 unchanged: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "voice-sample-at-length",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.83,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "The rewrite's em-dash rate is within 50 percent of the sample's 2.0 per 100 words (between 1.0 and 3.0 per 100 words)",
+          "passed": true,
+          "evidence": "em-dash rate 1.22 per 100 words",
+          "method": "script"
+        },
+        {
+          "text": "The slang word \"gnarly\" appears at least 3 times",
+          "passed": false,
+          "evidence": "gnarly x1",
+          "method": "script"
+        },
+        {
+          "text": "At least 5 sentence fragments remain",
+          "passed": true,
+          "evidence": "Fragments in the rewrite include \"Some history.\", \"Why move?\", \"So: Postgres.\", \"But worse at what, exactly.\", \"And the gnarly one: GIN index bloat.\" and \"Where that leaves us: about $4,000 a month back...\"",
+          "method": "agent"
+        },
+        {
+          "text": "No new facts, numbers, or names absent from the draft appear (scripts/prose-scan.py --compare files/round3/voice-sample-long.md <rewrite> reports zero)",
+          "passed": true,
+          "evidence": "  no specifics in the rewrite that were absent from the source",
+          "method": "script"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes, and does not cite the 1-per-1,000 cap against the sample",
+          "passed": true,
+          "evidence": "no apology / no cap citation",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The voice sample section is unchanged",
+          "passed": true,
+          "evidence": "sample lines 1-21 unchanged: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "voice-sample-at-length",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 4,
+        "failed": 2,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "The rewrite's em-dash rate is within 50 percent of the sample's 2.0 per 100 words (between 1.0 and 3.0 per 100 words)",
+          "passed": false,
+          "evidence": "em-dash rate 0.85 per 100 words",
+          "method": "script"
+        },
+        {
+          "text": "The slang word \"gnarly\" appears at least 3 times",
+          "passed": false,
+          "evidence": "gnarly x0",
+          "method": "script"
+        },
+        {
+          "text": "At least 5 sentence fragments remain",
+          "passed": true,
+          "evidence": "10 sentences of <=4 words",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No new facts, numbers, or names absent from the draft appear (scripts/prose-scan.py --compare files/round3/voice-sample-long.md <rewrite> reports zero)",
+          "passed": true,
+          "evidence": "  no specifics in the rewrite that were absent from the source",
+          "method": "script"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes, and does not cite the 1-per-1,000 cap against the sample",
+          "passed": true,
+          "evidence": "no apology / no cap citation",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The voice sample section is unchanged",
+          "passed": true,
+          "evidence": "sample lines 1-21 unchanged: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "voice-sample-at-length",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 4,
+        "failed": 2,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.67
+      },
+      "expectations": [
+        {
+          "text": "The rewrite's em-dash rate is within 50 percent of the sample's 2.0 per 100 words (between 1.0 and 3.0 per 100 words)",
+          "passed": true,
+          "evidence": "em-dash rate 1.25 per 100 words",
+          "method": "script"
+        },
+        {
+          "text": "The slang word \"gnarly\" appears at least 3 times",
+          "passed": false,
+          "evidence": "gnarly x0",
+          "method": "script"
+        },
+        {
+          "text": "At least 5 sentence fragments remain",
+          "passed": true,
+          "evidence": "11 sentences of <=4 words",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No new facts, numbers, or names absent from the draft appear (scripts/prose-scan.py --compare files/round3/voice-sample-long.md <rewrite> reports zero)",
+          "passed": false,
+          "evidence": "  [NEW-NUMBER] 7: 1, 180ms, 2, 240ms, 3, 4, 500ms",
+          "method": "script"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes, and does not cite the 1-per-1,000 cap against the sample",
+          "passed": true,
+          "evidence": "no apology / no cap citation",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The voice sample section is unchanged",
+          "passed": true,
+          "evidence": "sample lines 1-21 unchanged: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "eval_name": "voice-sample-at-length",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.83,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.83
+      },
+      "expectations": [
+        {
+          "text": "The rewrite's em-dash rate is within 50 percent of the sample's 2.0 per 100 words (between 1.0 and 3.0 per 100 words)",
+          "passed": true,
+          "evidence": "em-dash rate 1.56 per 100 words",
+          "method": "script"
+        },
+        {
+          "text": "The slang word \"gnarly\" appears at least 3 times",
+          "passed": false,
+          "evidence": "gnarly x0",
+          "method": "script"
+        },
+        {
+          "text": "At least 5 sentence fragments remain",
+          "passed": true,
+          "evidence": "7 sentences of <=4 words",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "No new facts, numbers, or names absent from the draft appear (scripts/prose-scan.py --compare files/round3/voice-sample-long.md <rewrite> reports zero)",
+          "passed": true,
+          "evidence": "  no specifics in the rewrite that were absent from the source",
+          "method": "script"
+        },
+        {
+          "text": "The response does not apologize for or flag the em dashes, and does not cite the 1-per-1,000 cap against the sample",
+          "passed": true,
+          "evidence": "no apology / no cap citation",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The voice sample section is unchanged",
+          "passed": true,
+          "evidence": "sample lines 1-21 unchanged: True",
+          "method": "script"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.907,
+        "stddev": 0.16,
+        "min": 0.5,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 0.907,
+        "stddev": 0.159,
+        "min": 0.5,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.811,
+        "stddev": 0.141,
+        "min": 0.67,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 0.852,
+        "stddev": 0.123,
+        "min": 0.667,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.10",
+      "pass_rate_behavior_only": "+0.06",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "long-document-scanner-audit: with 1.00 vs without 0.71 (+0.29), n=3+3",
+    "quoted-material-at-scale: with 1.00 vs without 1.00 (+0.00), n=3+3",
+    "voice-sample-at-length: with 0.72 vs without 0.72 (-0.00), n=3+3",
+    "1 of 45 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 0.907 vs without 0.852, delta +0.06."
+  ]
+}

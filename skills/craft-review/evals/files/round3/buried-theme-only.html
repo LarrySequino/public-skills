@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Workspace settings — Vantage</title>
+<style>
+/* =====================================================================
+   1. Primitives. Warm neutral ramp, one teal family, three status hues.
+   ===================================================================== */
+:root {
+  --bone:       #fdfdfc;
+  --sand-025:   #f7f6f4;
+  --sand-050:   #efedea;
+  --sand-100:   #e4e1dc;
+  --sand-200:   #d3cfc8;
+  --sand-300:   #b5b0a7;
+  --sand-400:   #8d877d;
+  --sand-500:   #6f6960;
+  --sand-600:   #5f5a52;
+  --sand-700:   #4a4640;
+  --sand-800:   #3a3630;
+  --sand-900:   #211f1c;
+
+  --char-900:   #131210;
+  --char-800:   #1b1a17;
+  --char-700:   #232120;
+  --char-600:   #302d2a;
+
+  --teal-050:   #dff0f1;
+  --teal-200:   #bfe8ec;
+  --teal-300:   #5fc6cf;
+  --teal-600:   #0f6b73;
+  --teal-800:   #08474d;
+  --teal-950:   #103038;
+
+  --moss-050:   #e3f2e6;
+  --moss-300:   #7fd39a;
+  --moss-700:   #1a6035;
+  --moss-950:   #12281a;
+
+  --clay-050:   #fbeee1;
+  --clay-300:   #e8a86e;
+  --clay-700:   #8a4310;
+  --clay-950:   #33200f;
+}
+
+/* =====================================================================
+   2. Roles. Components read these only.
+   ===================================================================== */
+:root {
+  --surface-page:    var(--sand-025, #f7f6f4);
+  --surface-raised:  var(--bone, #fdfdfc);
+  --surface-rail:    var(--sand-050, #efedea);
+  --surface-sunken:  var(--sand-100, #e4e1dc);
+
+  --text-primary:    var(--sand-900, #211f1c);
+  --text-secondary:  var(--sand-700, #4a4640);
+  --text-muted:      var(--sand-600, #5f5a52);
+
+  --line:            var(--sand-200, #d3cfc8);
+  --accent:          var(--teal-600, #0f6b73);
+  --accent-on:       var(--bone, #fdfdfc);
+  --accent-wash:     var(--teal-050, #dff0f1);
+  --accent-ink:      var(--teal-800, #08474d);
+  --avatar-bg:       var(--sand-800, #3a3630);
+  --avatar-on:       var(--bone, #fdfdfc);
+}
+
+/* =====================================================================
+   3. Frame
+   ===================================================================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background: var(--surface-page);
+  font: 15px/1.55 "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.shell { display: grid; grid-template-columns: 256px 1fr; min-height: 100vh; }
+
+.masthead {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 32px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--line);
+}
+.masthead__mark { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.masthead__mark span { color: var(--text-muted); font-weight: 400; }
+.masthead__spacer { flex: 1; }
+.masthead__who {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--avatar-on);
+  background: var(--avatar-bg);
+  border-radius: 999px;
+}
+
+.rail {
+  padding: 24px 12px;
+  color: var(--text-secondary);
+  background: var(--surface-rail);
+  border-right: 1px solid var(--line);
+}
+.rail h2 {
+  margin: 0 0 12px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.rail a {
+  display: block;
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+}
+.rail a[aria-current="page"] {
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent-wash);
+}
+.rail hr { margin: 16px 12px; border: 0; border-top: 1px solid var(--line); }
+
+.main { padding: 32px 40px 48px; max-width: 880px; }
+.main > header { margin: 0 0 24px; }
+.main > header h1 { margin: 0 0 4px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.main > header p { margin: 0; color: var(--text-muted); font-size: 13px; }
+
+.btn {
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 500;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn--primary { color: var(--accent-on); background: var(--accent); border-color: transparent; }
+.btn--quiet { color: var(--text-secondary); background: var(--surface-raised); }
+
+/* =====================================================================
+   4. Setting cards
+   ===================================================================== */
+.card {
+  margin: 0 0 24px;
+  padding: 24px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
+.card > p { margin: 0 0 16px; font-size: 13px; color: var(--text-muted); }
+.field { display: grid; gap: 4px; margin: 0 0 16px; }
+.field label { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+.field input, .field select {
+  padding: 8px 12px;
+  font: inherit;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.field small { font-size: 12px; color: var(--text-muted); }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* The retention notice is the one place a setting explains a consequence,
+   so it carries the accent edge rather than another gray rule. */
+.notice {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--surface-sunken);
+  border-left: 3px solid var(--accent-edge);
+  border-radius: 4px;
+}
+
+/* =====================================================================
+   5. API keys
+   ===================================================================== */
+.keys { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.keys caption { text-align: left; font-size: 13px; color: var(--text-muted); padding: 0 0 8px; }
+.keys th {
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  color: var(--text-secondary);
+  background: var(--surface-sunken);
+}
+.keys td { padding: 12px; border-top: 1px solid var(--line); font-size: 14px; }
+.keys .secret { color: var(--text-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.tag {
+  --tag-live-fg:  var(--moss-700, #1a6035);
+  --tag-live-bg:  var(--moss-050, #e3f2e6);
+  --tag-idle-fg:  var(--clay-700, #8a4310);
+  --tag-idle-bg:  var(--clay-050, #fbeee1);
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .tag {
+    --tag-live-fg:  var(--moss-300, #7fd39a);
+    --tag-live-bg:  var(--moss-950, #12281a);
+    --tag-idle-fg:  var(--clay-300, #e8a86e);
+    --tag-idle-bg:  var(--clay-950, #33200f);
+  }
+}
+:root[data-theme="dark"] .tag {
+  --tag-live-fg:  var(--moss-300, #7fd39a);
+  --tag-live-bg:  var(--moss-950, #12281a);
+  --tag-idle-fg:  var(--clay-300, #e8a86e);
+  --tag-idle-bg:  var(--clay-950, #33200f);
+}
+.keys .tag--live { color: var(--tag-live-fg); background: var(--tag-live-bg); }
+.keys .tag--idle { color: var(--tag-idle-fg); background: var(--tag-idle-bg); }
+
+/* =====================================================================
+   6. Theme overrides. Appended last so a role can be re-pointed without
+      editing the component that reads it.
+   ===================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-page:    var(--char-900, #131210);
+    --surface-raised:  var(--char-800, #1b1a17);
+    --surface-rail:    var(--char-800, #1b1a17);
+    --surface-sunken:  var(--char-700, #232120);
+
+    --text-primary:    var(--sand-025, #f7f6f4);
+    --text-secondary:  var(--sand-200, #d3cfc8);
+    --text-muted:      var(--sand-400, #8d877d);
+
+    --line:            var(--char-600, #302d2a);
+    --accent:          var(--teal-300, #5fc6cf);
+    --accent-on:       var(--char-900, #131210);
+    --accent-wash:     var(--teal-950, #103038);
+    --accent-ink:      var(--teal-200, #bfe8ec);
+    --accent-edge:     var(--teal-300, #5fc6cf);
+    --avatar-bg:       var(--sand-200, #d3cfc8);
+    --avatar-on:       var(--char-900, #131210);
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface-page:    var(--char-900, #131210);
+  --surface-raised:  var(--char-800, #1b1a17);
+  --surface-rail:    var(--char-800, #1b1a17);
+  --surface-sunken:  var(--char-700, #232120);
+
+  --text-primary:    var(--sand-025, #f7f6f4);
+  --text-secondary:  var(--sand-200, #d3cfc8);
+  --text-muted:      var(--sand-400, #8d877d);
+
+  --line:            var(--char-600, #302d2a);
+  --accent:          var(--teal-300, #5fc6cf);
+  --accent-on:       var(--char-900, #131210);
+  --accent-wash:     var(--teal-950, #103038);
+  --accent-ink:      var(--teal-200, #bfe8ec);
+  --avatar-bg:       var(--sand-200, #d3cfc8);
+  --avatar-on:       var(--char-900, #131210);
+}
+
+.footer {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 16px;
+  padding: 16px 32px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--surface-rail);
+  border-top: 1px solid var(--line);
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="masthead">
+    <div class="masthead__mark">Vantage <span>/ Workspace settings</span></div>
+    <div class="masthead__spacer"></div>
+    <button class="btn btn--quiet" type="button">Discard</button>
+    <button class="btn btn--primary" type="button">Save changes</button>
+    <div class="masthead__who">DK</div>
+  </header>
+
+  <nav class="rail" aria-label="Settings sections">
+    <h2>Workspace</h2>
+    <a href="#" aria-current="page">General</a>
+    <a href="#">Members</a>
+    <a href="#">Billing</a>
+    <hr>
+    <h2>Developer</h2>
+    <a href="#">API keys</a>
+    <a href="#">Webhooks</a>
+    <a href="#">Audit log</a>
+  </nav>
+
+  <main class="main">
+    <header>
+      <h1>General</h1>
+      <p>Applies to everyone in the Meridian Health workspace.</p>
+    </header>
+
+    <section class="card">
+      <h3>Identity</h3>
+      <p>How this workspace appears to members and in exported reports.</p>
+      <div class="field">
+        <label for="ws-name">Workspace name</label>
+        <input id="ws-name" type="text" value="Meridian Health">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="ws-slug">URL slug</label>
+          <input id="ws-slug" type="text" value="meridian-health">
+          <small>vantage.app/meridian-health</small>
+        </div>
+        <div class="field">
+          <label for="ws-tz">Reporting time zone</label>
+          <select id="ws-tz">
+            <option>America/Chicago</option>
+            <option>America/New_York</option>
+            <option>Europe/Dublin</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Data retention</h3>
+      <p>Records past the window are deleted on the first of each month.</p>
+      <div class="row">
+        <div class="field">
+          <label for="ret-events">Event history</label>
+          <select id="ret-events">
+            <option>90 days</option>
+            <option>180 days</option>
+            <option selected>13 months</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ret-exports">Generated exports</label>
+          <select id="ret-exports">
+            <option selected>30 days</option>
+            <option>90 days</option>
+          </select>
+        </div>
+      </div>
+      <p class="notice">Shortening a window deletes anything already past it at the next
+        monthly sweep. Deleted records cannot be restored from a backup.</p>
+    </section>
+
+    <section class="card">
+      <h3>API keys</h3>
+      <p>Keys inherit the permissions of the member who created them.</p>
+      <table class="keys">
+        <caption>Four active keys. Rotate anything older than a year.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Label</th>
+            <th scope="col">Key</th>
+            <th scope="col">Created</th>
+            <th scope="col">Last used</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Claims sync</td>
+            <td class="secret">vk_live_9f2c...41ab</td>
+            <td>Mar 4, 2026</td>
+            <td>2 minutes ago</td>
+            <td><span class="tag tag--live">Active</span></td>
+          </tr>
+          <tr>
+            <td>Nightly export</td>
+            <td class="secret">vk_live_7b10...c093</td>
+            <td>Nov 19, 2025</td>
+            <td>9 hours ago</td>
+            <td><span class="tag tag--live">Active</span></td>
+          </tr>
+          <tr>
+            <td>Staging harness</td>
+            <td class="secret">vk_test_2ad4...ff7e</td>
+            <td>Jan 8, 2026</td>
+            <td>6 weeks ago</td>
+            <td><span class="tag tag--idle">Idle</span></td>
+          </tr>
+          <tr>
+            <td>Partner sandbox</td>
+            <td class="secret">vk_test_55e1...80b2</td>
+            <td>Aug 2, 2025</td>
+            <td>11 months ago</td>
+            <td><span class="tag tag--idle">Idle</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Workspace ID wsp_3f81a</span>
+    <span>Plan: Scale</span>
+    <span>Changes are recorded in the audit log</span>
+  </footer>
+</div>
+</body>
+</html>

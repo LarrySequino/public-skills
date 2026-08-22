@@ -1,7 +1,7 @@
 {
   "metadata": {
     "skill_name": "skill-curator",
-    "skill_path": "/Users/larry/projects/skills/skills/skill-curator",
+    "skill_path": "skills/skill-curator",
     "executor_model": "claude-opus-5",
     "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
     "timestamp": "2026-08-21",

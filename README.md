@@ -115,8 +115,9 @@ Upload it at **Settings → Capabilities → Skills**. Uploading the same name o
 Every skill carries an `ATTRIBUTION.md` naming what it descends from, what was
 harvested as ideas and written fresh, and what expression carried over. Those files
 record measurements: each skill is scanned against every source in runs of eight
-words, short enough to catch a lifted sentence and long enough that a hit means copying
-rather than two people describing the same thing.
+words, short enough to catch a lifted sentence and long enough to skip most coincidence.
+A single hit is a lead to read, not proof: generic prose can collide. Volume and run
+length are what settle it.
 
 That method found a gap in this repo's own work. **natural-writing began as a fork of
 [stephenturner/skill-deslop](https://github.com/stephenturner/skill-deslop)** (MIT)
@@ -185,6 +186,93 @@ results" for not saying "monitor," "AA needs 4.5:1" cited as a standard read as 
 finding, and a chip counter that took "a minor point" for a severity label. Each was caught
 by reading the answers, and each would have published a wrong number. The method held; the
 first draft of the grader did not, which is the argument for the method.
+
+### Round 3: fixtures a reader cannot hold in their head
+
+Round 1 left four evals as floors both arms cleared, because inline CSS and three-file
+libraries hand the baseline every value. Round 3 built inputs where the answer is not visible at a
+glance. A 1,537-word document with seven scattered tells, a 442-line stylesheet
+whose only contrast failure sits inside a dark-mode block behind three `var()` hops, one
+off-scale padding among 62 declarations, an asymmetry no source value states, and a
+twelve-skill library with one real collision and one red herring that scores higher on raw
+term overlap. 48 runs, same day, same model:
+
+| Skill | With | Without | Delta | Behavior-only |
+|---|---|---|---|---|
+| natural-writing | 0.907 | 0.811 | **+0.10** | +0.06 |
+| skill-curator | 1.000 | 0.833 | **+0.17** | +0.07 |
+| craft-review | 0.967 | 0.775 | **+0.19** | −0.04 |
+
+The per-eval deltas are where the design shows: the 62-value spacing page **+0.25**, the
+layout-only asymmetry **+0.25**, the long audit **+0.29**.
+
+craft-review's behavior-only number is negative for a reason worth publishing. In 2 of 3
+runs its own contrast machinery generated Critical findings that outranked the defect
+`preflight.py` had explicitly blocked on, and one run demoted that blocked defect to Major
+and put two of its own findings above it. The skill found more and buried what it was
+pointed at. `SKILL.md` §6 now says a `[BLOCK]` is Critical and sorts first; three re-runs
+against the fixed skill put it at row 1 every time.
+
+Three round-3 expectations turned out to encode false premises, all in craft-review, all
+from verifying a fixture only with the tool under test. The control borders really are
+1.43:1, the layout really has no breakpoint, and runs were being marked wrong for finding
+them. All three are rewritten to test reporting discipline, both rounds re-graded on one
+yardstick, and each correction is recorded in `evals.json` with what changed and why.
+
+### Round 5: what happens when the checks get their own evals
+
+Every check added while fixing round 3 shipped without eval coverage. Round 5 built six
+fixtures for them and ran 36 more runs. The result is mostly negative, and that is the
+useful part:
+
+| Eval | With | Without | What it measures |
+|---|---|---|---|
+| no-invented-names-when-made-concrete | 0.94 | 0.50 | **+0.44, the one real discriminator** |
+| light-edit-keeps-facts-and-voice | 0.78 | 0.67 | mostly a floor |
+| dark-only-token-is-not-a-defect | 1.00 | 0.73 | regression guard; behavior identical |
+| copied-code-under-original-prose | 1.00 | 0.80 | availability, not behavior |
+| disowned-script-is-not-a-missing-script | 1.00 | 0.80 | availability, not behavior |
+| alpha-only-contrast-failure | 1.00 | 1.00 | floor |
+
+Behavior-only: natural-writing **+0.28**, craft-review **+0.04**, skill-curator **+0.00**.
+
+One of six evals separates the arms on behavior. On the fabrication test all three baselines
+invented figures, invented product names, and flagged **zero** gaps: asked to make vague copy
+concrete, they filled the vagueness in rather than asking what belonged there. The with-skill
+runs flagged the gaps and left the names alone. The other five evals are floors or regression
+guards, and are labeled as such in each `evals.json` so a headline delta is not mistaken for a
+behavioral win. Their value is that they fail loudly if a future change re-breaks a check, which two
+changes did during this round.
+
+### Across model families
+
+The same two prompts went to eight model and harness combinations with no skill attached:
+"rewrite this and make it specific" over a vague paragraph, and "deslop this" over prose that
+was already human. Every one invented specifics the source never contained (`$4,200/month`,
+`Redis`, `March 4`, `420ms`) and every one rewrote the already-good prose, keeping between 29
+and 59 percent of it.
+
+| Model | Invented specifics | Source surviving the rewrite |
+|---|---|---|
+| grok-4.6 | 7 numbers, 3 names | 32% |
+| gemini-3.7-flash | 15 numbers | 29% |
+| gpt-5.6-terra | 6 numbers | 46% |
+| claude-opus-5 | 11 numbers | 59% |
+| deepseek-chat | 7 numbers | 41% |
+| GPT via codex | 1 name | 50% |
+| Grok via its CLI | 7 numbers, 3 names | 40% |
+
+These are the two failures `natural-writing` exists to prevent, and no family is exempt.
+`prose-scan.py --compare` now catches 7 of the 8 fabrications and all 8 over-rewrites; the
+one it passes used bracketed placeholders instead of inventing values, which is the correct
+answer.
+
+Running the skills themselves on another family is a smaller claim. GPT with `skill-curator`
+scored 1.00 on the twelve-skill audit against 0.90 unaided, and with `craft-review` 1.00
+against 0.80, but behavior-only both deltas are **+0.00**: GPT found the buried 3.74:1 chip by
+writing its own luminance function in a heredoc, and read the twelve-skill library closely
+enough to catch every planted defect. The skills are usable by a non-Anthropic agent, which
+was worth establishing. On these fixtures they do not measurably change what it produces.
 
 ## This repo is generated
 

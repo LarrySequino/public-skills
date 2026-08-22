@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Release health — Halyard</title>
+<style>
+/* =====================================================================
+   1. Primitives
+   ===================================================================== */
+:root {
+  --paper:      #fcfcfd;
+  --slate-025:  #f6f7f9;
+  --slate-050:  #eef1f5;
+  --slate-100:  #e2e7ee;
+  --slate-200:  #cfd6e0;
+  --slate-400:  #8b97a8;
+  --slate-600:  #566072;
+  --slate-700:  #3f4859;
+  --slate-800:  #2a3140;
+  --slate-900:  #1a2029;
+
+  --ink-900:    #0f141b;
+  --ink-800:    #161d26;
+  --ink-700:    #1c2531;
+  --ink-600:    #27313f;
+
+  --blue-050:   #e2ebfb;
+  --blue-200:   #cfe0ff;
+  --blue-300:   #7aa2f7;
+  --blue-600:   #1d4ed8;
+  --blue-800:   #12305e;
+  --blue-950:   #1b2b45;
+
+  --green-050:  #e6f4ee;
+  --green-300:  #6fd3ac;
+  --green-700:  #116149;
+  --green-950:  #102b23;
+
+  --red-050:    #fbe9ea;
+  --red-300:    #f2a3a8;
+  --red-700:    #8f1d24;
+  --red-950:    #2f1416;
+}
+
+/* =====================================================================
+   2. Roles
+   ===================================================================== */
+:root {
+  --surface-page:    var(--slate-025, #f6f7f9);
+  --surface-raised:  var(--paper, #fcfcfd);
+  --surface-sunken:  var(--slate-100, #e2e7ee);
+
+  --text-primary:    var(--slate-900, #1a2029);
+  --text-secondary:  var(--slate-700, #3f4859);
+  --text-muted:      var(--slate-600, #566072);
+
+  --line:            var(--slate-200, #cfd6e0);
+  --accent:          var(--blue-600, #1d4ed8);
+  --accent-on:       var(--paper, #fcfcfd);
+  --accent-wash:     var(--blue-050, #e2ebfb);
+  --accent-ink:      var(--blue-800, #12305e);
+  --alert:           var(--red-700, #8f1d24);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-page:    var(--ink-900, #0f141b);
+    --surface-raised:  var(--ink-800, #161d26);
+    --surface-sunken:  var(--ink-700, #1c2531);
+
+    --text-primary:    var(--slate-050, #eef1f5);
+    --text-secondary:  var(--slate-200, #cfd6e0);
+    --text-muted:      var(--slate-400, #8b97a8);
+
+    --line:            var(--ink-600, #27313f);
+    --accent:          var(--blue-300, #7aa2f7);
+    --accent-on:       var(--ink-900, #0f141b);
+    --accent-wash:     var(--blue-950, #1b2b45);
+    --accent-ink:      var(--blue-200, #cfe0ff);
+    --alert:           var(--red-300, #f2a3a8);
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface-page:    var(--ink-900, #0f141b);
+  --surface-raised:  var(--ink-800, #161d26);
+  --surface-sunken:  var(--ink-700, #1c2531);
+
+  --text-primary:    var(--slate-050, #eef1f5);
+  --text-secondary:  var(--slate-200, #cfd6e0);
+  --text-muted:      var(--slate-400, #8b97a8);
+
+  --line:            var(--ink-600, #27313f);
+  --accent:          var(--blue-300, #7aa2f7);
+  --accent-on:       var(--ink-900, #0f141b);
+  --accent-wash:     var(--blue-950, #1b2b45);
+  --accent-ink:      var(--blue-200, #cfe0ff);
+  --alert:           var(--red-300, #f2a3a8);
+}
+
+/* =====================================================================
+   3. Frame
+   ===================================================================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background: var(--surface-page);
+  font: 15px/1.55 "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 32px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--line);
+}
+.masthead__mark { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.masthead__mark span { color: var(--text-muted); font-weight: 400; }
+.masthead__spacer { flex: 1; }
+
+.btn {
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 500;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn--primary { color: var(--accent-on); background: var(--accent); border-color: transparent; }
+.btn--quiet { color: var(--text-secondary); background: var(--surface-raised); }
+
+.page { padding: 32px; }
+.page__head { margin: 0 0 24px; }
+.page__head h1 { margin: 0 0 4px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.page__head p { margin: 0; font-size: 13px; color: var(--text-muted); }
+
+/* =====================================================================
+   4. Health cards. Three of the same component, side by side, so any
+      difference between them reads immediately.
+   ===================================================================== */
+.kpi-row { display: flex; gap: 16px; margin: 0 0 32px; }
+.kpi {
+  flex: 1 1 0;
+  padding: 24px;
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+/* A service that breached its error budget gets a status stripe. */
+.kpi[data-state="breached"] { border-left: 8px solid var(--alert); }
+
+.kpi__body { display: flex; flex-direction: column; gap: 8px; }
+.kpi__label { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); }
+.kpi__value { margin: 0; font-size: 28px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi__foot { margin: 0; font-size: 13px; color: var(--text-secondary); }
+
+/* =====================================================================
+   5. Deploy log
+   ===================================================================== */
+.panel {
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.panel__head { display: flex; align-items: center; gap: 16px; padding: 16px 24px; border-bottom: 1px solid var(--line); }
+.panel__head h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.panel__head p { margin: 0; font-size: 13px; color: var(--text-muted); }
+.panel__spacer { flex: 1; }
+
+.log { margin: 0; padding: 8px; list-style: none; }
+.log__row { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: 8px; }
+.log__row + .log__row { box-shadow: inset 0 1px 0 var(--line); }
+.log__sha { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; color: var(--text-muted); }
+.log__what { flex: 1; font-size: 14px; }
+.log__who { font-size: 13px; color: var(--text-secondary); }
+.log__when { font-size: 13px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+.chip {
+  --chip-ok-fg:  var(--green-700, #116149);
+  --chip-ok-bg:  var(--green-050, #e6f4ee);
+  --chip-bad-fg: var(--red-700, #8f1d24);
+  --chip-bad-bg: var(--red-050, #fbe9ea);
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .chip {
+    --chip-ok-fg:  var(--green-300, #6fd3ac);
+    --chip-ok-bg:  var(--green-950, #102b23);
+    --chip-bad-fg: var(--red-300, #f2a3a8);
+    --chip-bad-bg: var(--red-950, #2f1416);
+  }
+}
+:root[data-theme="dark"] .chip {
+  --chip-ok-fg:  var(--green-300, #6fd3ac);
+  --chip-ok-bg:  var(--green-950, #102b23);
+  --chip-bad-fg: var(--red-300, #f2a3a8);
+  --chip-bad-bg: var(--red-950, #2f1416);
+}
+.log .chip--ok { color: var(--chip-ok-fg); background: var(--chip-ok-bg); }
+.log .chip--bad { color: var(--chip-bad-fg); background: var(--chip-bad-bg); }
+
+.footer {
+  display: flex;
+  gap: 16px;
+  padding: 16px 32px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--surface-sunken);
+  box-shadow: inset 0 1px 0 var(--line);
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead__mark">Halyard <span>/ Release health</span></div>
+  <div class="masthead__spacer"></div>
+  <button class="btn btn--quiet" type="button">Last 7 days</button>
+  <button class="btn btn--primary" type="button">Open incident</button>
+</header>
+
+<main class="page">
+  <div class="page__head">
+    <h1>Release health</h1>
+    <p>Rolling 24 hours across the three services on the payments path.</p>
+  </div>
+
+  <section class="kpi-row" aria-label="Service health">
+    <article class="kpi" data-state="healthy">
+      <div class="kpi__body">
+        <p class="kpi__label">Checkout API</p>
+        <p class="kpi__value">99.98%</p>
+        <p class="kpi__foot">Error budget 82% remaining</p>
+      </div>
+    </article>
+    <article class="kpi" data-state="breached">
+      <div class="kpi__body">
+        <p class="kpi__label">Ledger writer</p>
+        <p class="kpi__value">99.21%</p>
+        <p class="kpi__foot">Error budget exhausted Tuesday</p>
+      </div>
+    </article>
+    <article class="kpi" data-state="healthy">
+      <div class="kpi__body">
+        <p class="kpi__label">Payout scheduler</p>
+        <p class="kpi__value">99.95%</p>
+        <p class="kpi__foot">Error budget 64% remaining</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="panel" aria-label="Recent deploys">
+    <div class="panel__head">
+      <h2>Recent deploys</h2>
+      <p>Newest first</p>
+      <span class="panel__spacer"></span>
+      <button class="btn btn--quiet" type="button">Filter</button>
+    </div>
+    <ul class="log">
+      <li class="log__row">
+        <span class="log__sha">8f21c04</span>
+        <span class="log__what">Retry ledger writes on lock timeout</span>
+        <span class="log__who">M. Okonjo</span>
+        <span class="log__when">18 min ago</span>
+        <span class="chip chip--ok">Passed</span>
+      </li>
+      <li class="log__row">
+        <span class="log__sha">2b90ae7</span>
+        <span class="log__what">Raise payout scheduler concurrency to 12</span>
+        <span class="log__who">S. Fenwick</span>
+        <span class="log__when">1 hr ago</span>
+        <span class="chip chip--ok">Passed</span>
+      </li>
+      <li class="log__row">
+        <span class="log__sha">c47d118</span>
+        <span class="log__what">Backfill missing settlement references</span>
+        <span class="log__who">J. Arriaga</span>
+        <span class="log__when">3 hr ago</span>
+        <span class="chip chip--bad">Rolled back</span>
+      </li>
+      <li class="log__row">
+        <span class="log__sha">d05e6b2</span>
+        <span class="log__what">Split checkout API health probe from readiness</span>
+        <span class="log__who">M. Okonjo</span>
+        <span class="log__when">6 hr ago</span>
+        <span class="chip chip--ok">Passed</span>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Halyard</span>
+  <span>Metrics from the payments SLO board</span>
+  <span>Refreshed 40 seconds ago</span>
+</footer>
+</body>
+</html>

@@ -5,10 +5,12 @@
 > (currently the case). When you build a real product design file with Figma variables, this
 > file becomes a secondary reference — keep it in sync, or delete it and rely on live tokens.
 >
-> **Status:** PLACEHOLDER. These are neutral starter values, not anyone's brand — replace them
-> with the real system before relying on the consistency pass, or the review will measure the
-> screen against the wrong scale. Once replaced, anything a screen uses that is NOT listed here
-> is a consistency finding by definition.
+> **Status:** PLACEHOLDER, and never a review baseline on its own. These are neutral starter
+> values, not anyone's brand. Do not measure a screen against them unless the user has adopted
+> this system for the product: a consistency finding against a scale the artifact never claimed
+> is a manufactured defect. With no adopted system, infer the artifact's own repeated values and
+> label the baseline `(inferred)`. Once this file holds a real system, anything a screen uses
+> that is NOT listed here is a consistency finding by definition.
 
 ## Spacing scale (8-point grid; 4 for fine tuning)
 

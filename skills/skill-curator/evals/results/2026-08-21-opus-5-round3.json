@@ -1,0 +1,569 @@
+{
+  "metadata": {
+    "skill_name": "skill-curator",
+    "skill_path": "skills/skill-curator",
+    "executor_model": "claude-opus-5",
+    "analyzer_model": "deterministic scripts (tools/evals/grade.py) + agent grader for flagged items",
+    "timestamp": "2026-08-21-round3",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 5,
+      "eval_name": "twelve-skill-audit",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The report names figma-handoff and design-tokens-sync as the colliding pair, and says a prompt about getting tokens out of Figma would match both",
+          "passed": true,
+          "evidence": "both collision names present",
+          "method": "script"
+        },
+        {
+          "text": "The recommended fix for that pair is a boundary clause in each description or a merge, not an edit to the bodies",
+          "passed": true,
+          "evidence": "fix is descriptions/merge",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "pdf-form-fill and pdf-report-build are NOT reported as a collision; if mentioned at all, they are called already disambiguated because each description names the other",
+          "passed": true,
+          "evidence": "**pdf-form-fill / pdf-report-build** \u2014 adjacent jobs with model mutual boundary language. This pair is the template for fix 4.",
+          "method": "agent"
+        },
+        {
+          "text": "release-notes-draft is named as bloated, quantified explicitly in some unit (492 lines, over 400 lines, ~20 KB, or a multiple of the other skills' size)",
+          "passed": true,
+          "evidence": "bloat named with an explicit size",
+          "method": "script"
+        },
+        {
+          "text": "csv-profiler is named as linking a reference file that does not exist (references/missing.md)",
+          "passed": true,
+          "evidence": "dead link named",
+          "method": "script"
+        },
+        {
+          "text": "flaky-test-triage is named as referring to scripts/run.py without shipping it",
+          "passed": true,
+          "evidence": "missing script named",
+          "method": "script"
+        },
+        {
+          "text": "k8s-rollout-check and spreadsheet-formulas are both named as having no provenance record",
+          "passed": true,
+          "evidence": "both no-provenance skills named",
+          "method": "script"
+        },
+        {
+          "text": "The report notes that twelve skills in one scope is past the discovery budget of roughly ten",
+          "passed": true,
+          "evidence": "discovery-budget point made",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": true,
+          "evidence": "audit.py named",
+          "method": "script"
+        },
+        {
+          "text": "Findings are given in priority order rather than as an unranked list",
+          "passed": true,
+          "evidence": "## What to fix, in priority order",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "twelve-skill-audit",
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The report names figma-handoff and design-tokens-sync as the colliding pair, and says a prompt about getting tokens out of Figma would match both",
+          "passed": true,
+          "evidence": "both collision names present",
+          "method": "script"
+        },
+        {
+          "text": "The recommended fix for that pair is a boundary clause in each description or a merge, not an edit to the bodies",
+          "passed": true,
+          "evidence": "fix is descriptions/merge",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "pdf-form-fill and pdf-report-build are NOT reported as a collision; if mentioned at all, they are called already disambiguated because each description names the other",
+          "passed": true,
+          "evidence": "**pdf-form-fill / pdf-report-build** \u2014 adjacent jobs with mutual NOT-for clauses naming each other. This is the boundary pattern the figma pair should copy.",
+          "method": "agent"
+        },
+        {
+          "text": "release-notes-draft is named as bloated, quantified explicitly in some unit (492 lines, over 400 lines, ~20 KB, or a multiple of the other skills' size)",
+          "passed": true,
+          "evidence": "bloat named with an explicit size",
+          "method": "script"
+        },
+        {
+          "text": "csv-profiler is named as linking a reference file that does not exist (references/missing.md)",
+          "passed": true,
+          "evidence": "dead link named",
+          "method": "script"
+        },
+        {
+          "text": "flaky-test-triage is named as referring to scripts/run.py without shipping it",
+          "passed": true,
+          "evidence": "missing script named",
+          "method": "script"
+        },
+        {
+          "text": "k8s-rollout-check and spreadsheet-formulas are both named as having no provenance record",
+          "passed": true,
+          "evidence": "both no-provenance skills named",
+          "method": "script"
+        },
+        {
+          "text": "The report notes that twelve skills in one scope is past the discovery budget of roughly ten",
+          "passed": true,
+          "evidence": "discovery-budget point made",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": true,
+          "evidence": "audit.py named",
+          "method": "script"
+        },
+        {
+          "text": "Findings are given in priority order rather than as an unranked list",
+          "passed": true,
+          "evidence": "## What to fix, in priority order",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "twelve-skill-audit",
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The report names figma-handoff and design-tokens-sync as the colliding pair, and says a prompt about getting tokens out of Figma would match both",
+          "passed": true,
+          "evidence": "both collision names present",
+          "method": "script"
+        },
+        {
+          "text": "The recommended fix for that pair is a boundary clause in each description or a merge, not an edit to the bodies",
+          "passed": true,
+          "evidence": "fix is descriptions/merge",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "pdf-form-fill and pdf-report-build are NOT reported as a collision; if mentioned at all, they are called already disambiguated because each description names the other",
+          "passed": true,
+          "evidence": "pdf-form-fill and pdf-report-build (their mutual NOT-for boundary language is the model the design pair should copy)",
+          "method": "agent"
+        },
+        {
+          "text": "release-notes-draft is named as bloated, quantified explicitly in some unit (492 lines, over 400 lines, ~20 KB, or a multiple of the other skills' size)",
+          "passed": true,
+          "evidence": "bloat named with an explicit size",
+          "method": "script"
+        },
+        {
+          "text": "csv-profiler is named as linking a reference file that does not exist (references/missing.md)",
+          "passed": true,
+          "evidence": "dead link named",
+          "method": "script"
+        },
+        {
+          "text": "flaky-test-triage is named as referring to scripts/run.py without shipping it",
+          "passed": true,
+          "evidence": "missing script named",
+          "method": "script"
+        },
+        {
+          "text": "k8s-rollout-check and spreadsheet-formulas are both named as having no provenance record",
+          "passed": true,
+          "evidence": "both no-provenance skills named",
+          "method": "script"
+        },
+        {
+          "text": "The report notes that twelve skills in one scope is past the discovery budget of roughly ten",
+          "passed": true,
+          "evidence": "discovery-budget point made",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": true,
+          "evidence": "audit.py named",
+          "method": "script"
+        },
+        {
+          "text": "Findings are given in priority order rather than as an unranked list",
+          "passed": true,
+          "evidence": "Findings below, ranked by what to fix first.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "twelve-skill-audit",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 8,
+        "failed": 2,
+        "total": 10,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.89
+      },
+      "expectations": [
+        {
+          "text": "The report names figma-handoff and design-tokens-sync as the colliding pair, and says a prompt about getting tokens out of Figma would match both",
+          "passed": true,
+          "evidence": "both collision names present",
+          "method": "script"
+        },
+        {
+          "text": "The recommended fix for that pair is a boundary clause in each description or a merge, not an edit to the bodies",
+          "passed": true,
+          "evidence": "fix is descriptions/merge",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "pdf-form-fill and pdf-report-build are NOT reported as a collision; if mentioned at all, they are called already disambiguated because each description names the other",
+          "passed": true,
+          "evidence": "(The only healthy pair: pdf-form-fill and pdf-report-build point at each other, and both exist \u2014 that is the model to follow.)",
+          "method": "agent"
+        },
+        {
+          "text": "release-notes-draft is named as bloated, quantified explicitly in some unit (492 lines, over 400 lines, ~20 KB, or a multiple of the other skills' size)",
+          "passed": true,
+          "evidence": "bloat named with an explicit size",
+          "method": "script"
+        },
+        {
+          "text": "csv-profiler is named as linking a reference file that does not exist (references/missing.md)",
+          "passed": true,
+          "evidence": "dead link named",
+          "method": "script"
+        },
+        {
+          "text": "flaky-test-triage is named as referring to scripts/run.py without shipping it",
+          "passed": true,
+          "evidence": "missing script named",
+          "method": "script"
+        },
+        {
+          "text": "k8s-rollout-check and spreadsheet-formulas are both named as having no provenance record",
+          "passed": true,
+          "evidence": "both no-provenance skills named",
+          "method": "script"
+        },
+        {
+          "text": "The report notes that twelve skills in one scope is past the discovery budget of roughly ten",
+          "passed": false,
+          "evidence": "not noted",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": false,
+          "evidence": "audit.py named",
+          "method": "script"
+        },
+        {
+          "text": "Findings are given in priority order rather than as an unranked list",
+          "passed": true,
+          "evidence": "The writing quality of the\nprocedures themselves is high and consistent; the problems are structural. In priority order:",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "twelve-skill-audit",
+      "configuration": "without_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 8,
+        "failed": 2,
+        "total": 10,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 0.89
+      },
+      "expectations": [
+        {
+          "text": "The report names figma-handoff and design-tokens-sync as the colliding pair, and says a prompt about getting tokens out of Figma would match both",
+          "passed": true,
+          "evidence": "both collision names present",
+          "method": "script"
+        },
+        {
+          "text": "The recommended fix for that pair is a boundary clause in each description or a merge, not an edit to the bodies",
+          "passed": true,
+          "evidence": "fix is descriptions/merge",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "pdf-form-fill and pdf-report-build are NOT reported as a collision; if mentioned at all, they are called already disambiguated because each description names the other",
+          "passed": true,
+          "evidence": "No overlapping triggers or duplicate scopes among the 12 \u2014 the pdf pair even disambiguates itself explicitly.",
+          "method": "agent"
+        },
+        {
+          "text": "release-notes-draft is named as bloated, quantified explicitly in some unit (492 lines, over 400 lines, ~20 KB, or a multiple of the other skills' size)",
+          "passed": false,
+          "evidence": "bloat named with an explicit size",
+          "method": "script"
+        },
+        {
+          "text": "csv-profiler is named as linking a reference file that does not exist (references/missing.md)",
+          "passed": true,
+          "evidence": "dead link named",
+          "method": "script"
+        },
+        {
+          "text": "flaky-test-triage is named as referring to scripts/run.py without shipping it",
+          "passed": true,
+          "evidence": "missing script named",
+          "method": "script"
+        },
+        {
+          "text": "k8s-rollout-check and spreadsheet-formulas are both named as having no provenance record",
+          "passed": true,
+          "evidence": "both no-provenance skills named",
+          "method": "script"
+        },
+        {
+          "text": "The report notes that twelve skills in one scope is past the discovery budget of roughly ten",
+          "passed": true,
+          "evidence": "discovery-budget point made",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": false,
+          "evidence": "audit.py named",
+          "method": "script"
+        },
+        {
+          "text": "Findings are given in priority order rather than as an unranked list",
+          "passed": true,
+          "evidence": "Here is what to fix, in priority order.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "twelve-skill-audit",
+      "configuration": "without_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 0.9,
+        "passed": 9,
+        "failed": 1,
+        "total": 10,
+        "undecided": 0,
+        "time_seconds": null,
+        "tokens": null,
+        "tool_calls": null,
+        "errors": 0,
+        "pass_rate_behavior_only": 1.0
+      },
+      "expectations": [
+        {
+          "text": "The report names figma-handoff and design-tokens-sync as the colliding pair, and says a prompt about getting tokens out of Figma would match both",
+          "passed": true,
+          "evidence": "both collision names present",
+          "method": "script"
+        },
+        {
+          "text": "The recommended fix for that pair is a boundary clause in each description or a merge, not an edit to the bodies",
+          "passed": true,
+          "evidence": "fix is descriptions/merge",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "pdf-form-fill and pdf-report-build are NOT reported as a collision; if mentioned at all, they are called already disambiguated because each description names the other",
+          "passed": true,
+          "evidence": "Only the two PDF skills point at each other correctly.",
+          "method": "agent"
+        },
+        {
+          "text": "release-notes-draft is named as bloated, quantified explicitly in some unit (492 lines, over 400 lines, ~20 KB, or a multiple of the other skills' size)",
+          "passed": true,
+          "evidence": "bloat named with an explicit size",
+          "method": "script"
+        },
+        {
+          "text": "csv-profiler is named as linking a reference file that does not exist (references/missing.md)",
+          "passed": true,
+          "evidence": "dead link named",
+          "method": "script"
+        },
+        {
+          "text": "flaky-test-triage is named as referring to scripts/run.py without shipping it",
+          "passed": true,
+          "evidence": "missing script named",
+          "method": "script"
+        },
+        {
+          "text": "k8s-rollout-check and spreadsheet-formulas are both named as having no provenance record",
+          "passed": true,
+          "evidence": "both no-provenance skills named",
+          "method": "script"
+        },
+        {
+          "text": "The report notes that twelve skills in one scope is past the discovery budget of roughly ten",
+          "passed": true,
+          "evidence": "discovery-budget point made",
+          "method": "script-heuristic"
+        },
+        {
+          "text": "The transcript shows scripts/audit.py was run against the library before the written assessment",
+          "passed": false,
+          "evidence": "audit.py named",
+          "method": "script"
+        },
+        {
+          "text": "Findings are given in priority order rather than as an unranked list",
+          "passed": true,
+          "evidence": "Here is what to fix, in priority order.",
+          "method": "agent"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.833,
+        "stddev": 0.047,
+        "min": 0.8,
+        "max": 0.9
+      },
+      "time_seconds": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "tokens": {
+        "mean": null,
+        "stddev": null,
+        "min": null,
+        "max": null
+      },
+      "pass_rate_behavior_only": {
+        "mean": 0.926,
+        "stddev": 0.052,
+        "min": 0.889,
+        "max": 1.0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.17",
+      "pass_rate_behavior_only": "+0.07",
+      "time_seconds": "n/a",
+      "tokens": "n/a"
+    }
+  },
+  "notes": [
+    "twelve-skill-audit: with 1.00 vs without 0.83 (+0.17), n=3+3",
+    "2 of 27 expectations check that a bundled script was run; those can only pass with the skill present. Behavior-only (excluding them): with 1.0 vs without 0.926, delta +0.07."
+  ]
+}

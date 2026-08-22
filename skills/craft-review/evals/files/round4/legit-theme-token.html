@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Weekly digest — Meridian</title>
+<style>
+/* =====================================================================
+   Meridian digest. Two theme states, both driven by the OS setting:
+   the base :root is the light palette, and the dark block below
+   overrides it. There is no in-page toggle, so no [data-theme] layer.
+
+   Two tokens exist only in the dark block on purpose. A lifted shadow
+   and a warmed hairline have no light-mode counterpart: in light the
+   card is separated by its border and the page ground, and painting a
+   shadow there would only muddy it. Both are read exclusively by rules
+   inside the same dark block, so neither is ever referenced in a state
+   where it does not resolve.
+   ===================================================================== */
+
+:root {
+  --surface:        #ffffff;
+  --surface-sunken: #f5f6f8;
+  --text:           #16191f;
+  --text-muted:     #555d6b;
+  --border:         #e3e6ec;
+  --accent:         #1a56c4;
+  --accent-fg:      #ffffff;
+  --chip-bg:        #e6f1e9;
+  --chip-fg:        #14532d;
+  --rule:           #eceef2;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--surface-sunken);
+  color: var(--text);
+  font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- shell ----------------------------------------------------- */
+
+.wrap {
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 48px 24px 80px;
+}
+
+header.masthead {
+  border-bottom: 1px solid var(--border);
+  margin: 0 0 32px;
+  padding: 0 0 20px;
+}
+
+.masthead h1 {
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+.masthead p {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin: 0;
+}
+
+/* --- cards ------------------------------------------------------ */
+
+.card {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 0 0 20px;
+  padding: 24px;
+}
+
+.card h2 {
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+
+.card p { margin: 0 0 12px; }
+.card p:last-child { margin-bottom: 0; }
+
+.card__foot {
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 16px 0 0;
+}
+
+/* --- aside ------------------------------------------------------ */
+
+.aside {
+  background: var(--surface-sunken);
+  color: var(--text-muted);
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 16px 0 0;
+  padding: 16px 20px;
+}
+
+/* --- chips and buttons ------------------------------------------ */
+
+.chip {
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+}
+
+.btn {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+}
+
+/* --- table ------------------------------------------------------ */
+
+table {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+}
+
+thead th {
+  background: var(--surface-sunken);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 8px 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+tbody td {
+  border-top: 1px solid var(--rule);
+  padding: 12px;
+}
+
+footer.colophon {
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 40px 0 0;
+  padding: 20px 0 0;
+}
+
+/* --- dark theme --------------------------------------------------
+   Overrides for the shared tokens, plus two tokens that belong to
+   this state alone and are consumed here and nowhere else.
+   ----------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface:        #14171c;
+    --surface-sunken: #0f1216;
+    --text:           #eceef2;
+    --text-muted:     #a3abb8;
+    --border:         #262b33;
+    --accent:         #7aa7f5;
+    --accent-fg:      #0d1117;
+    --chip-bg:        #17301f;
+    --chip-fg:        #8fd6a5;
+    --rule:           #21262e;
+
+    /* dark-only: a card needs lifting off a dark ground, and its top
+       edge needs a warmed hairline that light mode has no use for. */
+    --lift-shadow:    0 8px 24px rgba(0, 0, 0, 0.55);
+    --hairline-warm:  #323a46;
+  }
+
+  .card {
+    box-shadow: var(--lift-shadow);
+    border-top-color: var(--hairline-warm);
+  }
+
+  .aside { box-shadow: var(--lift-shadow); }
+}
+
+/* --- narrow ------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .wrap { padding: 32px 16px 64px; }
+  .card { padding: 20px; }
+  .masthead h1 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>Weekly digest</h1>
+    <p>What shipped, what slipped, and what is waiting on someone.</p>
+  </header>
+
+  <article class="card">
+    <h2>Scheduled exports moved to the queue</h2>
+    <p>Exports over fifty thousand rows now run on the worker pool instead of the
+      request path. The response returns a job id straight away and the file lands
+      in the same place it always did.</p>
+    <p>Two customers had been timing out on the old path every Monday morning. Both
+      confirmed a clean run this week.</p>
+    <div class="aside">Anyone still hitting the synchronous endpoint keeps the old
+      behavior until the end of the quarter, when it goes away.</div>
+    <div class="card__foot">
+      <span class="chip">Shipped</span>
+      <button class="btn" type="button">Read the note</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <h2>Timezone handling in recurring reports</h2>
+    <p>A report scheduled for 09:00 now fires at 09:00 in the workspace timezone
+      rather than in whatever zone the person who created it happened to be in.
+      Existing schedules were migrated on Tuesday night.</p>
+    <div class="card__foot">
+      <span class="chip">Shipped</span>
+      <button class="btn" type="button">Read the note</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <h2>Open this week</h2>
+    <table>
+      <thead>
+        <tr><th>Item</th><th>Owner</th><th>State</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Bulk permission editor</td><td>Platform</td><td>In review</td></tr>
+        <tr><td>Audit log retention settings</td><td>Security</td><td>Waiting on legal</td></tr>
+        <tr><td>Import from CSV, second pass</td><td>Data</td><td>In progress</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <footer class="colophon">
+    Sent every Friday. Reply to this note and it reaches the whole team.
+  </footer>
+
+</div>
+
+</body>
+</html>

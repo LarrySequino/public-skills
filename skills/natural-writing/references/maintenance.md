@@ -116,3 +116,18 @@ Audit the skill against itself on every sweep, before checking any external sour
 | self-audit | 2026-08-16 | Predicative real/actual inflation ("the gap is real") found in this skill's own output; the existing entry covered only the attributive form. Entry extended to both. Worth repeating: check the skill's own prose against its catalog. |
 | ad-hoc (practitioner post, X) | 2026-08-16 | paraprosdokians in marketing copy; harvested as Affirmative Reversals, the non-negation half of binary contrast, which a negation-only screen misses |
 | ad-hoc (viral prompt, X) | 2026-07-29 | ban-list prompt; harvested nominalization/stacked noun phrases; rejected flat bans (hedging, parataxis) as over-sanding |
+
+## Cross-model failure corpus (2026-08-21)
+
+The same two prompts were sent to eight model/harness combinations with no skill attached:
+"rewrite this and make it specific" over a vague paragraph, and "deslop this" over prose that
+was already human. Every one of the eight invented specifics that appear nowhere in the source
+(`$4,200/month`, `Redis`, `March 4`, `420ms`), and every one rewrote the already-good prose
+between 25 and 62 percent, dropping facts and voice as it went. The failure is not one model's
+quirk, which is the argument for the mechanical checks rather than the prose rules.
+
+Two checks in `scripts/prose-scan.py --compare` came out of that corpus and are the ones to
+re-test when it is rebuilt: `LOST-*`, which reports specifics the rewrite dropped rather than
+only the ones it added, and `REWRITE-SCOPE`, which reports how much of the source survived.
+`REWRITE-SCOPE` is gated on the source scanning close to clean, because rewriting slop heavily
+is the correct answer and firing there would be noise.

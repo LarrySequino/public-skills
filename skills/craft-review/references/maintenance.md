@@ -205,3 +205,20 @@ a rubric — cut before adding.
 ## Locale
 
 Run `tools/us-english.py skills/craft-review` from the repo root; it must report clean. US English is the house rule and publish.sh enforces it.
+
+## Adversarial review, 2026-08-21 (GPT-5.x via codex)
+
+An outside model was pointed at this skill with instructions to find rules that are wrong,
+construct inputs that produce false positives, and read the script source rather than trust a
+passing self-check. Seven findings held up under my own reproduction; these are the ones worth
+re-testing whenever the scripts change:
+
+| What it found | Now covered by |
+|---|---|
+| The workflow ordered a fallback to the placeholder token file, which `design-system.md` itself says measures the screen against the wrong scale | `SKILL.md` step 2 infers the artifact's own scale and labels it `(inferred)` |
+| `preflight.py` blocked a token defined and consumed entirely inside one theme | the check now fires only when a rule outside that theme reads the token; the demo page exercises the real defect |
+| `contrast.py` dropped alpha, so a translucent foreground was never measured | `parse_color` returns alpha and `get_ratio` composites over the ground |
+| `contrast.py` printed an error and exited 0 | unusable input exits 2 |
+| `preflight.py` swallowed unparseable colors and passed them | reported as `uncheckable-color` |
+| A page with no custom properties got no contrast pass at all | base is always a scope |
+| `1.4x` nesting was marked Universal, so every miss was automatically Critical | demoted to a preference |
